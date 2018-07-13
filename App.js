@@ -1,11 +1,13 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View , TouchableOpacity} from 'react-native';
 
 export default class App extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text>Kirk is a bitch</Text>
+        <TouchableOpacity>
+          <Text style={{fontSize: 50}}>Kirk is a bitch</Text>
+        </TouchableOpacity>
       </View>
     );
   }
