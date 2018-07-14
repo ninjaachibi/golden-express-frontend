@@ -23,7 +23,8 @@ import CameraAccess from './Components/CameraAccess'
 import HomeScreen from './Components/HomeScreen'
 import MealPlanScreen from './Components/MealPlanScreen'
 import GroceryListScreen from './Components/GroceryListScreen'
-import MyInfoScreen from './Components/MyInfoScreen'
+import MyInfoScreen from './Components/MyInfoScreen';
+import HorizontalMealScroll from './Components/HorizontalMealScroll'
 
 //Navigator
 export default StackNavigator({
@@ -50,5 +51,8 @@ export default StackNavigator({
   },
   CameraAccess: {
     screen: CameraAccess,
+  },
+  HorizontalMealScroll: {
+    screen: HorizontalMealScroll,
   }
-}, {initialRouteName: 'MealPlan'});
+}, {initialRouteName: 'HorizontalMealScroll'});
