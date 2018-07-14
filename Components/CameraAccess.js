@@ -2,44 +2,6 @@ import React from 'react';
 import { Text, View, TouchableOpacity } from 'react-native';
 import { Camera, Permissions } from 'expo';
 
-// var gcloud = require('gcloud')({
-//   keyFilename: '../env.js',
-//   projectId: 'carbide-kayak-210203'
-// });
-
-// // var datastore = require('@google-cloud/datastore');
-// var vision = require('@google-cloud/vision');
-// // var visionClient = vision({
-// //   keyFilename: '../env.js',
-// //   projectId: 'carbide-kayak-210203'
-// // });
-// const client = new vision.ImageAnnotatorClient();
-//
-// // Performs label detection on the image file
-// client
-//   .labelDetection('./resources/wakeupcat.jpg')
-//   .then(results => {
-//     const labels = results[0].labelAnnotations;
-//
-//     console.log('Labels:');
-//     labels.forEach(label => console.log(label.description));
-//   })
-//   .catch(err => {
-//     console.error('ERROR:', err);
-//   });
-
-// var gcloud = require('@google-cloud/vision')({
-//   keyFilename: './keyFile.json',
-//   projectId: 'carbide-kayak-210203'
-// });
-// var vision = gcloud.vision();
-
-// Imports the Google Cloud client library
-// const vision = require('@google-cloud/vision');
-
-
-// var vision = gcloud.vision();
-
 class CameraAccess extends React.Component {
   static navigationOptions = {
     title: 'Camera'
@@ -47,6 +9,7 @@ class CameraAccess extends React.Component {
   state = {
     hasCameraPermission: null,
     type: Camera.Constants.Type.back,
+    photo: []
   };
 
   async componentWillMount() {
@@ -61,60 +24,109 @@ class CameraAccess extends React.Component {
 // };
 
 processText = img => {
-  // Creates a client
-  // const client = new vision.ImageAnnotatorClient();
-  //
-  // /**
-  //  * TODO(developer): Uncomment the following line before running the sample.
-  //  */
-  // // const fileName = 'Local image file, e.g. /path/to/image.png';
-  //
-  // // Read a local image as a text document
-  // client
-  //   .documentTextDetection(img)
-  //   .then(results => {
-  //     const fullTextAnnotation = results[0].fullTextAnnotation;
-  //     console.log('annotation!', fullTextAnnotation.text);
-  //   })
-  //   .catch(err => {
-  //     console.error('ERROR:', err);
-  //   });
+  const body =
+  {
+  requests:[
+  {
+  image:{ content: img.base64, },
+  features:[{"type":"DOCUMENT_TEXT_DETECTION","maxResults":5}]
+  },],
+  };
   fetch("https://vision.googleapis.com/v1/images:annotate?key=AIzaSyDpxkjWTEFntmPwlLO1Ka0hBjrj2fukSxA", {
     method: 'POST',
     headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-      // "Authorization": "Bearer AIzaSyDpxkjWTEFntmPwlLO1Ka0hBjrj2fukSxA"
+      'Accept' : 'application/json',
+      'Content-Type': 'image/jpeg',
+      // "Authorization": "Bearer ya29.Glv4BWMGmNYmDIz8_MwA8JcmWqGJ2aKWJXYNF4anxgPsKskELaDuAlItSdcAqkGUmYyQyci_vUYbmRGSnvYaFzDERssouFzc2ejtrXKpz-u3guXb-eDVbF5jP3C-"
     },
-    body: JSON.stringify({
-      'requests': [
-        {
-          'image': {
-            'source': {
-              'imageUri': img
-            }
-          },
-          'features': [
-            {
-              'type': 'DOCUMENT_TEXT_DETECTION'
-            }
-          ]
-        }
-      ]
-    }),
-  }).then(data => console.log('DATA', JSON.stringify(data)));
+    body: JSON.stringify(body)
+  }).then(data =>{
+  console.log(data);
+  })
+
+
+  // fetch("https://vision.googleapis.com/v1/images:annotate?key=AIzaSyDpxkjWTEFntmPwlLO1Ka0hBjrj2fukSxA", {
+  //   method: 'POST',
+  //   headers: {
+  //     Accept: 'application/json',
+  //     'Content-Type': 'application/json',
+  //     // "Authorization": "Bearer AIzaSyDpxkjWTEFntmPwlLO1Ka0hBjrj2fukSxA"
+  //   },
+  //   body: JSON.stringify({
+  //     'requests': [
+  //       {
+  //         'image': {
+  //           'source': {
+  //             'imageUri': img
+  //           }
+  //         },
+  //         'features': [
+  //           {
+  //             'type': 'DOCUMENT_TEXT_DETECTION'
+  //           }
+  //         ]
+  //       }
+  //     ]
+  //   }),
+  // }).then(data => console.log('DATA', JSON.stringify(data)));
 }
 
 async snap() {
   if (this.camera) {
-    let photo = await this.camera.takePictureAsync();
-    // vision.detectText(photo.uri, (err, text, apiResponse) => {
-    //     console.log(text);
-    //   });
-    // };
-    console.log(photo)
-    // this.processText(photo.uri)
+      let photo = await this.camera.takePictureAsync( {base64: true} );
+      let uploadResponse = await this.processText(photo);
+
+    //   fetch("https://www.googleapis.com/upload/storage/v1/b/recieptbucketz/o?uploadType=media&name=test2.jpg", {
+    //     method: 'POST',
+    //     headers: {
+    //       // Accept: 'application/json',
+    //       'Content-Type': 'image/jpeg',
+    //       "Authorization": "Bearer ya29.Glv4BWMGmNYmDIz8_MwA8JcmWqGJ2aKWJXYNF4anxgPsKskELaDuAlItSdcAqkGUmYyQyci_vUYbmRGSnvYaFzDERssouFzc2ejtrXKpz-u3guXb-eDVbF5jP3C-"
+    //     },
+    //     body: photo.base64
+    // }).then(data =>{
+    //   console.log(data);
+    // })
   }
+}
+
+async uploadImageAsync(photo) {
+
+
+
+  // let apiUrl = 'https://www.googleapis.com/upload/storage/v1/b/recieptbucketz/o?uploadType=media&name=test4.jpg';
+  //
+  // let uriParts = uri.split('.');
+  // console.log(uriParts)
+  // let fileType = uriParts[uriParts.length - 1];
+  //
+  // let formData = new FormData();
+  // formData.append('photo', {
+  //   uri,
+  //   name: `photo.${fileType}`,
+  //   type: `image/${fileType}`,
+  // });
+  //
+  // let options = {
+  //   method: 'POST',
+  //   headers: {
+  //     'Accept': 'application/json',
+  //     'Content-Type': 'application/json',
+  //
+  //   },
+  //   body: {
+  //   requests:[
+  //   {
+  //   image:{ content: photo.base64 },
+  //   features:[
+  //   { "type":"TYPE_UNSPECIFIED","maxResults":5 },
+  //   {"type":"LANDMARK_DETECTION","maxResults":5},{"type":"FACE_DETECTION","maxResults":5},{"type":"LOGO_DETECTION","maxResults":5},
+  //   {"type":"LABEL_DETECTION","maxResults":5},{"type":"TEXT_DETECTION","maxResults":5},{"type":"DOCUMENT_TEXT_DETECTION","maxResults":5},{"type":"SAFE_SEARCH_DETECTION","maxResults":5},{"type":"IMAGE_PROPERTIES","maxResults":5},{"type":"CROP_HINTS","maxResults":5},{"type":"WEB_DETECTION","maxResults":5}],
+  // }]}
+  //   };
+  // };
+  //
+  // return fetch(apiUrl, options);
 }
 
 
