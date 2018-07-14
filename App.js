@@ -55,4 +55,5 @@ export default StackNavigator({
   HorizontalMealScroll: {
     screen: HorizontalMealScroll,
   }
-}, {initialRouteName: 'MealPlanScreen'});
+}, {initialRouteName: 'MealPlan'});
+

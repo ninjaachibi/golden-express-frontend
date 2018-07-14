@@ -10,7 +10,8 @@ import {
   Button,
   RefreshControl,
   Image,
-  ScrollView
+  ScrollView,
+  AsyncStorage
 } from 'react-native';
 import styles from './Styles'
 
@@ -25,6 +26,7 @@ class GroceryListScreen extends React.Component{
       groceries: this.props.navigation.getParam('groceries'),
     }
     this.strikeThrough = this.strikeThrough.bind(this)
+    this.deleteAllStriked = this.deleteAllStriked.bind(this)
   }
 
   componentDidMount() {
@@ -37,6 +39,13 @@ class GroceryListScreen extends React.Component{
     console.log('copy of groceries', groceries);
     groceries[i].striked = ! !!groceries[i].striked;
     this.setState({groceries: groceries});
+  }
+
+  deleteAllStriked() {
+    console.log('delete all striked');
+    this.setState({
+      groceries: this.state.groceries.filter((item)=> !item.striked)
+    })
   }
 
   render() {
@@ -64,11 +73,14 @@ class GroceryListScreen extends React.Component{
               </View>
             )}
           />
+          <View style={{marginBottom: 30}}>
           <Button
-            onPress={()=>{}}
+            onPress={()=>{this.deleteAllStriked()}}
             title="Delete All Marked Through"
             color="#841584"
           />
+        </View>
+
       </View>
 
     )
