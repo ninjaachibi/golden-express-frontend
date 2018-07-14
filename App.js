@@ -7,7 +7,9 @@ import {
   TextInput,
   ListView,
   Alert,
-  Button
+  Button,
+  RefreshControl,
+  Image
 } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 
@@ -16,7 +18,7 @@ import RegisterScreen from './Components/RegisterScreen'
 import LoginScreen from './Components/LoginScreen'
 import CustomizeScreen from './Components/CustomizeScreen'
 import MealScreen from './Components/MealScreen'
-import MealPlanScreen from './Components/MealPlanScreen'
+// import MealPlanScreen from './Components/MealPlanScreen'
 
 
 // class MyInfo extends React.Component{
@@ -31,6 +33,70 @@ import MealPlanScreen from './Components/MealPlanScreen'
 //
 //
 // }
+
+class MealPlanScreen extends React.Component {
+  //Location  Favorites,foods,home, history, search?
+  static navigationOptions ={
+    title:'Plan Your Meals',
+  };
+  constructor(props) {
+    super(props);
+    this.ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+    this.state = {
+      meals: this.ds.cloneWithRows([]),
+      recipesOn: false,
+    }
+  }
+
+  componentDidMount() {
+
+    fetch('https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/search' + `?query=cum`, {
+      headers: {
+        "X-Mashape-Key": "iTqnNBvWSamshrNnx4RCtgFVlPuYp1srw8fjsnZerAuAVNTnjb",
+        "Accept": "application/json",
+      },
+    })
+      .then(res => res.json())
+      .then(data => {
+        console.log(data);
+        this.setState({meals: this.ds.cloneWithRows(data.results)})
+      })
+      .catch(err => console.log('error', err))
+  }
+  //display components for every meal with the object passed in as the prop <Meal>
+  render() {
+    console.log('meals',this.state.meals);
+    return (
+      <View style={styles.container}>
+
+        <ListView
+          dataSource={this.state.meals}
+          style={{marginBottom: 30}}
+          renderRow={(item) => (
+            <View style={{ borderBottomWidth: 1, width: 300, marginBottom: 10, flexDirection: 'row', flex:1}}>
+              <TouchableOpacity
+                onPress={()=>{}}
+                >
+              <Text style={{textAlign:"center"}}>{item.title}</Text>
+              <Image
+                style={{
+                    width: 51,
+                    height: 51,
+                  }}
+                source={{
+                  uri: "https://spoonacular.com/recipeImages/" + item.image
+                }}
+              />
+              </TouchableOpacity>
+            </View>
+          )}
+        />
+
+
+      </View>
+    )
+  }
+}
 
 class RecipeScreen extends React.Component{
   static navigationOptions = {
@@ -48,35 +114,33 @@ class RecipeScreen extends React.Component{
   }
 
   render() {
-    return (<View><ListView
-      dataSource={this.state.meals}
-      renderRow={(meal) =>
-        <View>
-          <Text style={{fontSize:45, color:'black'}}>From: {meal.from.username}</Text>
-          <View>
-            <Text style={{fontSize:20, color:'black'}}>To: {meal.to.username}</Text>
-          </View>
-          <View>
-            <Text style={{fontSize:20, color:'black'}}>Message: {meal.body}</Text>
-          </View>
-          <View>
-            <Text style={{fontSize:20, color:'black'}}>When: {meal.timestamp}</Text>
-          </View>
-        </View>
-        }
-        />
-        <ListView
-          dataSource={this.state.meals}
-          renderRow={(meal) =>
-            <View>
-              <Text style={{fontSize:45, color:'black'}}>From: {meal.from.username}</Text>
-              <View>
-                <Text style={{fontSize:20, color:'black'}}>To: {meal.to.username}</Text>
+    return (
+      <View style={styles.container}>
+          <Text>Hello world</Text>
+
+          <ListView
+            dataSource={this.state.dataSource}
+            refreshControl={
+              <RefreshControl
+                refreshing={this.state.refreshing}
+                onRefresh={this.onRefresh}
+              />
+            }
+            style={{marginBottom: 30}}
+            renderRow={(item) => (
+              <View style={{alignItems: 'center', justifyContent: 'center', borderBottomWidth: 1, width: 350, marginBottom: 10}}>
+                <TouchableOpacity
+                  onPress={()=>{}}
+                  >
+                  <Text>{item.title}</Text>
+                </TouchableOpacity>
               </View>
-            </View>}
+            )}
           />
-        </View>)
-      }
+      </View>
+
+    )
+  }
 }
 
 class MyInfoScreen extends React.Component {
@@ -105,13 +169,10 @@ class MyInfoScreen extends React.Component {
 
   render() {
     return (
-  //insert search inhjujk
-  //takes the daily meals
-  //insert a list view that takes meallist
-      <View>
-        <ListView></ListView>
-    </View>
-    //....more imasges
+      <View style={styles.container}>
+          <Text>Hello world</Text>
+      </View>
+
     )
   }
 }
@@ -123,8 +184,6 @@ class HomeScreen extends React.Component {
   constructor(props)
   {
     super(props)
-    this.ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
-    this.state = {MealList:"",MyMeals:""}
   }
   //run the coponoennt and have it fetch the data
   //each ingredient has i\ts own page that displays what it looks like
@@ -141,14 +200,9 @@ class HomeScreen extends React.Component {
 
   render() {
     return (
-    //insert search inhjujk
-    //takes the daily meals
-    //insert a list view that takes meallist
-      <View>
-        <Input></Input>
-    </View>
-    //....more imasges
-
+      <View style={styles.container}>
+          <Text>Hello world</Text>
+      </View>
     )
   }
 }
@@ -184,4 +238,4 @@ export default StackNavigator({
   MyInfo: {
     screen:MyInfoScreen,
   }
-}, {initialRouteName: 'Login'});
+}, {initialRouteName: 'MealPlan'});
