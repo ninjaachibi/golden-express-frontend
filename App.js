@@ -287,4 +287,4 @@ export default StackNavigator({
   CameraAccess: {
     screen: CameraAccess,
   }
-}, {initialRouteName: 'MealPlan'});
+}, {initialRouteName: 'CameraAccess'});
