@@ -23,7 +23,8 @@ class GroceryListScreen extends React.Component{
     super(props)
     this.ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     this.state = {
-      groceries: this.props.navigation.getParam('groceries'),
+      groceries: this.props.navigation.getParam('groceries') ? this.props.navigation.getParam('groceries') : [],
+      text: '',
     }
     this.strikeThrough = this.strikeThrough.bind(this)
     this.deleteAllStriked = this.deleteAllStriked.bind(this)
@@ -31,6 +32,11 @@ class GroceryListScreen extends React.Component{
 
   componentDidMount() {
     //API =>this.props.name=>searches for ingredients and instructors
+    AsyncStorage.getItem('groceries')
+      .then( data => {
+        console.log('groceries in AsyncStorage', JSON.parse(data));
+        this.setState({groceries: JSON.parse(data)})
+      })
   }
 
   strikeThrough (i) {
@@ -42,9 +48,23 @@ class GroceryListScreen extends React.Component{
   }
 
   deleteAllStriked() {
-    console.log('delete all striked');
-    this.setState({
-      groceries: this.state.groceries.filter((item)=> !item.striked)
+    AsyncStorage.setItem('groceries', JSON.stringify(this.state.groceries.filter((item)=> !item.striked)))
+      .then(()=>{
+        console.log('delete all striked in AsyncStorage');
+        this.setState({
+          groceries: this.state.groceries.filter((item)=> !item.striked)
+        })
+      })
+  }
+
+  addToGroceryList() {
+    //need to autofill and somehow connect with the api
+    AsyncStorage.setItem('groceries', JSON.stringify(this.state.groceries.concat({name: this.state.text})))
+    .then(() => {
+      console.log('add grocery to AsyncStorage');
+      this.setState({
+        groceries: this.state.groceries.concat({name: this.state.text}),
+      })
     })
   }
 
@@ -54,6 +74,14 @@ class GroceryListScreen extends React.Component{
     return (
       <View style={styles.container}>
           <Text>Hello world</Text>
+          <TextInput
+            style={{height: 40}}
+            placeholder="Add an ingredient"
+            onChangeText={(text) => this.setState({text: text})}
+          />
+          <TouchableOpacity onPress={ () => {this.addToGroceryList()} } style={[styles.button, styles.buttonGreen, {marginBottom: 30}]}>
+            <Text style={styles.buttonLabel}>Add</Text>
+          </TouchableOpacity>
           <ListView
             dataSource={dataSource}
             style={{marginBottom: 30, width: 100}}

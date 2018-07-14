@@ -58,6 +58,16 @@ processText = img => {
 })
 
 
+  .then(dataJson =>{
+    console.log(dataJson)
+    var responses=[];
+    // let data = JSON.parse(dataJson)
+    dataJson._bodyInit.responses[0].forEach( (obj) =>{
+      responses.push(obj.description)
+    })
+    console.log(responses)
+  })
+
   // fetch("https://vision.googleapis.com/v1/images:annotate?key=AIzaSyDpxkjWTEFntmPwlLO1Ka0hBjrj2fukSxA", {
   //   method: 'POST',
   //   headers: {
