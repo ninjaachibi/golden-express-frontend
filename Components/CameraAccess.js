@@ -40,10 +40,17 @@ processText = img => {
       // "Authorization": "Bearer ya29.Glv4BWMGmNYmDIz8_MwA8JcmWqGJ2aKWJXYNF4anxgPsKskELaDuAlItSdcAqkGUmYyQyci_vUYbmRGSnvYaFzDERssouFzc2ejtrXKpz-u3guXb-eDVbF5jP3C-"
     },
     body: JSON.stringify(body)
-  }).then(data =>{
-  console.log(data);
   })
 
+  .then(dataJson =>{
+    console.log(dataJson)
+    var responses=[];
+    // let data = JSON.parse(dataJson)
+    dataJson._bodyInit.responses[0].forEach( (obj) =>{
+      responses.push(obj.description)
+    })
+    console.log(responses)
+  })
 
   // fetch("https://vision.googleapis.com/v1/images:annotate?key=AIzaSyDpxkjWTEFntmPwlLO1Ka0hBjrj2fukSxA", {
   //   method: 'POST',
