@@ -10,7 +10,8 @@ import {
   Button,
   RefreshControl,
   Image,
-  ScrollView
+  ScrollView,
+  AsyncStorage
 } from 'react-native';
 import styles from './Styles'
 
@@ -27,11 +28,12 @@ class MealPlanScreen extends React.Component {
       recipesOn: false,
       currentMeal: null,
       groceryList: [],
+      query: this.props.navigation.getParam('query')
     }
   }
 
   componentDidMount() {
-    fetch('https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/search' + `?query=kalbi`, {
+    fetch('https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/search' + `?query=${this.state.query}`, {
       headers: {
         "X-Mashape-Key": "iTqnNBvWSamshrNnx4RCtgFVlPuYp1srw8fjsnZerAuAVNTnjb",
         "Accept": "application/json",
@@ -67,8 +69,22 @@ class MealPlanScreen extends React.Component {
 
   addToGroceryList (extendedIngredients) {
     console.log('in addToGroceryList');
-    this.props.navigation.push('GroceryList', {
-      groceries: extendedIngredients,
+    AsyncStorage.setItem('groceries', JSON.stringify(extendedIngredients))
+    .then(()=> {
+      console.log('saved groceries to AsyncStorage');
+      this.props.navigation.push('GroceryList', {
+        groceries: extendedIngredients,
+      })
+    })
+  }
+
+  addToMeals (currentMeal) {
+    AsyncStorage.setItem('meals', JSON.stringify(currentMeal))
+    .then(()=> {
+      console.log('saved meal to AsyncStorage');
+      this.props.navigation.push('Home', {
+        addedMeals: currentMeal,
+      })
     })
   }
 
@@ -116,15 +132,20 @@ class MealPlanScreen extends React.Component {
               title="Add Ingredients to Grocery List"
               color="#841584"
             />
+            <Button
+              onPress={()=>{this.addToMeals(this.state.currentMeal)}}
+              title="Add to Meal Plan"
+              color="#841584"
+            />
 
 
           </View>
           :
           <ListView
             dataSource={this.state.meals}
-            style={{marginBottom: 30, backgroundColor:'pink', width: 100}}
+            style={{marginBottom: 30, backgroundColor:'pink', width: 150}}
             renderRow={(item) => (
-              <View style={{ borderBottomWidth: 1, width: 100, marginBottom: 10, flexDirection: 'row', flex:1, backgroundColor: "lightblue"}}>
+              <View style={{ borderBottomWidth: 1, width: 150, marginBottom: 10, flexDirection: 'row', flex:1, backgroundColor: "lightblue"}}>
 
                 <TouchableOpacity
                   onPress={this.displayMeal.bind(this, item)}
@@ -132,8 +153,8 @@ class MealPlanScreen extends React.Component {
                 <Text style={{textAlign: "center"}}>{item.title}</Text>
                 <Image
                   style={{
-                      width: 100,
-                      height: 100,
+                      width: 150,
+                      height: 150,
                     }}
                   source={{
                     uri: "https://spoonacular.com/recipeImages/" + item.image
