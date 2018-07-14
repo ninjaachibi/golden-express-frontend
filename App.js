@@ -26,6 +26,7 @@ import GroceryListScreen from './Components/GroceryListScreen'
 import MyInfoScreen from './Components/MyInfoScreen';
 import HorizontalMealScroll from './Components/HorizontalMealScroll'
 import SearchScreen from './Components/SearchScreen'
+import MyMeals from './Components/MyMeals'
 
 //Navigator
 export default StackNavigator({
