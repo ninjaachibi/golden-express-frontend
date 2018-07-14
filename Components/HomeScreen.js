@@ -71,37 +71,61 @@ class HomeScreen extends React.Component {
 
               <TouchableOpacity onPress={()=>{}}>
                 <View style={{backgroundColor:"blue", height: 100, width: 100, marginLeft: 10, marginRight: 10, marginTop: 10}}>
+                    <Image
+                      style={{borderRadius:15,
+                          width: 100,
+                          height: 100,
+                        }}
+                      source={{
+                        uri: 'https://spoonacular.com/recipeImages/323420-556x370.jpeg'//this.state.meals.image
+                      }}
+                    />
+
+                </View>
+              </TouchableOpacity>
+
+              <TouchableOpacity onPress={()=>{}}>
+                <View style={{backgroundColor:"yellow", height: 100, width: 100, marginLeft: 10, marginRight: 10, marginTop: 10}}>
                   <Image
                     style={{
                         width: 100,
                         height: 100,
                       }}
                     source={{
-                      uri: this.state.meals.image
+                      uri: "https://spoonacular.com/recipeImages/507501-556x370.jpg"//this.state.meals.image
                     }}
                   />
                 </View>
               </TouchableOpacity>
-
-              <TouchableOpacity onPress={()=>{}}>
-                <View style={{backgroundColor:"yellow", height: 100, width: 100, marginLeft: 10, marginRight: 10, marginTop: 10}}></View>
-              </TouchableOpacity>
-
-              <TouchableOpacity onPress={()=>{}}>
-                <View style={{backgroundColor:"red", height: 100, width: 100, marginLeft: 10, marginRight: 10, marginTop: 10}}></View>
+sds              <TouchableOpacity onPress={()=>{}}>
+                <View style={{backgroundColor:"red", height: 100, width: 100, marginLeft: 10, marginRight: 10, marginTop: 10}}>
+                  <Image
+                  style={{
+                      width: 100,
+                      height: 100,
+                    }}
+                  source={{
+                    uri: "https://spoonacular.com/recipeImages/716461-556x370.jpg"//this.state.meals.image
+                  }}
+                />
+                </View>
               </TouchableOpacity>
 
             </View>
 
 
-            <View>
+            <View style={{marginTop: 30}}>
               <Button
-                onPress={()=>{this.props.navigation.navigate('My GroceryList')}}
+                onPress={()=>{this.props.navigation.navigate('GroceryList')}}
                 title="GroceryList"
               />
               <Button
                 onPress={()=>{this.props.navigation.navigate('Search')}}
                 title="Recipes"
+              />
+              <Button
+                onPress={()=>{this.props.navigation.navigate('CameraAccess')}}
+                title="Scan Your Receipt"
               />
             </View>
 
