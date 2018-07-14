@@ -31,7 +31,7 @@ class MealPlanScreen extends React.Component {
   }
 
   componentDidMount() {
-    fetch('https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/search' + `?query=duck`, {
+    fetch('https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/search' + `?query=kalbi`, {
       headers: {
         "X-Mashape-Key": "iTqnNBvWSamshrNnx4RCtgFVlPuYp1srw8fjsnZerAuAVNTnjb",
         "Accept": "application/json",
