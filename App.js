@@ -19,6 +19,7 @@ import RegisterScreen from './Components/RegisterScreen'
 import LoginScreen from './Components/LoginScreen'
 import CustomizeScreen from './Components/CustomizeScreen'
 import MealScreen from './Components/MealScreen'
+import CameraAccess from './Components/CameraAccess'
 // import MealPlanScreen from './Components/MealPlanScreen'
 
 class MealPlanScreen extends React.Component {
@@ -315,5 +316,8 @@ export default StackNavigator({
   },
   MyInfo: {
     screen:MyInfoScreen,
+  },
+  CameraAccess: {
+    screen: CameraAccess,
   }
 }, {initialRouteName: 'MealPlan'});
