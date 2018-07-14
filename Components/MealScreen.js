@@ -19,7 +19,10 @@ class MealScreen extends React.Component{
   constructor(props) {
     super(props)
     this.ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
-    this.state = {nutrition:"",name:""}
+    this.state = {
+      nutrition: "",
+      name: ""
+    }
   }
   //run the coponoennt and have it fetch the data
   //each ingredient has i\ts own page that displays what it looks like
