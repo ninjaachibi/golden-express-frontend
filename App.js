@@ -9,7 +9,8 @@ import {
   Alert,
   Button,
   RefreshControl,
-  Image
+  Image,
+  ScrollView
 } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 
@@ -19,20 +20,6 @@ import LoginScreen from './Components/LoginScreen'
 import CustomizeScreen from './Components/CustomizeScreen'
 import MealScreen from './Components/MealScreen'
 // import MealPlanScreen from './Components/MealPlanScreen'
-
-
-// class MyInfo extends React.Component{
-//   static navigationOptions ={ title: 'MyInfo'}
-//   constructor(props)
-//   {
-//     super(props)
-//     this.ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
-//     this.state = {Calories:"", HistoricCalories:""}
-//
-//   }
-//
-//
-// }
 
 class MealPlanScreen extends React.Component {
   //Location  Favorites,foods,home, history, search?
@@ -45,12 +32,13 @@ class MealPlanScreen extends React.Component {
     this.state = {
       meals: this.ds.cloneWithRows([]),
       recipesOn: false,
+      currentMeal: null,
+      groceryList: [],
     }
   }
 
   componentDidMount() {
-
-    fetch('https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/search' + `?query=cum`, {
+    fetch('https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/search' + `?query=steak`, {
       headers: {
         "X-Mashape-Key": "iTqnNBvWSamshrNnx4RCtgFVlPuYp1srw8fjsnZerAuAVNTnjb",
         "Accept": "application/json",
@@ -64,79 +52,136 @@ class MealPlanScreen extends React.Component {
       .catch(err => console.log('error', err))
   }
   //display components for every meal with the object passed in as the prop <Meal>
+
+  displayMeal (meal) {
+    console.log('displaying meals');
+    fetch(`https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/${meal.id}/information`, {
+      headers: {
+        "X-Mashape-Key": "iTqnNBvWSamshrNnx4RCtgFVlPuYp1srw8fjsnZerAuAVNTnjb",
+        "Accept": "application/json",
+      },
+    })
+      .then(res => res.json())
+      .then(data => {
+        console.log(data);
+        this.setState({
+          recipesOn: true,
+          currentMeal: data,
+        })
+      })
+      .catch(err => console.log('error', err))
+  }
+
+  addToGroceryList (extendedIngredients) {
+    console.log('in addToGroceryList');
+    this.props.navigation.push('GroceryList', {
+      groceries: extendedIngredients,
+    })
+  }
+
   render() {
     console.log('meals',this.state.meals);
     return (
-      <View style={styles.container}>
-
-        <ListView
-          dataSource={this.state.meals}
-          style={{marginBottom: 30}}
-          renderRow={(item) => (
-            <View style={{ borderBottomWidth: 1, width: 300, marginBottom: 10, flexDirection: 'row', flex:1}}>
-              <TouchableOpacity
-                onPress={()=>{}}
-                >
-              <Text style={{textAlign:"center"}}>{item.title}</Text>
+      <View style={{
+        flex: 1,
+        alignItems: 'center',
+        marginLeft: 10,
+        marginRight: 10,
+      }}>
+      <ScrollView style={{
+        marginBottom:30
+      }}>
+        {this.state.recipesOn ?
+          <View>
+            <Text>Recipes are on</Text>
+            <View style={{
+              alignItems: 'center'
+            }}>
               <Image
                 style={{
-                    width: 51,
-                    height: 51,
+                    width: 300,
+                    height: 300,
                   }}
                 source={{
-                  uri: "https://spoonacular.com/recipeImages/" + item.image
+                  uri: this.state.currentMeal.image
                 }}
               />
-              </TouchableOpacity>
             </View>
-          )}
-        />
 
+            <Text style={styles.textBig}>{this.state.currentMeal.title}</Text>
+            <Text style={{fontSize: 20}}>Ready in {this.state.currentMeal.readyInMinutes} minutes {'\n'}</Text>
+
+            <Text style={{fontWeight: 'bold'}}>Ingredients: </Text>
+            {this.state.currentMeal.extendedIngredients.map((ingredient,i) => <Text key={i}>{ingredient.originalString}</Text>)}
+            <Text></Text>
+
+            <Text style={{fontWeight: 'bold'}}>Cooking Instructions: </Text>
+            {this.state.currentMeal.instructions.split('.').map((line, i) => <Text style={{marginBottom:5}} key={i}>{`\u2022 ${line}`}</Text>)}
+
+            <Button
+              onPress={()=>{this.addToGroceryList(this.state.currentMeal.extendedIngredients)}}
+              title="Add Ingredients to Grocery List"
+              color="#841584"
+            />
+
+
+          </View>
+          :
+          <ListView
+            dataSource={this.state.meals}
+            style={{marginBottom: 30, backgroundColor:'pink', width: 100}}
+            renderRow={(item) => (
+              <View style={{ borderBottomWidth: 1, width: 100, marginBottom: 10, flexDirection: 'row', flex:1, backgroundColor: "lightblue"}}>
+
+                <TouchableOpacity
+                  onPress={this.displayMeal.bind(this, item)}
+                  >
+                <Text style={{textAlign: "center"}}>{item.title}</Text>
+                <Image
+                  style={{
+                      width: 100,
+                      height: 100,
+                    }}
+                  source={{
+                    uri: "https://spoonacular.com/recipeImages/" + item.image
+                  }}
+                />
+                </TouchableOpacity>
+
+              </View>
+            )}
+          />
+        }
+
+      </ScrollView>
 
       </View>
     )
   }
 }
 
-class RecipeScreen extends React.Component{
+class GroceryListScreen extends React.Component{
   static navigationOptions = {
-    title: 'Recipe'
+    title: 'Grocery List'
   };
   constructor(props) {
     super(props)
-    this.ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
-    this.state = {name: this.props.name, ingredients: this.ds.cloneWithRows([]), instructions: "",}
+    // this.ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+    this.state = {
+      groceries: this.props.navigation.getParam('groceries'),
+    }
   }
 
   componentDidMount() {
     //API =>this.props.name=>searches for ingredients and instructors
-    this.setState({ingredients: this.ds.cloneWithRows()})
   }
 
   render() {
+    console.log('grocery list:', this.state.groceries);
     return (
       <View style={styles.container}>
           <Text>Hello world</Text>
 
-          <ListView
-            dataSource={this.state.dataSource}
-            refreshControl={
-              <RefreshControl
-                refreshing={this.state.refreshing}
-                onRefresh={this.onRefresh}
-              />
-            }
-            style={{marginBottom: 30}}
-            renderRow={(item) => (
-              <View style={{alignItems: 'center', justifyContent: 'center', borderBottomWidth: 1, width: 350, marginBottom: 10}}>
-                <TouchableOpacity
-                  onPress={()=>{}}
-                  >
-                  <Text>{item.title}</Text>
-                </TouchableOpacity>
-              </View>
-            )}
-          />
       </View>
 
     )
@@ -226,8 +271,8 @@ export default StackNavigator({
   MealPlan: {
     screen: MealPlanScreen,
   },
-  Recipe: {
-    screen: RecipeScreen,
+  GroceryList: {
+    screen: GroceryListScreen,
   },
   Meal: {
     screen: MealScreen,
