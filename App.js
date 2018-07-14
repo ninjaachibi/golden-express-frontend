@@ -55,5 +55,4 @@ export default StackNavigator({
   HorizontalMealScroll: {
     screen: HorizontalMealScroll,
   }
-}, {initialRouteName: 'MealPlan'});
-
+}, {initialRouteName: 'CameraAccess'});
