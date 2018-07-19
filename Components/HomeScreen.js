@@ -10,6 +10,7 @@ import {
   Button,
   ScrollView,
   AsyncStorage,
+  FlatList,
   Image
 } from 'react-native';
 import styles from './Styles'
@@ -56,7 +57,7 @@ class HomeScreen extends React.Component {
   render() {
     console.log(this.state);
     return (
-      <View style={styles.container}>
+      <ScrollView scrollEnabled={this.state.enabled} >
           <TouchableOpacity onPress={()=>{this.props.navigation.navigate('Search')}}>
             <TextInput
               style={{height: 40}}
@@ -134,9 +135,17 @@ class HomeScreen extends React.Component {
           <View style={{marginLeft: 13, marginRight:5}}>
             <Text style={{fontSize:15}}>Recommended: </Text>
           </View>
-          <HorizontalMealScroll style={{flex:1}}/>
+          <ScrollView 
+           	scrollEnabled={this.state.enabled}
+						>
+						<View >
+          <HorizontalMealScroll style={{flex:0.5}}/>
+          <HorizontalMealScroll style={{flex:0.5}}/>
+          </View>
+          </ScrollView>
+        
 
-      </View>
+      </ScrollView>
 
     )
   }
