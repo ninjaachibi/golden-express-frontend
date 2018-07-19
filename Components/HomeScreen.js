@@ -97,7 +97,7 @@ class HomeScreen extends React.Component {
                   />
                 </View>
               </TouchableOpacity>
-sds              <TouchableOpacity onPress={()=>{}}>
+              <TouchableOpacity onPress={()=>{}}>
                 <View style={{backgroundColor:"red", height: 100, width: 100, marginLeft: 10, marginRight: 10, marginTop: 10}}>
                   <Image
                   style={{

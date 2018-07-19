@@ -16,7 +16,6 @@ const data = [
     title: "Low Carb Frosty"
   }
 ];
-
 class HorizontalMealScroll extends Component {
   constructor(props) {
     super(props);
