@@ -59,7 +59,7 @@ componentDidMount()
 
   render() {
     return (
-
+   
       <FlatList
         horizontal
         data={this.state.data}
