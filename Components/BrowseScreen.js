@@ -15,7 +15,7 @@ import {
 } from 'react-native';
 import styles from './Styles'
 
-class MealPlanScreen extends React.Component {
+class BrowserScreen extends React.Component {
   //Location  Favorites,foods,home, history, search?
   static navigationOptions ={
     title:'Plan Your Meals',
@@ -174,4 +174,4 @@ class MealPlanScreen extends React.Component {
   }
 }
 
-export default MealPlanScreen;
+export default BrowserScreen;

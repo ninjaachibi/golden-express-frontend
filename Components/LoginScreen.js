@@ -62,7 +62,7 @@ class LoginScreen extends React.Component {
       <View style={styles.container}>
         <Text>{this.state.message}</Text>
 
-        <Text style={styles.textBig}>Login to HoHoHo!</Text>
+        <Text style={styles.textBig}>Welcome to Golden Express!</Text>
         <TextInput
           style={{height: 40}}
           placeholder="Enter your username"
