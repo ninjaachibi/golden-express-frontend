@@ -68,47 +68,7 @@ class BrowseGroceryScreen extends React.Component {
       <ScrollView style={{
         marginBottom:30
       }}>
-        {this.state.recipesOn ?
-          <View>
-            <Text>Recipes are on</Text>
-            <View style={{
-              alignItems: 'center'
-            }}>
-              <Image
-                style={{
-                    width: 300,
-                    height: 300,
-                  }}
-                source={{
-                  uri: this.state.currentMeal.image
-                }}
-              />
-            </View>
 
-            <Text style={styles.textBig}>{this.state.currentMeal.title}</Text>
-            <Text style={{fontSize: 20}}>Ready in {this.state.currentMeal.readyInMinutes} minutes {'\n'}</Text>
-
-            <Text style={{fontWeight: 'bold'}}>Ingredients: </Text>
-            {this.state.currentMeal.extendedIngredients.map((ingredient,i) => <Text key={i}>{ingredient.originalString}</Text>)}
-            <Text></Text>
-
-            <Text style={{fontWeight: 'bold'}}>Cooking Instructions: </Text>
-            {this.state.currentMeal.instructions.split('.').map((line, i) => <Text style={{marginBottom:5}} key={i}>{`\u2022 ${line}`}</Text>)}
-
-            <Button
-              onPress={()=>{this.addToGroceryList(this.state.currentMeal.extendedIngredients)}}
-              title="Add Ingredients to Grocery List"
-              color="#841584"
-            />
-            <Button
-              onPress={()=>{this.addToMeals(this.state.currentMeal)}}
-              title="Add to Meal Plan"
-              color="#841584"
-            />
-
-
-          </View>
-          :
           <ListView
             dataSource={this.state.items}
             style={{marginBottom: 30, backgroundColor:'pink', width: 150}}
@@ -118,14 +78,14 @@ class BrowseGroceryScreen extends React.Component {
                 <TouchableOpacity
                   onPress={()=>{}}
                   >
-                <Text style={{textAlign: "center"}}>{item.title}</Text>
+                <Text style={{textAlign: "center"}}>{item.ItemName}</Text>
                 <Image
                   style={{
                       width: 150,
                       height: 150,
                     }}
                   source={{
-                    uri: "https://spoonacular.com/recipeImages/" + item.image
+                    uri: item.Pic_URL
                   }}
                 />
                 </TouchableOpacity>
@@ -133,7 +93,7 @@ class BrowseGroceryScreen extends React.Component {
               </View>
             )}
           />
-        }
+
 
       </ScrollView>
 
