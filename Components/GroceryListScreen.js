@@ -31,12 +31,6 @@ class GroceryListScreen extends React.Component{
   }
 
   componentDidMount() {
-    //API =>this.props.name=>searches for ingredients and instructors
-    AsyncStorage.getItem('groceries')
-      .then( data => {
-        console.log('groceries in AsyncStorage', JSON.parse(data));
-        this.setState({groceries: JSON.parse(data)})
-      })
   }
 
   strikeThrough (i) {

@@ -17,16 +17,12 @@ import { StackNavigator } from 'react-navigation';
 import styles from './Components/Styles'
 import RegisterScreen from './Components/RegisterScreen'
 import LoginScreen from './Components/LoginScreen'
-import CustomizeScreen from './Components/CustomizeScreen'
-import MealScreen from './Components/MealScreen'
 import CameraAccess from './Components/CameraAccess'
 import HomeScreen from './Components/HomeScreen'
-import MealPlanScreen from './Components/MealPlanScreen'
+import BrowseGroceryScreen from './Components/BrowseGroceryScreen'
 import GroceryListScreen from './Components/GroceryListScreen'
-import MyInfoScreen from './Components/MyInfoScreen';
 import HorizontalMealScroll from './Components/HorizontalMealScroll'
 import SearchScreen from './Components/SearchScreen'
-import MyMeals from './Components/MyMeals'
 
 //Navigator
 export default StackNavigator({
@@ -36,8 +32,8 @@ export default StackNavigator({
   Register: {
     screen: RegisterScreen,
   },
-  MealPlan: {
-    screen: MealPlanScreen,
+  BrowseGrocery: {
+    screen: BrowseGroceryScreen,
   },
   GroceryList: {
     screen: GroceryListScreen,
@@ -45,14 +41,8 @@ export default StackNavigator({
   Search: {
     screen: SearchScreen,
   },
-  Meal: {
-    screen: MealScreen,
-  },
   Home: {
     screen: HomeScreen,
-  },
-  MyInfo: {
-    screen:MyInfoScreen,
   },
   CameraAccess: {
     screen: CameraAccess,
@@ -60,5 +50,4 @@ export default StackNavigator({
   HorizontalMealScroll: {
     screen: HorizontalMealScroll,
   }
-}, {initialRouteName: 'Home'});
-
+}, {initialRouteName: 'BrowseGrocery'});
