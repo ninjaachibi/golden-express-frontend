@@ -23,6 +23,8 @@ import BrowseGroceryScreen from './Components/BrowseGroceryScreen'
 import GroceryListScreen from './Components/GroceryListScreen'
 import HorizontalMealScroll from './Components/HorizontalMealScroll'
 import SearchScreen from './Components/SearchScreen'
+import CheckoutScreen from './Components/CheckoutScreen'
+
 
 //Navigator
 export default StackNavigator({
@@ -47,7 +49,7 @@ export default StackNavigator({
   CameraAccess: {
     screen: CameraAccess,
   },
-  HorizontalMealScroll: {
-    screen: HorizontalMealScroll,
+  Checkout: {
+    screen: CheckoutScreen,
   }
-}, {initialRouteName: 'Login'});
+}, {initialRouteName: 'Checkout'});
