@@ -18,7 +18,7 @@ class LoginScreen extends React.Component {
 
   constructor() {
     super();
-    this.state ={
+    this.state = {
       message:''
     }
   }
@@ -39,16 +39,17 @@ class LoginScreen extends React.Component {
       /* do something with responseJson and go back to the Login view but
       * make sure to check for responseJson.success! */
       console.log(responseJson)
-      if (responseJson.success)
-      {
+      if (responseJson.success) {
         this.props.navigation.navigate('Home')
       }
-
+      else {
+        this.setState({message: `Error: ${responseJson.message}`})
+      }
     })
     .catch((err) => {
       /* do something if there was an error with fetching */
-      console.log(err)
-      this.setState({message:err})
+      console.log('error', err)
+      this.setState({message: err})
     });
 
   }
