@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { FlatList, Text } from "react-native";
+import { FlatList, Text, View, TouchableOpacity } from "react-native";
 import { Card } from "react-native-elements";
 
 const data = [
@@ -56,31 +56,45 @@ componentDidMount()
 
 }
 
-
+//"#b3d9ff"
   render() {
     return (
-   
+      <View style={{flex:1}}>
+        <View style={{alignItems:'flex-end'}}>
+          <TouchableOpacity>
+          <Text style={{color:'red',marginTop:2,marginRight:10, fontWeight:'bold',fontSize:15}}>View more ></Text>
+          </TouchableOpacity>
+        </View>
+
       <FlatList
+        getItemLayout={(data, index) => (
+           {length: 280, offset: 280 * index, index}
+         )}
+
         horizontal
         data={this.state.data}
         renderItem={({ item: rowData }) => {
           return (
             <Card
               title={null}
+              style={{color:"white"}}
+
               image={{ uri: rowData.imageUrl }}
-              containerStyle={{ padding: 0, width: 160, height:280, borderRadius:10,backgroundColor:"#b3d9ff"}}
+              imageStyle={{width:115, height:115,borderRadius:32,marginLeft:15.2,marginTop:22}}
+              containerStyle={{ borderColor: "white",marginLeft:-1.5, width: 125, height:190, borderRadius:30,backgroundColor:"white",alignItems:"center", justifyContent:'flex-start',}}
             >
-              <Text style={{ fontSize:18,marginBottom: 10, color:'white' }}>
+              <View style={{marginTop:-5,width:110,alignItems:"flex-start"}}>
+              <Text style={{ fontWeight:'bold',fontSize:9,marginBottom: 10, color:'black' }}>
                 {rowData.title}
               </Text>
-              <Text style={{ fontSize:18,marginBottom: 10, color:'white' }}>
-                {rowData.calories}
-              </Text>
+              </View>
+
             </Card>
           );
         }}
         keyExtractor={(item, index) => index}
       />
+    </View>
     );
   }
 }
