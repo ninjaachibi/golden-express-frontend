@@ -24,7 +24,7 @@ class LoginScreen extends React.Component {
   }
 
   press() {
-    fetch('https://hohoho-backend.herokuapp.com/login', { //make this our own backend
+    fetch('https://golden-express.herokuapp.com/login', {
       method: 'POST',
       headers: {
         "Content-Type": "application/json"

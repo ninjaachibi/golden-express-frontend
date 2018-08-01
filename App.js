@@ -50,4 +50,4 @@ export default StackNavigator({
   HorizontalMealScroll: {
     screen: HorizontalMealScroll,
   }
-}, {initialRouteName: 'Home'});
+}, {initialRouteName: 'Login'});

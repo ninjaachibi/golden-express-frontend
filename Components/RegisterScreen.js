@@ -21,7 +21,7 @@ class RegisterScreen extends React.Component {
   };
 
   register() {
-    fetch('https://hohoho-backend.herokuapp.com/register', {
+    fetch('https://golden-express.herokuapp.com/register', {
       method: 'POST',
       headers: {
         "Content-Type": "application/json"
