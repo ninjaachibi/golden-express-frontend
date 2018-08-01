@@ -3,6 +3,10 @@
   "version": "0.0.0",
   "description": "Hello Expo!",
   "main": "node_modules/expo/AppEntry.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "script": "babel-node scripts.js"
+  },
   "private": true,
   "dependencies": {
     "expo": "^25.0.0",
@@ -10,5 +14,9 @@
     "react-native": "https://github.com/expo/react-native/archive/sdk-25.0.0.tar.gz",
     "react-native-elements": "^0.19.1",
     "react-navigation": "^1.5.12"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.7.0"
   }
 }

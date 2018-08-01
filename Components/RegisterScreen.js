@@ -12,9 +12,11 @@ import {
 import styles from './Styles'
 
 class RegisterScreen extends React.Component {
-  constructor() {
-    super()
-    this.state= {}
+  constructor(props) {
+    super(props);
+    this.state = {
+      message:''
+    }
   }
   static navigationOptions = {
     title: 'Register'
@@ -36,8 +38,12 @@ class RegisterScreen extends React.Component {
       /* do something with responseJson and go back to the Login view but
        * make sure to check for responseJson.success! */
        console.log(responseJson)
-       this.props.navigation.navigate('Login')
-
+       if(responseJson.success) {
+         this.props.navigation.navigate('Login')
+       }
+       else {
+         this.setState({message: `Error: ${responseJson.message}`})
+       }
     })
     .catch((err) => {
       /* do something if there was an error with fetching */
@@ -48,6 +54,8 @@ class RegisterScreen extends React.Component {
   render() {
     return (
       <View style={styles.container}>
+        <Text>{this.state.message}</Text>
+
         <Text style={styles.textBig}>Register</Text>
         <TextInput
           style={{height: 40}}

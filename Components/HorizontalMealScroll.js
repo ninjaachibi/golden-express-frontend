@@ -23,8 +23,7 @@ class HorizontalMealScroll extends Component {
       data: [],
     };
   }
-componentDidMount()
-{
+componentDidMount() {
   fetch('https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/search' + `?number=100`, {
     headers: {
       "X-Mashape-Key": "iTqnNBvWSamshrNnx4RCtgFVlPuYp1srw8fjsnZerAuAVNTnjb",
