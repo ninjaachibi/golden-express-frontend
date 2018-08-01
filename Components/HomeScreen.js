@@ -67,7 +67,7 @@ class HomeScreen extends React.Component {
           </TouchableOpacity>
 
           <View style={{flex:2, marginLeft: 5, marginRight:5}}>
-            <Text style={styles.textBig}>Today's Meals:</Text>
+            <Text style={styles.textBig}>Today's Meals (今天的meals):</Text>
             <View style={{flexDirection:'row', justifyContent: 'space-around', alignItems: 'center', }}>
 
               <TouchableOpacity onPress={()=>{}}>
@@ -124,10 +124,6 @@ class HomeScreen extends React.Component {
                 onPress={()=>{this.props.navigation.navigate('Search')}}
                 title="Recipes"
               />
-              <Button
-                onPress={()=>{this.props.navigation.navigate('CameraAccess')}}
-                title="Scan Your Receipt"
-              />
             </View>
 
           </View>
@@ -135,7 +131,7 @@ class HomeScreen extends React.Component {
           <View style={{marginLeft: 13, marginRight:5}}>
             <Text style={{fontSize:15}}>Recommended: </Text>
           </View>
-          <ScrollView 
+          <ScrollView
            	scrollEnabled={this.state.enabled}
 						>
 						<View >
@@ -143,7 +139,7 @@ class HomeScreen extends React.Component {
           <HorizontalMealScroll style={{flex:0.5}}/>
           </View>
           </ScrollView>
-        
+
 
       </ScrollView>
 

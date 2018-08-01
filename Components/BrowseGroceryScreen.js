@@ -15,7 +15,10 @@ import {
 } from 'react-native';
 import styles from './Styles'
 
-class MealPlanScreen extends React.Component {
+import groceryItems from '../public/Inventory/Fresh_Meat'
+console.log('groceryItems',groceryItems);
+
+class BrowseGroceryScreen extends React.Component {
   //Location  Favorites,foods,home, history, search?
   static navigationOptions ={
     title:'Plan Your Meals',
@@ -24,72 +27,37 @@ class MealPlanScreen extends React.Component {
     super(props);
     this.ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     this.state = {
-      meals: this.ds.cloneWithRows([]),
-      recipesOn: false,
-      currentMeal: null,
-      groceryList: [],
-      query: this.props.navigation.getParam('query')
+      items: this.ds.cloneWithRows([]),
     }
   }
 
   componentDidMount() {
-    fetch('https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/search' + `?query=${this.state.query}`, {
-      headers: {
-        "X-Mashape-Key": "iTqnNBvWSamshrNnx4RCtgFVlPuYp1srw8fjsnZerAuAVNTnjb",
-        "Accept": "application/json",
-      },
-    })
-      .then(res => res.json())
-      .then(data => {
-        console.log(data);
-        this.setState({meals: this.ds.cloneWithRows(data.results)})
-      })
-      .catch(err => console.log('error', err))
+    this.setState({items: this.ds.cloneWithRows(groceryItems)})
   }
   //display components for every meal with the object passed in as the prop <Meal>
 
-  displayMeal (meal) {
-    console.log('displaying meals');
-    fetch(`https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/${meal.id}/information`, {
-      headers: {
-        "X-Mashape-Key": "iTqnNBvWSamshrNnx4RCtgFVlPuYp1srw8fjsnZerAuAVNTnjb",
-        "Accept": "application/json",
-      },
-    })
-      .then(res => res.json())
-      .then(data => {
-        console.log(data);
-        this.setState({
-          recipesOn: true,
-          currentMeal: data,
-        })
-      })
-      .catch(err => console.log('error', err))
-  }
+  // displayMeal (meal) {
+  //   console.log('displaying meals');
+  //   fetch(`https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/${meal.id}/information`, {
+  //     headers: {
+  //       "X-Mashape-Key": "iTqnNBvWSamshrNnx4RCtgFVlPuYp1srw8fjsnZerAuAVNTnjb",
+  //       "Accept": "application/json",
+  //     },
+  //   })
+  //     .then(res => res.json())
+  //     .then(data => {
+  //       console.log(data);
+  //       this.setState({
+  //         recipesOn: true,
+  //         currentMeal: data,
+  //       })
+  //     })
+  //     .catch(err => console.log('error', err))
+  // }
 
-  addToGroceryList (extendedIngredients) {
-    console.log('in addToGroceryList');
-    AsyncStorage.setItem('groceries', JSON.stringify(extendedIngredients))
-    .then(()=> {
-      console.log('saved groceries to AsyncStorage');
-      this.props.navigation.push('GroceryList', {
-        groceries: extendedIngredients,
-      })
-    })
-  }
-
-  addToMeals (currentMeal) {
-    AsyncStorage.setItem('meals', JSON.stringify(currentMeal))
-    .then(()=> {
-      console.log('saved meal to AsyncStorage');
-      this.props.navigation.push('Home', {
-        addedMeals: currentMeal,
-      })
-    })
-  }
 
   render() {
-    console.log('meals',this.state.meals);
+    console.log('meals',this.state.items);
     return (
       <View style={{
         flex: 1,
@@ -142,13 +110,13 @@ class MealPlanScreen extends React.Component {
           </View>
           :
           <ListView
-            dataSource={this.state.meals}
+            dataSource={this.state.items}
             style={{marginBottom: 30, backgroundColor:'pink', width: 150}}
             renderRow={(item) => (
               <View style={{ borderBottomWidth: 1, width: 150, marginBottom: 10, flexDirection: 'row', flex:1, backgroundColor: "lightblue"}}>
 
                 <TouchableOpacity
-                  onPress={this.displayMeal.bind(this, item)}
+                  onPress={()=>{}}
                   >
                 <Text style={{textAlign: "center"}}>{item.title}</Text>
                 <Image
@@ -174,4 +142,4 @@ class MealPlanScreen extends React.Component {
   }
 }
 
-export default MealPlanScreen;
+export default BrowseGroceryScreen;

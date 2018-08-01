@@ -24,7 +24,7 @@ class LoginScreen extends React.Component {
   }
 
   press() {
-    fetch('https://hohoho-backend.herokuapp.com/login', {
+    fetch('https://hohoho-backend.herokuapp.com/login', { //make this our own backend
       method: 'POST',
       headers: {
         "Content-Type": "application/json"
@@ -41,7 +41,7 @@ class LoginScreen extends React.Component {
       console.log(responseJson)
       if (responseJson.success)
       {
-        this.props.navigation.navigate('Users')
+        this.props.navigation.navigate('Home')
       }
 
     })
@@ -62,7 +62,7 @@ class LoginScreen extends React.Component {
       <View style={styles.container}>
         <Text>{this.state.message}</Text>
 
-        <Text style={styles.textBig}>Login to HoHoHo!</Text>
+        <Text style={styles.textBig}>Welcome to Golden Express!</Text>
         <TextInput
           style={{height: 40}}
           placeholder="Enter your username"
