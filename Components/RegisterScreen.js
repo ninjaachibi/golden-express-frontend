@@ -8,7 +8,8 @@ import {
   ListView,
   Alert,
   UIManager,
-  Dimensions
+  Dimensions,
+  ImageBackground
 } from 'react-native';
 import styles from './Styles'
 import { Input, Button } from 'react-native-elements'
@@ -16,10 +17,8 @@ import Icon from 'react-native-vector-icons/SimpleLineIcons'
 
 UIManager.setLayoutAnimationEnabledExperimental &&
   UIManager.setLayoutAnimationEnabledExperimental(true)
+const BG_IMG = require('../assets/bg_screen3.jpg')
 
-
-// const SCREEN_WIDTH = Dimensions.get('window').width
-// const SCREEN_HEIGHT = Dimensions.get('window').height
 
 class RegisterScreen extends React.Component {
   constructor(props) {
@@ -64,6 +63,11 @@ class RegisterScreen extends React.Component {
   render() {
     return (
       <View style={styles.container}>
+        <ImageBackground
+            source={BG_IMG}
+            style={styles.bgImage}
+            >
+
         <Text>{this.state.message}</Text>
 
         <Text style={styles.textBig}>Register</Text>
@@ -80,6 +84,7 @@ class RegisterScreen extends React.Component {
         <TouchableOpacity style={[styles.button, styles.buttonBlue]} onPress={ () => {this.register()} }>
           <Text style={styles.buttonLabel}>Register</Text>
         </TouchableOpacity>
+      </ImageBackground>
       </View>
     )
   }

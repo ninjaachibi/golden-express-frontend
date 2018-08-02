@@ -40,4 +40,4 @@ class FeedbackScreen extends React.Component {
   }
 }
 
-export default LoginScreen;
+export default FeedbackScreen;
