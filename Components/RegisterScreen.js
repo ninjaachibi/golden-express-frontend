@@ -7,9 +7,19 @@ import {
   TextInput,
   ListView,
   Alert,
-  Button
+  UIManager,
+  Dimensions
 } from 'react-native';
 import styles from './Styles'
+import { Input, Button } from 'react-native-elements'
+import Icon from 'react-native-vector-icons/SimpleLineIcons'
+
+UIManager.setLayoutAnimationEnabledExperimental &&
+  UIManager.setLayoutAnimationEnabledExperimental(true)
+
+
+// const SCREEN_WIDTH = Dimensions.get('window').width
+// const SCREEN_HEIGHT = Dimensions.get('window').height
 
 class RegisterScreen extends React.Component {
   constructor(props) {

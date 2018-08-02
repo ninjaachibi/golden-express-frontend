@@ -6,9 +6,11 @@ import {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
+    paddingBottom: 20,
+    paddingTop: 20,
+    backgroundColor: '#293046',
     alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    justifyContent: 'space-around',
   },
   containerFull: {
     flex: 1,

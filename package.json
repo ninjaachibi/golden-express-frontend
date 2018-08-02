@@ -13,6 +13,7 @@
     "react": "16.2.0",
     "react-native": "https://github.com/expo/react-native/archive/sdk-25.0.0.tar.gz",
     "react-native-elements": "^0.19.1",
+    "react-native-linear-gradient": "^2.4.0",
     "react-navigation": "^1.5.12"
   },
   "devDependencies": {

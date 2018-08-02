@@ -13,11 +13,9 @@ import {
   ScrollView
 } from 'react-native';
 import { StackNavigator } from 'react-navigation';
-
 import styles from './Components/Styles'
 import RegisterScreen from './Components/RegisterScreen'
 import LoginScreen from './Components/LoginScreen'
-import CameraAccess from './Components/CameraAccess'
 import HomeScreen from './Components/HomeScreen'
 import BrowseGroceryScreen from './Components/BrowseGroceryScreen'
 import GroceryListScreen from './Components/GroceryListScreen'
