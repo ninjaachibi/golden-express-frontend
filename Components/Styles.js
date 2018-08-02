@@ -15,6 +15,16 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-around',
   },
+  goldenImage: {
+  flex: 1,
+  top: 0,
+  left: 0,
+  width:SCREEN_WIDTH,
+  justifyContent: 'center',
+  alignItems: 'stretch',
+  opacity: 0.8
+},
+
   bgImage: {
   flex: 1,
   top: 0,

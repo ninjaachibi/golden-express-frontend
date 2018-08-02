@@ -24,6 +24,7 @@ import SearchScreen from './Components/SearchScreen'
 import CheckoutScreen from './Components/CheckoutScreen'
 import FeedbackScreen from './Components/FeedbackScreen'
 
+
 //Navigator
 export default StackNavigator({
   Login: {
@@ -51,4 +52,4 @@ export default StackNavigator({
   Feedback: {
     screen: FeedbackScreen
   }
-}, {initialRouteName: 'Register'});
+}, {initialRouteName: 'Home'});
