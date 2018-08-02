@@ -10,8 +10,9 @@ import {
   Button,
   ImageBackground
 } from 'react-native';
-import styles from './Styles'
-const BG_IMG = require('../assets/bg_screen2.jpg')
+import styles from './Styles';
+import {Input,Icon} from 'react-native-elements';
+const BG_IMG = require('../assets/BG.jpg')
 
 
 class LoginScreen extends React.Component {
@@ -70,22 +71,33 @@ class LoginScreen extends React.Component {
             >
         <Text>{this.state.message}</Text>
 
-        <Text style={styles.textBig}>Welcome to Golden Express!</Text>
-        <TextInput
-          style={{height: 40}}
-          placeholder="Enter your username"
+        <Text style={styles.textBig}>WELCOME</Text>
+        <View style={styles.inputContainer}>
+         <TextInput
+         
+          style={styles.Logininput}
+          placeholder="          Username"
+          placeholderTextColor='white'
           onChangeText={(text) => this.setState({username: text})}
-        />
+        /> 
+       </View>
+       <View style={styles.inputContainer}>
         <TextInput
-          style={{height: 40}}
-          placeholder="Enter your password"
+          style={styles.Logininput}
+          secureTextEntry={true}
+          placeholder="          Password"
+          placeholderTextColor='white'
+          borderColor='white'
+          borderStyle='solid'
           onChangeText={(text) => this.setState({password: text})}
         />
+        </View>
         <TouchableOpacity onPress={ () => {this.press()} } style={[styles.button, styles.buttonGreen]}>
           <Text style={styles.buttonLabel}>Login</Text>
         </TouchableOpacity>
         <TouchableOpacity style={[styles.button, styles.buttonBlue]} onPress={ () => {this.register()} }>
-          <Text style={styles.buttonLabel}>Tap to Register</Text>
+          <Text style={styles.buttonLabel} borderColor='white'
+          borderStyle='solid'>Register</Text>
         </TouchableOpacity>
       </ImageBackground>
       </View>

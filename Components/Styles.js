@@ -2,6 +2,7 @@
 import {
   StyleSheet,
   Dimensions,
+  Text,
 } from 'react-native';
 
 const SCREEN_WIDTH = Dimensions.get('window').width
@@ -53,25 +54,47 @@ const styles = StyleSheet.create({
   textBig: {
     fontSize: 36,
     textAlign: 'center',
+    fontFamily: 'Didot',
+    color:'white',
     margin: 10,
   },
   button: {
     alignSelf: 'stretch',
     paddingTop: 10,
     paddingBottom: 10,
-    marginTop: 10,
-    marginLeft: 5,
-    marginRight: 5,
-    borderRadius: 5
+    marginTop: 20,
+    marginLeft: 55,
+    marginRight: 55,
+    borderRadius: 10
+  },
+  inputContainer:{
+    borderBottomWidth:0.4,
+    borderColor:'white',
+    height: 30,
+    width:180,
+    justifyContent: 'center',
+    alignItems: 'stretch',
+    textAlign:'center'
+  },
+  Logininput:{
+    height: 40,
+    color:'white'
   },
   buttonRed: {
     backgroundColor: '#FF585B',
   },
   buttonBlue: {
-    backgroundColor: '#0074D9',
+    backgroundColor: 'transparent',
+    borderColor:'white',
+    borderBottomWidth:0.7,
+    borderTopWidth:0.7,
+    borderLeftWidth:0.7,
+    borderRightWidth:0.7,
+    borderColor:'white',
+
   },
   buttonGreen: {
-    backgroundColor: '#2ECC40'
+    backgroundColor: '#3aa575',
   },
   buttonLabel: {
     textAlign: 'center',
