@@ -64,7 +64,7 @@ componentDidMount() {
           <Text style={{color:'red',marginTop:2,marginRight:10, fontWeight:'bold',fontSize:15}}>View more ></Text>
           </TouchableOpacity>
         </View>
-
+<Text> Coupons</Text>
       <FlatList
         getItemLayout={(data, index) => (
            {length: 280, offset: 280 * index, index}
@@ -79,8 +79,8 @@ componentDidMount() {
               style={{color:"white"}}
 
               image={{ uri: rowData.imageUrl }}
-              imageStyle={{width:115, height:115,borderRadius:32,marginLeft:15.2,marginTop:22}}
-              containerStyle={{ borderColor: "white",marginLeft:-1.5, width: 125, height:190, borderRadius:30,backgroundColor:"white",alignItems:"center", justifyContent:'flex-start',}}
+              imageStyle={{width:115, height:115,borderRadius:32,marginLeft:9,marginTop:22}}
+              containerStyle={{ borderColor: "white",marginLeft:-5, width: 125, height:190, borderColor:'white',borderRadius:30,backgroundColor:"white",alignItems:"center", justifyContent:'flex-start',}}
             >
               <View style={{marginTop:-5,width:110,alignItems:"flex-start"}}>
               <Text style={{ fontWeight:'bold',fontSize:9,marginBottom: 10, color:'black' }}>

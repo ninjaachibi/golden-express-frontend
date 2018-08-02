@@ -11,11 +11,16 @@ import {
   ScrollView,
   AsyncStorage,
   FlatList,
-  Image
+  Image,
+  ImageBackground
 } from 'react-native';
 import styles from './Styles'
 
 import HorizontalMealScroll from './HorizontalMealScroll'
+const G_IMG = require('../assets/goldenImage.jpg')
+const D_IMG = require('../assets/goldenTemple.jpg')
+const L_IMG = require('../assets/lol.jpg')
+
 
 class HomeScreen extends React.Component {
   static navigationOptions ={
@@ -27,6 +32,9 @@ class HomeScreen extends React.Component {
     this.state = {
       search:"",
       meals: [],
+      searchBar: false,
+      message:'',
+      search: '',
     }
   }
   //run the coponoennt and have it fetch the data
@@ -34,6 +42,22 @@ class HomeScreen extends React.Component {
   //how to make an image, where do i source
   //user gives quantities
   //algo updates quantiies with respect to recipe and user's desires
+  submit() {
+    console.log('clicked search');
+    this.setState({searchBar:!this.state.searchBar})
+    this.props.navigation.navigate('BrowseGrocery', {
+      query: this.state.search,
+    });
+  }
+
+  searchBarScreen() {
+    console.log("Registered press")
+    if (!this.state.searchBar)
+    {
+      this.setState({searchBar:true})
+    }
+
+  }
 
   componentDidMount() {
     //fetch meallist
@@ -56,25 +80,97 @@ class HomeScreen extends React.Component {
 
   render() {
     console.log(this.state);
-    return (
-      <ScrollView scrollEnabled={this.state.enabled} >
-        <View style={{height:100,backgroundColor:"#ff5c33",alignItems:'center',justifyContent:'center'}}>
-        <View style={{flex:0.2, justifyContent:'center',alignItems:'center',marginTop:10}}>
+    const view = () => {
+      if (this.state.searchBar)
+      {
+        return {
+          flex: 1,
+          backgroundColor: '#F5FCFF',
+          alignItems:'stretch'
+        }
+      }
+      else {
 
-          <TouchableOpacity style={{backgroundColor:'white', width:345, height:35,borderRadius:20,marginLeft:10,marginRight:10}} onPress={()=>{this.props.navigation.navigate('Search')}}>
+          return {}
+
+      }
+    }
+    const display = () => {
+      return this.state.searchBar ? 'none': null;
+    }
+
+    const searchBarScreen = () => {
+      console.log("Registered press")
+      if (!this.state.searchBar)
+      {
+        this.setState({searchBar:true})
+      }
+    }
+    console.log(view())
+    console.log(display())
+    console.log(this.state)
+    return (
+
+      // <View style={{
+      //   flex: 1,
+      //   alignItems: 'center',
+      //   backgroundColor: '#F5FCFF',
+      // }}>
+      //   <Text>{this.state.message}</Text>
+      //
+      //   <TextInput
+      //     style={{height: 40}}
+      //     placeholder="Search for a Recipe"
+      //     onChangeText={(text) => this.setState({search: text})}
+      //   />
+      //
+        // <TouchableOpacity style={[styles.button, styles.buttonBlue]} onPress={ () => {this.submit()} }>
+        //   <Text style={styles.buttonLabel}>Search</Text>
+        // </TouchableOpacity>
+      // </View>
+
+
+
+      <View style={{
+        flex:1,
+      }}>
+
+      <ScrollView style={{
+        flex:1,
+      }} scrollEnabled={!this.state.searchBar} >
+
+            <View style={view()}>
+              <ImageBackground
+                  source={this.state.searchBar ? D_IMG: G_IMG}
+                  style={[styles.goldenImage, {opacity: this.state.searchBar ? 0.69:0.8, justifyContent: this.state.searchBar ? 'flex-start': 'flex-end',height: this.state.searchBar ? 800: 170, flex: this.state.searchBar ? 5: null
+}]}>
+          {/* <View style={{
+            flex: 1,
+            alignItems: 'stretch',
+            backgroundColor: '#F5FCFF',
+          }}>
+            <Text>{this.state.message}</Text> */}
+
             <TextInput
-              style={{height: 30,fontSize:15, marginLeft:5, marginTop:2}}
-              placeholder="Search Recipes"
+              style={{height: 40, backgroundColor:'white', borderRadius: 20, margin: 10, padding:3,display:null}}
+              placeholder="Search for a Recipe"
               onChangeText={(text) => this.setState({search: text})}
+              onTouchStart={() => {this.searchBarScreen()}}
             />
-          </TouchableOpacity>
-          </View>
+            <TouchableOpacity style={[styles.button, styles.buttonBlue, {display: this.state.searchBar ? null: 'none'}]} onPress={ () => {this.submit()} }>
+              <Text style={styles.buttonLabel}>Search</Text>
+            </TouchableOpacity>
+            {/* <TouchableOpacity style={[styles.button, styles.buttonBlue]} onPress={ () => {this.submit()} }>
+              <Text style={styles.buttonLabel}>Search</Text>
+            </TouchableOpacity> */}
+          {/* </View> */}
+</ImageBackground>
         </View>
-        <View style={{height:100,backgroundColor:"gold",alignItems:'center',justifyContent:'center'}}>
-          <Text style={{fontSize:60, color:'silver'}}>Coupon!</Text>
-        </View>
-						<View style={{flex:1,backgroundColor:'white'
-}}>
+<ImageBackground
+  source={L_IMG}
+style={{height:120,display: display()}}/>
+						<View style={{flex:1,backgroundColor:'white',display:display(), alignItems:'flex-start'}}>
+
           <HorizontalMealScroll style={{flex:1}}/>
           <HorizontalMealScroll style={{flex:1}}/>
           <HorizontalMealScroll style={{flex:1}}/>
@@ -83,6 +179,7 @@ class HomeScreen extends React.Component {
         </View>
 
           </ScrollView>
+        </View>
 
     )
   }
