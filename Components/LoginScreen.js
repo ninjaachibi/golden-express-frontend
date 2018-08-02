@@ -7,9 +7,12 @@ import {
   TextInput,
   ListView,
   Alert,
-  Button
+  Button,
+  ImageBackground
 } from 'react-native';
 import styles from './Styles'
+const BG_IMG = require('../assets/bg_screen2.jpg')
+
 
 class LoginScreen extends React.Component {
   static navigationOptions ={
@@ -61,6 +64,10 @@ class LoginScreen extends React.Component {
   render() {
     return (
       <View style={styles.container}>
+        <ImageBackground
+            source={BG_IMG}
+            style={styles.bgImage}
+            >
         <Text>{this.state.message}</Text>
 
         <Text style={styles.textBig}>Welcome to Golden Express!</Text>
@@ -80,6 +87,7 @@ class LoginScreen extends React.Component {
         <TouchableOpacity style={[styles.button, styles.buttonBlue]} onPress={ () => {this.register()} }>
           <Text style={styles.buttonLabel}>Tap to Register</Text>
         </TouchableOpacity>
+      </ImageBackground>
       </View>
     )
   }
