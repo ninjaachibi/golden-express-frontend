@@ -83,11 +83,10 @@ window.addEventListener('popstate', function() {
 </script>
 `
 class CheckoutScreen extends React.Component {
-  static navigationOptions ={
+  static navigationOptions = {
     title:'Checkout',
   };
-  constructor(props)
-  {
+  constructor(props) {
     super(props)
   }
   //run the coponoennt and have it fetch the data
