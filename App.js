@@ -41,7 +41,10 @@ const Tabs = TabNavigator({
   Categories: { 
     screen: CategoriesScreen,
     navigationOptions: {
-      tabBarLabel:'Categories'
+      tabBarLabel:'Categories',
+      headerStyle: {
+        backgroundColor: "white",
+      },
     }},
   Home: { screen: HomeScreen,
     navigationOptions: {
@@ -49,7 +52,10 @@ const Tabs = TabNavigator({
     } },
   Search: { screen: SearchScreen,
     navigationOptions: {
-      tabBarLabel:'Search'
+      tabBarLabel:'Search',
+      headerStyle: {
+        backgroundColor: "white",
+      },
     } },
   BrowseGrocery: { screen: BrowseGroceryScreen,
     navigationOptions: {
@@ -74,6 +80,9 @@ const MainNavigator = StackNavigator({
   Feedback: {
     screen: FeedbackScreen
   },
+  Try:{
+    screen:Tabs
+  }
 })
 
 
@@ -82,7 +91,7 @@ export default class App extends React.Component {
   render() {
     return (
       <View style={{ flex: 1 }}>
-        <Tabs />
+        <MainNavigator />
       </View>
     );
   }
