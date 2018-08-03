@@ -21,7 +21,7 @@ console.log('groceryItems',groceryItems);
 class BrowseGroceryScreen extends React.Component {
   //Location  Favorites,foods,home, history, search?
   static navigationOptions ={
-    title:'Plan Your Meals',
+    title:'BrowseGrocery',
   };
   constructor(props) {
     super(props);

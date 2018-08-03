@@ -19,7 +19,7 @@ import styles from './Styles'
 import HorizontalMealScroll from './HorizontalMealScroll'
 const G_IMG = require('../assets/goldenImage.jpg')
 const D_IMG = require('../assets/goldenTemple.jpg')
-const L_IMG = require('../assets/lol.jpg')
+const L_IMG = require('../assets/Coupon.jpg')
 
 
 class HomeScreen extends React.Component {
@@ -36,6 +36,7 @@ class HomeScreen extends React.Component {
       message:'',
       search: '',
     }
+
   }
   //run the coponoennt and have it fetch the data
   //each ingredient has i\ts own page that displays what it looks like
@@ -50,14 +51,8 @@ class HomeScreen extends React.Component {
     });
   }
 
-  searchBarScreen() {
-    console.log("Registered press")
-    if (!this.state.searchBar)
-    {
-      this.setState({searchBar:true})
-    }
 
-  }
+
 
   componentDidMount() {
     //fetch meallist
@@ -79,36 +74,36 @@ class HomeScreen extends React.Component {
   }
 
   render() {
-    console.log(this.state);
-    const view = () => {
-      if (this.state.searchBar)
-      {
-        return {
-          flex: 1,
-          backgroundColor: '#F5FCFF',
-          alignItems:'stretch'
-        }
-      }
-      else {
-
-          return {}
-
-      }
-    }
-    const display = () => {
-      return this.state.searchBar ? 'none': null;
-    }
-
-    const searchBarScreen = () => {
-      console.log("Registered press")
-      if (!this.state.searchBar)
-      {
-        this.setState({searchBar:true})
-      }
-    }
-    console.log(view())
-    console.log(display())
-    console.log(this.state)
+    // console.log(this.state);
+    // const view = () => {
+    //   if (this.state.searchBar)
+    //   {
+    //     return {
+    //       flex: 1,
+    //       backgroundColor: '#F5FCFF',
+    //       alignItems:'stretch'
+    //     }
+    //   }
+    //   else {
+    //
+    //       return {}
+    //
+    //   }
+    // }
+    // const display = () => {
+    //   return this.state.searchBar ? 'none': null;
+    // }
+    //
+    // const searchBarScreen = () => {
+    //   console.log("Registered press")
+    //   if (!this.state.searchBar)
+    //   {
+    //     this.setState({searchBar:true})
+    //   }
+    // }
+    // console.log(view())
+    // console.log(display())
+    // console.log(this.state)
     return (
 
       // <View style={{
@@ -137,12 +132,17 @@ class HomeScreen extends React.Component {
 
       <ScrollView style={{
         flex:1,
-      }} scrollEnabled={!this.state.searchBar} >
+      }} scrollEnabled={true}
+      enableEmptySections={true}
+      >
 
-            <View style={view()}>
               <ImageBackground
-                  source={this.state.searchBar ? D_IMG: G_IMG}
-                  style={[styles.goldenImage, {opacity: this.state.searchBar ? 0.69:0.8, justifyContent: this.state.searchBar ? 'flex-start': 'flex-end',height: this.state.searchBar ? 800: 170, flex: this.state.searchBar ? 5: null
+                  source={G_IMG}
+                  style={[styles.goldenImage, {
+                    opacity: 0.8,
+                    justifyContent: 'flex-end',
+                    height: 170,
+
 }]}>
           {/* <View style={{
             flex: 1,
@@ -151,25 +151,28 @@ class HomeScreen extends React.Component {
           }}>
             <Text>{this.state.message}</Text> */}
 
-            <TextInput
-              style={{height: 40, backgroundColor:'white', borderRadius: 20, margin: 10, padding:3,display:null}}
+            <TouchableOpacity
+              style={{height: 40, backgroundColor:'white', borderRadius: 20, margin: 10, padding:3,display:null, alignItems:'center', justifyContent:'center', }}
               placeholder="Search for a Recipe"
-              onChangeText={(text) => this.setState({search: text})}
-              onTouchStart={() => {this.searchBarScreen()}}
-            />
-            <TouchableOpacity style={[styles.button, styles.buttonBlue, {display: this.state.searchBar ? null: 'none'}]} onPress={ () => {this.submit()} }>
-              <Text style={styles.buttonLabel}>Search</Text>
-            </TouchableOpacity>
+              onPress={()=>{this.props.navigation.navigate('Search')}
+}>
+             <Text style={{color:'grey'}}> Search Golden Express </Text>
+
             {/* <TouchableOpacity style={[styles.button, styles.buttonBlue]} onPress={ () => {this.submit()} }>
               <Text style={styles.buttonLabel}>Search</Text>
             </TouchableOpacity> */}
           {/* </View> */}
+        </TouchableOpacity>
 </ImageBackground>
-        </View>
-<ImageBackground
+        <View style={{backgroundColor:'#e5e5e5', alignItems:'center'}}>
+<Image
   source={L_IMG}
-style={{height:120,display: display()}}/>
-						<View style={{flex:1,backgroundColor:'white',display:display(), alignItems:'flex-start'}}>
+style={{backgroundColor: 'grey',height:175, width: 240}}/>
+</View>
+						<View style={{flex:1,
+              backgroundColor:'#e8ecf4',
+
+              alignItems:'flex-start'}}>
 
           <HorizontalMealScroll style={{flex:1}}/>
           <HorizontalMealScroll style={{flex:1}}/>
