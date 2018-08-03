@@ -51,4 +51,4 @@ export default StackNavigator({
   Feedback: {
     screen: FeedbackScreen
   }
-}, {initialRouteName: 'Home'});
+}, {initialRouteName: 'Feedback'});
