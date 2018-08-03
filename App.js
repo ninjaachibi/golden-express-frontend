@@ -13,7 +13,7 @@ import {
   ScrollView
 } from 'react-native';
  // Version can be specified in package.json
-
+import { Ionicons } from '@expo/vector-icons';
 import { StackNavigator, TabNavigator, TabBarBottom} from 'react-navigation';
 import { createStackNavigator } from 'react-navigation';
 
@@ -30,19 +30,16 @@ import FeedbackScreen from './Components/FeedbackScreen'
 import CategoriesScreen from './Components/CategoriesScreen'
 import CartScreen from './Components/CartScreen'
 
-
 import Stack from './Components/navigation/Stack.js'
-import { createStore } from 'redux'
+import {createStore} from 'redux'
 import { Provider } from 'react-redux'
-
-//Navigator
-
 
 const Tabs = TabNavigator({
   Categories: {
     screen: CategoriesScreen,
     navigationOptions: {
-      tabBarLabel:'Categories',
+      tabBarIcon:({ tintColor }) => <Ionicons name='ios-bookmarks' size={30} color={tintColor} />,
+      tabBarLabel:'Category',
       headerStyle: {
         backgroundColor: "white",
       },
@@ -50,27 +47,25 @@ const Tabs = TabNavigator({
   Home: {
     screen: HomeScreen,
     navigationOptions: {
-      tabBarLabel:'Home'
-    }
-  },
-  Search: {
-    screen: SearchScreen,
+      tabBarIcon:({ tintColor }) => <Ionicons name='ios-home' size={30} color={tintColor} />,
+      tabBarLabel:null
+    } },
+  Search: { screen: SearchScreen,
     navigationOptions: {
+      tabBarIcon:({ tintColor }) => <Ionicons name='ios-search' size={30} color={tintColor} />,
       tabBarLabel:'Search',
       headerStyle: {
         backgroundColor: "white",
       },
-    }
-  },
-  Result: {
-    screen: ResultScreen,
+    } },
+  Result: { screen: ResultScreen,
     navigationOptions: {
-      tabBarLabel:'Result'
-    }
-  },
-  GroceryList: {
-    screen: GroceryListScreen,
+      tabBarIcon:({ tintColor }) => <Ionicons name='ios-list' size={30} color={tintColor} />,
+      tabBarLabel:'Browse'
+    } },
+  GroceryList: { screen: GroceryListScreen,
     navigationOptions: {
+      tabBarIcon:({ tintColor }) => <Ionicons name='ios-basket' size={30} color={tintColor} />,
       tabBarLabel:'Grocery'
     }
   },
@@ -80,6 +75,7 @@ const Tabs = TabNavigator({
       tabBarLabel: 'My Cart'
     }
   }
+
 })
 
 const MainNavigator = StackNavigator({
@@ -101,12 +97,13 @@ const MainNavigator = StackNavigator({
 }, {initialRouteName: 'Try'});
 
 
+
 export default class App extends React.Component {
 
   render() {
     return (
       <View style={{ flex: 1 }}>
-        <MainNavigator />
+        <Tabs />
       </View>
     );
   }
