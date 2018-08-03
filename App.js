@@ -13,13 +13,16 @@ import {
   ScrollView
 } from 'react-native';
  // Version can be specified in package.json
+import { Ionicons } from '@expo/vector-icons';
+import {Header, Icon} from 'react-native-elements';
+
 import { StackNavigator, TabNavigator, TabBarBottom} from 'react-navigation';
 import { createStackNavigator } from 'react-navigation';
 import styles from './Components/Styles'
 import RegisterScreen from './Components/RegisterScreen'
 import LoginScreen from './Components/LoginScreen'
 import HomeScreen from './Components/HomeScreen'
-import BrowseGroceryScreen from './Components/BrowseGroceryScreen'
+import ResultScreen from './Components/ResultScreen'
 import GroceryListScreen from './Components/GroceryListScreen'
 import HorizontalMealScroll from './Components/HorizontalMealScroll'
 import SearchScreen from './Components/SearchScreen'
@@ -27,8 +30,6 @@ import CheckoutScreen from './Components/CheckoutScreen'
 import FeedbackScreen from './Components/FeedbackScreen'
 import CategoriesScreen from './Components/CategoriesScreen'
 import HomeNavigator from './Components/HomeNavigator'
-// import Stack from './Components/navigation/Stack.js'
-//Navigator
 
 
 const Tabs = TabNavigator({
@@ -41,28 +42,40 @@ const Tabs = TabNavigator({
   Categories: {
     screen: CategoriesScreen,
     navigationOptions: {
-
-      tabBarLabel:'Categories',
+      tabBarIcon:({ tintColor }) => <Ionicons name='ios-bookmarks' size={30} color={tintColor} />,
+      tabBarLabel:'Category',
       headerStyle: {
         backgroundColor: "white",
       },
     }},
-
+  Home: { screen: HomeScreen,
+    navigationOptions: {
+      tabBarIcon:({ tintColor }) => <Ionicons name='ios-home' size={30} color={tintColor} />,
+      tabBarLabel:null,
+      header: null
+    } },
   Search: { screen: SearchScreen,
     navigationOptions: {
+      tabBarIcon:({ tintColor }) => <Ionicons name='ios-search' size={30} color={tintColor} />,
       tabBarLabel:'Search',
       headerStyle: {
         backgroundColor: "white",
       },
     } },
-  BrowseGrocery: { screen: BrowseGroceryScreen,
+  Result: { screen: ResultScreen,
+
     navigationOptions: {
+      tabBarIcon:({ tintColor }) => <Ionicons name='ios-list' size={30} color={tintColor} />,
       tabBarLabel:'Browse'
     } },
   GroceryList: { screen: GroceryListScreen,
+
     navigationOptions: {
+      tabBarIcon:({ tintColor }) => <Ionicons name='ios-basket' size={30} color={tintColor} />,
       tabBarLabel:'Grocery'
-    } }
+    } },
+
+
 })
 const MainNavigator = StackNavigator({
    Login: {
@@ -88,6 +101,16 @@ const MainNavigator = StackNavigator({
   headerMode: 'float',
   navigationOptions: {
     headerLeft: null,
+    headerRight:  <Header
+        backgroundColor='transparent'
+        rightComponent={
+        <TouchableOpacity>
+          <Icon
+          name='shopping-cart'
+          color='blue'
+          onPress={()=>{}}/>
+          </TouchableOpacity>}
+      />
   }
  })
 export default class App extends React.Component {

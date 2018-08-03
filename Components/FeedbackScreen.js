@@ -53,8 +53,8 @@ class FeedbackScreen extends React.Component {
         <FormLabel>Question</FormLabel>
         <FormInput placeholder='Please enter your question...' onChangeText={(text)=>this.setState({question: text})}/>
       </ScrollView>
-       
-        
+
+
        <View>
          <Text>Please rate </Text>
         <Rating

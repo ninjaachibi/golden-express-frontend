@@ -14,8 +14,8 @@ import {
   AsyncStorage,
   TouchableHighlight
 } from 'react-native';
-import styles from './Styles'
-
+import styles from './Styles';
+import {Header, Icon} from 'react-native-elements';
 import groceryItems from '../public/Inventory/Fresh_Meat'
 console.log('groceryItems',groceryItems);
 const MEAT = require('../assets/Meat.png')
@@ -46,7 +46,7 @@ class CategoriesScreen extends React.Component {
   componentDidMount() {
     this.setState({items: this.ds.cloneWithRows(groceryItems)})
   }
-  
+
   createCategory (cat1,cat2) {
     return  (
       <View style={{flex:1, justifyContent:'flex-start', alignItems:'center',flexDirection:'row',justifyContent:'center'}}>
@@ -60,12 +60,21 @@ class CategoriesScreen extends React.Component {
     )
   }
 
+  shoppingCart(){
+    return(
+      this.props.navigation.navigate('Search')
+    )
+  }
+
   render() {
     console.log('meals',this.state.items);
     return (
 
       <ScrollView style={{flex:1}}>
         <View style={{height:12}}/>
+
+
+
         {this.createCategory(MEAT,PRODUCE)}
         {this.createCategory(SEAFOOD,DAIRY)}
         {this.createCategory(FROZEN,PRESERVED)}
