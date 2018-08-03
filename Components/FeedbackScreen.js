@@ -46,6 +46,7 @@ class FeedbackScreen extends React.Component {
         flex:1,
       }}>
         <FormLabel>Name</FormLabel>
+
         <FormInput placeholder='Please enter your name...' onChangeText={(text)=>this.setState({Name: text})}/>
         <FormLabel>Phone Number</FormLabel>
         <FormInput placeholder='Please enter your phone number...' onChangeText={(text)=>this.setState({phoneNumber: text})}/>
@@ -60,7 +61,7 @@ class FeedbackScreen extends React.Component {
            showRating
            type="star"
            fractions={1}
-           startingValue={3.5}
+           startingValue={2.5}
            imageSize={40}
            onFinishRating={(score)=>this.setState({rating:score})}
            style={{ paddingVertical: 10 }}

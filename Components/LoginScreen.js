@@ -44,7 +44,7 @@ class LoginScreen extends React.Component {
       * make sure to check for responseJson.success! */
       console.log(responseJson)
       if (responseJson.success) {
-        this.props.navigation.navigate('Home')
+        this.props.navigation.navigate('Try')
       }
       else {
         this.setState({message: `Error: ${responseJson.message}`})
