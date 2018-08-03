@@ -17,7 +17,7 @@ import styles from './Styles'
 
 class GroceryListScreen extends React.Component{
   static navigationOptions = {
-    title: 'Grocery List'
+    title: 'GroceryList'
   };
   constructor(props) {
     super(props)

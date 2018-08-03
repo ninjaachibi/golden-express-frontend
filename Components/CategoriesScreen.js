@@ -17,11 +17,12 @@ import styles from './Styles'
 
 import groceryItems from '../public/Inventory/Fresh_Meat'
 console.log('groceryItems',groceryItems);
+const F_IMG = require('../assets/Fruits.jpg')
 
-class BrowseGroceryScreen extends React.Component {
+class CategoriesScreen extends React.Component {
   //Location  Favorites,foods,home, history, search?
   static navigationOptions ={
-    title:'BrowseGrocery',
+    title:'Categories',
   };
   constructor(props) {
     super(props);
@@ -59,47 +60,18 @@ class BrowseGroceryScreen extends React.Component {
   render() {
     console.log('meals',this.state.items);
     return (
-      <View style={{
-        flex: 1,
-        alignItems: 'center',
-        marginLeft: 10,
-        marginRight: 10,
-      }}>
-      <ScrollView style={{
-        marginBottom:30
-      }}>
 
-          <ListView
-            dataSource={this.state.items}
-            style={{marginBottom: 30, backgroundColor:'pink', width: 150}}
-            renderRow={(item) => (
-              <View style={{ borderBottomWidth: 1, width: 150, marginBottom: 10, flexDirection: 'row', flex:1, backgroundColor: "lightblue"}}>
-
-                <TouchableOpacity
-                  onPress={()=>{}}
-                  >
-                <Text style={{textAlign: "center"}}>{item.ItemName}</Text>
-                <Image
-                  style={{
-                      width: 150,
-                      height: 150,
-                    }}
-                  source={{
-                    uri: item.Pic_URL
-                  }}
-                />
-                </TouchableOpacity>
-
-              </View>
-            )}
-          />
+      <ScrollView style={{flex:1}}>
+        <View style={{flex:1, justifyContent:'flex-start', alignItems:'flex-start',flexDirection:'row'}}>
+        <Image source={F_IMG} style={{height: 150,width: 150, margin: 20,flex: 1, display:'inline'}}/>
+        <Image source={F_IMG} style={{height: 150,width: 150,margin: 20, flex: 1, display: 'inline'}}/>
+      </View>
 
 
       </ScrollView>
 
-      </View>
     )
   }
 }
 
-export default BrowseGroceryScreen;
+export default CategoriesScreen;
