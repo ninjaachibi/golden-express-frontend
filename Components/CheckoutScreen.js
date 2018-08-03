@@ -21,7 +21,7 @@ let stripeAPI = `
 <script src="https://checkout.stripe.com/checkout.js"></script>
 <style>
 html, body {
-  background-color: blue;
+  background-color: gold;
 }
 #customButton {
  display:inline-block;
@@ -47,7 +47,7 @@ html, body {
  }
 }
 </style>
-<button id="customButton">Purchase</button>
+<button style="height: '360px'; width:'1080px'" id="customButton">Purchase</button>
 
 <script>
 
@@ -83,11 +83,10 @@ window.addEventListener('popstate', function() {
 </script>
 `
 class CheckoutScreen extends React.Component {
-  static navigationOptions ={
+  static navigationOptions = {
     title:'Checkout',
   };
-  constructor(props)
-  {
+  constructor(props) {
     super(props)
   }
   //run the coponoennt and have it fetch the data
@@ -100,8 +99,9 @@ class CheckoutScreen extends React.Component {
   render() {
     console.log(this.state);
     return (
-      <View style={{flex: 1, backgroundColor: 'gold', alignItems: 'stretch'}}>
-        <WebView source={{html:stripeAPI}} style={{backgroundColor:'red'}}/>
+      <View style={{flex: 1, backgroundColor: 'gold', alignItems: 'stretch', position:'absolute', top:0,bottom:0,left:0,right:0 }}>
+        <WebView scalesPageToFit={false}
+        scrollEnabled={false} source={{html:stripeAPI}} style={{backgroundColor: 'gold',position:'absolute', top:0,bottom:0,left:0,right:0}}/>
 
 
 
