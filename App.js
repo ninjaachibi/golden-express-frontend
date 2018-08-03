@@ -76,6 +76,13 @@ const Tabs = TabNavigator({
       tabBarIcon:({ tintColor }) => <Ionicons name='ios-basket' size={30} color={tintColor} />,
       tabBarLabel:'Grocery'
     }
+  },
+  Cart: {
+    screen: CartScreen,
+    navigationOptions: {
+      tabBarIcon:({ tintColor }) => <Ionicons name='ios-basket' size={30} color={tintColor} />,
+      tabBarLabel:'Cart'
+    }
   }
 
 })
