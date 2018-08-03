@@ -14,9 +14,10 @@ import {
 } from 'react-native';
  // Version can be specified in package.json
 import { Ionicons } from '@expo/vector-icons';
-import { StackNavigator, TabNavigator, TabBarBottom} from 'react-navigation';
-import { createStackNavigator } from 'react-navigation';
+import {Header, Icon} from 'react-native-elements';
 
+import { StackNavigator, TabNavigator, TabBarBottom } from 'react-navigation';
+import { createStackNavigator } from 'react-navigation';
 import styles from './Components/Styles'
 import RegisterScreen from './Components/RegisterScreen'
 import LoginScreen from './Components/LoginScreen'
@@ -29,12 +30,18 @@ import CheckoutScreen from './Components/CheckoutScreen'
 import FeedbackScreen from './Components/FeedbackScreen'
 import CategoriesScreen from './Components/CategoriesScreen'
 import CartScreen from './Components/CartScreen'
-
-import Stack from './Components/navigation/Stack.js'
-import {createStore} from 'redux'
-import { Provider } from 'react-redux'
+import HomeNavigator from './Components/HomeNavigator'
 
 const Tabs = TabNavigator({
+  Home: {
+    screen: HomeNavigator,
+    headerMode: 'none',
+    navigationOptions: {
+      tabBarIcon:({ tintColor }) => <Ionicons name='ios-home' size={30} color={tintColor} />,
+      tabBarLabel:'Home',
+      header: null
+    }
+  },
   Categories: {
     screen: CategoriesScreen,
     navigationOptions: {
@@ -42,45 +49,42 @@ const Tabs = TabNavigator({
       tabBarLabel:'Category',
       headerStyle: {
         backgroundColor: "white",
-      },
-  }},
-  Home: {
-    screen: HomeScreen,
-    navigationOptions: {
-      tabBarIcon:({ tintColor }) => <Ionicons name='ios-home' size={30} color={tintColor} />,
-      tabBarLabel:null
-    } },
-  Search: { screen: SearchScreen,
+      }
+    }
+  },
+
+  Search: {
+    screen: SearchScreen,
     navigationOptions: {
       tabBarIcon:({ tintColor }) => <Ionicons name='ios-search' size={30} color={tintColor} />,
       tabBarLabel:'Search',
       headerStyle: {
         backgroundColor: "white",
       },
-    } },
-  Result: { screen: ResultScreen,
+    }
+  },
+  Result: {
+    screen: ResultScreen,
     navigationOptions: {
       tabBarIcon:({ tintColor }) => <Ionicons name='ios-list' size={30} color={tintColor} />,
       tabBarLabel:'Browse'
-    } },
-  GroceryList: { screen: GroceryListScreen,
+    }
+  },
+  GroceryList: {
+    screen: GroceryListScreen,
     navigationOptions: {
       tabBarIcon:({ tintColor }) => <Ionicons name='ios-basket' size={30} color={tintColor} />,
       tabBarLabel:'Grocery'
     }
-  },
-  Cart: {
-    screen: CartScreen,
-    navigationOptions: {
-      tabBarLabel: 'My Cart'
-    }
   }
 
 })
-
 const MainNavigator = StackNavigator({
   Login: {
     screen: LoginScreen,
+    navigationOptions: {
+      header: null,
+    }
   },
   Register: {
     screen: RegisterScreen,
@@ -92,18 +96,30 @@ const MainNavigator = StackNavigator({
     screen: FeedbackScreen
   },
   Try: {
-    screen:Tabs
+    screen: Tabs
+  },
+},
+{
+  headerMode: 'float',
+  navigationOptions: {
+    headerLeft: null,
+    headerRight:  <Header
+        backgroundColor='transparent'
+        rightComponent={
+        <TouchableOpacity>
+          <Icon
+          name='shopping-cart'
+          color='blue'
+          onPress={()=>{}}/>
+          </TouchableOpacity>}
+      />
   }
-}, {initialRouteName: 'Try'});
-
-
-
+ })
 export default class App extends React.Component {
-
   render() {
     return (
       <View style={{ flex: 1 }}>
-        <Tabs />
+        <MainNavigator />
       </View>
     );
   }
@@ -137,20 +153,11 @@ export default class App extends React.Component {
 //     screen: CategoriesScreen
 //   }
 // }
-
-
-
-
 // const Home = StackNavigator(screens, {initialRouteName: 'Home'} )
 // const Search = StackNavigator(screens,{initialRouteName: 'Search'} )
 // const BrowseGrocery = StackNavigator(screens, {initialRouteName: 'BrowseGrocery'})
 // const GroceryList = StackNavigator(screens, {initialRouteName: 'GroceryList'})
 // const Categories = StackNavigator(screens, {initialRouteName: 'Categories'})
-
-
-
-
-
 // export default TabNavigator(
 //   {
 //     Categories: { screen: Categories },
@@ -158,8 +165,6 @@ export default class App extends React.Component {
 //     Search: { screen: Search },
 //     BrowseGrocery: { screen: BrowseGrocery },
 //     GroceryList: { screen: GroceryList }
-
-
 //   },
 //   {
 //     // navigationOptions: ({ navigation }) => ({

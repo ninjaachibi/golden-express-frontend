@@ -23,9 +23,7 @@ const L_IMG = require('../assets/Coupon.jpg')
 
 
 class HomeScreen extends React.Component {
-  static navigationOptions ={
-    title:'Golden Express',
-  };
+
   constructor(props)
   {
     super(props)
@@ -126,9 +124,7 @@ class HomeScreen extends React.Component {
 
 
 
-      <View style={{
-        flex:1,
-      }}>
+
 
       <ScrollView style={{
         flex:1,
@@ -182,7 +178,6 @@ class HomeScreen extends React.Component {
       </View>
 
     </ScrollView>
-  </View>
 
 )
 }

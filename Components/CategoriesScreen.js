@@ -16,7 +16,6 @@ import {
 } from 'react-native';
 import styles from './Styles';
 import {Header, Icon} from 'react-native-elements';
-import { Ionicons } from '@expo/vector-icons';
 import groceryItems from '../public/Inventory/Fresh_Meat'
 console.log('groceryItems',groceryItems);
 const MEAT = require('../assets/Meat.png')
@@ -60,7 +59,7 @@ class CategoriesScreen extends React.Component {
       </View>
     )
   }
-  
+
   shoppingCart(){
     return(
       this.props.navigation.navigate('Search')
@@ -73,18 +72,9 @@ class CategoriesScreen extends React.Component {
 
       <ScrollView style={{flex:1}}>
         <View style={{height:12}}/>
-        
-        <Header
-          backgroundColor='transparent'
-          rightComponent={
-          <TouchableOpacity>
-            <Icon 
-            name='shopping-cart'
-            color='blue'
-            onPress={()=>this.shoppingCart()}/>
-            </TouchableOpacity>}
-        />
-        
+
+
+
         {this.createCategory(MEAT,PRODUCE)}
         {this.createCategory(SEAFOOD,DAIRY)}
         {this.createCategory(FROZEN,PRESERVED)}
