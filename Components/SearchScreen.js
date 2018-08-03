@@ -54,7 +54,7 @@ class SearchScreen extends React.Component {
               width:null,
               resizeMode:'cover',
               flex: 5
-}]}>
+            }]}>
     {/* <View style={{
       flex: 1,
       alignItems: 'stretch',
