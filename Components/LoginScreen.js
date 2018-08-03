@@ -71,22 +71,22 @@ class LoginScreen extends React.Component {
             >
         <Text>{this.state.message}</Text>
 
-        <Text style={styles.textBig}>WELCOME</Text>
+        <Text style={[styles.textBig,{color:'rgba(225, 225, 225, .7)'}]}>WELCOME</Text>
         <View style={styles.inputContainer}>
          <TextInput
-         
+
           style={styles.Logininput}
-          placeholder="          Username"
-          placeholderTextColor='white'
+          placeholder="Username"
+          placeholderTextColor='rgba(225, 225, 225, .7)'
           onChangeText={(text) => this.setState({username: text})}
-        /> 
+        />
        </View>
        <View style={styles.inputContainer}>
         <TextInput
           style={styles.Logininput}
           secureTextEntry={true}
-          placeholder="          Password"
-          placeholderTextColor='white'
+          placeholder="Password"
+          placeholderTextColor='rgba(225, 225, 225, .7)'
           borderColor='white'
           borderStyle='solid'
           onChangeText={(text) => this.setState({password: text})}

@@ -149,45 +149,6 @@ class HomeScreen extends React.Component {
             alignItems: 'stretch',
             backgroundColor: '#F5FCFF',
           }}>
-<<<<<<< HEAD
-            <Text>{this.state.message}</Text> */}
-
-            <TouchableOpacity
-              style={{height: 40, backgroundColor:'white', borderRadius: 20, margin: 10, padding:3,display:null, alignItems:'center', justifyContent:'center', }}
-              placeholder="Search for a Recipe"
-              onPress={()=>{this.props.navigation.navigate('Search', {message: "You can pass props"})}
-}>
-             <Text style={{color:'grey'}}> Search Golden Express </Text>
-
-            {/* <TouchableOpacity style={[styles.button, styles.buttonBlue]} onPress={ () => {this.submit()} }>
-              <Text style={styles.buttonLabel}>Search</Text>
-            </TouchableOpacity> */}
-          {/* </View> */}
-        </TouchableOpacity>
-</ImageBackground>
-        <View style={{backgroundColor:'#e5e5e5', alignItems:'center'}}>
-<Image
-  source={L_IMG}
-style={{backgroundColor: 'grey',height:175, width: 240}}/>
-</View>
-						<View style={{flex:1,
-              backgroundColor:'#e8ecf4',
-
-              alignItems:'flex-start'}}>
-
-          <HorizontalMealScroll style={{flex:1}}/>
-          <HorizontalMealScroll style={{flex:1}}/>
-          <HorizontalMealScroll style={{flex:1}}/>
-          <HorizontalMealScroll style={{flex:1}}/>
-          <HorizontalMealScroll style={{flex:1}}/>
-        </View>
-
-          </ScrollView>
-        </View>
-
-    )
-  }
-=======
           <Text>{this.state.message}</Text> */}
 
           <TouchableOpacity
@@ -225,7 +186,6 @@ style={{backgroundColor: 'grey',height:175, width: 240}}/>
 
 )
 }
->>>>>>> 7f7c52124f65da3edcc9ef578b9ef3fb639231b4
 }
 
 export default HomeScreen;
