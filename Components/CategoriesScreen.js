@@ -60,11 +60,7 @@ class CategoriesScreen extends React.Component {
     )
   }
 
-  shoppingCart(){
-    return(
-      this.props.navigation.navigate('Search')
-    )
-  }
+  
 
   render() {
     console.log('meals',this.state.items);

@@ -129,7 +129,7 @@ class HomeScreen extends React.Component {
       <ScrollView style={{
         flex:1,
       }} scrollEnabled={true}
-      enableEmptySections={true}
+      enableEmptySections={false}
       >
 
         <ImageBackground

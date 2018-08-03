@@ -34,9 +34,9 @@ import HomeNavigator from './Components/HomeNavigator'
 
 const Tabs = TabNavigator({
   Home: { screen: HomeNavigator,
-      headerMode: 'none',
     navigationOptions: {
-      tabBarLabel:'Home',
+      tabBarIcon:({ tintColor }) => <Ionicons name='ios-home' size={30} color={tintColor} />,
+      tabBarLabel:null,
       header: null
     } },
   Categories: {
@@ -48,12 +48,7 @@ const Tabs = TabNavigator({
         backgroundColor: "white",
       },
     }},
-  Home: { screen: HomeScreen,
-    navigationOptions: {
-      tabBarIcon:({ tintColor }) => <Ionicons name='ios-home' size={30} color={tintColor} />,
-      tabBarLabel:null,
-      header: null
-    } },
+
   Search: { screen: SearchScreen,
     navigationOptions: {
       tabBarIcon:({ tintColor }) => <Ionicons name='ios-search' size={30} color={tintColor} />,
@@ -76,7 +71,22 @@ const Tabs = TabNavigator({
     } },
 
 
-})
+},
+{
+  navigationOptions: {
+    headerRight:  <Header
+      backgroundColor='transparent'
+      rightComponent={
+      <TouchableOpacity>
+        <Icon
+        name='shopping-cart'
+        color='blue'
+        onPress={()=>{}}/>
+        </TouchableOpacity>}
+    />
+  }
+}
+)
 const MainNavigator = StackNavigator({
    Login: {
     screen: LoginScreen,
@@ -101,18 +111,8 @@ const MainNavigator = StackNavigator({
   headerMode: 'float',
   navigationOptions: {
     headerLeft: null,
-    headerRight:  <Header
-        backgroundColor='transparent'
-        rightComponent={
-        <TouchableOpacity>
-          <Icon
-          name='shopping-cart'
-          color='blue'
-          onPress={()=>{}}/>
-          </TouchableOpacity>}
-      />
-  }
- })
+
+ }})
 export default class App extends React.Component {
   render() {
     return (
