@@ -16,7 +16,7 @@ import {
 import { Ionicons } from '@expo/vector-icons';
 import {Header, Icon} from 'react-native-elements';
 
-import { StackNavigator, TabNavigator, TabBarBottom} from 'react-navigation';
+import { StackNavigator, TabNavigator, TabBarBottom } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation';
 import styles from './Components/Styles'
 import RegisterScreen from './Components/RegisterScreen'
@@ -29,16 +29,19 @@ import SearchScreen from './Components/SearchScreen'
 import CheckoutScreen from './Components/CheckoutScreen'
 import FeedbackScreen from './Components/FeedbackScreen'
 import CategoriesScreen from './Components/CategoriesScreen'
+import CartScreen from './Components/CartScreen'
 import HomeNavigator from './Components/HomeNavigator'
 
-
 const Tabs = TabNavigator({
-  Home: { screen: HomeNavigator,
-      headerMode: 'none',
+  Home: {
+    screen: HomeNavigator,
+    headerMode: 'none',
     navigationOptions: {
+      tabBarIcon:({ tintColor }) => <Ionicons name='ios-home' size={30} color={tintColor} />,
       tabBarLabel:'Home',
       header: null
-    } },
+    }
+  },
   Categories: {
     screen: CategoriesScreen,
     navigationOptions: {
@@ -46,39 +49,38 @@ const Tabs = TabNavigator({
       tabBarLabel:'Category',
       headerStyle: {
         backgroundColor: "white",
-      },
-    }},
-  Home: { screen: HomeScreen,
-    navigationOptions: {
-      tabBarIcon:({ tintColor }) => <Ionicons name='ios-home' size={30} color={tintColor} />,
-      tabBarLabel:null,
-      header: null
-    } },
-  Search: { screen: SearchScreen,
+      }
+    }
+  },
+
+  Search: {
+    screen: SearchScreen,
     navigationOptions: {
       tabBarIcon:({ tintColor }) => <Ionicons name='ios-search' size={30} color={tintColor} />,
       tabBarLabel:'Search',
       headerStyle: {
         backgroundColor: "white",
       },
-    } },
-  Result: { screen: ResultScreen,
-
+    }
+  },
+  Result: {
+    screen: ResultScreen,
     navigationOptions: {
       tabBarIcon:({ tintColor }) => <Ionicons name='ios-list' size={30} color={tintColor} />,
       tabBarLabel:'Browse'
-    } },
-  GroceryList: { screen: GroceryListScreen,
-
+    }
+  },
+  GroceryList: {
+    screen: GroceryListScreen,
     navigationOptions: {
       tabBarIcon:({ tintColor }) => <Ionicons name='ios-basket' size={30} color={tintColor} />,
       tabBarLabel:'Grocery'
-    } },
-
+    }
+  }
 
 })
 const MainNavigator = StackNavigator({
-   Login: {
+  Login: {
     screen: LoginScreen,
     navigationOptions: {
       header: null,
