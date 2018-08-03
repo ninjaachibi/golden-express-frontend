@@ -12,44 +12,21 @@ import {
   Image,
   ScrollView
 } from 'react-native';
-import { StackNavigator } from 'react-navigation';
-import styles from './Components/Styles'
-import RegisterScreen from './Components/RegisterScreen'
-import LoginScreen from './Components/LoginScreen'
-import HomeScreen from './Components/HomeScreen'
-import BrowseGroceryScreen from './Components/BrowseGroceryScreen'
-import GroceryListScreen from './Components/GroceryListScreen'
-import HorizontalMealScroll from './Components/HorizontalMealScroll'
-import SearchScreen from './Components/SearchScreen'
-import CheckoutScreen from './Components/CheckoutScreen'
-import FeedbackScreen from './Components/FeedbackScreen'
+
+import Stack from './Components/navigation/Stack.js'
+import {createStore} from 'redux'
+import { Provider } from 'react-redux'
 
 
-//Navigator
-export default StackNavigator({
-  Login: {
-    screen: LoginScreen,
-  },
-  Register: {
-    screen: RegisterScreen,
-  },
-  BrowseGrocery: {
-    screen: BrowseGroceryScreen,
-  },
-  GroceryList: {
-    screen: GroceryListScreen,
-  },
-  Search: {
-    screen: SearchScreen,
-  },
-  Home: {
-    screen: HomeScreen,
-  },
+const store = createStore(reducer)
+export default class App extends Component{
+  render(){
+    return (
 
-  Checkout: {
-    screen: CheckoutScreen,
-  },
-  Feedback: {
-    screen: FeedbackScreen
+        <Stack />
+     
+
+    )
   }
-}, {initialRouteName: 'Feedback'});
+}
+
