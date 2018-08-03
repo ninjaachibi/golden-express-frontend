@@ -34,26 +34,10 @@ class BrowseGroceryScreen extends React.Component {
   componentDidMount() {
     this.setState({items: this.ds.cloneWithRows(groceryItems)})
   }
-  //display components for every meal with the object passed in as the prop <Meal>
 
-  // displayMeal (meal) {
-  //   console.log('displaying meals');
-  //   fetch(`https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/${meal.id}/information`, {
-  //     headers: {
-  //       "X-Mashape-Key": "iTqnNBvWSamshrNnx4RCtgFVlPuYp1srw8fjsnZerAuAVNTnjb",
-  //       "Accept": "application/json",
-  //     },
-  //   })
-  //     .then(res => res.json())
-  //     .then(data => {
-  //       console.log(data);
-  //       this.setState({
-  //         recipesOn: true,
-  //         currentMeal: data,
-  //       })
-  //     })
-  //     .catch(err => console.log('error', err))
-  // }
+  //display components for every grocery item with the id passed in as the prop itemId
+  displayItem (itemId) {
+  }
 
 
   render() {
