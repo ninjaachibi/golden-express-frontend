@@ -52,4 +52,4 @@ export default StackNavigator({
   Feedback: {
     screen: FeedbackScreen
   }
-}, {initialRouteName: 'Login'});
+}, {initialRouteName: 'Feedback'});
