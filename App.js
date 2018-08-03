@@ -120,3 +120,4 @@ export default TabNavigator(
     order: ['Categories', 'Search', 'BrowseGrocery','GroceryList','Home']
   }
 );
+
