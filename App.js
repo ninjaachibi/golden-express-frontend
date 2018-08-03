@@ -45,7 +45,6 @@ export default StackNavigator({
   Home: {
     screen: HomeScreen,
   },
-
   Checkout: {
     screen: CheckoutScreen,
   },
