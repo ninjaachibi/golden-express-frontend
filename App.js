@@ -12,7 +12,11 @@ import {
   Image,
   ScrollView
 } from 'react-native';
-import { StackNavigator } from 'react-navigation';
+ // Version can be specified in package.json
+
+import { StackNavigator, TabNavigator, TabBarBottom} from 'react-navigation';
+import { createStackNavigator } from 'react-navigation';
+
 import styles from './Components/Styles'
 import RegisterScreen from './Components/RegisterScreen'
 import LoginScreen from './Components/LoginScreen'
@@ -23,10 +27,13 @@ import HorizontalMealScroll from './Components/HorizontalMealScroll'
 import SearchScreen from './Components/SearchScreen'
 import CheckoutScreen from './Components/CheckoutScreen'
 import FeedbackScreen from './Components/FeedbackScreen'
+import CategoriesScreen from './Components/CategoriesScreen'
+
 
 
 //Navigator
-export default StackNavigator({
+
+const screens = {
   Login: {
     screen: LoginScreen,
   },
@@ -50,5 +57,66 @@ export default StackNavigator({
   },
   Feedback: {
     screen: FeedbackScreen
+  },
+  Categories: {
+    screen: CategoriesScreen
   }
-}, {initialRouteName: 'Feedback'});
+}
+
+
+
+
+const Home = StackNavigator(screens, {initialRouteName: 'Home'} )
+const Search = StackNavigator(screens,{initialRouteName: 'Search'} )
+const BrowseGrocery = StackNavigator(screens, {initialRouteName: 'BrowseGrocery'})
+const GroceryList = StackNavigator(screens, {initialRouteName: 'GroceryList'})
+const Categories = StackNavigator(screens, {initialRouteName: 'Categories'})
+
+
+
+
+
+export default TabNavigator(
+  {
+    Categories: { screen: Categories },
+    Home: { screen: HomeScreen },
+    Search: { screen: Search },
+    BrowseGrocery: { screen: BrowseGrocery },
+    GroceryList: { screen: GroceryList }
+
+
+  },
+  {
+    // navigationOptions: ({ navigation }) => ({
+    //   tabBarIcon: ({ focused, tintColor }) => {
+    //     const { routeName } = navigation.state;
+    //     let iconName;
+    //     if (routeName === 'Home') {
+    //       iconName = `ios-information-circle${focused ? '' : '-outline'}`;
+    //     } else if (routeName === 'Search') {
+    //       iconName = `ios-options${focused ? '' : '-outline'}`;
+    //     }
+    //     else if (routeName === 'BrowseGrocery') {
+    //       iconName = `ios-options${focused ? '' : '-outline'}`;
+    //     }
+    //     else if (routeName === 'GroceryList') {
+    //       iconName = `ios-options${focused ? '' : '-outline'}`;
+    //     }
+    //
+    //
+    //     // You can return any component that you like here! We usually use an
+    //     // icon component from react-native-vector-icons
+    //     return <Ionicons name={iconName} size={25} color={tintColor} />;
+    //   },
+    // }),
+    // tabBarComponent: TabBarBottom,
+    // tabBarPosition: 'bottom',
+    // tabBarOptions: {
+    //   activeTintColor: 'tomato',
+    //   inactiveTintColor: 'gray',
+    // },
+    // animationEnabled: true,
+    // swipeEnabled: false,
+    order: ['Categories', 'Search', 'BrowseGrocery','GroceryList','Home']
+  }
+);
