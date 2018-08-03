@@ -46,7 +46,7 @@ class CategoriesScreen extends React.Component {
   componentDidMount() {
     this.setState({items: this.ds.cloneWithRows(groceryItems)})
   }
-  
+
   createCategory (cat1,cat2) {
     return  (
       <View style={{flex:1, justifyContent:'flex-start', alignItems:'center',flexDirection:'row',justifyContent:'center'}}>

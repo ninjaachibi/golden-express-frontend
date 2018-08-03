@@ -2,22 +2,22 @@ import { StackNavigator } from 'react-navigation';
 import RegisterScreen from '../RegisterScreen'
 import LoginScreen from '../LoginScreen'
 import HomeScreen from '../HomeScreen'
-import BrowseGroceryScreen from '../BrowseGroceryScreen'
+import ResultScreen from '../ResultScreen'
 import GroceryListScreen from '../GroceryListScreen'
 import SearchScreen from '../SearchScreen'
 import CheckoutScreen from '../CheckoutScreen'
 import FeedbackScreen from '../FeedbackScreen'
 
 const Stack = StackNavigator({
-    
+
     Login: {
       screen: LoginScreen,
     },
     Register: {
       screen: RegisterScreen,
     },
-    BrowseGrocery: {
-      screen: BrowseGroceryScreen,
+    Result: {
+      screen: ResultScreen,
     },
     GroceryList: {
       screen: GroceryListScreen,
@@ -37,4 +37,3 @@ const Stack = StackNavigator({
   }, {initialRouteName: 'Feedback'});
 
   export default Stack
-  

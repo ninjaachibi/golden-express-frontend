@@ -15,10 +15,10 @@ import {
 } from 'react-native';
 import styles from './Styles'
 
-import groceryItems from '../public/Inventory/Fresh_Meat'
-console.log('groceryItems',groceryItems);
+import groceryItems from '../public/New_Inventory/new_meat.json'
+console.log('groceryItems', groceryItems);
 
-class BrowseGroceryScreen extends React.Component {
+class ResultScreen extends React.Component {
   //Location  Favorites,foods,home, history, search?
   static navigationOptions ={
     title:'BrowseGrocery',
@@ -86,4 +86,4 @@ class BrowseGroceryScreen extends React.Component {
   }
 }
 
-export default BrowseGroceryScreen;
+export default ResultScreen;
