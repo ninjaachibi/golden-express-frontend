@@ -154,7 +154,7 @@ class HomeScreen extends React.Component {
             <TouchableOpacity
               style={{height: 40, backgroundColor:'white', borderRadius: 20, margin: 10, padding:3,display:null, alignItems:'center', justifyContent:'center', }}
               placeholder="Search for a Recipe"
-              onPress={()=>{this.props.navigation.navigate('Search')}
+              onPress={()=>{this.props.navigation.navigate('Search', {message: "You can pass props"})}
 }>
              <Text style={{color:'grey'}}> Search Golden Express </Text>
 

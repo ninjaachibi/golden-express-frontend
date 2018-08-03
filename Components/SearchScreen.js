@@ -23,8 +23,8 @@ class SearchScreen extends React.Component {
     title: 'Search'
   };
 
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       message: '',
       search: '',
@@ -45,6 +45,7 @@ class SearchScreen extends React.Component {
         backgroundColor: '#F5FCFF',
         alignItems:'stretch'
       }}>
+
         <ImageBackground
             source={D_IMG}
             style={[styles.goldenImage, {
@@ -61,7 +62,7 @@ class SearchScreen extends React.Component {
       backgroundColor: '#F5FCFF',
     }}>
       <Text>{this.state.message}</Text> */}
-
+<Text>  </Text>
       <TextInput
         autoFocus={true}
 
@@ -78,6 +79,7 @@ class SearchScreen extends React.Component {
       </TouchableOpacity> */}
     {/* </View> */}
 </ImageBackground>
+
   </View>
     )
   }
