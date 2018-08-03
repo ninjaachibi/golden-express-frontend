@@ -28,6 +28,7 @@ import SearchScreen from './Components/SearchScreen'
 import CheckoutScreen from './Components/CheckoutScreen'
 import FeedbackScreen from './Components/FeedbackScreen'
 import CategoriesScreen from './Components/CategoriesScreen'
+import CartScreen from './Components/CartScreen'
 
 
 import Stack from './Components/navigation/Stack.js'
@@ -45,30 +46,44 @@ const Tabs = TabNavigator({
       headerStyle: {
         backgroundColor: "white",
       },
-    }},
-  Home: { screen: HomeScreen,
+  }},
+  Home: {
+    screen: HomeScreen,
     navigationOptions: {
       tabBarLabel:'Home'
-    } },
-  Search: { screen: SearchScreen,
+    }
+  },
+  Search: {
+    screen: SearchScreen,
     navigationOptions: {
       tabBarLabel:'Search',
       headerStyle: {
         backgroundColor: "white",
       },
-    } },
-  Result: { screen: ResultScreen,
+    }
+  },
+  Result: {
+    screen: ResultScreen,
     navigationOptions: {
       tabBarLabel:'Result'
-    } },
-  GroceryList: { screen: GroceryListScreen,
+    }
+  },
+  GroceryList: {
+    screen: GroceryListScreen,
     navigationOptions: {
       tabBarLabel:'Grocery'
-    } }
+    }
+  },
+  Cart: {
+    screen: CartScreen,
+    navigationOptions: {
+      tabBarLabel: 'My Cart'
+    }
+  }
 })
 
 const MainNavigator = StackNavigator({
-   Login: {
+  Login: {
     screen: LoginScreen,
   },
   Register: {
@@ -80,10 +95,10 @@ const MainNavigator = StackNavigator({
   Feedback: {
     screen: FeedbackScreen
   },
-  Try:{
+  Try: {
     screen:Tabs
   }
-})
+}, {initialRouteName: 'Try'});
 
 
 export default class App extends React.Component {
