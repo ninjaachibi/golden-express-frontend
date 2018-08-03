@@ -57,7 +57,7 @@ class BrowseGroceryScreen extends React.Component {
             dataSource={this.state.items}
             style={{marginBottom: 30, backgroundColor:'pink', width: 150}}
             renderRow={(item) => (
-              <View style={{ borderBottomWidth: 1, width: 150, marginBottom: 10, flexDirection: 'row', flex:1, backgroundColor: "lightblue"}}>
+              <View style={{ borderBottomWidth: 1, width: 150, marginBottom: 10, flexDirection: 'row', flex:1, backgroundColor: "lightblue", textAlign: "center"}}>
 
                 <TouchableOpacity
                   onPress={()=>{}}

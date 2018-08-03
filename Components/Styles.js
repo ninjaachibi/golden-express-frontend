@@ -10,8 +10,6 @@ const SCREEN_HEIGHT = Dimensions.get('window').height
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingBottom: 20,
-    paddingTop: 20,
     backgroundColor: 'transparent',
     alignItems: 'center',
     justifyContent: 'space-around',
@@ -52,10 +50,10 @@ const styles = StyleSheet.create({
     marginBottom: 5,
   },
   textBig: {
-    fontSize: 36,
+    fontSize: 44,
     textAlign: 'center',
     fontFamily: 'Didot',
-    color:'white',
+    color:'rgba(255,255,255,0.89)',
     margin: 10,
   },
   button: {
@@ -74,7 +72,6 @@ const styles = StyleSheet.create({
     width:180,
     justifyContent: 'center',
     alignItems: 'stretch',
-    textAlign:'center'
   },
   Logininput:{
     height: 40,
@@ -84,17 +81,18 @@ const styles = StyleSheet.create({
     backgroundColor: '#FF585B',
   },
   buttonBlue: {
-    backgroundColor: 'transparent',
-    borderColor:'white',
+    backgroundColor: 'orange',
+    opacity:0.77,
+    borderColor:'#f9ce84',
     borderBottomWidth:0.7,
     borderTopWidth:0.7,
     borderLeftWidth:0.7,
     borderRightWidth:0.7,
-    borderColor:'white',
 
   },
   buttonGreen: {
     backgroundColor: '#3aa575',
+    opacity: 0.77
   },
   buttonLabel: {
     textAlign: 'center',

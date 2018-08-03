@@ -26,40 +26,28 @@ import SearchScreen from './Components/SearchScreen'
 import CheckoutScreen from './Components/CheckoutScreen'
 import FeedbackScreen from './Components/FeedbackScreen'
 import CategoriesScreen from './Components/CategoriesScreen'
-<<<<<<< HEAD
 import HomeNavigator from './Components/HomeNavigator'
 // import Stack from './Components/navigation/Stack.js'
 //Navigator
+
+
 const Tabs = TabNavigator({
+  Home: { screen: HomeNavigator,
+      headerMode: 'none',
+    navigationOptions: {
+      tabBarLabel:'Home',
+      header: null
+    } },
   Categories: {
-=======
-
-
-import Stack from './Components/navigation/Stack.js'
-import {createStore} from 'redux'
-import { Provider } from 'react-redux'
-
-//Navigator
-
-
-const Tabs = TabNavigator({
-  Categories: { 
->>>>>>> 325cbd7cc673d2ebae3105fce8d34ffe61da45da
     screen: CategoriesScreen,
     navigationOptions: {
+
       tabBarLabel:'Categories',
       headerStyle: {
         backgroundColor: "white",
       },
     }},
-<<<<<<< HEAD
-  Home: { screen: HomeNavigator,
-=======
-  Home: { screen: HomeScreen,
->>>>>>> 325cbd7cc673d2ebae3105fce8d34ffe61da45da
-    navigationOptions: {
-      tabBarLabel:'Home'
-    } },
+
   Search: { screen: SearchScreen,
     navigationOptions: {
       tabBarLabel:'Search',
@@ -76,13 +64,12 @@ const Tabs = TabNavigator({
       tabBarLabel:'Grocery'
     } }
 })
-<<<<<<< HEAD
-=======
-
->>>>>>> 325cbd7cc673d2ebae3105fce8d34ffe61da45da
 const MainNavigator = StackNavigator({
    Login: {
     screen: LoginScreen,
+    navigationOptions: {
+      header: null,
+    }
   },
   Register: {
     screen: RegisterScreen,
@@ -93,8 +80,16 @@ const MainNavigator = StackNavigator({
   Feedback: {
     screen: FeedbackScreen
   },
-<<<<<<< HEAD
-})
+  Try: {
+    screen: Tabs
+  },
+},
+{
+  headerMode: 'float',
+  navigationOptions: {
+    headerLeft: null,
+  }
+ })
 export default class App extends React.Component {
   render() {
     return (
@@ -103,23 +98,6 @@ export default class App extends React.Component {
       </View>
     );
   }
-=======
-  Try:{
-    screen:Tabs
-  }
-})
-
-
-export default class App extends React.Component {
-
-  render() {
-    return (
-      <View style={{ flex: 1 }}>
-        <MainNavigator />
-      </View>
-    );
-  }
->>>>>>> 325cbd7cc673d2ebae3105fce8d34ffe61da45da
 }
 // const screens = {
 //   Login: {
@@ -150,26 +128,11 @@ export default class App extends React.Component {
 //     screen: CategoriesScreen
 //   }
 // }
-<<<<<<< HEAD
-=======
-
-
-
-
->>>>>>> 325cbd7cc673d2ebae3105fce8d34ffe61da45da
 // const Home = StackNavigator(screens, {initialRouteName: 'Home'} )
 // const Search = StackNavigator(screens,{initialRouteName: 'Search'} )
 // const BrowseGrocery = StackNavigator(screens, {initialRouteName: 'BrowseGrocery'})
 // const GroceryList = StackNavigator(screens, {initialRouteName: 'GroceryList'})
 // const Categories = StackNavigator(screens, {initialRouteName: 'Categories'})
-<<<<<<< HEAD
-=======
-
-
-
-
-
->>>>>>> 325cbd7cc673d2ebae3105fce8d34ffe61da45da
 // export default TabNavigator(
 //   {
 //     Categories: { screen: Categories },
@@ -177,11 +140,6 @@ export default class App extends React.Component {
 //     Search: { screen: Search },
 //     BrowseGrocery: { screen: BrowseGrocery },
 //     GroceryList: { screen: GroceryList }
-<<<<<<< HEAD
-=======
-
-
->>>>>>> 325cbd7cc673d2ebae3105fce8d34ffe61da45da
 //   },
 //   {
 //     // navigationOptions: ({ navigation }) => ({

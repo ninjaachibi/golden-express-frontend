@@ -32,14 +32,19 @@ import HomeNavigator from './HomeNavigator'
 
 
 const stack = {
+  Home: {
+    screen: HomeScreen
+  },
   Search: {
   screen: SearchScreen
 },
-Home: {
-  screen: HomeScreen
-}
 }
 
-var Home = StackNavigator(stack, {initialRouteName: "Home"})
+var Home = StackNavigator(stack, {
+  headerMode: 'none',
+  navigationOptions: {
+    headerVisible: false,
+  }
+})
 
 export default Home;
