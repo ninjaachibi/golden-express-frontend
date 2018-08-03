@@ -12,7 +12,7 @@ import {
   Image,
   ScrollView
 } from 'react-native';
-import { Ionicons } from '@expo/vector-icons'; // Version can be specified in package.json
+ // Version can be specified in package.json
 
 import { StackNavigator, TabNavigator, TabBarBottom} from 'react-navigation';
 import { createStackNavigator } from 'react-navigation';
@@ -117,6 +117,6 @@ export default TabNavigator(
     // },
     // animationEnabled: true,
     // swipeEnabled: false,
-    order: ['Categories','Home', 'Search', 'BrowseGrocery','GroceryList']
+    order: ['Categories', 'Search', 'BrowseGrocery','GroceryList','Home']
   }
 );

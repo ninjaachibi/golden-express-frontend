@@ -50,7 +50,9 @@ class SearchScreen extends React.Component {
             style={[styles.goldenImage, {
               opacity: 0.69,
               justifyContent:'flex-start',
-              height: 800,
+              height: null,
+              width:null,
+              resizeMode:'cover',
               flex: 5
 }]}>
     {/* <View style={{
