@@ -41,7 +41,7 @@ const stack = {
 }
 
 var Home = StackNavigator(stack, {
-  headerMode: 'float',
+  headerMode: 'none',
   navigationOptions: {
     headerVisible: true,
   }

@@ -33,21 +33,15 @@ import CartScreen from './Components/CartScreen'
 import HomeNavigator from './Components/HomeNavigator'
 
 const Tabs = TabNavigator({
-<<<<<<< HEAD
-  Home: { screen: HomeNavigator,
-    navigationOptions: {
-      tabBarIcon:({ tintColor }) => <Ionicons name='ios-home' size={30} color={tintColor} />,
-      tabBarLabel:null,
-=======
   Home: {
     screen: HomeNavigator,
-    headerMode: 'none',
+    headerMode: 'float',
     navigationOptions: {
-      tabBarIcon:({ tintColor }) => <Ionicons name='ios-home' size={30} color={tintColor} />,
+      tabBarIcon: ({ tintColor }) => <Ionicons name='ios-home' size={30} color={tintColor} />,
       tabBarLabel:'Home',
->>>>>>> 458fb6266eb794878282b41dbedeba157e634e69
-      header: null
-    }
+      headerStyle: {
+        backgroundColor: "white",
+      }    }
   },
   Categories: {
     screen: CategoriesScreen,
@@ -56,19 +50,12 @@ const Tabs = TabNavigator({
       tabBarLabel:'Category',
       headerStyle: {
         backgroundColor: "white",
-<<<<<<< HEAD
-      },
-    }},
-
-  Search: { screen: SearchScreen,
-=======
       }
     }
   },
 
   Search: {
     screen: SearchScreen,
->>>>>>> 458fb6266eb794878282b41dbedeba157e634e69
     navigationOptions: {
       tabBarIcon:({ tintColor }) => <Ionicons name='ios-search' size={30} color={tintColor} />,
       tabBarLabel:'Search',
