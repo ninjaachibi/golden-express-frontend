@@ -21,7 +21,7 @@ import styles from './Components/Styles'
 import RegisterScreen from './Components/RegisterScreen'
 import LoginScreen from './Components/LoginScreen'
 import HomeScreen from './Components/HomeScreen'
-import BrowseGroceryScreen from './Components/BrowseGroceryScreen'
+import ResultScreen from './Components/ResultScreen'
 import GroceryListScreen from './Components/GroceryListScreen'
 import HorizontalMealScroll from './Components/HorizontalMealScroll'
 import SearchScreen from './Components/SearchScreen'
@@ -31,14 +31,14 @@ import CategoriesScreen from './Components/CategoriesScreen'
 
 
 import Stack from './Components/navigation/Stack.js'
-import {createStore} from 'redux'
+import { createStore } from 'redux'
 import { Provider } from 'react-redux'
 
 //Navigator
 
 
 const Tabs = TabNavigator({
-  Categories: { 
+  Categories: {
     screen: CategoriesScreen,
     navigationOptions: {
       tabBarLabel:'Categories',
@@ -57,9 +57,9 @@ const Tabs = TabNavigator({
         backgroundColor: "white",
       },
     } },
-  BrowseGrocery: { screen: BrowseGroceryScreen,
+  Result: { screen: ResultScreen,
     navigationOptions: {
-      tabBarLabel:'Browse'
+      tabBarLabel:'Result'
     } },
   GroceryList: { screen: GroceryListScreen,
     navigationOptions: {
