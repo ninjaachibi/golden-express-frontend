@@ -20,9 +20,9 @@ console.log('groceryItems', groceryItems);
 
 class ResultScreen extends React.Component {
   //Location  Favorites,foods,home, history, search?
-  static navigationOptions ={
-    title:'Results',
-  };
+  static navigationOptions = () => ({
+    header: <Text>Results</Text> //need to fix this
+  });
   constructor(props) {
     super(props);
     this.ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
@@ -34,6 +34,8 @@ class ResultScreen extends React.Component {
   }
 
   componentDidMount() {
+    let groceryItems = this.props.navigation.getParam('groceryItems', [])
+    console.log('passed in items', groceryItems);
     this.setState({items: this.ds.cloneWithRows(groceryItems)})
   }
 
@@ -52,6 +54,7 @@ class ResultScreen extends React.Component {
 
   render() {
     console.log('items',this.state.items);
+    console.log('render',this.state, this.props);
     return (
       <View style={{
         flex: 1,
@@ -74,13 +77,13 @@ class ResultScreen extends React.Component {
                     height: 300,
                   }}
                 source={{
-                  uri: this.state.currentItem.Pic_URL
+                  uri: this.state.currentItem.imgURI
                 }}
               />
             </View>
-            <Text style={styles.textBig, {"color":"black"}}>{this.state.currentItem.ItemName}</Text>
-            <Text style={{fontWeight: 'bold'}}>Price: {this.state.currentItem.Price}</Text>
-            <Text style={{fontWeight: 'bold'}}>Description: {this.state.currentItem.Description}</Text>
+            <Text style={styles.textBig, {"color":"black"}}>{this.state.currentItem.name}</Text>
+            <Text style={{fontWeight: 'bold'}}>Price: {this.state.currentItem.price}</Text>
+            <Text style={{fontWeight: 'bold'}}>Description: {this.state.currentItem.description}</Text>
 
             <Button
               onPress={()=>{this.addToCart(this.state.currentItem)}}
@@ -105,14 +108,14 @@ class ResultScreen extends React.Component {
                 <TouchableOpacity
                   onPress={this.displayItem.bind(this, item)}
                   >
-                <Text style={{textAlign: "center"}}>{item.ItemName}</Text>
+                <Text style={{textAlign: "center"}}>{item.name}</Text>
                 <Image
                   style={{
                       width: 150,
                       height: 150,
                     }}
                   source={{
-                    uri: item.Pic_URL
+                    uri: item.imgURI
                   }}
                 />
                 </TouchableOpacity>

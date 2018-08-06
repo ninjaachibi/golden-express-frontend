@@ -63,8 +63,9 @@ class CategoriesScreen extends React.Component {
   browseAisle (aisle) {
     fetch('http://localhost:3000/browse' + `?aisle=${aisle.toLowerCase()}`)
     .then((resp) => resp.json())
-    .then(resp=>{
-      console.log(resp);
+    .then(resp => {
+      console.log('hitting',resp);
+      this.props.navigation.navigate('Result', {groceryItems: resp.items})
     })
   }
 
