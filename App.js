@@ -132,8 +132,9 @@ const MainNavigator = StackNavigator({
   headerMode: 'float',
   navigationOptions: {
     headerLeft: null,
-
- }})
+  },
+  initialRouteName: 'Try' //for debugging
+})
 export default class App extends React.Component {
   render() {
     return (
