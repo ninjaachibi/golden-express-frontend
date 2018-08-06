@@ -109,125 +109,75 @@ export default class HomeScreen extends React.Component {
   }
 
   render() {
-    // console.log(this.state);
-    // const view = () => {
-    //   if (this.state.searchBar)
-    //   {
-    //     return {
-    //       flex: 1,
-    //       backgroundColor: '#F5FCFF',
-    //       alignItems:'stretch'
-    //     }
-    //   }
-    //   else {
-    //
-    //       return {}
-    //
-    //   }
-    // }
-    // const display = () => {
-    //   return this.state.searchBar ? 'none': null;
-    // }
-    //
-    // const searchBarScreen = () => {
-    //   console.log("Registered press")
-    //   if (!this.state.searchBar)
-    //   {
-    //     this.setState({searchBar:true})
-    //   }
-    // }
-    // console.log(view())
-    // console.log(display())
-    // console.log(this.state)
     return (
 
-      // <View style={{
-      //   flex: 1,
-      //   alignItems: 'center',
-      //   backgroundColor: '#F5FCFF',
-      // }}>
-      //   <Text>{this.state.message}</Text>
-      //
-      //   <TextInput
-      //     style={{height: 40}}
-      //     placeholder="Search for a Recipe"
-      //     onChangeText={(text) => this.setState({search: text})}
-      //   />
-      //
-      // <TouchableOpacity style={[styles.button, styles.buttonBlue]} onPress={ () => {this.submit()} }>
-      //   <Text style={styles.buttonLabel}>Search</Text>
-      // </TouchableOpacity>
-      // </View>
+      <View style={{flex:1, alignItems: 'flex-start'}}>
+        <View style={{flex:0.0005}}>
+          <TouchableOpacity style={{marginLeft:200,marginTop:59}}>
+            <Icon
+              name='shopping-cart'
+              color='blue'
+              onPress={()=>{state.params.cart()}}/>
+            </TouchableOpacity>
+          </View>
 
 
-<View style={{flex:1, alignItems: 'flex-start'}}>
+          <ScrollView style={{
+            flex:12,
+          }} scrollEnabled={true}
+          enableEmptySections={true}
+          >
+
+            <ImageBackground
+              source={G_IMG}
+              style={[styles.goldenImage, {
+                opacity: 0.8,
+                justifyContent: 'flex-end',
+                height: 170,
+
+              }]}>
 
 
+              {/* <View style={{
+                flex: 1,
+                alignItems: 'stretch',
+                backgroundColor: '#F5FCFF',
+              }}>
+              <Text>{this.state.message}</Text> */}
 
-      <ScrollView style={{
-        flex:12,
-      }} scrollEnabled={true}
-      enableEmptySections={true}
-      >
+              <TouchableOpacity
+                style={{height: 40, backgroundColor:'white', borderRadius: 20, margin: 10, padding:3,display:null, alignItems:'center', justifyContent:'center', }}
+                placeholder="Search for a Recipe"
+                onPress={()=>{this.searchBar()}
+              }>
+              <Text style={{color:'grey'}}> Search Golden Express </Text>
 
-        <ImageBackground
-          source={G_IMG}
-          style={[styles.goldenImage, {
-            opacity: 0.8,
-            justifyContent: 'flex-end',
-            height: 170,
+              {/* <TouchableOpacity style={[styles.button, styles.buttonBlue]} onPress={ () => {this.submit()} }>
+              <Text style={styles.buttonLabel}>Search</Text>
+            </TouchableOpacity> */}
+            {/* </View> */}
+          </TouchableOpacity>
+        </ImageBackground>
+        <View style={{backgroundColor:'#e5e5e5', alignItems:'center'}}>
+          <Image
+            source={L_IMG}
+            style={{backgroundColor: 'grey',height:175, width: 240}}/>
+          </View>
+          <View style={{flex:1,
+            backgroundColor:'#e8ecf4',
 
-          }]}>
-          <View style={{flex:0.0008, justifyContent:'flex-start', alignItems: 'flex-end'}}>
-              <TouchableHighlight onPress={()=>{console.log('pressed');this.props.screenProps.cart()}} style={{marginRight:0, marginBottom:-100}}>
-                  <Icon
-                  name='shopping-cart'
-                  color='blue'
-                />
-                </TouchableHighlight>
-              </View>
+            alignItems:'flex-start'}}>
 
+            <HorizontalMealScroll style={{flex:1}}/>
+            <HorizontalMealScroll style={{flex:1}}/>
+            <HorizontalMealScroll style={{flex:1}}/>
+            <HorizontalMealScroll style={{flex:1}}/>
+            <HorizontalMealScroll style={{flex:1}}/>
+          </View>
 
-          {/* <View style={{
-            flex: 1,
-            alignItems: 'stretch',
-            backgroundColor: '#F5FCFF',
-          }}>
-          <Text>{this.state.message}</Text> */}
-
-          <TouchableOpacity
-            style={{height: 40, backgroundColor:'white', borderRadius: 20, margin: 10, padding:3,display:null, alignItems:'center', justifyContent:'center', }}
-            placeholder="Search for an Item"
-            onPress={()=>{console.log('pressed'); this.props.navigation.navigate('HomeSearch')}
-          }>
-          <Text style={{color:'grey'}}> Search Golden Express </Text>
-
-          {/* <TouchableOpacity style={[styles.button, styles.buttonBlue]} onPress={ () => {this.submit()} }>
-          <Text style={styles.buttonLabel}>Search</Text>
-        </TouchableOpacity> */}
-        {/* </View> */}
-      </TouchableOpacity>
-    </ImageBackground>
-      <View style={{backgroundColor:'#e5e5e5', alignItems:'center'}}>
-        <Image
-          source={L_IMG}
-          style={{backgroundColor: 'grey',height:175, width: 240}}/>
-      </View>
-      <View style={{flex:1,
-        backgroundColor:'#e8ecf4',
-
-        alignItems:'flex-start'}}>
-
-        <HorizontalMealScroll style={{flex:1}}/>
-        <HorizontalMealScroll style={{flex:1}}/>
-        <HorizontalMealScroll style={{flex:1}}/>
-        <HorizontalMealScroll style={{flex:1}}/>
-        <HorizontalMealScroll style={{flex:1}}/>
+        </ScrollView>
       </View>
 
-    </ScrollView>
-  </View>
-
-)
-}
+    )
+  }
 }

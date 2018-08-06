@@ -36,7 +36,7 @@ import HomeSearch from './HomeSearch'
 
 
 
-export default class Home extends React.Component{
+export default class HomeNavigator extends React.Component{
   constructor(props)
   {
     super(props);
