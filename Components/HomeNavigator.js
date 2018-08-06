@@ -31,11 +31,6 @@ import CategoriesScreen from './CategoriesScreen'
 import SearchNavigator from './SearchNavigator'
 import HomeSearch from './HomeSearch'
 
-
-
-
-
-
 export default class HomeNavigator extends React.Component{
   constructor(props)
   {
