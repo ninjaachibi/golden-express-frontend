@@ -57,6 +57,7 @@ componentDidMount()
   }
 
   render() {
+    console.log('render',this.state, this.props);
     return (
       <View style={{
         flex: 1,
