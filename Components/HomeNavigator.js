@@ -49,7 +49,7 @@ export default class HomeNavigator extends React.Component{
   }
 
   navigateCart() {
-    this.props.navigation.navigate('Cart')
+    this.props.screenProps.cart()
   }
   navigateHome() {
     this.props.navigation.navigate('Home')
