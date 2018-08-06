@@ -20,18 +20,16 @@ import { Ionicons } from '@expo/vector-icons';
 import {Header, Icon} from 'react-native-elements';
 const D_IMG = require('../assets/goldenTemple.jpg')
 
-class SearchScreen extends React.Component {
+class HomeSearch extends React.Component {
   static navigationOptions =({navigation}) => {
     const {state} = navigation
     return {
-    headerStyle:{ position: 'absolute', backgroundColor: 'transparent', zIndex: 100, top: 0, left: 0, right: 0 },
-
-    headerRight: <Header><TouchableOpacity style={{marginRight:10}}>
+    headerRight: <TouchableOpacity style={{marginRight:10}}>
         <Icon
         name='shopping-cart'
         color='blue'
         onPress={()=>{state.params.cart()}}/>
-      </TouchableOpacity></Header>
+      </TouchableOpacity>
     }
 
   };
@@ -71,7 +69,6 @@ componentDidMount()
               justifyContent:'flex-start',
               height: null,
               width:null,
-              flex: 5
             }]}>
     {/* <View style={{
       flex: 1,
@@ -79,24 +76,18 @@ componentDidMount()
       backgroundColor: '#F5FCFF',
     }}>
       <Text>{this.state.message}</Text> */}
-      <View><TouchableOpacity style={{marginLeft:325,marginTop:54}}>
-          <Icon
-          name='shopping-cart'
-          color='blue'
-          onPress={()=>{state.params.cart()}}/>
-        </TouchableOpacity>
-        <TextInput
 
-          style={{height: 40, width: 375, backgroundColor:'white', borderRadius: 8, marginBottom: 100, display:null}}
-          placeholder="Search for an Item"
-          onChangeText={(text) => this.setState({search: text})}
-        />
-        <TouchableOpacity style={[styles.button, styles.buttonBlue]}
-          onPress={ () => {this.submit()} }>
-          <Text style={styles.buttonLabel}>Search</Text>
-        </TouchableOpacity></View>
-<Text>  </Text>
+      <TextInput
+        autoFocus={true}
 
+        style={{height: 40, backgroundColor:'white', borderRadius: 20, margin: 10, marginTop: 45, padding:3,display:null}}
+        placeholder="Search for an Item"
+        onChangeText={(text) => this.setState({search: text})}
+      />
+      <TouchableOpacity style={[styles.button, styles.buttonBlue]}
+        onPress={ () => {this.submit()} }>
+        <Text style={styles.buttonLabel}>Search</Text>
+      </TouchableOpacity>
       {/* <TouchableOpacity style={[styles.button, styles.buttonBlue]} onPress={ () => {this.submit()} }>
         <Text style={styles.buttonLabel}>Search</Text>
       </TouchableOpacity> */}
@@ -108,4 +99,4 @@ componentDidMount()
   }
 }
 
-export default SearchScreen;
+export default HomeSearch;

@@ -28,10 +28,12 @@ import SearchScreen from './SearchScreen'
 import CheckoutScreen from './CheckoutScreen'
 import FeedbackScreen from './FeedbackScreen'
 import CategoriesScreen from './CategoriesScreen'
-import SearchNavigator from './SearchNavigator'
-import HomeSearch from './HomeSearch'
+import HomeNavigator from './HomeNavigator'
 
-export default class HomeNavigator extends React.Component{
+
+
+
+export default class Categories extends React.Component{
   constructor(props)
   {
     super(props);
@@ -47,23 +49,23 @@ export default class HomeNavigator extends React.Component{
 
   render(){
     const stack = {
-      HomePage: {
-        screen: HomeScreen,
+      Categories: {
+        screen: CategoriesScreen,
       },
-      HomeSearch: {
-      screen: HomeSearch,
+      Search: {
+      screen: SearchScreen
     },
     }
 
-    const HomeStack = StackNavigator(stack, {initialRouteName: 'HomePage',
-      headerMode: 'none',
+    var CategoriesStack = StackNavigator(stack, {initialRouteName: 'Categories',
+      headerMode: 'screen',
       navigationOptions: {
-        headerVisible: false,
+        headerVisible: true,
       }
     })
     return (
       <View style={{flex: 1}}>
-        <HomeStack
+        <CategoriesStack
           screenProps={{
             cart: this.navigateCart
           }}/>
