@@ -24,6 +24,7 @@ class HomeSearch extends React.Component {
   static navigationOptions =({navigation}) => {
     const {state} = navigation
     return {
+    title: 'Home Search',
     headerRight: <TouchableOpacity style={{marginRight:10}}>
         <Icon
         name='shopping-cart'
@@ -36,14 +37,17 @@ class HomeSearch extends React.Component {
 
 componentDidMount()
 {
+
   const {setParams} = this.props.navigation;
   setParams({cart: this.props.screenProps.cart})
+
 }
   constructor(props) {
     super(props);
     this.state = {
       message: '',
       search: '',
+
     }
   }
 
@@ -55,6 +59,27 @@ componentDidMount()
   }
 
   render() {
+
+    const { navigation } = this.props;
+    {
+     this.state.default ? this.setState({default: navigation.getParam('default', true)}): null
+  }
+
+    // if (this.state.default)
+    // {
+    //   this.setState({default:false},()=>  this.props.navigation.navigate('HomePage'))
+    //
+    // }
+
+    console.log(this.state)
+    if (!this.state.default)
+    {
+      console.log(this.props.screenProps.home)
+      this.props.screenProps.home()
+    }
+
+
+
     return (
       <View style={{
         flex: 1,

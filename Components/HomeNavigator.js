@@ -44,10 +44,15 @@ export default class HomeNavigator extends React.Component{
 
     }
     this.navigateCart = this.navigateCart.bind(this)
+    this.navigateHome = this.navigateHome.bind(this)
+
   }
 
   navigateCart() {
     this.props.navigation.navigate('Cart')
+  }
+  navigateHome() {
+    this.props.navigation.navigate('Home')
   }
 
   render(){
@@ -60,8 +65,8 @@ export default class HomeNavigator extends React.Component{
     },
     }
 
-    const HomeStack = StackNavigator(stack, {initialRouteName: 'HomePage',
-      headerMode: 'none',
+    const HomeStack = StackNavigator(stack, {initialRouteName:'HomePage',
+      headerMode: 'screen',
       navigationOptions: {
         headerVisible: true,
       }
@@ -70,7 +75,8 @@ export default class HomeNavigator extends React.Component{
       <View style={{flex: 1}}>
         <HomeStack
           screenProps={{
-            cart: this.navigateCart
+            cart: this.navigateCart,
+            home: this.navigateHome
           }}/>
       </View>
 
