@@ -28,7 +28,7 @@ const PRESERVED = {cat: 'preserved', src: require('../assets/Preserved.png')}
 const BEVERAGES = {cat: 'beverage', src: require('../assets/Beverages.png')}
 const SNACKS = {cat: 'snacks', src: require('../assets/Snacks.png')}
 const NOODLES = {cat: 'noodles', src: require('../assets/Noodles.png')}
-const SPICES = {cat: 'spice', src: require('../assets/Spices.png')}
+const SPICES = {cat: 'spices', src: require('../assets/Spices.png')}
 
 
 class CategoriesScreen extends React.Component {
@@ -51,7 +51,6 @@ class CategoriesScreen extends React.Component {
     super(props);
     this.ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     this.state = {
-      items: this.ds.cloneWithRows([]),
     }
   }
 
@@ -85,7 +84,6 @@ class CategoriesScreen extends React.Component {
 
 
   render() {
-    console.log('meals',this.state.items);
     return (
 
       <ScrollView style={{flex:1}}>
