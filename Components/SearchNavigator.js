@@ -58,7 +58,7 @@ export default class Categories extends React.Component{
     }
 
     var SearchStack = StackNavigator(stack, {initialRouteName: 'Search',
-      headerMode: 'none',
+      headerMode: 'screen',
       navigationOptions: {
         headerVisible: false,
       }

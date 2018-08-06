@@ -123,9 +123,10 @@ export default class HomeScreen extends React.Component {
             <ImageBackground
               source={G_IMG}
               style={[styles.goldenImage, {
-                opacity: 0.8,
+                opacity: 0.7,
                 justifyContent: 'flex-start',
                 height: 170,
+
 
               }]}>
               <View style={{flex:6, marginBottom: -30, flexDirection:'row',alignItems:'center', justifyContent:'flex-end'}}>
@@ -164,10 +165,10 @@ export default class HomeScreen extends React.Component {
         </View>
 
         </ImageBackground>
-        <View style={{backgroundColor:'#e5e5e5', alignItems:'center'}}>
+        <View style={{backgroundColor:'#F0EFF5', alignItems:'flex-start', justifyContent:'center'}}>
           <Image
             source={L_IMG}
-            style={{backgroundColor: 'grey',height:175, width: 240}}/>
+            style={{height:150, width: 220, borderRadius: 14, margin: 7.5,marginLeft: 75}}/>
           </View>
           <View style={{flex:1,
             backgroundColor:'#e8ecf4',

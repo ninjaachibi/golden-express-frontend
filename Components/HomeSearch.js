@@ -72,7 +72,7 @@ componentDidMount()
     // }
 
     console.log(this.state)
-    if (!this.state.default)
+    if (this.state.default)
     {
       console.log(this.props.screenProps.home)
       this.props.screenProps.home()
@@ -94,6 +94,7 @@ componentDidMount()
               justifyContent:'flex-start',
               height: null,
               width:null,
+
             }]}>
     {/* <View style={{
       flex: 1,
@@ -105,10 +106,12 @@ componentDidMount()
       <TextInput
         autoFocus={true}
 
-        style={{height: 40, backgroundColor:'white', borderRadius: 20, margin: 10, marginTop: 45, padding:3,display:null}}
         placeholder="Search for an Item"
-        onChangeText={(text) => this.setState({search: text})}
-      />
+        onKeyPress={() =>{this.setState({type: true})}}
+        style={{textAlign: this.state.type ? 'left': 'center',borderColor:'black',height: 40, backgroundColor:'white',padding:3,display:null}}
+
+        onChangeText={(text) => this.setState({search: text})}>
+         </TextInput>
       <TouchableOpacity style={[styles.button, styles.buttonBlue]}
         onPress={ () => {this.submit()} }>
         <Text style={styles.buttonLabel}>Search</Text>

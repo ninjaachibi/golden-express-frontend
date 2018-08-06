@@ -24,14 +24,14 @@ class SearchScreen extends React.Component {
   static navigationOptions =({navigation}) => {
     const {state} = navigation
     return {
-    headerStyle:{ position: 'absolute', backgroundColor: 'transparent', zIndex: 100, top: 0, left: 0, right: 0 },
 
-    headerRight: <Header><TouchableOpacity style={{marginRight:10}}>
+    headerTitle: <Text style={{fontSize:18,fontWeight:'bold'}}> Search </Text>,
+    headerRight: <TouchableOpacity style={{marginRight:10}}>
         <Icon
         name='shopping-cart'
         color='blue'
         onPress={()=>{state.params.cart()}}/>
-      </TouchableOpacity></Header>
+      </TouchableOpacity>
     }
 
   };
@@ -79,15 +79,10 @@ componentDidMount()
       backgroundColor: '#F5FCFF',
     }}>
       <Text>{this.state.message}</Text> */}
-      <View><TouchableOpacity style={{marginLeft:325,marginTop:54}}>
-          <Icon
-          name='shopping-cart'
-          color='blue'
-          onPress={()=>{state.params.cart()}}/>
-        </TouchableOpacity>
+      <View style={{justifyContent:'flex-start'}}>
         <TextInput
 
-          style={{height: 40, width: 375, backgroundColor:'white', borderRadius: 8, marginBottom: 100, display:null}}
+          style={{height: 40, width: 375, backgroundColor:'white',display:null, padding:3}}
           placeholder="Search for an Item"
           onChangeText={(text) => this.setState({search: text})}
         />
