@@ -93,7 +93,7 @@ const Tabs = TabNavigator({
   }
 
 },
-{
+{initialRouteName:'Home',
   navigationOptions: {
     headerRight:  <Header
       backgroundColor='transparent'

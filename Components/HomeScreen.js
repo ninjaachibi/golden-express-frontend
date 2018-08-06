@@ -1,8 +1,12 @@
+import React from 'react';
+
+
 import {
   StyleSheet,
   View,
   Text,
   TouchableOpacity,
+  TouchableHighlight,
   TextInput,
   ListView,
   Alert,
@@ -14,26 +18,13 @@ import {
   AsyncStorage
 } from 'react-native';
  // Version can be specified in package.json
+import HorizontalMealScroll from './HorizontalMealScroll'
 import { Ionicons } from '@expo/vector-icons';
 import {Header, Icon} from 'react-native-elements';
-import React from 'react';
-import { StackNavigator, TabNavigator, TabBarBottom } from 'react-navigation';
-import { createStackNavigator } from 'react-navigation';
 import styles from './Styles'
-import RegisterScreen from './RegisterScreen'
-import LoginScreen from './LoginScreen'
-import ResultScreen from './ResultScreen'
-import GroceryListScreen from './GroceryListScreen'
-import HorizontalMealScroll from './HorizontalMealScroll'
-import SearchScreen from './SearchScreen'
-import CheckoutScreen from './CheckoutScreen'
-import FeedbackScreen from './FeedbackScreen'
-import CategoriesScreen from './CategoriesScreen'
-import CartScreen from './CartScreen'
-import HomeNavigator from './HomeNavigator'
-import CategoriesNavigator from './CategoriesNavigator'
-import SearchNavigator from './SearchNavigator'
-import HomeSearch from './HomeSearch'
+
+
+
 const G_IMG = require('../assets/goldenImage.jpg')
 const D_IMG = require('../assets/goldenTemple.jpg')
 const L_IMG = require('../assets/Coupon.jpg')
@@ -50,14 +41,13 @@ export default class HomeScreen extends React.Component {
   static navigationOptions =({navigation}) => {
     const {state} = navigation
     return {
-    title: <Text style={{color:'white'}}> Home </Text>,
-     headerStyle:{ position: 'absolute', backgroundColor: 'transparent', zIndex: 100, top: 0, left: 0, right: 0 },
-    headerRight: <TouchableOpacity style={{marginRight:10}}>
-        <Icon
-        name='shopping-cart'
-        color='blue'
-        onPress={()=>{state.params.cart()}}/>
-      </TouchableOpacity>
+    header:null
+    // headerRight: <TouchableOpacity style={{marginRight:10}}>
+    //     <Icon
+    //     name='shopping-cart'
+    //     color='blue'
+    //     onPress={()=>{state.params.cart()}}/>
+    //   </TouchableOpacity>
     }
 
   };
@@ -72,8 +62,6 @@ export default class HomeScreen extends React.Component {
       message:'',
       search: '',
     }
-    this.cartNavigate = this.cartNavigate.bind(this)
-    this.searchBar = this.searchBar.bind(this)
 
 
   }
@@ -117,7 +105,7 @@ export default class HomeScreen extends React.Component {
   }
 
   searchBar(){
-    this.props.navigation.navigate('HomeSearch')
+    this.props.navigation.navigate('HomeSearch',{default: true})
   }
 
   render() {
@@ -125,18 +113,8 @@ export default class HomeScreen extends React.Component {
 
 
 
-      <View style={{flex:1, alignItems: 'flex-start'}}>
-        <View style={{flex:0.0005}}>
-          <TouchableOpacity style={{marginLeft:200,marginTop:59}}>
-            <Icon
-              name='shopping-cart'
-              color='blue'
-              onPress={()=>{state.params.cart()}}/>
-            </TouchableOpacity>
-          </View>
 
-
-          <ScrollView style={{
+          <ScrollView contentContainerStyle={{alignItems:'flex-start'}} style={{
             flex:12,
           }} scrollEnabled={true}
           enableEmptySections={true}
@@ -146,10 +124,21 @@ export default class HomeScreen extends React.Component {
               source={G_IMG}
               style={[styles.goldenImage, {
                 opacity: 0.8,
-                justifyContent: 'flex-end',
+                justifyContent: 'flex-start',
                 height: 170,
 
               }]}>
+              <View style={{flex:6, marginBottom: -30, flexDirection:'row',alignItems:'center', justifyContent:'flex-end'}}>
+                <View style={{flex:.85,alignItems:'center'}}>
+                <Text style={{fontSize:21, fontWeight:'bold', color:'white'}}>Home</Text>
+              </View>
+              <TouchableOpacity style={{marginRight:10}}>
+                  <Icon
+                  name='shopping-cart'
+                  color='blue'
+                  onPress={()=>{this.props.screenProps.cart()}}/>
+                </TouchableOpacity>
+              </View>
 
 
               {/* <View style={{
@@ -158,9 +147,10 @@ export default class HomeScreen extends React.Component {
                 backgroundColor: '#F5FCFF',
               }}>
               <Text>{this.state.message}</Text> */}
+              <View style={{flex:3, alignItems:'center', justifyContent:'flex-end'}}>
 
               <TouchableOpacity
-                style={{height: 40, backgroundColor:'white', borderRadius: 20, margin: 10, padding:3,display:null, alignItems:'center', justifyContent:'center', }}
+                style={{height: 40, width:350, backgroundColor:'white', borderRadius: 20, margin: 10, padding:3,display:null, alignItems:'center', justifyContent:'center', }}
                 placeholder="Search for a Recipe"
                 onPress={()=>{this.searchBar()}
               }>
@@ -171,6 +161,8 @@ export default class HomeScreen extends React.Component {
             </TouchableOpacity> */}
             {/* </View> */}
           </TouchableOpacity>
+        </View>
+
         </ImageBackground>
         <View style={{backgroundColor:'#e5e5e5', alignItems:'center'}}>
           <Image
@@ -190,7 +182,6 @@ export default class HomeScreen extends React.Component {
           </View>
 
         </ScrollView>
-      </View>
 
     )
   }

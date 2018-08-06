@@ -18,9 +18,6 @@ import { StackNavigator, TabNavigator, TabBarBottom} from 'react-navigation';
 import { createStackNavigator } from 'react-navigation';
 
 import styles from './Styles'
-import RegisterScreen from './RegisterScreen'
-import LoginScreen from './LoginScreen'
-import HomeScreen from './HomeScreen'
 import Result from './ResultScreen'
 import GroceryListScreen from './GroceryListScreen'
 import HorizontalMealScroll from './HorizontalMealScroll'
@@ -28,7 +25,6 @@ import SearchScreen from './SearchScreen'
 import CheckoutScreen from './CheckoutScreen'
 import FeedbackScreen from './FeedbackScreen'
 import CategoriesScreen from './CategoriesScreen'
-import HomeNavigator from './HomeNavigator'
 
 
 
