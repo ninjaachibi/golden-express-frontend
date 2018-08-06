@@ -32,88 +32,17 @@ import CartScreen from './Components/CartScreen'
 import HomeNavigator from './Components/HomeNavigator'
 import CategoriesNavigator from './Components/CategoriesNavigator'
 import SearchNavigator from './Components/SearchNavigator'
+import Interface from './Components/Interface'
 
-const Tabs = TabNavigator({
-  Home: {
-    screen: HomeNavigator,
-    navigationOptions: {
-      tabBarIcon: ({ tintColor }) => <Ionicons name='ios-home' size={30} color={tintColor} />,
-      tabBarLabel:'Home',
-      header:null,
-
-      headerStyle: {
-        backgroundColor: "white",
-      }    }
-  },
-  Categories: {
-    screen: CategoriesNavigator,
-    navigationOptions: {
-      tabBarIcon:({ tintColor }) => <Ionicons name='ios-bookmarks' size={30} color={tintColor} />,
-      tabBarLabel:'Category',
-      header:null,
-      headerStyle: {
-        backgroundColor: "white",
-      }
-    }
-  },
-
-  Search: {
-    screen: SearchNavigator,
-    navigationOptions: {
-      tabBarIcon:({ tintColor }) => <Ionicons name='ios-search' size={30} color={tintColor} />,
-      tabBarLabel:'Search',
-      header:null,
-
-      headerStyle: {
-        backgroundColor: "white",
-      },
-    }
-  },
-  Result: {
-    screen: ResultScreen,
-    navigationOptions: {
-      tabBarIcon:({ tintColor }) => <Ionicons name='ios-list' size={30} color={tintColor} />,
-      tabBarLabel:'Results'
-    }
-  },
-  GroceryList: {
-    screen: GroceryListScreen,
-    navigationOptions: {
-      tabBarIcon:({ tintColor }) => <Ionicons name='ios-basket' size={30} color={tintColor} />,
-      tabBarLabel:'Grocery'
-    }
-  },
-  Cart: {
-    screen: CartScreen,
-    headerMode:'none',
-    navigationOptions: {
-      tabBarIcon:({ tintColor }) => <Ionicons name='ios-basket' size={30} color={tintColor} />,
-      tabBarLabel:'Cart',
-    }
-  }
-
-},
-{initialRouteName:'Home',
-  navigationOptions: {
-    headerRight:  <Header
-      backgroundColor='transparent'
-      rightComponent={
-      <TouchableOpacity>
-        <Icon
-        name='shopping-cart'
-        color='blue'
-        onPress={()=>{}}/>
-        </TouchableOpacity>}
-    />
-  }
-}
-)
 const MainNavigator = StackNavigator({
   Login: {
     screen: LoginScreen,
     navigationOptions: {
       header: null,
     }
+  },
+  Cart: {
+    screen: CartScreen
   },
   Register: {
     screen: RegisterScreen,
@@ -124,16 +53,19 @@ const MainNavigator = StackNavigator({
   Feedback: {
     screen: FeedbackScreen
   },
-  Try: {
-    screen: Tabs
+  Interface: {
+    screen: Interface,
+      navigationOptions: {
+        header: null,
+
+    }
   },
 },
 {
   headerMode: 'float',
   navigationOptions: {
-    headerLeft: null,
   },
-  initialRouteName: 'Try' //for debugging
+  initialRouteName: 'Interface' //for debugging
 })
 export default class App extends React.Component {
   render() {
