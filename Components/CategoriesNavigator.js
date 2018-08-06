@@ -18,7 +18,7 @@ import { StackNavigator, TabNavigator, TabBarBottom} from 'react-navigation';
 import { createStackNavigator } from 'react-navigation';
 
 import styles from './Styles'
-import Result from './ResultScreen'
+import ResultScreen from './ResultScreen'
 import GroceryListScreen from './GroceryListScreen'
 import HorizontalMealScroll from './HorizontalMealScroll'
 import SearchScreen from './SearchScreen'
@@ -49,8 +49,11 @@ export default class Categories extends React.Component{
         screen: CategoriesScreen,
       },
       Search: {
-      screen: SearchScreen
-    },
+        screen: SearchScreen
+      },
+      Result: {
+        screen: ResultScreen
+      }
     }
 
     var CategoriesStack = StackNavigator(stack, {initialRouteName: 'Categories',
