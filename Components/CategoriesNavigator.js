@@ -40,7 +40,7 @@ export default class Categories extends React.Component{
   }
 
   navigateCart() {
-    this.props.navigation.navigate('Cart')
+    this.props.screenProps.cart()
   }
 
   render(){
