@@ -1,8 +1,12 @@
+import React from 'react';
+
+
 import {
   StyleSheet,
   View,
   Text,
   TouchableOpacity,
+  TouchableHighlight,
   TextInput,
   ListView,
   Alert,
@@ -14,26 +18,13 @@ import {
   AsyncStorage
 } from 'react-native';
  // Version can be specified in package.json
+import HorizontalMealScroll from './HorizontalMealScroll'
 import { Ionicons } from '@expo/vector-icons';
 import {Header, Icon} from 'react-native-elements';
-import React from 'react';
-import { StackNavigator, TabNavigator, TabBarBottom } from 'react-navigation';
-import { createStackNavigator } from 'react-navigation';
 import styles from './Styles'
-import RegisterScreen from './RegisterScreen'
-import LoginScreen from './LoginScreen'
-import ResultScreen from './ResultScreen'
-import GroceryListScreen from './GroceryListScreen'
-import HorizontalMealScroll from './HorizontalMealScroll'
-import SearchScreen from './SearchScreen'
-import CheckoutScreen from './CheckoutScreen'
-import FeedbackScreen from './FeedbackScreen'
-import CategoriesScreen from './CategoriesScreen'
-import CartScreen from './CartScreen'
-import HomeNavigator from './HomeNavigator'
-import CategoriesNavigator from './CategoriesNavigator'
-import SearchNavigator from './SearchNavigator'
-import HomeSearch from './HomeSearch'
+
+
+
 const G_IMG = require('../assets/goldenImage.jpg')
 const D_IMG = require('../assets/goldenTemple.jpg')
 const L_IMG = require('../assets/Coupon.jpg')
@@ -51,7 +42,6 @@ export default class HomeScreen extends React.Component {
     const {state} = navigation
     return {
     title: <Text style={{color:'white'}}> Home </Text>,
-     headerStyle:{ position: 'absolute', backgroundColor: 'transparent', zIndex: 100, top: 0, left: 0, right: 0 },
     headerRight: <TouchableOpacity style={{marginRight:10}}>
         <Icon
         name='shopping-cart'
@@ -72,8 +62,6 @@ export default class HomeScreen extends React.Component {
       message:'',
       search: '',
     }
-    this.cartNavigate = this.cartNavigate.bind(this)
-    this.searchBar = this.searchBar.bind(this)
 
 
   }
@@ -173,14 +161,7 @@ export default class HomeScreen extends React.Component {
 
 
 <View style={{flex:1, alignItems: 'flex-start'}}>
-  <View style={{flex:0.0005}}>
-      <TouchableOpacity style={{marginLeft:200,marginTop:59}}>
-          <Icon
-          name='shopping-cart'
-          color='blue'
-          onPress={()=>{state.params.cart()}}/>
-        </TouchableOpacity>
-      </View>
+
 
 
       <ScrollView style={{
@@ -197,6 +178,14 @@ export default class HomeScreen extends React.Component {
             height: 170,
 
           }]}>
+          <View style={{flex:0.0008, justifyContent:'flex-start', alignItems: 'flex-end'}}>
+              <TouchableHighlight onPress={()=>{console.log('pressed');this.props.screenProps.cart()}} style={{marginRight:0, marginBottom:-100}}>
+                  <Icon
+                  name='shopping-cart'
+                  color='blue'
+                />
+                </TouchableHighlight>
+              </View>
 
 
           {/* <View style={{
@@ -208,8 +197,8 @@ export default class HomeScreen extends React.Component {
 
           <TouchableOpacity
             style={{height: 40, backgroundColor:'white', borderRadius: 20, margin: 10, padding:3,display:null, alignItems:'center', justifyContent:'center', }}
-            placeholder="Search for a Recipe"
-            onPress={()=>{this.searchBar()}
+            placeholder="Search for an Item"
+            onPress={()=>{console.log('pressed'); this.props.navigation.navigate('HomeSearch')}
           }>
           <Text style={{color:'grey'}}> Search Golden Express </Text>
 

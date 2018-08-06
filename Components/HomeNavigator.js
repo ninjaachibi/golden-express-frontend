@@ -36,7 +36,7 @@ import HomeSearch from './HomeSearch'
 
 
 
-export default class HomeNavigator extends React.Component{
+export default class Home extends React.Component{
   constructor(props)
   {
     super(props);
@@ -63,7 +63,7 @@ export default class HomeNavigator extends React.Component{
     const HomeStack = StackNavigator(stack, {initialRouteName: 'HomePage',
       headerMode: 'none',
       navigationOptions: {
-        headerVisible: false,
+        headerVisible: true,
       }
     })
     return (
