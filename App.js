@@ -21,7 +21,6 @@ import { createStackNavigator } from 'react-navigation';
 import styles from './Components/Styles'
 import RegisterScreen from './Components/RegisterScreen'
 import LoginScreen from './Components/LoginScreen'
-import HomeScreen from './Components/HomeScreen'
 import ResultScreen from './Components/ResultScreen'
 import GroceryListScreen from './Components/GroceryListScreen'
 import HorizontalMealScroll from './Components/HorizontalMealScroll'
@@ -31,23 +30,27 @@ import FeedbackScreen from './Components/FeedbackScreen'
 import CategoriesScreen from './Components/CategoriesScreen'
 import CartScreen from './Components/CartScreen'
 import HomeNavigator from './Components/HomeNavigator'
+import CategoriesNavigator from './Components/CategoriesNavigator'
+import SearchNavigator from './Components/SearchNavigator'
 
 const Tabs = TabNavigator({
   Home: {
     screen: HomeNavigator,
-    headerMode: 'float',
     navigationOptions: {
       tabBarIcon: ({ tintColor }) => <Ionicons name='ios-home' size={30} color={tintColor} />,
       tabBarLabel:'Home',
+      header:null,
+
       headerStyle: {
         backgroundColor: "white",
       }    }
   },
   Categories: {
-    screen: CategoriesScreen,
+    screen: CategoriesNavigator,
     navigationOptions: {
       tabBarIcon:({ tintColor }) => <Ionicons name='ios-bookmarks' size={30} color={tintColor} />,
       tabBarLabel:'Category',
+      header:null,
       headerStyle: {
         backgroundColor: "white",
       }
@@ -55,10 +58,12 @@ const Tabs = TabNavigator({
   },
 
   Search: {
-    screen: SearchScreen,
+    screen: SearchNavigator,
     navigationOptions: {
       tabBarIcon:({ tintColor }) => <Ionicons name='ios-search' size={30} color={tintColor} />,
       tabBarLabel:'Search',
+      header:null,
+
       headerStyle: {
         backgroundColor: "white",
       },
@@ -80,9 +85,10 @@ const Tabs = TabNavigator({
   },
   Cart: {
     screen: CartScreen,
+    headerMode:'none',
     navigationOptions: {
       tabBarIcon:({ tintColor }) => <Ionicons name='ios-basket' size={30} color={tintColor} />,
-      tabBarLabel:'Cart'
+      tabBarLabel:'Cart',
     }
   }
 

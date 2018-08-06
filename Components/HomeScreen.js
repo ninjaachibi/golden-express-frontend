@@ -1,4 +1,3 @@
-import React from 'react';
 import {
   StyleSheet,
   View,
@@ -8,21 +7,60 @@ import {
   ListView,
   Alert,
   Button,
-  ScrollView,
-  AsyncStorage,
-  FlatList,
+  RefreshControl,
   Image,
-  ImageBackground
+  ScrollView,
+  ImageBackground,
+  AsyncStorage
 } from 'react-native';
+ // Version can be specified in package.json
+import { Ionicons } from '@expo/vector-icons';
+import {Header, Icon} from 'react-native-elements';
+import React from 'react';
+import { StackNavigator, TabNavigator, TabBarBottom } from 'react-navigation';
+import { createStackNavigator } from 'react-navigation';
 import styles from './Styles'
-
+import RegisterScreen from './RegisterScreen'
+import LoginScreen from './LoginScreen'
+import ResultScreen from './ResultScreen'
+import GroceryListScreen from './GroceryListScreen'
 import HorizontalMealScroll from './HorizontalMealScroll'
+import SearchScreen from './SearchScreen'
+import CheckoutScreen from './CheckoutScreen'
+import FeedbackScreen from './FeedbackScreen'
+import CategoriesScreen from './CategoriesScreen'
+import CartScreen from './CartScreen'
+import HomeNavigator from './HomeNavigator'
+import CategoriesNavigator from './CategoriesNavigator'
+import SearchNavigator from './SearchNavigator'
+import HomeSearch from './HomeSearch'
 const G_IMG = require('../assets/goldenImage.jpg')
 const D_IMG = require('../assets/goldenTemple.jpg')
 const L_IMG = require('../assets/Coupon.jpg')
 
 
-class HomeScreen extends React.Component {
+export default class HomeScreen extends React.Component {
+
+  cartNavigate()
+  {
+    this.props.screenProps.cart()
+
+  }
+
+  static navigationOptions =({navigation}) => {
+    const {state} = navigation
+    return {
+    title: <Text style={{color:'white'}}> Home </Text>,
+     headerStyle:{ position: 'absolute', backgroundColor: 'transparent', zIndex: 100, top: 0, left: 0, right: 0 },
+    headerRight: <TouchableOpacity style={{marginRight:10}}>
+        <Icon
+        name='shopping-cart'
+        color='blue'
+        onPress={()=>{state.params.cart()}}/>
+      </TouchableOpacity>
+    }
+
+  };
 
   constructor(props)
   {
@@ -34,8 +72,13 @@ class HomeScreen extends React.Component {
       message:'',
       search: '',
     }
+    this.cartNavigate = this.cartNavigate.bind(this)
+    this.searchBar = this.searchBar.bind(this)
+
 
   }
+
+
   //run the coponoennt and have it fetch the data
   //each ingredient has i\ts own page that displays what it looks like
   //how to make an image, where do i source
@@ -57,6 +100,8 @@ class HomeScreen extends React.Component {
     //display top Meals
     //fetch recommended meals
     //create alogirthm that displays certain meals
+    const {setParams} = this.props.navigation;
+    setParams({cart: this.props.screenProps.cart})
     AsyncStorage.getItem('meals')
       .then((data) => {
         console.log('meals from AsyncStorage', JSON.parse(data));
@@ -69,6 +114,10 @@ class HomeScreen extends React.Component {
   }
   press() {
     this.props.navigation.navigate('Search')
+  }
+
+  searchBar(){
+    this.props.navigation.navigate('HomeSearch')
   }
 
   render() {
@@ -123,13 +172,21 @@ class HomeScreen extends React.Component {
       // </View>
 
 
-
+<View style={{flex:1, alignItems: 'flex-start'}}>
+  <View style={{flex:0.0005}}>
+      <TouchableOpacity style={{marginLeft:200,marginTop:59}}>
+          <Icon
+          name='shopping-cart'
+          color='blue'
+          onPress={()=>{state.params.cart()}}/>
+        </TouchableOpacity>
+      </View>
 
 
       <ScrollView style={{
-        flex:1,
+        flex:12,
       }} scrollEnabled={true}
-      enableEmptySections={false}
+      enableEmptySections={true}
       >
 
         <ImageBackground
@@ -140,6 +197,8 @@ class HomeScreen extends React.Component {
             height: 170,
 
           }]}>
+
+
           {/* <View style={{
             flex: 1,
             alignItems: 'stretch',
@@ -150,7 +209,7 @@ class HomeScreen extends React.Component {
           <TouchableOpacity
             style={{height: 40, backgroundColor:'white', borderRadius: 20, margin: 10, padding:3,display:null, alignItems:'center', justifyContent:'center', }}
             placeholder="Search for a Recipe"
-            onPress={()=>{this.props.navigation.navigate('Search')}
+            onPress={()=>{this.searchBar()}
           }>
           <Text style={{color:'grey'}}> Search Golden Express </Text>
 
@@ -178,9 +237,8 @@ class HomeScreen extends React.Component {
       </View>
 
     </ScrollView>
+  </View>
 
 )
 }
 }
-
-export default HomeScreen;

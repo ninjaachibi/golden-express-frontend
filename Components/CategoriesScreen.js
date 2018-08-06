@@ -17,6 +17,7 @@ import {
 import styles from './Styles';
 import {Header, Icon} from 'react-native-elements';
 import groceryItems from '../public/Inventory/Fresh_Meat'
+import { Ionicons } from '@expo/vector-icons';
 console.log('groceryItems',groceryItems);
 const MEAT = require('../assets/Meat.png')
 const PRODUCE = require('../assets/Produce.png')
@@ -32,9 +33,20 @@ const SPICES = require('../assets/Spices.png')
 
 class CategoriesScreen extends React.Component {
   //Location  Favorites,foods,home, history, search?
-  static navigationOptions ={
-    title:'Browse Golden Express',
+  static navigationOptions =({navigation}) => {
+    const {state} = navigation
+    return {
+    title: <Text> Categories </Text>,
+    headerRight: <TouchableOpacity style={{marginRight:10}}>
+        <Icon
+        name='shopping-cart'
+        color='blue'
+        onPress={()=>{state.params.cart()}}/>
+      </TouchableOpacity>
+    }
+
   };
+
   constructor(props) {
     super(props);
     this.ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
@@ -44,6 +56,8 @@ class CategoriesScreen extends React.Component {
   }
 
   componentDidMount() {
+    const {setParams} = this.props.navigation;
+    setParams({cart: this.props.screenProps.cart})
     this.setState({items: this.ds.cloneWithRows(groceryItems)})
   }
 
@@ -60,7 +74,7 @@ class CategoriesScreen extends React.Component {
     )
   }
 
-  
+
 
   render() {
     console.log('meals',this.state.items);
