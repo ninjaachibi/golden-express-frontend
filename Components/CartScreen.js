@@ -27,8 +27,13 @@ class CartScreen extends React.Component {
     }
   }
 
+  async componentDidMount () {
+    let cart = await AsyncStorage.getItem('cart')
+    this.setState({cart});
+  }
 
   render() {
+    console.log(cart);
     return (
       <View style={{
         flex: 1,
