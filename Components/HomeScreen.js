@@ -114,10 +114,11 @@ export default class HomeScreen extends React.Component {
 
 
 
-          <ScrollView contentContainerStyle={{alignItems:'flex-start'}} style={{
-            flex:12,
-          }} scrollEnabled={true}
-          enableEmptySections={true}
+          <ScrollView
+            contentContainerStyle={{alignItems:'flex-start'}}
+            style={{flex:12}}
+            scrollEnabled={true}
+            enableEmptySections={true}
           >
 
             <ImageBackground
