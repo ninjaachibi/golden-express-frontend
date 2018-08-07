@@ -19,15 +19,17 @@ import {
   Animated,
   Platform,
   StatusBar,
+  Dimensions
 } from 'react-native';
  // Version can be specified in package.json
 import HorizontalMealScroll from './HorizontalMealScroll'
 import { Ionicons } from '@expo/vector-icons';
 import {Header, Icon} from 'react-native-elements';
 import styles from './Styles'
-
-const HEADER_MAX_HEIGHT = 80//240;
-const HEADER_MIN_HEIGHT = 20;
+const SCREEN_WIDTH = Dimensions.get('window').width
+const SCREEN_HEIGHT = Dimensions.get('window').height
+const HEADER_MAX_HEIGHT = 100//240;
+const HEADER_MIN_HEIGHT = 0;
 const HEADER_SCROLL_DISTANCE = HEADER_MAX_HEIGHT - HEADER_MIN_HEIGHT;
 
 const G_IMG = require('../assets/goldenImage.jpg')
@@ -141,8 +143,8 @@ export default class HomeScreen extends React.Component {
   extrapolate: 'clamp',
 });
 const imageOpacity1 = this.state.scrollY.interpolate({
-inputRange: [0, HEADER_SCROLL_DISTANCE / 2, HEADER_SCROLL_DISTANCE],
-outputRange: [1, 0.75, 1],
+inputRange: [0,  HEADER_SCROLL_DISTANCE / 6, HEADER_SCROLL_DISTANCE / 4,HEADER_SCROLL_DISTANCE / 2,HEADER_SCROLL_DISTANCE * 3 / 4,HEADER_SCROLL_DISTANCE * 7 / 8, HEADER_SCROLL_DISTANCE],
+outputRange: [0, 0.25, 0.40,0.6,0.75,0.9,1],
 extrapolate: 'clamp',
 });
 const imageTranslate = this.state.scrollY.interpolate({
@@ -210,9 +212,10 @@ const titleScale = scrollY.interpolate({
             y: -HEADER_MAX_HEIGHT,
           }}
           >
+            <View style={[styles.scrollViewContent]}>
 
 
-        <View style={{backgroundColor:'#F0EFF5', alignItems:'flex-start', justifyContent:'center'}}>
+        <View style={[styles.row,{backgroundColor:'#F0EFF5', alignItems:'flex-start', justifyContent:'center'}]}>
           <TouchableHighlight onPress={()=>this.openDrawer()}>
 
           <Image
@@ -223,13 +226,25 @@ const titleScale = scrollY.interpolate({
             backgroundColor:'#e8ecf4',
 
             alignItems:'flex-start'}}>
-
-            <HorizontalMealScroll style={{flex:1}}/>
-            <HorizontalMealScroll style={{flex:1}}/>
-            <HorizontalMealScroll style={{flex:1}}/>
-            <HorizontalMealScroll style={{flex:1}}/>
+            <View style={[styles.row]}>
             <HorizontalMealScroll style={{flex:1}}/>
           </View>
+            <View style={[styles.row]}>
+
+            <HorizontalMealScroll style={{flex:1}}/>
+          </View>
+
+            <View style={[styles.row]}>
+
+            <HorizontalMealScroll style={{flex:1}}/>
+          </View>
+            <View style={[styles.row]}>
+
+            <HorizontalMealScroll style={{flex:1}}/>
+          </View>
+
+          </View>
+        </View>
 
         </Animated.ScrollView>
 
@@ -274,12 +289,13 @@ const titleScale = scrollY.interpolate({
 
        </Animated.View>
 
+
        <Animated.View
           style={[
-            styles.left,
+            styles.behind,
             {
-
               opacity: imageOpacity1,
+
               transform: [
                 { translateY: titleTranslate },
                   {scale: titleScale }
@@ -287,7 +303,9 @@ const titleScale = scrollY.interpolate({
             },
           ]}
         >
-        <TouchableOpacity onPress={() => this.openDrawer()}>
+          <View style={{marginTop:-25,marginLeft: 15}}>
+
+        <TouchableOpacity style={{marginTop:-31.5,marginLeft:-1}} onPress={() => this.openDrawer()}>
           <Icon
                  name='map-o'
                  type='font-awesome'
@@ -297,14 +315,30 @@ const titleScale = scrollY.interpolate({
 
                />
              </TouchableOpacity>
+           </View>
+
+             <View style={{marginTop:-25,marginLeft: SCREEN_WIDTH/2-25}}>
+            <Text style={{fontSize:21, fontWeight:'bold', color:'red',marginTop:-5}}>Home</Text>
+          </View>
+
+          <View style={{marginTop:-25,marginLeft: 30}}>
+
+
+          <TouchableOpacity style={{marginLeft:SCREEN_WIDTH - 64, marginTop:32.1}}>
+              <Icon
+              name='shopping-cart'
+              color='blue'
+              onPress={()=>{this.props.screenProps.cart()}}/>
+            </TouchableOpacity>
+          </View>
 
         </Animated.View>
         <Animated.View
            style={[
-             styles.center,
+             styles.front,
              {
+               opacity: imageOpacity,
 
-               opacity: imageOpacity1,
                transform: [
                  { translateY: titleTranslate },
                    {scale: titleScale }
@@ -312,9 +346,50 @@ const titleScale = scrollY.interpolate({
              },
            ]}
          >
-          <Text style={{fontSize:21, fontWeight:'bold', color:'red'}}>Home</Text>
+           <View style={{marginTop:-25,marginLeft: 15}}>
+
+         <TouchableOpacity style={{marginTop:-31.5,marginLeft:-1}} onPress={() => this.openDrawer()}>
+           <Icon
+                  name='map-o'
+                  type='font-awesome'
+                  size={25}
+                  color={'#FF9F1C'}
+                  underlayColor={'white'}
+
+                />
+              </TouchableOpacity>
+            </View>
+
+              <View style={{marginTop:-25,marginLeft: SCREEN_WIDTH/2-25}}>
+             <Text style={{fontSize:21, fontWeight:'bold', color:'white',marginTop:-5}}>Home</Text>
+           </View>
+
+           <View style={{marginTop:-25,marginLeft: 30}}>
+
+
+           <TouchableOpacity style={{marginLeft:SCREEN_WIDTH - 64, marginTop:32.1}}>
+               <Icon
+               name='shopping-cart'
+               color='blue'
+               onPress={()=>{this.props.screenProps.cart()}}/>
+             </TouchableOpacity>
+           </View>
 
          </Animated.View>
+        {/* <Animated.View
+           style={[
+             styles.center,
+             {
+
+               transform: [
+                 { translateY: titleTranslate },
+                   {scale: titleScale }
+               ],
+             },
+           ]}
+         >
+
+         </Animated.View> */}
 
 
 
@@ -322,11 +397,10 @@ const titleScale = scrollY.interpolate({
 
 
 
-       <Animated.View
+       {/* <Animated.View
           style={[
             styles.right,
             {
-              opacity: imageOpacity1,
               transform: [
                 { translateY: titleTranslate},
                 {scale: titleScale },
@@ -334,15 +408,10 @@ const titleScale = scrollY.interpolate({
             },
           ]}
         >
-          <TouchableOpacity style={{marginRight:10}}>
-              <Icon
-              name='shopping-cart'
-              color='blue'
-              onPress={()=>{this.props.screenProps.cart()}}/>
-            </TouchableOpacity>
 
 
-      </Animated.View>
+
+      </Animated.View>*/}
 </View>
 
     )
