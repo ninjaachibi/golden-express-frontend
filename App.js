@@ -57,7 +57,6 @@ const MainNavigator = StackNavigator({
     screen: Interface,
       navigationOptions: {
         header: null,
-
     }
   },
 },

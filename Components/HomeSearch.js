@@ -21,7 +21,7 @@ import {Header, Icon} from 'react-native-elements';
 const D_IMG = require('../assets/goldenTemple.jpg')
 
 class HomeSearch extends React.Component {
-  static navigationOptions =({navigation}) => {
+  static navigationOptions = ({navigation}) => {
     const {state} = navigation
     return {
     title: 'Home Search',
