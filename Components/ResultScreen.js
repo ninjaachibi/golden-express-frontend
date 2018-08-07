@@ -49,22 +49,24 @@ class ResultScreen extends React.Component {
   }
 
   async addToCart (item) {
-    console.log('adding to cart', item);
+    // console.log('adding to cart', item);
     try {
-      let cart = await AsyncStorage.getItem('cart');
-      if(!cart) return;
-      else {
-        cart.push(item)
-        await AsyncStorage.setItem('cart', cart);
-        console.log("added to card");
+      let cart = await AsyncStorage.getItem('cart', (err,res)=> {console.log('res',res);});
+      cart = JSON.parse(cart);
+      console.log('cart is',cart);
+      if(!cart) {
+        cart = []
       }
+        cart.push(item)
+        await AsyncStorage.setItem('cart', JSON.stringify(cart));
+        console.log("added to cart", cart);
     }
-    catch(err) console.log(err);
+    catch(err) {
+      console.log(err);
+    }
   }
 
   render() {
-    console.log('items',this.state.items);
-    console.log('render',this.state, this.props);
     return (
       <View style={{
         flex: 1,
