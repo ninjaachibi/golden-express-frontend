@@ -81,6 +81,7 @@ class CartScreen extends React.Component {
 
   checkout() {
     console.log('checking out');
+    this.props.navigation.navigate('Checkout')
   }
 
   calculateTotal () {

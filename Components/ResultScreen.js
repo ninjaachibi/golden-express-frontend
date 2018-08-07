@@ -13,6 +13,7 @@ import {
   ScrollView,
   AsyncStorage
 } from 'react-native';
+import {Header, Icon} from 'react-native-elements';
 import styles from './Styles'
 
 import groceryItems from '../public/New_Inventory/new_meat.json'
@@ -21,8 +22,10 @@ console.log('groceryItems', groceryItems);
 class ResultScreen extends React.Component {
   //Location  Favorites,foods,home, history, search?
   static navigationOptions = () => ({
-    header: <Text>Results</Text> //need to fix this
+    header: <Text>Results</Text> //need to fix this + add go back
   });
+
+
   constructor(props) {
     super(props);
     this.ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});

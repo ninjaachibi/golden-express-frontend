@@ -100,10 +100,14 @@ class CheckoutScreen extends React.Component {
     console.log(this.state);
     return (
       <View style={{flex: 1, backgroundColor: 'gold', alignItems: 'stretch', position:'absolute', top:0,bottom:0,left:0,right:0 }}>
-        <WebView scalesPageToFit={false}
-        scrollEnabled={false} source={{html:stripeAPI}} style={{backgroundColor: 'gold',position:'absolute', top:0,bottom:0,left:0,right:0}}/>
+        {/* <WebView
+          scalesPageToFit={false}
+          scrollEnabled={false}
+          source={{html:stripeAPI}}
+          style={{backgroundColor: 'gold',position:'absolute', top:0,bottom:0,left:0,right:0}}
+        /> */}
 
-
+        <Text>Hello world</Text>
 
       </View>
 
