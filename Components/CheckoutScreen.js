@@ -14,6 +14,7 @@ import {
   Image,
   WebView
 } from 'react-native';
+import _ from 'underscore'
 import styles from './Styles'
 
 import HorizontalMealScroll from './HorizontalMealScroll'
@@ -92,13 +93,15 @@ class CheckoutScreen extends React.Component {
   }
 
   componentDidMount () {
-    let total = this.props.navigation.getParam('total',0);
-    console.log('got total', total);
-    this.setState({total})
+    let total = this.props.navigation.getParam('total', 0);
+    let cart = this.props.navigation.getParam('cart', {})
+    console.log('got total', total, 'cart', cart);
+    this.setState({total, cart})
   }
 
   render() {
     console.log(this.state);
+    let { total, cart } = this.state;
     return (
       <View style={{flex: 1, backgroundColor: 'gold', alignItems: 'stretch', position:'absolute', top:0,bottom:0,left:0,right:0 }}>
         {/* <WebView
@@ -112,10 +115,11 @@ class CheckoutScreen extends React.Component {
 
         <View className="items-container">
           <Text>items here</Text>
+          {_.values(cart).map((item)=><Text>{item.count} {item.item.name}</Text>)}
         </View>
 
         <View className="confirmation-container">
-          <Text>Please confirm your order: {this.state.total}</Text>
+          <Text>Please confirm your order: {total}</Text>
 
           <Button title="place order" onPress={()=>{console.log('confirmed')}}/>
         </View>
