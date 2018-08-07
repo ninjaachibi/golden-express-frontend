@@ -32,7 +32,6 @@ import CartScreen from './CartScreen'
 import HomeNavigator from './HomeNavigator'
 import CategoriesNavigator from './CategoriesNavigator'
 import SearchNavigator from './SearchNavigator'
-import DrawerNavigator from './DrawerNavigator'
 
 const Tabs = TabNavigator({
   Home: {
@@ -110,23 +109,12 @@ export default class Interface extends React.Component {
     super(props);
     this.state = {};
     this.navigateCart = this.navigateCart.bind(this);
-    this.openDrawer = this.openDrawer.bind(this);
-    this.closeDrawer = this.closeDrawer.bind(this);
-
-
   }
 
 
-  openDrawer(){
-    this.props.navigation.navigate('DrawerOpen')
-  }
-
-  closeDrawer(){
-    this.props.navigation.navigate('DrawerClose')
-  }
 
   navigateCart(){
-    this.props.screenProps.openCart()
+    this.props.navigation.navigate("Cart")
   }
 
   render() {
@@ -134,10 +122,7 @@ export default class Interface extends React.Component {
       <View style={{flex:1}}>
 
         <Tabs screenProps={{
-          cart: this.navigateCart,
-          openDrawer: this.openDrawer,
-          closeDrawer: this.closeDrawer
-
+          cart: this.navigateCart
         }}/>
       </View>
 

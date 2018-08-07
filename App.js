@@ -32,8 +32,8 @@ import CartScreen from './Components/CartScreen'
 import HomeNavigator from './Components/HomeNavigator'
 import CategoriesNavigator from './Components/CategoriesNavigator'
 import SearchNavigator from './Components/SearchNavigator'
-import Interface from './Components/Interface'
-
+// import Interface from './Components/Interface' why does import not work
+import DrawerNavigator from './Components/DrawerNavigator'
 const MainNavigator = StackNavigator({
   Login: {
     screen: LoginScreen,
@@ -53,19 +53,20 @@ const MainNavigator = StackNavigator({
   Feedback: {
     screen: FeedbackScreen
   },
-  Interface: {
-    screen: Interface,
+  Drawer: {
+    screen: DrawerNavigator,
       navigationOptions: {
         header: null,
 
     }
   },
+
 },
 {
   headerMode: 'float',
   navigationOptions: {
   },
-  initialRouteName: 'Interface' //for debugging
+  initialRouteName: 'Drawer' //for debugging
 })
 export default class App extends React.Component {
   render() {

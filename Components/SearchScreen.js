@@ -58,6 +58,8 @@ componentDidMount()
 
   render() {
     console.log('render',this.state, this.props);
+    let navigation = this.props.navigation;
+
     return (
       <View style={{
         flex: 1,
@@ -74,12 +76,16 @@ componentDidMount()
               width:null,
               flex: 5
             }]}>
-    {/* <View style={{
-      flex: 1,
-      alignItems: 'stretch',
-      backgroundColor: '#F5FCFF',
-    }}>
-      <Text>{this.state.message}</Text> */}
+            <Icon
+              name='map-o'
+              type='font-awesome'
+              size={50}
+              color={'#FF9F1C'}
+              underlayColor={'white'}
+              onPress={() => navigation.navigate("DrawerOpen")}
+            />
+
+
       <View style={{justifyContent:'flex-start'}}>
         <TextInput
 
