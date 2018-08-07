@@ -24,20 +24,28 @@ class CartScreen extends React.Component {
   constructor() {
     super();
     this.state = {
-      cart: [],
     }
   }
 
   async componentDidMount () {
     // AsyncStorage.removeItem('cart', ()=>{console.log('removed iten')})
-    let cart = await AsyncStorage.getItem('cart')
-    console.log('got cart',JSON.parse(cart));
+    let cart = await AsyncStorage.getItem('cart', () => {
+      console.log('got cart');
+    })
+
+    if(!cart) {
+      cart = "{}";
+    }
     this.setState({cart:JSON.parse(cart)});
+  }
+
+  checkout() {
+    console.log('checking out');
   }
 
   render() {
     console.log('cart',this.state.cart);
-    // console.log(_.mapObject(this.state.cart, (item) => item))
+    console.log(_.values(this.state.cart));
     return (
       <View style={{
         flex: 1,
@@ -47,12 +55,14 @@ class CartScreen extends React.Component {
         <Text>Welcome to cart</Text>
         {!this.state.cart || this.state.cart.length === 0 ?
           <Text>Cart is empty</Text>
-          : this.state.cart.map((item)=> {
+          : _.values(this.state.cart).map((item) => {
             return (
-              <Text>{item.name}</Text>
+              <Text>{item.item.name}: Count: {item.count}</Text>
             )
           })
         }
+
+        <Button title="Checkout Cart" onPress={()=>this.checkout()} />
 
 
       </View>
