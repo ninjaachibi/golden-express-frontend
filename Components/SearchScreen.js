@@ -57,7 +57,6 @@ componentDidMount()
   }
 
   render() {
-    console.log('render',this.state, this.props);
     let navigation = this.props.navigation;
 
     return (
