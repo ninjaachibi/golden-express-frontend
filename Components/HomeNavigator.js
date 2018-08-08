@@ -45,8 +45,9 @@ export default class HomeNavigator extends React.Component{
     }
     this.navigateCart = this.navigateCart.bind(this)
     this.navigateHome = this.navigateHome.bind(this)
-    this.openDrawer = this.openDrawer.bind(this)
     this.closeDrawer = this.closeDrawer.bind(this)
+    this.openDrawer = this.openDrawer.bind(this)
+
 
 
   }

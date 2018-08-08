@@ -53,6 +53,7 @@ export default class Categories extends React.Component{
       },
       Result: {
         screen: ResultScreen
+
       }
     }
 

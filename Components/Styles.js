@@ -210,9 +210,8 @@ const styles = StyleSheet.create({
     paddingTop: Platform.OS !== 'ios' ? HEADER_MAX_HEIGHT : 0,
   },
   row: {
-    height: 140,
+    height: 240,
     margin: 16,
-    backgroundColor: '#D3D3D3',
     alignItems: 'center',
     justifyContent: 'center',
   },

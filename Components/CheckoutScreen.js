@@ -87,23 +87,38 @@ class CheckoutScreen extends React.Component {
     title:'Checkout',
   };
   constructor(props) {
-    super(props)
+    super(props);
+    this.state = {total:0};
   }
-  //run the coponoennt and have it fetch the data
-  //each ingredient has i\ts own page that displays what it looks like
-  //how to make an image, where do i source
-  //user gives quantities
-  //algo updates quantiies with respect to recipe and user's desires
 
+  componentDidMount () {
+    let total = this.props.navigation.getParam('total',0);
+    console.log('got total', total);
+    this.setState({total})
+  }
 
   render() {
     console.log(this.state);
     return (
       <View style={{flex: 1, backgroundColor: 'gold', alignItems: 'stretch', position:'absolute', top:0,bottom:0,left:0,right:0 }}>
-        <WebView scalesPageToFit={false}
-        scrollEnabled={false} source={{html:stripeAPI}} style={{backgroundColor: 'gold',position:'absolute', top:0,bottom:0,left:0,right:0}}/>
+        {/* <WebView
+          scalesPageToFit={false}
+          scrollEnabled={false}
+          source={{html:stripeAPI}}
+          style={{backgroundColor: 'gold',position:'absolute', top:0,bottom:0,left:0,right:0}}
+        /> */}
 
+        <Text>Hello world</Text>
 
+        <View className="items-container">
+          <Text>items here</Text>
+        </View>
+
+        <View className="confirmation-container">
+          <Text>Please confirm your order: {this.state.total}</Text>
+
+          <Button title="place order" onPress={()=>{console.log('confirmed')}}/>
+        </View>
 
       </View>
 

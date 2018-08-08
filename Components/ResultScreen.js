@@ -13,6 +13,7 @@ import {
   ScrollView,
   AsyncStorage
 } from 'react-native';
+import {Header, Icon} from 'react-native-elements';
 import styles from './Styles'
 
 import groceryItems from '../public/New_Inventory/new_meat.json'
@@ -21,8 +22,10 @@ console.log('groceryItems', groceryItems);
 class ResultScreen extends React.Component {
   //Location  Favorites,foods,home, history, search?
   static navigationOptions = () => ({
-    header: <Text>Results</Text> //need to fix this
+    header: <Text>Results</Text> //need to fix this + add go back
   });
+
+
   constructor(props) {
     super(props);
     this.ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
@@ -48,19 +51,29 @@ class ResultScreen extends React.Component {
     })
   }
 
-  addToCart (item) {
-    console.log('adding to cart', item);
+  async addToCart (item) {
+    // console.log('adding to cart', item);
+    try {
+      let cart = await AsyncStorage.getItem('cart', (err,res)=> {if(err)console.log('err',err);});
+      cart = JSON.parse(cart);
+      console.log('cart is',cart);
+      if(!cart) {
+        cart = {}
+      }
+        cart[item._id] = !!cart[item._id] ? {count: ++cart[item._id].count, item} : {count: 1, item};
+        await AsyncStorage.setItem('cart', JSON.stringify(cart));
+        console.log("added to cart", cart);
+    }
+    catch(err) {
+      console.log(err);
+    }
   }
 
   render() {
-    console.log('items',this.state.items);
-    console.log('render',this.state, this.props);
     return (
       <View style={{
         flex: 1,
-        alignItems: 'center',
-        marginLeft: 10,
-        marginRight: 10,
+        
       }}>
       <ScrollView style={{
         marginBottom:30
