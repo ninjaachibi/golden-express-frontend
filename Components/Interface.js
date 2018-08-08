@@ -70,13 +70,7 @@ const Tabs = TabNavigator({
       },
     }
   },
-  Result: {
-    screen: ResultScreen,
-    navigationOptions: {
-      tabBarIcon:({ tintColor }) => <Ionicons name='ios-list' size={30} color={tintColor} />,
-      tabBarLabel:'Results'
-    }
-  },
+  
   GroceryList: {
     screen: GroceryListScreen,
     navigationOptions: {
