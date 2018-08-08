@@ -11,6 +11,8 @@
   "dependencies": {
     "@expo/vector-icons": "github:expo/vector-icons",
     "expo": "^25.0.0",
+    "prop-types": "^15.6.2",
+    "proptypes": "^1.1.0",
     "react": "16.2.0",
     "react-native": "https://github.com/expo/react-native/archive/sdk-25.0.0.tar.gz",
     "react-native-elements": "^0.19.1",

@@ -57,7 +57,8 @@ componentDidMount()
   }
 
   render() {
-    console.log('render',this.state, this.props);
+    let navigation = this.props.navigation;
+
     return (
       <View style={{
         flex: 1,
@@ -74,12 +75,8 @@ componentDidMount()
               width:null,
               flex: 5
             }]}>
-    {/* <View style={{
-      flex: 1,
-      alignItems: 'stretch',
-      backgroundColor: '#F5FCFF',
-    }}>
-      <Text>{this.state.message}</Text> */}
+          
+
       <View style={{justifyContent:'flex-start'}}>
         <TextInput
 
