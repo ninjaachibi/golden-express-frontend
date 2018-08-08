@@ -14,8 +14,9 @@ import {
   Image,
   WebView
 } from 'react-native';
-import _ from 'underscore'
-import styles from './Styles'
+import _ from 'underscore';
+import styles from './Styles';
+import {Header, Icon, Card,Avatar} from 'react-native-elements';
 // import PaymentInfoScreen from './PaymentInfoScreen'
 
 let stripeAPI = `
@@ -140,17 +141,20 @@ class CheckoutScreen extends React.Component {
     console.log(this.state);
     let { total, cart } = this.state;
     return (
-      <View style={{flex: 1, backgroundColor: 'gold', alignItems: 'stretch', position:'absolute', top:0,bottom:0,left:0,right:0 }}>
+     
+     <View style={{flex: 1, alignItems: 'stretch', position:'absolute', top:0,bottom:0,left:0,right:0 }}>
         {/* <WebView
           scalesPageToFit={false}
           scrollEnabled={false}
           source={{html:stripeAPI}}
           style={{backgroundColor: 'gold',position:'absolute', top:0,bottom:0,left:0,right:0}}
         /> */}
-
+        <ScrollView>
         <View className="items-container">
-          <Text>items here</Text>
-          {_.values(cart).map((item)=><Text key={item.item._id}>{item.count} {item.item.name}</Text>)}
+          <Text style={{fontSize:25,fontWeight:'bold',marginTop:15}}>Order Summary</Text>
+          <Card>
+          {_.values(cart).map((item)=><Text key={item.item._id} style={{fontSize:17}}>{item.count} {item.item.name}</Text>)}
+          </Card>
         </View>
 
         <View className="payment-container">
@@ -167,9 +171,9 @@ class CheckoutScreen extends React.Component {
 
           <Button title="place order" onPress={()=>{console.log('confirmed');this.order()}}/>
         </View>
-
+        </ScrollView>
       </View>
-
+    
     )
   }
 }

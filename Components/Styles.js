@@ -113,7 +113,7 @@ const styles = StyleSheet.create({
     flexWrap:'wrap'
   },
   itemQuan:{
-    fontSize:16.5,
+    fontSize:20,
     marginTop:7.5,
     marginLeft:3.45,
     marginRight:2.7
