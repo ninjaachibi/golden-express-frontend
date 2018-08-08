@@ -70,7 +70,7 @@ const Tabs = TabNavigator({
       },
     }
   },
-  
+
   GroceryList: {
     screen: GroceryListScreen,
     navigationOptions: {
@@ -81,7 +81,7 @@ const Tabs = TabNavigator({
 
 
 },
-{initialRouteName:'Home',
+{initialRouteName:'Categories',
   navigationOptions: {
     headerRight:  <Header
       backgroundColor='transparent'

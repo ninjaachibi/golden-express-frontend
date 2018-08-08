@@ -15,17 +15,13 @@ import {
 } from 'react-native';
 import {Header, Icon} from 'react-native-elements';
 import styles from './Styles'
-
 import groceryItems from '../public/New_Inventory/new_meat.json'
 console.log('groceryItems', groceryItems);
-
 class ResultScreen extends React.Component {
   //Location  Favorites,foods,home, history, search?
   static navigationOptions = () => ({
-    header: <Text>Results</Text> //need to fix this + add go back
+    header: null //need to fix this + add go back
   });
-
-
   constructor(props) {
     super(props);
     this.ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
@@ -35,13 +31,11 @@ class ResultScreen extends React.Component {
       currentItem: null,
     }
   }
-
   componentDidMount() {
     let groceryItems = this.props.navigation.getParam('groceryItems', [])
     console.log('passed in items', groceryItems);
     this.setState({items: this.ds.cloneWithRows(groceryItems)})
   }
-
   //display components for every grocery item with the id passed in as the prop itemId
   displayItem (item) {
     console.log('item is', item); //may need to change this to a fetch request?
@@ -50,7 +44,6 @@ class ResultScreen extends React.Component {
       currentItem: item
     })
   }
-
   async addToCart (item) {
     // console.log('adding to cart', item);
     try {
@@ -68,14 +61,17 @@ class ResultScreen extends React.Component {
       console.log(err);
     }
   }
-
   render() {
     return (
       <View style={{
         flex: 1,
-        
+        alignItems: 'center',
+        justifyContent:'center',
+        marginLeft: 10,
+        marginRight: 10,
       }}>
-      <ScrollView style={{
+      <Text>Hi</Text>
+      {/* <ScrollView style={{
         marginBottom:30
       }}>
         {this.state.itemsOn ?
@@ -97,19 +93,16 @@ class ResultScreen extends React.Component {
             <Text style={styles.textBig, {"color":"black"}}>{this.state.currentItem.name}</Text>
             <Text style={{fontWeight: 'bold'}}>Price: {this.state.currentItem.price}</Text>
             <Text style={{fontWeight: 'bold'}}>Description: {this.state.currentItem.description}</Text>
-
             <Button
               onPress={()=>{this.addToCart(this.state.currentItem)}}
               title="Add Item to Cart"
               color="#841584"
             />
-
             <Button
               onPress={()=>{this.setState({itemsOn: false, currentItem:null})}}
               title="Go back"
               color="#841584"
             />
-
           </View>
           :
           <ListView
@@ -117,7 +110,6 @@ class ResultScreen extends React.Component {
             style={{marginBottom: 30, backgroundColor:'pink', width: 150}}
             renderRow={(item) => (
               <View style={{ borderBottomWidth: 1, width: 150, marginBottom: 10, flexDirection: 'row', flex:1, backgroundColor: "lightblue"}}>
-
                 <TouchableOpacity
                   onPress={this.displayItem.bind(this, item)}
                   >
@@ -132,18 +124,16 @@ class ResultScreen extends React.Component {
                   }}
                 />
                 </TouchableOpacity>
-
               </View>
             )}
           />
         }
 
 
-      </ScrollView>
+      </ScrollView> */}
 
       </View>
     )
   }
 }
-
 export default ResultScreen;

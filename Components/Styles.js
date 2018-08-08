@@ -215,6 +215,29 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  shoppingCartItem:{
+    textAlign:'left',
+    fontSize: 20
+  },
+  singleCardBox:{
+    flexDirection:"row",
+    justifyContent: 'space-between'
+  },
+  addAndRemoveBox:{
+    flexDirection:'row',
+    alignItems:'flex-end',
+    flexWrap:'wrap'
+  },
+  itemQuan:{
+    fontSize:20,
+    marginTop:7.5,
+    marginLeft:3.45,
+    marginRight:2.7
+  },
+  totalPrice:{
+    fontSize:28,
+    textAlign:"right",
+    marginRight:20  }
 });
 
 export default styles;
