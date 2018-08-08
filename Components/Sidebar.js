@@ -26,7 +26,7 @@ render () {
          icon={{name: 'umbrella', type: 'font-awesome', size: 20}}
          title='Four'
          buttonStyle={styles.button}
-         onPress={this.navigateToScreen('Four')}/>
+         onPress={this.navigateToScreen('One')}/>
         <Button
          raised
          icon={{name: 'user-circle', type: 'font-awesome', size:20}}

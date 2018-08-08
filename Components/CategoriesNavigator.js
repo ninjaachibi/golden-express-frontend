@@ -21,7 +21,6 @@ import styles from './Styles'
 import ResultScreen from './ResultScreen'
 import GroceryListScreen from './GroceryListScreen'
 import HorizontalMealScroll from './HorizontalMealScroll'
-import SearchScreen from './SearchScreen'
 import CheckoutScreen from './CheckoutScreen'
 import FeedbackScreen from './FeedbackScreen'
 import CategoriesScreen from './CategoriesScreen'
@@ -48,9 +47,7 @@ export default class Categories extends React.Component{
       Categories: {
         screen: CategoriesScreen,
       },
-      Search: {
-        screen: SearchScreen
-      },
+
       Result: {
         screen: ResultScreen
 

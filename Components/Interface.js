@@ -51,7 +51,6 @@ const Tabs = TabNavigator({
     navigationOptions: {
       tabBarIcon:({ tintColor }) => <Ionicons name='ios-bookmarks' size={30} color={tintColor} />,
       tabBarLabel:'Category',
-      header:null,
       headerStyle: {
         backgroundColor: "white",
       }
@@ -82,18 +81,7 @@ const Tabs = TabNavigator({
 
 },
 {initialRouteName:'Categories',
-  navigationOptions: {
-    headerRight:  <Header
-      backgroundColor='transparent'
-      rightComponent={
-      <TouchableOpacity>
-        <Icon
-        name='shopping-cart'
-        color='blue'
-        onPress={()=>{}}/>
-        </TouchableOpacity>}
-    />
-  }
+
 }
 )
 

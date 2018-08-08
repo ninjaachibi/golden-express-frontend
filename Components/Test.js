@@ -40,3 +40,75 @@
 //     console.log(err);
 //   }
 // }
+// return (
+//       <View style={{
+//         flex: 1,
+//         alignItems: 'center',
+//         justifyContent:'center',
+//         marginLeft: 10,
+//         marginRight: 10,
+//       }}>
+//       <Text>Hi</Text>
+//       {/* <ScrollView style={{
+//         marginBottom:30
+//       }}>
+//         {this.state.itemsOn ?
+//           <View>
+//             <Text>Items are on</Text>
+//             <View style={{
+//               alignItems: 'center'
+//             }}>
+//               <Image
+//                 style={{
+//                     width: 300,
+//                     height: 300,
+//                   }}
+//                 source={{
+//                   uri: this.state.currentItem.imgURI
+//                 }}
+//               />
+//             </View>
+//             <Text style={styles.textBig, {"color":"black"}}>{this.state.currentItem.name}</Text>
+//             <Text style={{fontWeight: 'bold'}}>Price: {this.state.currentItem.price}</Text>
+//             <Text style={{fontWeight: 'bold'}}>Description: {this.state.currentItem.description}</Text>
+//             <Button
+//               onPress={()=>{this.addToCart(this.state.currentItem)}}
+//               title="Add Item to Cart"
+//               color="#841584"
+//             />
+//             <Button
+//               onPress={()=>{this.setState({itemsOn: false, currentItem:null})}}
+//               title="Go back"
+//               color="#841584"
+//             />
+//           </View>
+//           :
+//           <ListView
+//             dataSource={this.state.items}
+//             style={{marginBottom: 30, backgroundColor:'pink', width: 150}}
+//             renderRow={(item) => (
+//               <View style={{ borderBottomWidth: 1, width: 150, marginBottom: 10, flexDirection: 'row', flex:1, backgroundColor: "lightblue"}}>
+//                 <TouchableOpacity
+//                   onPress={this.displayItem.bind(this, item)}
+//                   >
+//                 <Text style={{textAlign: "center"}}>{item.name}</Text>
+//                 <Image
+//                   style={{
+//                       width: 150,
+//                       height: 150,
+//                     }}
+//                   source={{
+//                     uri: item.imgURI
+//                   }}
+//                 />
+//                 </TouchableOpacity>
+//               </View>
+//             )}
+//           />
+//         }
+//       </ScrollView> */}
+//
+//       </View>
+//     )
+//   }
+// }

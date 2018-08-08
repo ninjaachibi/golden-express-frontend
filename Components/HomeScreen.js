@@ -109,16 +109,15 @@ export default class HomeScreen extends React.Component {
     //display top Meals
     //fetch recommended meals
     //create alogirthm that displays certain meals
-    const {setParams} = this.props.navigation;
-    setParams({cart: this.props.screenProps.cart})
-    AsyncStorage.getItem('meals')
-      .then((data) => {
-        console.log('meals from AsyncStorage', JSON.parse(data));
-        this.setState({
-          meals: JSON.parse(data)
-        })
-      })
-      .catch(err => console.log('err',err))
+
+    // AsyncStorage.getItem('meals')
+    //   .then((data) => {
+    //     console.log('meals from AsyncStorage', JSON.parse(data));
+    //     this.setState({
+    //       meals: JSON.parse(data)
+    //     })
+    //   })
+    //   .catch(err => console.log('err',err))
 
   }
   press() {
