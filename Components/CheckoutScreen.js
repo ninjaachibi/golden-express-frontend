@@ -92,12 +92,15 @@ class CheckoutScreen extends React.Component {
     super(props);
     this.state = {
       total:0,
-      cardNumber: '',
       confirmed: false,
       paid: false,
-      expiremonth: '',
-      expireyear:'',
-      ccv:'',
+
+      cardNumber: '',
+      expMonth: '',
+      expYear:'',
+      cvc:'',
+
+      instructions: '',
       message: '',
     };
   }
@@ -111,10 +114,11 @@ class CheckoutScreen extends React.Component {
 
   order() {
     let { cardNumber, expMonth, expYear, cvc, total } = this.state;
-    cardNumber = "4242424242424242"//"4242424242424242";
-    expMonth = '1';
-    expYear = '2020'
-    cvc = '123';
+    console.log('order', cardNumber, expMonth, expYear, cvc, total);
+    // cardNumber = "4242424242424242";
+    // expMonth = '1';
+    // expYear = '2020'
+    // cvc = '123';
 
     fetch(`https://api.stripe.com/v1/tokens?card[number]=${cardNumber}&card[exp_month]=${expMonth}&card[exp_year]=${expYear}&card[cvc]=${cvc}&amount=${total*100}&currency=usd`, {
       method: 'POST',
@@ -148,7 +152,8 @@ class CheckoutScreen extends React.Component {
           },
           body: JSON.stringify({
             stripeToken: data.id,
-            total: total
+            total: total,
+            //need to include name, identifying information
           })
         })
         .then(resp => resp.json())
@@ -192,6 +197,13 @@ class CheckoutScreen extends React.Component {
             <Card>
               {_.values(cart).map((item)=><Text key={item.item._id} style={{fontSize:17}}>{item.count} {item.item.name}</Text>)}
             </Card>
+            <Text>Any special instructions?</Text>
+            <TextInput
+              placeholder='Any Instructions about your order?'
+              style={{height: 40,width:80, borderColor: 'gray', borderWidth: 1, padding: 5}}
+              onChangeText={(instructions) => this.setState({instructions})}
+              value={this.state.instructions}
+            />
           </View>
 
           <View className="payment-container">
@@ -207,20 +219,20 @@ class CheckoutScreen extends React.Component {
                 <TextInput
                   placeholder='mm'
                   style={{height: 40,width:80, borderColor: 'gray', borderWidth: 1, padding: 5}}
-                  onChangeText={(expiremonth) => this.setState({expiremonth})}
-                  value={this.state.expiremonth}
+                  onChangeText={(expMonth) => this.setState({expMonth})}
+                  value={this.state.expMonth}
                 />
                 <TextInput
-                  placeholder='yy'
+                  placeholder='yyyy'
                   style={{height: 40,width:80, borderColor: 'gray', borderWidth: 1, padding: 5}}
-                  onChangeText={(expireyear) => this.setState({expireyear})}
-                  value={this.state.expireyear}
+                  onChangeText={(expYear) => this.setState({expYear})}
+                  value={this.state.expYear}
                 />
                 <TextInput
                   placeholder='cvv'
                   style={{height: 40,width:80, borderColor: 'gray', borderWidth: 1, padding: 5, marginLeft:72}}
-                  onChangeText={(cvv) => this.setState({cvv})}
-                  value={this.state.cvv}
+                  onChangeText={(cvc) => this.setState({cvc})}
+                  value={this.state.cvc}
                 />
               </View>
 
