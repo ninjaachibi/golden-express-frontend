@@ -237,7 +237,20 @@ const styles = StyleSheet.create({
   totalPrice:{
     fontSize:28,
     textAlign:"right",
-    marginRight:20  }
+    marginRight:20  
+  },
+  checkOutTitle:{
+    fontSize:25,
+    fontWeight:'bold',
+    marginTop:15
+  },
+  paymentBox:{
+    flexDirection:'row', 
+    alignItems:'flex-end', 
+    flexWrap:'wrap',
+    marginTop:10
+  },
 });
+
 
 export default styles;
