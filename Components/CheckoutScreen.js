@@ -16,8 +16,8 @@ import {
 } from 'react-native';
 import _ from 'underscore'
 import styles from './Styles'
+// import PaymentInfoScreen from './PaymentInfoScreen'
 
-import HorizontalMealScroll from './HorizontalMealScroll'
 let stripeAPI = `
 <script src="https://checkout.stripe.com/checkout.js"></script>
 <style>
@@ -89,7 +89,10 @@ class CheckoutScreen extends React.Component {
   };
   constructor(props) {
     super(props);
-    this.state = {total:0};
+    this.state = {
+      total:0,
+      cardNumber: 'card number here'
+    };
   }
 
   componentDidMount () {
@@ -97,6 +100,40 @@ class CheckoutScreen extends React.Component {
     let cart = this.props.navigation.getParam('cart', {})
     console.log('got total', total, 'cart', cart);
     this.setState({total, cart})
+  }
+
+  order() {
+    console.log('apikey', process.env.STRIPE_API_KEY);
+    fetch('https://api.stripe.com/v1/tokens?card[number]=4242424242424242&card[exp_month]=1&card[exp_year]=2020&card[cvc]=123&amount=999&currency=usd', {
+      method: 'POST',
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+        "Authorization": 'Bearer ' + process.env.STRIPE_API_KEY,
+      }
+    })
+    .then(resp => {
+      console.log(resp);
+      return resp.json()
+    })
+    .then(data => {
+      // HERE WE HAVE ACCESS TO THE TOKEN TO SEND IT TO OUR SERVERS
+      // ALONG WITH INSENSITIVE DATA
+      fetch('http://localhost:3000/payments', {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({stripeToken: data.id})
+      })
+      .then(resp => resp.json())
+      .then(function(response) {
+        console.log('response',response);
+        if(response.paid) {
+          // DO SOMETHING AFTER PAYMENT CONFIRMATION
+        }
+      }.bind(this)).catch(err => console.error(err));
+    })
   }
 
   render() {
@@ -111,17 +148,24 @@ class CheckoutScreen extends React.Component {
           style={{backgroundColor: 'gold',position:'absolute', top:0,bottom:0,left:0,right:0}}
         /> */}
 
-        <Text>Hello world</Text>
-
         <View className="items-container">
           <Text>items here</Text>
-          {_.values(cart).map((item)=><Text>{item.count} {item.item.name}</Text>)}
+          {_.values(cart).map((item)=><Text key={item.item._id}>{item.count} {item.item.name}</Text>)}
+        </View>
+
+        <View className="payment-container">
+          <Text>Payment here</Text>
+          <TextInput
+            style={{height: 40, borderColor: 'gray', borderWidth: 1, padding: 10}}
+            onChangeText={(cardNumber) => this.setState({cardNumber})}
+            value={this.state.cardNumber}
+          />
         </View>
 
         <View className="confirmation-container">
           <Text>Please confirm your order: {total}</Text>
 
-          <Button title="place order" onPress={()=>{console.log('confirmed')}}/>
+          <Button title="place order" onPress={()=>{console.log('confirmed');this.order()}}/>
         </View>
 
       </View>
