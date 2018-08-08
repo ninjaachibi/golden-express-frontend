@@ -104,12 +104,11 @@ class CheckoutScreen extends React.Component {
   }
 
   order() {
-    console.log('apikey', process.env.STRIPE_API_KEY);
     fetch('https://api.stripe.com/v1/tokens?card[number]=4242424242424242&card[exp_month]=1&card[exp_year]=2020&card[cvc]=123&amount=999&currency=usd', {
       method: 'POST',
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",
-        "Authorization": 'Bearer ' + process.env.STRIPE_API_KEY,
+        "Authorization": 'Bearer ' + 'pk_test_JticRNIVAhMYRtChvuRtTS6p', //this is rob's public API KEY
       }
     })
     .then(resp => {
