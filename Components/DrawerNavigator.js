@@ -35,7 +35,8 @@ const DrawerStack = DrawerNavigator({
   },
   Five: {
     screen: HomeNavigator,
-  }
+  },
+  
 }, {
   initialRouteName: 'Three',
   contentComponent: DrawerContent,
