@@ -71,7 +71,7 @@ class ResultScreen extends React.Component {
         marginRight: 10,
       }}>
       <Text>Hi</Text>
-      {/* <ScrollView style={{
+      <ScrollView style={{
         marginBottom:30
       }}>
         {this.state.itemsOn ?
@@ -130,7 +130,7 @@ class ResultScreen extends React.Component {
         }
 
 
-      </ScrollView> */}
+      </ScrollView>
 
       </View>
     )
