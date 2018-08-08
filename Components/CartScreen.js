@@ -109,17 +109,12 @@ class CartScreen extends React.Component {
       <ScrollView
         scrollEnabled={true}
       >
-        <View style={{
-          flex: 1,
-          alignItems: 'center',
-          backgroundColor: '#F5FCFF',
-          paddingBottom: 80,
-        }}>
-          <Text>Welcome to cart</Text>
+        <View>
           {!this.state.cart || this.state.cart.length === 0 ?
             <Text>Cart is empty</Text>
             : _.values(this.state.cart).map((item) => {
               return (
+                <View>
                 <CartItem
                   key = {item.item._id}
                   item={item}
@@ -127,15 +122,20 @@ class CartScreen extends React.Component {
                   subtractFromCart={this.subtractFromCart}
                   getTotal={this.getItemTotal}
                 />
+                </View>
               )
             })
           }
 
-          <Button title="Checkout Cart" onPress={()=>{this.checkout();this.calculateTotal()}} />
-          <Text>
-            Total: ${this.calculateTotal()}
+
+          <Text style={styles.totalPrice}>
+            Total: ${this.calculateTotal().toFixed(2)}
           </Text>
 
+          <TouchableOpacity style={[styles.button, styles.buttonBlue]} onPress={()=>{this.checkout();this.calculateTotal()}}> 
+          <Text style={styles.buttonLabel} borderColor='white'
+          borderStyle='solid'>Checkout</Text>
+          </TouchableOpacity>
 
         </View>
       </ScrollView>
