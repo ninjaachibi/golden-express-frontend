@@ -20,7 +20,7 @@ console.log('groceryItems', groceryItems);
 class ResultScreen extends React.Component {
   //Location  Favorites,foods,home, history, search?
   static navigationOptions = () => ({
-    header: <Text>Results</Text> //need to fix this + add go back
+    header: null //need to fix this + add go back
   });
   constructor(props) {
     super(props);
@@ -66,10 +66,12 @@ class ResultScreen extends React.Component {
       <View style={{
         flex: 1,
         alignItems: 'center',
+        justifyContent:'center',
         marginLeft: 10,
         marginRight: 10,
       }}>
-      <ScrollView style={{
+      <Text>Hi</Text>
+      {/* <ScrollView style={{
         marginBottom:30
       }}>
         {this.state.itemsOn ?
@@ -126,7 +128,10 @@ class ResultScreen extends React.Component {
             )}
           />
         }
-      </ScrollView>
+
+
+      </ScrollView> */}
+
       </View>
     )
   }

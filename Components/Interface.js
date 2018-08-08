@@ -32,6 +32,7 @@ import CartScreen from './CartScreen'
 import HomeNavigator from './HomeNavigator'
 import CategoriesNavigator from './CategoriesNavigator'
 import SearchNavigator from './SearchNavigator'
+import DrawerNavigator from './DrawerNavigator'
 
 const Tabs = TabNavigator({
   Home: {
@@ -69,13 +70,7 @@ const Tabs = TabNavigator({
       },
     }
   },
-  Result: {
-    screen: ResultScreen,
-    navigationOptions: {
-      tabBarIcon:({ tintColor }) => <Ionicons name='ios-list' size={30} color={tintColor} />,
-      tabBarLabel:'Results'
-    }
-  },
+
   GroceryList: {
     screen: GroceryListScreen,
     navigationOptions: {
@@ -86,7 +81,7 @@ const Tabs = TabNavigator({
 
 
 },
-{initialRouteName:'Home',
+{initialRouteName:'Categories',
   navigationOptions: {
     headerRight:  <Header
       backgroundColor='transparent'
@@ -109,12 +104,23 @@ export default class Interface extends React.Component {
     super(props);
     this.state = {};
     this.navigateCart = this.navigateCart.bind(this);
+    this.openDrawer = this.openDrawer.bind(this);
+    this.closeDrawer = this.closeDrawer.bind(this);
+
+
   }
 
 
+  openDrawer(){
+    this.props.navigation.navigate('DrawerOpen')
+  }
+
+  closeDrawer(){
+    this.props.navigation.navigate('DrawerClose')
+  }
 
   navigateCart(){
-    this.props.navigation.navigate("Cart")
+    this.props.screenProps.openCart()
   }
 
   render() {
@@ -122,7 +128,10 @@ export default class Interface extends React.Component {
       <View style={{flex:1}}>
 
         <Tabs screenProps={{
-          cart: this.navigateCart
+          cart: this.navigateCart,
+          openDrawer: this.openDrawer,
+          closeDrawer: this.closeDrawer
+
         }}/>
       </View>
 

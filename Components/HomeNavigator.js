@@ -45,7 +45,19 @@ export default class HomeNavigator extends React.Component{
     }
     this.navigateCart = this.navigateCart.bind(this)
     this.navigateHome = this.navigateHome.bind(this)
+    this.closeDrawer = this.closeDrawer.bind(this)
+    this.openDrawer = this.openDrawer.bind(this)
 
+
+
+  }
+
+  openDrawer(){
+    this.props.screenProps.openDrawer()
+  }
+
+  closeDrawer(){
+    this.props.screenProps.closeDrawer()
   }
 
   navigateCart() {
@@ -76,7 +88,9 @@ export default class HomeNavigator extends React.Component{
         <HomeStack
           screenProps={{
             cart: this.navigateCart,
-            home: this.navigateHome
+            home: this.navigateHome,
+            openDrawer: this.openDrawer,
+            closeDrawer: this.closeDrawer
           }}/>
       </View>
 
