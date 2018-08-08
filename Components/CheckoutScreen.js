@@ -92,7 +92,9 @@ class CheckoutScreen extends React.Component {
     super(props);
     this.state = {
       total:0,
-      cardNumber: 'card number here'
+      cardNumber: 'card number here',
+      confirmed: false,
+      paid: false,
     };
   }
 
@@ -131,6 +133,10 @@ class CheckoutScreen extends React.Component {
         console.log('response',response);
         if(response.paid) {
           // DO SOMETHING AFTER PAYMENT CONFIRMATION
+          this.setState({paid: true, confirmed: true})
+        }
+        else {
+          this.setState({paid: false, confirmed: true})
         }
       }.bind(this)).catch(err => console.error(err));
     })
@@ -138,10 +144,10 @@ class CheckoutScreen extends React.Component {
 
   render() {
     console.log(this.state);
-    let { total, cart } = this.state;
+    let { total, cart, paid, confirmed } = this.state;
     return (
-     
-     <View style={{flex: 1, alignItems: 'stretch', position:'absolute', top:0,bottom:0,left:0,right:0 }}>
+
+      <View style={{flex: 1, alignItems: 'stretch', position:'absolute', top:0,bottom:0,left:0,right:0 }}>
         {/* <WebView
           scalesPageToFit={false}
           scrollEnabled={false}
@@ -149,30 +155,37 @@ class CheckoutScreen extends React.Component {
           style={{backgroundColor: 'gold',position:'absolute', top:0,bottom:0,left:0,right:0}}
         /> */}
         <ScrollView>
-        <View className="items-container">
-          <Text style={{fontSize:25,fontWeight:'bold',marginTop:15}}>Order Summary</Text>
-          <Card>
-          {_.values(cart).map((item)=><Text key={item.item._id} style={{fontSize:17}}>{item.count} {item.item.name}</Text>)}
-          </Card>
-        </View>
+          <View>
+            { confirmed ?
+              paid ? <Text>payment went through</Text>: <Text>problem with payment</Text>
+              :
+              null
+            }
+          </View>
+          <View className="items-container">
+            <Text style={{fontSize:25,fontWeight:'bold',marginTop:15}}>Order Summary</Text>
+            <Card>
+              {_.values(cart).map((item)=><Text key={item.item._id} style={{fontSize:17}}>{item.count} {item.item.name}</Text>)}
+            </Card>
+          </View>
 
-        <View className="payment-container">
-          <Text>Payment here</Text>
-          <TextInput
-            style={{height: 40, borderColor: 'gray', borderWidth: 1, padding: 10}}
-            onChangeText={(cardNumber) => this.setState({cardNumber})}
-            value={this.state.cardNumber}
-          />
-        </View>
+          <View className="payment-container">
+            <Text>Payment here</Text>
+            <TextInput
+              style={{height: 40, borderColor: 'gray', borderWidth: 1, padding: 10}}
+              onChangeText={(cardNumber) => this.setState({cardNumber})}
+              value={this.state.cardNumber}
+            />
+          </View>
 
-        <View className="confirmation-container">
-          <Text>Please confirm your order: {total}</Text>
+          <View className="confirmation-container">
+            <Text>Please confirm your order: {total}</Text>
 
-          <Button title="place order" onPress={()=>{console.log('confirmed');this.order()}}/>
-        </View>
+            <Button title="place order" onPress={()=>{console.log('confirmed');this.order()}}/>
+          </View>
         </ScrollView>
       </View>
-    
+
     )
   }
 }
