@@ -107,7 +107,7 @@ class CartScreen extends React.Component {
     console.log(_.values(this.state.cart));
     return (
       <ScrollView
-        scrollEnabled={true}
+        scrollEnabled={true} style={{marginBottom:30}}
       >
         <View>
           {!this.state.cart || this.state.cart.length === 0 ?

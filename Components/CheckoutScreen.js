@@ -92,7 +92,10 @@ class CheckoutScreen extends React.Component {
     super(props);
     this.state = {
       total:0,
-      cardNumber: 'card number here'
+      cardNumber: 'card number here',
+      expiremonth: 'mm',
+      expireyear:'yy',
+      ccv:'cvv'
     };
   }
 
@@ -150,25 +153,52 @@ class CheckoutScreen extends React.Component {
         /> */}
         <ScrollView>
         <View className="items-container">
-          <Text style={{fontSize:25,fontWeight:'bold',marginTop:15}}>Order Summary</Text>
+          <Text style={styles.checkOutTitle}>Order Summary</Text>
           <Card>
           {_.values(cart).map((item)=><Text key={item.item._id} style={{fontSize:17}}>{item.count} {item.item.name}</Text>)}
           </Card>
         </View>
 
         <View className="payment-container">
-          <Text>Payment here</Text>
+          <Text style={styles.checkOutTitle}>Payment Information</Text>
+        <Card >
           <TextInput
+            placeholder='Card Number'
             style={{height: 40, borderColor: 'gray', borderWidth: 1, padding: 10}}
             onChangeText={(cardNumber) => this.setState({cardNumber})}
             value={this.state.cardNumber}
           />
+          <View style={styles.paymentBox}>
+          <TextInput 
+            placeholder='mm'
+            style={{height: 40,width:80, borderColor: 'gray', borderWidth: 1, padding: 5}}
+            onChangeText={(expiremonth) => this.setState({expiremonth})}
+            value={this.state.expiremonth}
+          />
+          <TextInput 
+            placeholder='yy'
+            style={{height: 40,width:80, borderColor: 'gray', borderWidth: 1, padding: 5}}
+            onChangeText={(expireyear) => this.setState({expireyear})}
+            value={this.state.expireyear}
+          />
+           <TextInput 
+           placeholder='cvv'
+           style={{height: 40,width:80, borderColor: 'gray', borderWidth: 1, padding: 5, marginLeft:72}}
+           onChangeText={(cvv) => this.setState({cvv})}
+           value={this.state.cvv}
+          />
+        </View>
+        
+        </Card>
+        
         </View>
 
         <View className="confirmation-container">
-          <Text>Please confirm your order: {total}</Text>
-
-          <Button title="place order" onPress={()=>{console.log('confirmed');this.order()}}/>
+          <Text style ={{fontSize:20,marginTop:10}}>Please confirm your order: {total.toFixed(2)}</Text>
+          <TouchableOpacity style={[styles.button, styles.buttonBlue]} onPress={()=>{console.log('confirmed');this.order()}}> 
+          <Text style={styles.buttonLabel} borderColor='white'
+          borderStyle='solid'>Place Order</Text>
+          </TouchableOpacity>
         </View>
         </ScrollView>
       </View>
