@@ -57,7 +57,6 @@ const MainNavigator = StackNavigator({
     screen: DrawerNavigator,
       navigationOptions: {
         header: null,
-
     }
   },
 
