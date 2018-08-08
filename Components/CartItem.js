@@ -17,7 +17,7 @@ import {
 } from 'react-native';
 import styles from './Styles'
 import { Ionicons } from '@expo/vector-icons';
-import {Header, Icon} from 'react-native-elements';
+import {Header, Icon, Card,Avatar} from 'react-native-elements';
 
 export default class CartItem extends React.Component {
   constructor(props) {
@@ -29,19 +29,27 @@ export default class CartItem extends React.Component {
     let {height, width} = Dimensions.get('window');
     // console.log('height', height, 'width', width);
     return (
-      <View style={{
-        backgroundColor: '#F5FCFF',
-        alignItems:'stretch',
-        height: 100,
-        width: width,
-        borderStyle: 'solid',
-        borderWidth: 1,
-        flex:1
-      }}>
-        <Text>{item.item.name} Count: {item.count} Total: ${getTotal(item)}</Text>
-
-        <Button title="add" onPress={()=>{this.props.addToCart(item.item)}} />
-        <Button title="subtract" onPress={()=>{this.props.subtractFromCart(item.item)}} />
+      <View >
+        <Card>
+        <View>
+        <Avatar 
+          size="medium"
+          rounded
+          source={{uri:item.item.imgURI}}/>
+          <View style={styles.singleCardBox}>          
+            <Text style={styles.shoppingCartItem}>{item.item.name}</Text>
+              <View style={styles.addAndRemoveBox}>
+                <Icon name="remove" onPress={()=>{this.props.subtractFromCart(item.item)}} />       
+                <Text style={styles.itemQuan}>{item.count} </Text>
+                <Icon name="add"  onPress={()=>{this.props.addToCart(item.item)}} />
+              </View>
+          </View>
+        </View>
+          <View >
+        <Text style={{textAlign:'right'}}>Total: ${getTotal(item)}</Text> 
+          </View> 
+        
+      </Card>
 
 
       </View>
