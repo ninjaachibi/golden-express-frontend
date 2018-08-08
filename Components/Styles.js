@@ -113,7 +113,7 @@ const styles = StyleSheet.create({
     top: 0,
     left: 0,
     right: 0,
-    backgroundColor: '#e8ecf4',
+    backgroundColor: 'white',
     overflow: 'hidden',
     height: HEADER_MAX_HEIGHT,
     justifyContent: 'flex-start'
@@ -135,22 +135,38 @@ const styles = StyleSheet.create({
     width: null,
     height: HEADER_MAX_HEIGHT,
   },
-  left: {
+  front: {
     backgroundColor: 'transparent',
-    marginTop: Platform.OS === 'ios' ? 28 : 38,
-    height: 32,
+    marginTop: Platform.OS === 'ios' ? 0 : 38,
+    paddingTop: 87.5,
+    height: 55,
     alignItems: 'flex-start',
-    marginLeft:12,
     justifyContent: 'center',
     position: 'absolute',
+
+
+    top: 0,
+    left: 0,
+    right: 0,
+  },
+  behind: {
+    backgroundColor: 'white',
+    marginTop: Platform.OS === 'ios' ? 0 : 38,
+    paddingTop: 87.5,
+    height: 55,
+    alignItems: 'flex-start',
+    justifyContent: 'center',
+    position: 'absolute',
+
+
     top: 0,
     left: 0,
     right: 0,
   },
   wrapper: {
-    backgroundColor: 'transparent',
+    backgroundColor: 'white',
     marginTop: 15,
-    height: 32,
+    height: 55,
     alignItems: 'center',
     justifyContent: 'center',
     position: 'absolute',
@@ -158,10 +174,12 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
   },
+
   right: {
-    backgroundColor: 'transparent',
-    marginTop: Platform.OS === 'ios' ? 28 : 38,
-    height: 32,
+    backgroundColor: 'white',
+    paddingTop: 75,
+    marginTop: Platform.OS === 'ios' ? 0 : 38,
+    height: 55,
     alignItems: 'flex-end',
     marginRight:12,
     justifyContent: 'center',
@@ -172,8 +190,10 @@ const styles = StyleSheet.create({
   },
   center: {
     backgroundColor: 'transparent',
-    marginTop: Platform.OS === 'ios' ? 28 : 38,
-    height: 32,
+    paddingTop: 75,
+
+    marginTop: Platform.OS === 'ios' ? 0 : 38,
+    height: 55,
     alignItems: 'center',
     justifyContent: 'center',
     position: 'absolute',
@@ -190,9 +210,8 @@ const styles = StyleSheet.create({
     paddingTop: Platform.OS !== 'ios' ? HEADER_MAX_HEIGHT : 0,
   },
   row: {
-    height: 40,
+    height: 240,
     margin: 16,
-    backgroundColor: '#D3D3D3',
     alignItems: 'center',
     justifyContent: 'center',
   },

@@ -75,15 +75,7 @@ componentDidMount()
               width:null,
               flex: 5
             }]}>
-            <Icon
-              name='map-o'
-              type='font-awesome'
-              size={50}
-              color={'#FF9F1C'}
-              underlayColor={'white'}
-              onPress={() => navigation.navigate("DrawerOpen")}
-            />
-
+          
 
       <View style={{justifyContent:'flex-start'}}>
         <TextInput

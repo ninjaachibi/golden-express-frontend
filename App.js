@@ -49,6 +49,10 @@ const MainNavigator = StackNavigator({
   },
   Checkout: {
     screen: CheckoutScreen,
+    headerMode:'screen',
+    navigationOption: {
+      headerVisible:true
+    }
   },
   Feedback: {
     screen: FeedbackScreen
@@ -62,7 +66,7 @@ const MainNavigator = StackNavigator({
 
 },
 {
-  headerMode: 'float',
+  headerMode: 'screen',
   navigationOptions: {
   },
   initialRouteName: 'Drawer' //for debugging

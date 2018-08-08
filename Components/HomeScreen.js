@@ -19,20 +19,24 @@ import {
   Animated,
   Platform,
   StatusBar,
+  Dimensions
 } from 'react-native';
  // Version can be specified in package.json
 import HorizontalMealScroll from './HorizontalMealScroll'
 import { Ionicons } from '@expo/vector-icons';
 import {Header, Icon} from 'react-native-elements';
 import styles from './Styles'
-
-const HEADER_MAX_HEIGHT = 80//240;
-const HEADER_MIN_HEIGHT = 20;
+const SCREEN_WIDTH = Dimensions.get('window').width
+const SCREEN_HEIGHT = Dimensions.get('window').height
+const HEADER_MAX_HEIGHT = 100//240;
+const HEADER_MIN_HEIGHT = 0;
 const HEADER_SCROLL_DISTANCE = HEADER_MAX_HEIGHT - HEADER_MIN_HEIGHT;
-
+const B_IMG = require('../assets/Gradient1.png')
 const G_IMG = require('../assets/goldenImage.jpg')
 const D_IMG = require('../assets/goldenTemple.jpg')
 const L_IMG = require('../assets/Coupon.jpg')
+const A_IMG = require('../assets/GradientLayers.png')
+
 
 
 export default class HomeScreen extends React.Component {
@@ -141,8 +145,8 @@ export default class HomeScreen extends React.Component {
   extrapolate: 'clamp',
 });
 const imageOpacity1 = this.state.scrollY.interpolate({
-inputRange: [0, HEADER_SCROLL_DISTANCE / 2, HEADER_SCROLL_DISTANCE],
-outputRange: [1, 0.75, 1],
+inputRange: [0,  HEADER_SCROLL_DISTANCE / 6, HEADER_SCROLL_DISTANCE / 4,HEADER_SCROLL_DISTANCE / 2,HEADER_SCROLL_DISTANCE * 3 / 4,HEADER_SCROLL_DISTANCE * 7 / 8, HEADER_SCROLL_DISTANCE],
+outputRange: [0, 0.25, 0.40,0.6,0.75,0.9,1],
 extrapolate: 'clamp',
 });
 const imageTranslate = this.state.scrollY.interpolate({
@@ -174,7 +178,7 @@ const titleScale = scrollY.interpolate({
 
 
 
-      <View style={styles.fill}>
+      <View style={[styles.fill, {backgroundColor:'#07182f'}]}>
         <StatusBar
          translucent
          barStyle="light-content"
@@ -210,26 +214,57 @@ const titleScale = scrollY.interpolate({
             y: -HEADER_MAX_HEIGHT,
           }}
           >
+            <View style={[styles.scrollViewContent]}>
 
 
-        <View style={{backgroundColor:'#F0EFF5', alignItems:'flex-start', justifyContent:'center'}}>
-          <TouchableHighlight onPress={()=>this.openDrawer()}>
+        <View style={[styles.row,{backgroundColor:'transparent', alignItems:'center', justifyContent:'center'}]}>
+          {/* <TouchableHighlight onPress={()=>this.props.navigation.navigate('HomeSearch')}> */}
+          <TouchableOpacity
+            style={{height: 45, width: SCREEN_WIDTH, alignItems:'center', backgroundColor:'transparent', position:'absolute', top: 32.5,left:0,right:0,padding:3,display:null, justifyContent:'center', }}
+            placeholder="Search for a Recipe"
+            onPress={()=>{console.log("Pressed");this.props.navigation.navigate('HomeSearch')}
+          }>
 
+          {/* <TouchableOpacity style={[styles.button, styles.buttonBlue]} onPress={ () => {this.submit()} }>
+          <Text style={styles.buttonLabel}>Search</Text>
+          </TouchableOpacity> */}
+          {/* </View> */}
+          </TouchableOpacity>
+          <ImageBackground style={{width:SCREEN_WIDTH* 1.25, height: 250, justifyContent:'center',position:'absolute', top: 25, left:-20, right:50 }} source={B_IMG}>
           <Image
             source={L_IMG}
-            style={{height:190, width: 240, borderRadius: 14, marginTop: 130, marginBottom: 10, marginLeft: 75}}/></TouchableHighlight>
+            style={{height:160, width: 230, borderRadius: 14, position:'absolute', top:65,left:0, right:0, marginBottom: 14, marginLeft: 75}}/>
+          </ImageBackground>
+          {/* </TouchableHighlight> */}
           </View>
           <View style={{flex:1,
-            backgroundColor:'#e8ecf4',
+            backgroundColor:'#f1e87c',
 
             alignItems:'flex-start'}}>
+            <View style={[styles.row]}>
+              <ImageBackground style={{width:SCREEN_WIDTH* 1.25, height: 250, justifyContent:'center',position:'absolute', top: 25, left:-20, right:50 }} source={A_IMG}>
 
             <HorizontalMealScroll style={{flex:1}}/>
+          </ImageBackground>
+          </View>
+            <View style={[styles.row]}>
+              <ImageBackground style={{width:SCREEN_WIDTH* 1.25, height: 250, justifyContent:'center',position:'absolute', top: 25, left:-20, right:50 }} source={A_IMG}>
+
             <HorizontalMealScroll style={{flex:1}}/>
-            <HorizontalMealScroll style={{flex:1}}/>
-            <HorizontalMealScroll style={{flex:1}}/>
+          </ImageBackground>
+          </View>
+
+            <View style={[styles.row]}>
+
             <HorizontalMealScroll style={{flex:1}}/>
           </View>
+            <View style={[styles.row]}>
+
+            <HorizontalMealScroll style={{flex:1}}/>
+          </View>
+
+          </View>
+        </View>
 
         </Animated.ScrollView>
 
@@ -246,7 +281,6 @@ const titleScale = scrollY.interpolate({
           ]}
         >
 
-
            <Animated.Image
              source={G_IMG}
              style={[styles.backgroundImage, {
@@ -258,7 +292,7 @@ const titleScale = scrollY.interpolate({
 
 
            <TouchableOpacity
-             style={{height: 40, width:350, backgroundColor:'white', borderRadius: 20, margin: 10, marginTop: 102, padding:3,display:null, alignItems:'center', justifyContent:'center', }}
+             style={{height: 40, width: SCREEN_WIDTH, alignItems:'center', backgroundColor:'white', borderRadius: 8, marginTop: 152, padding:3,display:null, justifyContent:'center', }}
              placeholder="Search for a Recipe"
              onPress={()=>{console.log("Pressed");this.props.navigation.navigate('HomeSearch')}
            }>
@@ -274,12 +308,13 @@ const titleScale = scrollY.interpolate({
 
        </Animated.View>
 
+
        <Animated.View
           style={[
-            styles.left,
+            styles.behind,
             {
-
               opacity: imageOpacity1,
+
               transform: [
                 { translateY: titleTranslate },
                   {scale: titleScale }
@@ -287,7 +322,9 @@ const titleScale = scrollY.interpolate({
             },
           ]}
         >
-        <TouchableOpacity onPress={() => this.openDrawer()}>
+          <View style={{marginTop:-25,marginLeft: 15}}>
+
+        <TouchableOpacity style={{marginTop:-31.5,marginLeft:-1}} onPress={() => this.openDrawer()}>
           <Icon
                  name='map-o'
                  type='font-awesome'
@@ -297,14 +334,30 @@ const titleScale = scrollY.interpolate({
 
                />
              </TouchableOpacity>
+           </View>
+
+             <View style={{marginTop:-25,marginLeft: SCREEN_WIDTH/2-25}}>
+            <Text style={{fontSize:21, fontWeight:'bold', color:'red',marginTop:-5}}>Home</Text>
+          </View>
+
+          <View style={{marginTop:-25,marginLeft: 30}}>
+
+
+          <TouchableOpacity style={{marginLeft:SCREEN_WIDTH - 64, marginTop:32.1}}>
+              <Icon
+              name='shopping-cart'
+              color='blue'
+              onPress={()=>{this.props.screenProps.cart()}}/>
+            </TouchableOpacity>
+          </View>
 
         </Animated.View>
         <Animated.View
            style={[
-             styles.center,
+             styles.front,
              {
+               opacity: imageOpacity,
 
-               opacity: imageOpacity1,
                transform: [
                  { translateY: titleTranslate },
                    {scale: titleScale }
@@ -312,9 +365,50 @@ const titleScale = scrollY.interpolate({
              },
            ]}
          >
-          <Text style={{fontSize:21, fontWeight:'bold', color:'red'}}>Home</Text>
+           <View style={{marginTop:-25,marginLeft: 15}}>
+
+         <TouchableOpacity style={{marginTop:-31.5,marginLeft:-1}} onPress={() => this.openDrawer()}>
+           <Icon
+                  name='map-o'
+                  type='font-awesome'
+                  size={25}
+                  color={'#FF9F1C'}
+                  underlayColor={'white'}
+
+                />
+              </TouchableOpacity>
+            </View>
+
+              <View style={{marginTop:-25,marginLeft: SCREEN_WIDTH/2-25}}>
+             <Text style={{fontSize:21, fontWeight:'bold', color:'white',marginTop:-5}}>Home</Text>
+           </View>
+
+           <View style={{marginTop:-25,marginLeft: 30}}>
+
+
+           <TouchableOpacity style={{marginLeft:SCREEN_WIDTH - 64, marginTop:32.1}}>
+               <Icon
+               name='shopping-cart'
+               color='blue'
+               onPress={()=>{this.props.screenProps.cart()}}/>
+             </TouchableOpacity>
+           </View>
 
          </Animated.View>
+        {/* <Animated.View
+           style={[
+             styles.center,
+             {
+
+               transform: [
+                 { translateY: titleTranslate },
+                   {scale: titleScale }
+               ],
+             },
+           ]}
+         >
+
+         </Animated.View> */}
 
 
 
@@ -322,11 +416,10 @@ const titleScale = scrollY.interpolate({
 
 
 
-       <Animated.View
+       {/* <Animated.View
           style={[
             styles.right,
             {
-              opacity: imageOpacity1,
               transform: [
                 { translateY: titleTranslate},
                 {scale: titleScale },
@@ -334,15 +427,10 @@ const titleScale = scrollY.interpolate({
             },
           ]}
         >
-          <TouchableOpacity style={{marginRight:10}}>
-              <Icon
-              name='shopping-cart'
-              color='blue'
-              onPress={()=>{this.props.screenProps.cart()}}/>
-            </TouchableOpacity>
 
 
-      </Animated.View>
+
+      </Animated.View>*/}
 </View>
 
     )

@@ -39,7 +39,7 @@ const DrawerStack = DrawerNavigator({
 }, {
   initialRouteName: 'Three',
   contentComponent: DrawerContent,
-  drawerWidth: deviceWidth,
+  drawerWidth: deviceWidth*3/4,
   drawerPosition: 'up',
   drawerOpenRoute: 'DrawerOpen',
   drawerCloseRoute: 'DrawerClose',
