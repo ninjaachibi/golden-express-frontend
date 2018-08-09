@@ -15,6 +15,7 @@ import {
  // Version can be specified in package.json
 import { Ionicons } from '@expo/vector-icons';
 import {Header, Icon} from 'react-native-elements';
+console.disableYellowBox = true;
 
 import { StackNavigator, TabNavigator, TabBarBottom } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation';

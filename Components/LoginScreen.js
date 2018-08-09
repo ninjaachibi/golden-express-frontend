@@ -29,12 +29,12 @@ class LoginScreen extends React.Component {
   }
 
   async componentDidMount() {
-    // await AsyncStorage.removeItem('token', (err, token)=> {console.log('removed token', token)}); //logout
+    await AsyncStorage.removeItem('token', (err, token)=> {console.log('removed token', token)}); //logout
 
-    let token = await AsyncStorage.getItem('token', (err, token)=> {console.log('got token', token)});
-    if (token) {
-      this.props.navigation.navigate('Drawer')//for debugging
-    }
+    // let token = await AsyncStorage.getItem('token', (err, token)=> {console.log('got token', token)});
+    // if (token) {
+    //   this.props.navigation.navigate('Drawer')//for debugging
+    // }
 
   }
 
