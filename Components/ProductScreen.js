@@ -30,7 +30,7 @@ const NOODLES = {cat: 'Noodles', src: require('../assets/Noodles.png')}
 const SPICES = {cat: 'Spices', src: require('../assets/Spices.png')}
 
 
-class CategoriesScreen extends React.Component {
+class ProductScreen extends React.Component {
   //Location  Favorites,foods,home, history, search?
   static navigationOptions =({navigation}) => {
     const {state} = navigation
@@ -40,7 +40,7 @@ class CategoriesScreen extends React.Component {
         <Icon
         name='shopping-cart'
         color='blue'
-        onPress={()=>{state.params.cart()}}/>
+      />
       </TouchableOpacity>
     }
 
@@ -50,13 +50,17 @@ class CategoriesScreen extends React.Component {
     super(props);
     this.ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     this.state = {
+      item: "",
+
     }
   }
 
   componentDidMount() {
-    const {setParams} = this.props.navigation;
-    setParams({cart: this.props.screenProps.cart})
-    this.setState({items: this.ds.cloneWithRows(groceryItems)})
+    console.log("I have reached the Product Screen");
+    let item = this.props.navigation.getParam("item", {})
+    console.log(item)
+    this.setState({item:item})
+
   }
 
   browseAisle (aisle) {
@@ -71,10 +75,10 @@ class CategoriesScreen extends React.Component {
   createCategory (cat1,cat2) {
     return  (
       <View style={{flex:1, justifyContent:'flex-start', alignItems:'center',flexDirection:'row',justifyContent:'center'}}>
-        <TouchableOpacity activeOpacity={0.75} onPress={()=>{this.browseAisle(cat1.cat)}}>
+        <TouchableOpacity activeOpacity={0.75} >
           <Image source={cat1.src} style={{height: 170,width: 170, marginLeft: 12, marginRight: 5, marginTop: 10,flex: 1}}/>
         </TouchableOpacity>
-        <TouchableOpacity activeOpacity={0.75} onPress={()=>{this.browseAisle(cat2.cat)}}>
+        <TouchableOpacity activeOpacity={0.75} >
           <Image source={cat2.src} style={{height: 170,width: 170, marginRight: 12, marginLeft:5, marginTop: 10,flex: 1}}/>
         </TouchableOpacity>
       </View>
@@ -84,6 +88,11 @@ class CategoriesScreen extends React.Component {
 
 
   render() {
+
+    let groceryItems = this.props.navigation.getParam('name', "Okay")
+    console.log(groceryItems)
+    console.log(this.state.item)
+
     return (
 
       <ScrollView style={{flex:1}}>
@@ -120,4 +129,4 @@ class CategoriesScreen extends React.Component {
 }
 }
 
-export default CategoriesScreen;
+export default ProductScreen;

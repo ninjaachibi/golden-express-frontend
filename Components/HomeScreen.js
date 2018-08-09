@@ -109,16 +109,15 @@ export default class HomeScreen extends React.Component {
     //display top Meals
     //fetch recommended meals
     //create alogirthm that displays certain meals
-    const {setParams} = this.props.navigation;
-    setParams({cart: this.props.screenProps.cart})
-    AsyncStorage.getItem('meals')
-      .then((data) => {
-        console.log('meals from AsyncStorage', JSON.parse(data));
-        this.setState({
-          meals: JSON.parse(data)
-        })
-      })
-      .catch(err => console.log('err',err))
+
+    // AsyncStorage.getItem('meals')
+    //   .then((data) => {
+    //     console.log('meals from AsyncStorage', JSON.parse(data));
+    //     this.setState({
+    //       meals: JSON.parse(data)
+    //     })
+    //   })
+    //   .catch(err => console.log('err',err))
 
   }
   press() {
@@ -220,7 +219,7 @@ const titleScale = scrollY.interpolate({
         <View style={[styles.row,{backgroundColor:'transparent', alignItems:'center', justifyContent:'center'}]}>
           {/* <TouchableHighlight onPress={()=>this.props.navigation.navigate('HomeSearch')}> */}
           <TouchableOpacity
-            style={{height: 45, width: SCREEN_WIDTH, alignItems:'center', backgroundColor:'transparent', position:'absolute', top: 32.5,left:0,right:0,padding:3,display:null, justifyContent:'center', }}
+            style={{height: 100, width: SCREEN_WIDTH, alignItems:'center', backgroundColor:'transparent', position:'absolute', top: 32.5,left:0,right:0,padding:3,display:null, justifyContent:'center', }}
             placeholder="Search for a Recipe"
             onPress={()=>{console.log("Pressed");this.props.navigation.navigate('HomeSearch')}
           }>
@@ -326,10 +325,9 @@ const titleScale = scrollY.interpolate({
 
         <TouchableOpacity style={{marginTop:-31.5,marginLeft:-1}} onPress={() => this.openDrawer()}>
           <Icon
-                 name='map-o'
-                 type='font-awesome'
-                 size={25}
-                 color={'#FF9F1C'}
+                 name='account-circle'
+                 size={35}
+                 color={'black'}
                  underlayColor={'white'}
 
                />
@@ -369,10 +367,9 @@ const titleScale = scrollY.interpolate({
 
          <TouchableOpacity style={{marginTop:-31.5,marginLeft:-1}} onPress={() => this.openDrawer()}>
            <Icon
-                  name='map-o'
-                  type='font-awesome'
-                  size={25}
-                  color={'#FF9F1C'}
+                  name='account-circle'
+                  size={35}
+                  color={'black'}
                   underlayColor={'white'}
 
                 />
