@@ -37,6 +37,18 @@ class SearchScreen extends React.Component {
 
   };
 
+  searchItem(searchItem){
+     fetch('https://golden-express.herokuapp.com/searchItem'+`?searchItem=${searchItem.charAt(0).toUpperCase()+searchItem.slice(1)}`)
+     .then((resp)=> resp.json())
+     .then(resp => {
+       console.log(searchItem.charAt(0).toUpperCase()+searchItem.slice(1))
+       console.log(searchItem)
+       console.log('hitting',resp);
+       this.props.navigation.navigate('SearchResults', {groceryItems: resp.items})//?????
+     })
+   }
+
+
 componentDidMount()
 {
   const {setParams} = this.props.navigation;
@@ -84,7 +96,7 @@ componentDidMount()
               width:null,
               flex: 5
             }]}>
-          
+
 
       <View style={{justifyContent:'flex-start'}}>
         <TextInput

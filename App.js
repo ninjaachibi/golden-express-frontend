@@ -84,7 +84,7 @@ const MainNavigator = StackNavigator({
 
   AccountDetail: {
     screen: UserOrder
-  },
+  },//For testing
   Drawer: {
     screen: DrawerNavigator,
       navigationOptions: {

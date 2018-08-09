@@ -29,7 +29,8 @@ import CheckoutScreen from './CheckoutScreen'
 import FeedbackScreen from './FeedbackScreen'
 import CategoriesScreen from './CategoriesScreen'
 import HomeNavigator from './HomeNavigator'
-import SearchResultScreen from './SearchResultScreen'
+import SearchResultsScreen from './SearchResultsScreen'
+
 
 
 const stack = {
@@ -58,18 +59,44 @@ export default class SearchNavigator extends React.Component{
     this.navigateCart = this.navigateCart.bind(this)
   }
 
-  navigateCart() {
-    this.props.screenProps.cart()
-
+  openDrawer(){
+    this.props.screenProps.openDrawer()
   }
 
+  closeDrawer(){
+    this.props.screenProps.closeDrawer()
+  }
+
+  navigateCart() {
+    this.props.screenProps.cart()
+  }
+
+
+
+
   render(){
-   
+    const stack = {
+      Search: {
+        screen: SearchScreen,
+      },
+      SearchResults: {
+      screen: SearchResultsScreen
+    },
+    }
+
+    var SearchStack = StackNavigator(stack, {initialRouteName: 'Search',
+      headerMode: 'screen',
+      navigationOptions: {
+        headerVisible: false,
+      }
+    })
     return (
       <View style={{flex: 1}}>
         <SearchStack
           screenProps={{
-            cart: this.navigateCart
+            cart: this.navigateCart,
+            openDrawer: this.openDrawer,
+            closeDrawer: this.closeDrawer
           }}/>
       </View>
 
