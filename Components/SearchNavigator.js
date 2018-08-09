@@ -29,11 +29,12 @@ import CheckoutScreen from './CheckoutScreen'
 import FeedbackScreen from './FeedbackScreen'
 import CategoriesScreen from './CategoriesScreen'
 import HomeNavigator from './HomeNavigator'
+import SearchResultScreen from './SearchResultScreen'
 
 
 
 
-export default class Categories extends React.Component{
+export default class SearchNavigator extends React.Component{
   constructor(props)
   {
     super(props);
@@ -53,8 +54,8 @@ export default class Categories extends React.Component{
       Search: {
         screen: SearchScreen,
       },
-      Grocery: {
-      screen: GroceryListScreen
+      SearchResults: {
+      screen: SearchResultScreen
     },
     }
 
