@@ -16,7 +16,7 @@ import {
 } from 'react-native';
 import _ from 'underscore';
 import styles from './Styles';
-import {Header, Icon, Card,Avatar} from 'react-native-elements';
+import {Header, Icon, Card, Avatar} from 'react-native-elements';
 // import PaymentInfoScreen from './PaymentInfoScreen'
 
 let stripeAPI = `
@@ -92,12 +92,16 @@ class CheckoutScreen extends React.Component {
     super(props);
     this.state = {
       total:0,
-      cardNumber: 'card number here',
       confirmed: false,
       paid: false,
-      expiremonth: 'mm',
-      expireyear:'yy',
-      ccv:'cvv'
+
+      cardNumber: '',
+      expMonth: '',
+      expYear:'',
+      cvc:'',
+
+      instructions: '',
+      message: '',
     };
   }
 
@@ -109,7 +113,14 @@ class CheckoutScreen extends React.Component {
   }
 
   order() {
-    fetch('https://api.stripe.com/v1/tokens?card[number]=4242424242424242&card[exp_month]=1&card[exp_year]=2020&card[cvc]=123&amount=999&currency=usd', {
+    let { cardNumber, expMonth, expYear, cvc, total } = this.state;
+    console.log('order', cardNumber, expMonth, expYear, cvc, total);
+    // cardNumber = "4242424242424242";
+    // expMonth = '1';
+    // expYear = '2020'
+    // cvc = '123';
+
+    fetch(`https://api.stripe.com/v1/tokens?card[number]=${cardNumber}&card[exp_month]=${expMonth}&card[exp_year]=${expYear}&card[cvc]=${cvc}&amount=${total*100}&currency=usd`, {
       method: 'POST',
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",
@@ -123,31 +134,47 @@ class CheckoutScreen extends React.Component {
     .then(data => {
       // HERE WE HAVE ACCESS TO THE TOKEN TO SEND IT TO OUR SERVERS
       // ALONG WITH INSENSITIVE DATA
-      fetch('http://localhost:3000/payments', {
-        method: 'POST',
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({stripeToken: data.id})
-      })
-      .then(resp => resp.json())
-      .then(function(response) {
-        console.log('response',response);
-        if(response.paid) {
-          // DO SOMETHING AFTER PAYMENT CONFIRMATION
-          this.setState({paid: true, confirmed: true})
-        }
-        else {
-          this.setState({paid: false, confirmed: true})
-        }
-      }.bind(this)).catch(err => console.error(err));
+      console.log('data', data);
+      if(data.error) {
+        console.log('ERROR', data.error);
+        this.setState({
+          message: data.error.message,
+          paid: false,
+          confirmed: true,
+        })
+      }
+      else {
+        fetch('http://localhost:3000/payments', {
+          method: 'POST',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            stripeToken: data.id,
+            total: total,
+            //need to include name, identifying information
+          })
+        })
+        .then(resp => resp.json())
+        .then(function(response) {
+          console.log('response', response);
+          if(response.paid) {
+            // DO SOMETHING AFTER PAYMENT CONFIRMATION
+            this.setState({paid: true, confirmed: true, message: 'payment went through'})
+          }
+          else {
+            this.setState({paid: false, confirmed: true, message: 'problem with payment'})
+          }
+        }.bind(this)).catch(err => console.error(err));
+      }
+
     })
   }
 
   render() {
     console.log(this.state);
-    let { total, cart, paid, confirmed } = this.state;
+    let { total, cart, paid, confirmed, message } = this.state;
     return (
 
       <View style={{flex: 1, alignItems: 'stretch', position:'absolute', top:0,bottom:0,left:0,right:0 }}>
@@ -160,7 +187,7 @@ class CheckoutScreen extends React.Component {
         <ScrollView>
           <View>
             { confirmed ?
-              paid ? <Text>payment went through</Text>: <Text>problem with payment</Text>
+              paid ? <Text>{message}</Text>: <Text>problem with payment: {message}</Text>
               :
               null
             }
@@ -170,6 +197,13 @@ class CheckoutScreen extends React.Component {
             <Card>
               {_.values(cart).map((item)=><Text key={item.item._id} style={{fontSize:17}}>{item.count} {item.item.name}</Text>)}
             </Card>
+            <Text>Any special instructions?</Text>
+            <TextInput
+              placeholder='Any Instructions about your order?'
+              style={{height: 40,width:80, borderColor: 'gray', borderWidth: 1, padding: 5}}
+              onChangeText={(instructions) => this.setState({instructions})}
+              value={this.state.instructions}
+            />
           </View>
 
           <View className="payment-container">
@@ -185,20 +219,20 @@ class CheckoutScreen extends React.Component {
                 <TextInput
                   placeholder='mm'
                   style={{height: 40,width:80, borderColor: 'gray', borderWidth: 1, padding: 5}}
-                  onChangeText={(expiremonth) => this.setState({expiremonth})}
-                  value={this.state.expiremonth}
+                  onChangeText={(expMonth) => this.setState({expMonth})}
+                  value={this.state.expMonth}
                 />
                 <TextInput
-                  placeholder='yy'
+                  placeholder='yyyy'
                   style={{height: 40,width:80, borderColor: 'gray', borderWidth: 1, padding: 5}}
-                  onChangeText={(expireyear) => this.setState({expireyear})}
-                  value={this.state.expireyear}
+                  onChangeText={(expYear) => this.setState({expYear})}
+                  value={this.state.expYear}
                 />
                 <TextInput
                   placeholder='cvv'
                   style={{height: 40,width:80, borderColor: 'gray', borderWidth: 1, padding: 5, marginLeft:72}}
-                  onChangeText={(cvv) => this.setState({cvv})}
-                  value={this.state.cvv}
+                  onChangeText={(cvc) => this.setState({cvc})}
+                  value={this.state.cvc}
                 />
               </View>
 

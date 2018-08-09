@@ -101,8 +101,8 @@ export default class Interface extends React.Component {
   }
 
 
-  openProduct(){
-    this.props.screenProps.openProduct()
+  openProduct(item){
+    this.props.screenProps.openProduct(item)
   }
 
   openDrawer(){

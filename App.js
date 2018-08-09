@@ -71,8 +71,11 @@ const MainNavigator = StackNavigator({
   },
   Product: {
     screen: ProductScreen
-
   },
+
+  // AccountDetail: {
+  //   screen: UserOrder
+  // },
   Drawer: {
     screen: DrawerNavigator,
       navigationOptions: {
@@ -85,7 +88,7 @@ const MainNavigator = StackNavigator({
   headerMode: 'screen',
   navigationOptions: {
   },
-  initialRouteName: 'Drawer' //for debugging
+  initialRouteName: 'Login' //for debugging
 })
 export default class App extends React.Component {
   render() {

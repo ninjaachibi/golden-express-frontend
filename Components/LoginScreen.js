@@ -8,6 +8,7 @@ import {
   ListView,
   Alert,
   Button,
+  AsyncStorage,
   ImageBackground
 } from 'react-native';
 import styles from './Styles';
@@ -27,11 +28,21 @@ class LoginScreen extends React.Component {
     }
   }
 
+  async componentDidMount() {
+    // await AsyncStorage.removeItem('token', (err, token)=> {console.log('removed token', token)}); //logout
+
+    let token = await AsyncStorage.getItem('token', (err, token)=> {console.log('got token', token)});
+    if (token) {
+      this.props.navigation.navigate('Drawer')//for debugging
+    }
+
+  }
+
   press() {
     fetch('https://golden-express.herokuapp.com/login', {
       method: 'POST',
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({
         username: this.state.username,
@@ -44,7 +55,8 @@ class LoginScreen extends React.Component {
       * make sure to check for responseJson.success! */
       console.log(responseJson)
       if (responseJson.success) {
-        this.props.navigation.navigate('Try')
+        AsyncStorage.setItem('token',responseJson.token)
+        this.props.navigation.navigate('Drawer')//for debugging
       }
       else {
         this.setState({message: `Error: ${responseJson.message}`})
