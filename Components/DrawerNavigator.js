@@ -56,9 +56,13 @@ export default class Drawer extends React.Component{
     this.state = {}
     this.openCart= this.openCart.bind(this)
     this.openContact= this.openContact.bind(this)
-
+    this.openProduct = this.openProduct.bind(this)
     this.openAddress= this.openAddress.bind(this)
 
+  }
+
+  openProduct(item){
+    this.props.navigation.navigate('Product', {item: item})
   }
 
   openCart(){
@@ -82,7 +86,8 @@ export default class Drawer extends React.Component{
         <DrawerStack screenProps={{
           openCart: this.openCart,
           openAddress: this.openAddress,
-          openContact:this.openContact
+          openContact:this.openContact,
+          openProduct: this.openProduct
         }}/>
       </View>
     )

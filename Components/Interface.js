@@ -94,10 +94,16 @@ export default class Interface extends React.Component {
     this.navigateCart = this.navigateCart.bind(this);
     this.openDrawer = this.openDrawer.bind(this);
     this.closeDrawer = this.closeDrawer.bind(this);
+    this.openProduct = this.openProduct.bind(this);
+
 
 
   }
 
+
+  openProduct(){
+    this.props.screenProps.openProduct()
+  }
 
   openDrawer(){
     this.props.navigation.navigate('DrawerOpen')
@@ -118,7 +124,8 @@ export default class Interface extends React.Component {
         <Tabs screenProps={{
           cart: this.navigateCart,
           openDrawer: this.openDrawer,
-          closeDrawer: this.closeDrawer
+          closeDrawer: this.closeDrawer,
+          openProduct:this.openProduct
 
         }}/>
       </View>

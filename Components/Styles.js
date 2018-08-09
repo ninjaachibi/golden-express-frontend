@@ -108,6 +108,18 @@ const styles = StyleSheet.create({
   content: {
     flex: 1,
   },
+  headerResult:{
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    backgroundColor: 'white',
+    borderBottomWidth:0.25,
+    borderBottomColor:'grey',
+    overflow: 'hidden',
+    height: 90,
+    justifyContent: 'flex-start'
+  },
   header: {
     position: 'absolute',
     top: 0,

@@ -112,3 +112,48 @@
 //     )
 //   }
 // }
+
+
+
+
+{/* <Flatlist
+  data={this.state.groceries}
+  renderItem={({item}) => (
+  <View style={{flexDirection:'row',alignItems:'center'}}>
+    <View style={{ borderBottomWidth: 1, width: 150, marginBottom: 10, flexDirection: 'row', flex:1, backgroundColor: "lightblue"}}>
+      <TouchableOpacity
+        onPress={this.displayItem.bind(this, item[0])}
+        >
+      <Text style={{textAlign: "center"}}>{item[0].name}</Text>
+      <Image
+        style={{
+            width: 150,
+            height: 150,
+          }}
+        source={{
+          uri: item[0].imgURI
+        }}
+      />
+      </TouchableOpacity>
+    </View>
+    {!!item[1] ?
+    <View style={{ borderBottomWidth: 1, width: 150, marginBottom: 10, flexDirection: 'row', flex:1, backgroundColor: "lightblue"}}>
+      <TouchableOpacity
+        onPress={this.displayItem.bind(this, item[1])}
+        >
+      <Text style={{textAlign: "center"}}>{item[1].name}</Text>
+      <Image
+        style={{
+            width: 150,
+            height: 150,
+          }}
+        source={{
+          uri: item[1].imgURI
+        }}
+      />
+      </TouchableOpacity>
+    </View> : null
+  }
+  </View>
+  )}
+/> */}

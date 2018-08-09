@@ -30,6 +30,7 @@ export default class AccountNavigator extends React.Component{
   {
     super(props);
     this.state = {
+      name:"",
 
     }
     this.navigateHome = this.navigateHome.bind(this)

@@ -5,6 +5,9 @@ import { Button } from 'react-native-elements';
 import styles from './Sidebar.style';
 import PropTypes from 'prop-types';
 class DrawerContent extends Component {
+
+
+
 navigateToScreen = (route) => () => {
     const navigate = NavigationActions.navigate({
       routeName: route

@@ -34,6 +34,8 @@ import CategoriesNavigator from './Components/CategoriesNavigator'
 import SearchNavigator from './Components/SearchNavigator'
 import AddressScreen from './Components/AddressScreen'
 import ContactScreen from './Components/ContactScreen'
+import ProductScreen from './Components/ProductScreen'
+
 
 // import Interface from './Components/Interface' why does import not work
 import DrawerNavigator from './Components/DrawerNavigator'
@@ -66,6 +68,10 @@ const MainNavigator = StackNavigator({
   },
   Feedback: {
     screen: FeedbackScreen
+  },
+  Product: {
+    screen: ProductScreen
+
   },
   Drawer: {
     screen: DrawerNavigator,
