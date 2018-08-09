@@ -36,6 +36,18 @@ class SearchScreen extends React.Component {
 
   };
 
+  searchItem(searchItem){
+     fetch('https://golden-express.herokuapp.com/searchItem'+`?searchItem=${searchItem.charAt(0).toUpperCase()+searchItem.slice(1)}`)
+     .then((resp)=> resp.json())
+     .then(resp => {
+       console.log(searchItem.charAt(0).toUpperCase()+searchItem.slice(1))
+       console.log(searchItem)
+       console.log('hitting',resp);
+       this.props.navigation.navigate('SearchResults', {groceryItems: resp.items})//?????
+     })
+   }
+
+
 componentDidMount()
 {
   const {setParams} = this.props.navigation;
@@ -49,12 +61,7 @@ componentDidMount()
     }
   }
 
-  submit() {
-    console.log('clicked search');
-    this.props.navigation.navigate('MealPlan', {
-      query: this.state.search,
-    });
-  }
+
 
   render() {
     let navigation = this.props.navigation;
@@ -75,7 +82,7 @@ componentDidMount()
               width:null,
               flex: 5
             }]}>
-          
+
 
       <View style={{justifyContent:'flex-start'}}>
         <TextInput
@@ -85,7 +92,7 @@ componentDidMount()
           onChangeText={(text) => this.setState({search: text})}
         />
         <TouchableOpacity style={[styles.button, styles.buttonBlue]}
-          onPress={ () => {this.submit()} }>
+          onPress={ () => {this.searchItem(this.state.search)} }>
           <Text style={styles.buttonLabel}>Search</Text>
         </TouchableOpacity></View>
 <Text>  </Text>

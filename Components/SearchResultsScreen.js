@@ -40,7 +40,7 @@ const A_IMG = require('../assets/GradientLayers.png')
 
 
 
-export default class ResultScreen extends React.Component {
+export default class SearchResultsScreen extends React.Component {
 
 
   cartNavigate()
@@ -99,7 +99,7 @@ export default class ResultScreen extends React.Component {
       <View style={{ width: 160,  flex:1, paddingLeft:10, paddingRight:10, marginBottom:40}}>
       <View style={{ alignItems:'center'}}>
         <TouchableOpacity
-          onPress={()=>this.openProduct(item)}
+          onPress={()=>this.openProduct()}
           >
         <Image
           style={{
@@ -196,8 +196,7 @@ export default class ResultScreen extends React.Component {
 
 
     let groceryItems = this.props.navigation.getParam('groceryItems', [])
-    let aisle = this.props.navigation.getParam('aisle', "Results")
-    this.setState({aisle:aisle})
+
 
     console.log('ghjfhjfhgj',groceryItems)
     let double = []
@@ -397,7 +396,7 @@ const titleScale = scrollY.interpolate({
            </View>
 
              <View style={{marginTop:-25,marginLeft: SCREEN_WIDTH/2-25}}>
-            <Text style={{fontSize:18, fontWeight:'bold', color:'black'}}>{this.state.aisle}</Text>
+            <Text style={{fontSize:18, fontWeight:'bold', color:'black'}}>Results</Text>
           </View>
 
           <View style={{marginTop:-25,marginLeft: 30}}>

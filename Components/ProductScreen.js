@@ -57,9 +57,10 @@ class ProductScreen extends React.Component {
 
   componentDidMount() {
     console.log("I have reached the Product Screen");
-    let item = this.props.navigation.getParam("item", {})
+    let item = this.props.navigation.getParam("item", "item")
     console.log(item)
     this.setState({item:item})
+    console.log(this.state.item)
 
   }
 

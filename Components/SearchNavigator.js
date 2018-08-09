@@ -29,6 +29,8 @@ import CheckoutScreen from './CheckoutScreen'
 import FeedbackScreen from './FeedbackScreen'
 import CategoriesScreen from './CategoriesScreen'
 import HomeNavigator from './HomeNavigator'
+import SearchResultsScreen from './SearchResultsScreen'
+
 
 
 
@@ -43,18 +45,28 @@ export default class Categories extends React.Component{
     this.navigateCart = this.navigateCart.bind(this)
   }
 
+  openDrawer(){
+    this.props.screenProps.openDrawer()
+  }
+
+  closeDrawer(){
+    this.props.screenProps.closeDrawer()
+  }
+
   navigateCart() {
     this.props.screenProps.cart()
-
   }
+
+
+
 
   render(){
     const stack = {
       Search: {
         screen: SearchScreen,
       },
-      Grocery: {
-      screen: GroceryListScreen
+      SearchResults: {
+      screen: SearchResultsScreen
     },
     }
 
@@ -68,7 +80,9 @@ export default class Categories extends React.Component{
       <View style={{flex: 1}}>
         <SearchStack
           screenProps={{
-            cart: this.navigateCart
+            cart: this.navigateCart,
+            openDrawer: this.openDrawer,
+            closeDrawer: this.closeDrawer
           }}/>
       </View>
 
