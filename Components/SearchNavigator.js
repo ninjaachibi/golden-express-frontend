@@ -32,7 +32,21 @@ import HomeNavigator from './HomeNavigator'
 import SearchResultScreen from './SearchResultScreen'
 
 
+const stack = {
+  Search: {
+    screen: SearchScreen,
+  },
+  SearchResults: {
+  screen: SearchResultScreen
+},
+}
 
+var SearchStack = StackNavigator(stack, {initialRouteName: 'Search',
+  headerMode: 'screen',
+  navigationOptions: {
+    headerVisible: false,
+  }
+})
 
 export default class SearchNavigator extends React.Component{
   constructor(props)
@@ -50,21 +64,7 @@ export default class SearchNavigator extends React.Component{
   }
 
   render(){
-    const stack = {
-      Search: {
-        screen: SearchScreen,
-      },
-      SearchResults: {
-      screen: SearchResultScreen
-    },
-    }
-
-    var SearchStack = StackNavigator(stack, {initialRouteName: 'Search',
-      headerMode: 'screen',
-      navigationOptions: {
-        headerVisible: false,
-      }
-    })
+   
     return (
       <View style={{flex: 1}}>
         <SearchStack
