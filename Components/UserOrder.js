@@ -14,6 +14,7 @@ import {
   AsyncStorage
 } from 'react-native';
 import styles from './Styles';
+import {Card} from 'react-native-elements'
 
 class UserOrder extends React.Component {
     constructor(props) {
@@ -46,7 +47,7 @@ getOrders(){
     })
     .then((resp) => resp.json())
     .then(resp =>{ 
-        console.log('hitting', resp.order)
+        console.log('hitting', resp.order.items)
         this.setState({items:resp.order.items}
         )})
     .catch(err => console.log('error',err))
@@ -57,9 +58,10 @@ render(){
         <View>
         <Text style={styles.checkOutTitle}>Your Order:</Text>
         <ScrollView>
-            <Text>{this.state.items.map((item)=>{
-                return (<Text>{item}</Text>)
-            })}</Text>
+            
+            <Card>{this.state.items.map((item)=>{
+                return (<View style={{flexDirection:'row',flexWrap:'wrap',alignItems:'flex-end'}}><Text>{item.name}  {item.count}</Text></View>)
+            })}</Card>
           {/* {this.state.items.map((item)=>{
             return (<Text>{item}</Text>)
         })}       */}
@@ -70,8 +72,6 @@ render(){
 }
 
 }
-
-
 
 
 export default UserOrder

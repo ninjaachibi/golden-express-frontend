@@ -38,7 +38,7 @@ const stack = {
     screen: SearchScreen,
   },
   SearchResults: {
-  screen: SearchResultScreen
+  screen: SearchResultsScreen
 },
 }
 
