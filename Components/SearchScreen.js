@@ -30,7 +30,8 @@ class SearchScreen extends React.Component {
         <Icon
         name='shopping-cart'
         color='blue'
-        onPress={()=>{state.params.cart()}}/>
+// Testing       onPress={()=>{state.params.cart()}}
+        />
       </TouchableOpacity>
     }
 
@@ -39,7 +40,7 @@ class SearchScreen extends React.Component {
 componentDidMount()
 {
   const {setParams} = this.props.navigation;
-  setParams({cart: this.props.screenProps.cart})
+//Testing  setParams({cart: this.props.screenProps.cart})
 }
   constructor(props) {
     super(props);
@@ -49,12 +50,17 @@ componentDidMount()
     }
   }
 
-  submit() {
-    console.log('clicked search');
-    this.props.navigation.navigate('MealPlan', {
-      query: this.state.search,
-    });
+  searchItem(searchItem){
+    fetch('https://golden-express.herokuapp.com/searchItem'+`?searchItem=${searchItem.toLowerCase()}`)
+    .then((resp)=> resp.json())
+    .then(resp => {
+      console.log(searchItem)
+      console.log('hitting',resp);
+    //  this.props.navigation.navigate('Result', {resultItems: resp.items})//?????
+    })
   }
+
+ 
 
   render() {
     let navigation = this.props.navigation;
@@ -85,7 +91,7 @@ componentDidMount()
           onChangeText={(text) => this.setState({search: text})}
         />
         <TouchableOpacity style={[styles.button, styles.buttonBlue]}
-          onPress={ () => {this.submit()} }>
+          onPress={ () => {this.searchItem(this.state.search)} }>
           <Text style={styles.buttonLabel}>Search</Text>
         </TouchableOpacity></View>
 <Text>  </Text>

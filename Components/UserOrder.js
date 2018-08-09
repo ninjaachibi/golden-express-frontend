@@ -47,7 +47,7 @@ getOrders(){
     .then((resp) => resp.json())
     .then(resp =>{ 
         console.log('hitting', resp.order)
-        this.setState({items:resp.order.item}
+        this.setState({items:resp.order.items}
         )})
     .catch(err => console.log('error',err))
     }
@@ -55,12 +55,14 @@ getOrders(){
 render(){
     return(
         <View>
-        <Text>Your Order:</Text>
+        <Text style={styles.checkOutTitle}>Your Order:</Text>
         <ScrollView>
-
-          {this.state.items.map((item)=>{
+            <Text>{this.state.items.map((item)=>{
+                return (<Text>{item}</Text>)
+            })}</Text>
+          {/* {this.state.items.map((item)=>{
             return (<Text>{item}</Text>)
-        })}      
+        })}       */}
  
         </ScrollView>
         </View>
