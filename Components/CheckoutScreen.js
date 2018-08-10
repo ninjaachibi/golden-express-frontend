@@ -92,6 +92,7 @@ class CheckoutScreen extends React.Component {
     super(props);
     this.state = {
       total:0,
+      cart: {},
       confirmed: false,
       paid: false,
 
@@ -101,30 +102,35 @@ class CheckoutScreen extends React.Component {
       cvc:'',
 
       instructions: '',
+      address: '',
       message: '',
     };
   }
 
-  componentDidMount () {
+  async componentDidMount () {
     let total = this.props.navigation.getParam('total', 0);
-    let cart = this.props.navigation.getParam('cart', {})
+    let cart = this.props.navigation.getParam('cart', {});
+
     console.log('got total', total, 'cart', cart);
     this.setState({total, cart})
   }
 
   order() {
-    let { cardNumber, expMonth, expYear, cvc, total } = this.state;
-    console.log('order', cardNumber, expMonth, expYear, cvc, total);
-    // cardNumber = "4242424242424242";
-    // expMonth = '1';
-    // expYear = '2020'
-    // cvc = '123';
+    let { cardNumber, expMonth, expYear, cvc, total, address } = this.state;
+    cardNumber = "5555555555554444";
+    expMonth = '1';
+    expYear = '2020'
+    cvc = '123';
+    address = '851 California'
 
-    fetch(`https://api.stripe.com/v1/tokens?card[number]=${cardNumber}&card[exp_month]=${expMonth}&card[exp_year]=${expYear}&card[cvc]=${cvc}&amount=${total*100}&currency=usd`, {
+    console.log('order', cardNumber, expMonth, expYear, cvc, total, address);
+
+
+    fetch(`https://api.stripe.com/v1/tokens?card[number]=${cardNumber}&card[exp_month]=${expMonth}&card[exp_year]=${expYear}&card[cvc]=${cvc}&amount=${Math.round(total*100)}&currency=usd`, {
       method: 'POST',
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",
-        "Authorization": 'Bearer ' + 'pk_test_JticRNIVAhMYRtChvuRtTS6p', //this is rob's public API KEY
+        "Authorization": 'Bearer ' + 'pk_test_m8dakWs3AKLUeqE9lOucuaFX', //live key for GE
       }
     })
     .then(resp => {
@@ -148,20 +154,50 @@ class CheckoutScreen extends React.Component {
           method: 'POST',
           headers: {
             'Accept': 'application/json',
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
           },
           body: JSON.stringify({
             stripeToken: data.id,
-            total: total,
+            total: total ,
             //need to include name, identifying information
           })
         })
         .then(resp => resp.json())
-        .then(function(response) {
+        .then(async function(response) {
           console.log('response', response);
-          if(response.paid) {
+          if(!response.success) {
+            this.setState({paid: false, confirmed: true, message: response.message})
+          }
+          else if(response.charge.paid) {
             // DO SOMETHING AFTER PAYMENT CONFIRMATION
-            this.setState({paid: true, confirmed: true, message: 'payment went through'})
+            this.setState({paid: true, confirmed: true, message: 'payment went through'});
+            let token = await AsyncStorage.getItem('token');
+            console.log('got token from AsyncStorage', token);
+
+            //send an order request to the database
+            fetch(`http://localhost:3000/Order`, {
+              method: 'POST',
+              headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                "Authorization": `Bearer ${token}`,
+              },
+              body: JSON.stringify({
+                totalPrice: this.state.total,
+                address: address,
+                items: _.values(this.state.cart).map((item) => {
+                  return {
+                    count: item.count,
+                    name: item.item.name,
+                    itemId: item.item._id
+                  }
+                })
+              })
+            })
+            .then((resp) => resp.json())
+            .then(resp => {
+              console.log('response',resp);
+            })
           }
           else {
             this.setState({paid: false, confirmed: true, message: 'problem with payment'})
@@ -173,7 +209,13 @@ class CheckoutScreen extends React.Component {
   }
 
   render() {
-    console.log(this.state);
+    console.log(_.values(this.state.cart).map((item) => {
+      return {
+        count: item.count,
+        name: item.item.name,
+        itemId: item.item._id
+      }
+    }));
     let { total, cart, paid, confirmed, message } = this.state;
     return (
 
@@ -203,6 +245,14 @@ class CheckoutScreen extends React.Component {
               style={{height: 40,width:80, borderColor: 'gray', borderWidth: 1, padding: 5}}
               onChangeText={(instructions) => this.setState({instructions})}
               value={this.state.instructions}
+            />
+
+            <Text>Address here</Text>
+            <TextInput
+              placeholder='address?'
+              style={{height: 40,width:80, borderColor: 'gray', borderWidth: 1, padding: 5}}
+              onChangeText={(address) => this.setState({address})}
+              value={this.state.address}
             />
           </View>
 
