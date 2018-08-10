@@ -146,7 +146,7 @@ const titleScale = scrollY.interpolate({
 
     console.log(this.state)
 
-    const {name,price,image,description, aisle} = this.state
+    const {name,price,image,description, aisle,item} = this.state
 
     return (
       <View style={[styles.fill]}>
@@ -287,10 +287,11 @@ const titleScale = scrollY.interpolate({
              },
            ]}
          >
-           <View style={{marginTop:-25,marginLeft: 15}}>
 
-         <TouchableOpacity style={{marginTop:-31.5,marginLeft:-1}} onPress={() => this.props.navigation.goBack()}>
-           <Card>
+           <View style={{flexDirection:'row'}}>
+           <Card borderRadius={8} containerStyle={{alignItems:'flex-start', backgroundColor:'white', borderColor:'grey',marginLeft:5,}}>
+           <View style={{marginTop:-10, marginLeft: -10,width: SCREEN_WIDTH * 0.4}}>
+         <TouchableOpacity style={{marginLeft:-1}} onPress={() => this.props.navigation.goBack()}>
            <Icon
                   name='chevron-left'
                   size={35}
@@ -298,9 +299,30 @@ const titleScale = scrollY.interpolate({
                   underlayColor={'white'}
 
                 />
-              </Card>
               </TouchableOpacity>
             </View>
+            <View style={{marginTop:-10, width: SCREEN_WIDTH * 0.4}}>
+
+            <Text> Hello </Text>
+          </View>
+
+
+          </Card>
+          <Card borderRadius={8} containerStyle={{backgroundColor:'red', borderColor:'grey', marginRight:5}}>
+            <TouchableOpacity onPress={()=>this.addToCart(item)}>
+            <View style={{marginTop:-10, flexDirection:'row', width: SCREEN_WIDTH * 0.4}}>
+
+
+
+           <Text style={{color: 'white', fontSize: 16}}> Hello </Text>
+         </View>
+
+          </TouchableOpacity>
+
+      </Card>
+        
+
+        </View>
 
               <View style={{marginTop:-25,marginLeft: SCREEN_WIDTH*3/10}}>
              <Text style={{fontSize:8, fontWeight:'bold', color:'black'}}>{this.state.name}</Text>

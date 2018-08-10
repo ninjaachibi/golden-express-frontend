@@ -190,7 +190,7 @@ const styles = StyleSheet.create({
     height: 60,
     paddingBottom: 115,
     alignItems: 'flex-start',
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
     position: 'absolute',
     top: SCREEN_HEIGHT * 9/10,
     left: 0,
