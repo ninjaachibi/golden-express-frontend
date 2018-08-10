@@ -20,7 +20,7 @@ import {
   Platform,
   StatusBar,
   Dimensions,
-  Flatlist
+  Flatlist,
 } from 'react-native';
  // Version can be specified in package.json
 import HorizontalMealScroll from './HorizontalMealScroll'
@@ -67,8 +67,9 @@ export default class ResultScreen extends React.Component {
     return (
       <View style={{ width: 160, flex:1, paddingLeft:10, paddingRight:10, marginBottom:40}}>
         <View style={{alignItems: 'center'}}>
-        <TouchableOpacity
-          >
+          <TouchableOpacity
+            onPress={()=>this.openProduct(item)}
+            >
         <Image
           style={{
             borderRadius:15,
@@ -82,10 +83,10 @@ export default class ResultScreen extends React.Component {
         </TouchableOpacity>
       </View>
         <View style={{alignItems:'flex-start',marginTop:20}}>
-        <Text style={{textAlign: "center", marginLeft: 20, marginRight: -40,fontWeight:'bold',fontSize:17}}>{item.price}</Text>
+        <Text style={{textAlign: "left", marginLeft: 20, marginRight: -40,fontWeight:'bold',fontSize:17}}>{item.price}</Text>
 
-        <Text style={{textAlign: "center", marginLeft: 20,marginRight: 0, marginTop:5, fontSize: 12}}>{name}</Text>
-        <Text style={{textAlign: "center", marginLeft: 17.5,marginRight: -40, marginTop:5, fontSize: 12}}>{count}</Text>
+        <Text style={{textAlign: "left", marginLeft: 20,marginRight: 0, marginTop:5, fontSize: 12}}>{name}</Text>
+        <Text style={{textAlign: "left", marginLeft: 17.5,marginRight: -40, marginTop:5, fontSize: 12}}>{count}</Text>
 
       </View>
 

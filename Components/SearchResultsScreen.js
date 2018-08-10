@@ -67,8 +67,9 @@ export default class SearchResultsScreen extends React.Component {
     return (
       <View style={{ width: 160, flex:1, paddingLeft:10, paddingRight:10, marginBottom:40}}>
         <View style={{alignItems: 'center'}}>
-        <TouchableOpacity
-          >
+          <TouchableOpacity
+            onPress={()=>this.openProduct(item)}
+            >
         <Image
           style={{
             borderRadius:15,
@@ -99,7 +100,7 @@ export default class SearchResultsScreen extends React.Component {
       <View style={{ width: 160,  flex:1, paddingLeft:10, paddingRight:10, marginBottom:40}}>
       <View style={{ alignItems:'center'}}>
         <TouchableOpacity
-          onPress={()=>this.openProduct()}
+          onPress={()=>this.openProduct(item)}
           >
         <Image
           style={{
