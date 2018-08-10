@@ -16,7 +16,6 @@ import {
 import {Header, Icon} from 'react-native-elements';
 import styles from './Styles'
 import groceryItems from '../public/New_Inventory/new_meat.json'
-console.log('groceryItems', groceryItems);
 class ResultScreen extends React.Component {
   //Location  Favorites,foods,home, history, search?
   static navigationOptions = () => ({

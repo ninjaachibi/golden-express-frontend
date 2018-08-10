@@ -102,6 +102,8 @@ class CheckoutScreen extends React.Component {
       cvc:'',
 
       instructions: '',
+      name: '',
+      phone: '',
       address: '',
       message: '',
     };
@@ -134,7 +136,7 @@ class CheckoutScreen extends React.Component {
       }
     })
     .then(resp => {
-      console.log(resp);
+      // console.log(resp);
       return resp.json()
     })
     .then(data => {
@@ -150,7 +152,7 @@ class CheckoutScreen extends React.Component {
         })
       }
       else {
-        fetch('http://localhost:3000/payments', {
+        fetch('https://golden-express.herokuapp.com/payments', {
           method: 'POST',
           headers: {
             'Accept': 'application/json',
@@ -175,7 +177,7 @@ class CheckoutScreen extends React.Component {
             console.log('got token from AsyncStorage', token);
 
             //send an order request to the database
-            fetch(`http://localhost:3000/Order`, {
+            fetch(`https://golden-express.herokuapp.com/Order`, {
               method: 'POST',
               headers: {
                 'Accept': 'application/json',
@@ -196,7 +198,10 @@ class CheckoutScreen extends React.Component {
             })
             .then((resp) => resp.json())
             .then(resp => {
-              console.log('response',resp);
+              console.log('order fulfilled',resp);
+            })
+            .catch(err => {
+              console.log('ERROR',err);
             })
           }
           else {
@@ -209,13 +214,13 @@ class CheckoutScreen extends React.Component {
   }
 
   render() {
-    console.log(_.values(this.state.cart).map((item) => {
-      return {
-        count: item.count,
-        name: item.item.name,
-        itemId: item.item._id
-      }
-    }));
+    // console.log(_.values(this.state.cart).map((item) => {
+    //   return {
+    //     count: item.count,
+    //     name: item.item.name,
+    //     itemId: item.item._id
+    //   }
+    // }));
     let { total, cart, paid, confirmed, message } = this.state;
     return (
 
@@ -247,9 +252,25 @@ class CheckoutScreen extends React.Component {
               value={this.state.instructions}
             />
 
+
+          </View>
+
+          <View className="personal-info-container">
+            <TextInput
+              placeholder='Name'
+              style={{height: 40,width:80, borderColor: 'gray', borderWidth: 1, padding: 5}}
+              onChangeText={(name) => this.setState({name})}
+              value={this.state.name}
+            />
+            <TextInput
+              placeholder='Phone Number'
+              style={{height: 40,width:80, borderColor: 'gray', borderWidth: 1, padding: 5}}
+              onChangeText={(phone) => this.setState({phone})}
+              value={this.state.phone}
+            />
             <Text>Address here</Text>
             <TextInput
-              placeholder='address?'
+              placeholder='Address'
               style={{height: 40,width:80, borderColor: 'gray', borderWidth: 1, padding: 5}}
               onChangeText={(address) => this.setState({address})}
               value={this.state.address}
