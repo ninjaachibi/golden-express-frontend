@@ -22,7 +22,9 @@ class UserOrder extends React.Component {
         this.ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
         this.state = {
             orderDate:null,
-            items:[]
+            items:[],
+            username:'',
+            totalPrice:0
         }
     }
 
@@ -48,20 +50,31 @@ getOrders(){
     .then((resp) => resp.json())
     .then(resp =>{ 
         console.log('hitting', resp.order.items)
-        this.setState({items:resp.order.items}
-        )})
+        console.log('user',resp.username)
+        this.setState({items:resp.order.items})
+        this.setState({username:resp.username})
+        this.setState({totalPrice:resp.order.totalPrice})
+    })
     .catch(err => console.log('error',err))
     }
 
 render(){
     return(
         <View>
+        <Text style={styles.checkOutTitle}>Welcome {this.state.username}</Text>
         <Text style={styles.checkOutTitle}>Your Order:</Text>
         <ScrollView>
+        
+            <Card>
             
-            <Card>{this.state.items.map((item)=>{
-                return (<View style={{flexDirection:'row',flexWrap:'wrap',alignItems:'flex-end'}}><Text>{item.name}  {item.count}</Text></View>)
-            })}</Card>
+            {this.state.items.map((item)=>{
+                return (
+                <View style={{flexDirection:'row',flexWrap:'wrap',alignItems:'flex-end'}}>
+                <Text>{item.name}  {item.count}</Text>
+                </View>)
+            })}
+            <Text>Total:{this.state.totalPrice}</Text>
+            </Card>
           {/* {this.state.items.map((item)=>{
             return (<Text>{item}</Text>)
         })}       */}

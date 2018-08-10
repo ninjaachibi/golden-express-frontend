@@ -56,7 +56,7 @@ class LoginScreen extends React.Component {
       console.log(responseJson)
       if (responseJson.success) {
         AsyncStorage.setItem('token',responseJson.token)
-        this.props.navigation.navigate('AccountDetail')//for debugging
+        this.props.navigation.navigate('Drawer')//for debugging
       }
       else {
         this.setState({message: `Error: ${responseJson.message}`})

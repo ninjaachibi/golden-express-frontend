@@ -150,7 +150,8 @@ class CheckoutScreen extends React.Component {
         })
       }
       else {
-        fetch('http://localhost:3000/payments', {
+        console.log('helooooo')
+        fetch('http://7d56ed8d.ngrok.io/payments', {
           method: 'POST',
           headers: {
             'Accept': 'application/json',
@@ -162,7 +163,10 @@ class CheckoutScreen extends React.Component {
             //need to include name, identifying information
           })
         })
-        .then(resp => resp.json())
+        .then((resp) => {
+          console.log('yaaayaya') 
+          return resp.json()
+        })
         .then(async function(response) {
           console.log('response', response);
           if(!response.success) {
@@ -175,7 +179,7 @@ class CheckoutScreen extends React.Component {
             console.log('got token from AsyncStorage', token);
 
             //send an order request to the database
-            fetch(`http://localhost:3000/Order`, {
+            fetch(`http://7d56ed8d.ngrok.io/Order`, {
               method: 'POST',
               headers: {
                 'Accept': 'application/json',
