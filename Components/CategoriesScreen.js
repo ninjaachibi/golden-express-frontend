@@ -18,6 +18,7 @@ import styles from './Styles';
 import {Header, Icon} from 'react-native-elements';
 import groceryItems from '../public/Inventory/Fresh_Meat'
 import { Ionicons } from '@expo/vector-icons';
+<<<<<<< HEAD
 const MEAT = {cat: 'Meat', src: require('../assets/Meat.png')}
 const PRODUCE = {cat: 'Produce', src: require('../assets/Produce.png')}
 const SEAFOOD = {cat: 'Seafood', src: require('../assets/Seafood.png')}
@@ -28,6 +29,18 @@ const BEVERAGES = {cat: 'Beverage', src: require('../assets/Beverages.png')}
 const SNACKS = {cat: 'Snacks', src: require('../assets/Snacks.png')}
 const NOODLES = {cat: 'Noodles', src: require('../assets/Noodles.png')}
 const SPICES = {cat: 'Spices', src: require('../assets/Spices.png')}
+=======
+const MEAT = {cat: 'meat', src: require('../assets/Meat.png')}
+const PRODUCE = {cat: 'produce', src: require('../assets/Produce.png')}
+const SEAFOOD = {cat: 'seafood', src: require('../assets/Seafood.png')}
+const DAIRY = {cat: 'dairy', src: require('../assets/Dairy.png')}
+const FROZEN = {cat: 'frozen', src: require('../assets/Frozen.png')}
+const PRESERVED = {cat: 'preserved', src: require('../assets/Preserved.png')}
+const BEVERAGES = {cat: 'beverage', src: require('../assets/Beverages.png')}
+const SNACKS = {cat: 'snacks', src: require('../assets/Snacks.png')}
+const NOODLES = {cat: 'noodles', src: require('../assets/Noodles.png')}
+const SPICES = {cat: 'spices', src: require('../assets/Spices.png')}
+>>>>>>> 61cb4522f0da3fe6fa987a16c06047b46ecd0f78
 
 
 class CategoriesScreen extends React.Component {
