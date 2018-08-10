@@ -18,7 +18,6 @@ import styles from './Styles';
 import {Header, Icon} from 'react-native-elements';
 import groceryItems from '../public/Inventory/Fresh_Meat'
 import { Ionicons } from '@expo/vector-icons';
-console.log('groceryItems',groceryItems);
 const MEAT = {cat: 'meat', src: require('../assets/Meat.png')}
 const PRODUCE = {cat: 'produce', src: require('../assets/Produce.png')}
 const SEAFOOD = {cat: 'seafood', src: require('../assets/Seafood.png')}
@@ -61,7 +60,7 @@ class CategoriesScreen extends React.Component {
   }
 
   browseAisle (aisle) {
-    fetch('http://7d56ed8d.ngrok.io/browse' + `?aisle=${aisle.toLowerCase()}`)
+    fetch('https://golden-express.herokuapp.com/browse' + `?aisle=${aisle.toLowerCase()}`)
     .then((resp) => resp.json())
     .then(resp => {
       console.log('hitting',resp);
