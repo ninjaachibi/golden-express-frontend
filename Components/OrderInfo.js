@@ -65,7 +65,7 @@ getOrders(){
 render(){
     return(
         <View>
-        <Text style={styles.checkOutTitle}>Welcome {this.state.username}</Text>
+        <Text style={styles.checkOutTitle1}>Welcome {this.state.username}</Text>
         <Text style={styles.checkOutTitle}>Your Order:</Text>
         <ScrollView>
         
@@ -74,10 +74,15 @@ render(){
             {this.state.items.map((item)=>{
                 return (
                 <View style={{flexDirection:'row',flexWrap:'wrap',alignItems:'flex-end'}}>
-                <Text style={{fontSize:15}}>{item.name}  {item.count}</Text>
+                <Text style={{fontSize:18}}>{item.name}  {item.count}</Text>
                 </View>)
             })}
-            <Text style ={{textAlign:'left'}}>Total:{this.state.totalPrice}</Text>
+
+            <Text style ={{textAlign:'right',
+            fontWeight:'bold',
+            fontSize:18,
+            marginTop:15}}>Total:{this.state.totalPrice}</Text>
+        
             </Card>
           {/* {this.state.items.map((item)=>{
             return (<Text>{item}</Text>)
