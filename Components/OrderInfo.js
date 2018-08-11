@@ -15,7 +15,7 @@ import {
 } from 'react-native';
 import styles from './Styles';
 
-class UserOrder extends React.Component {
+class OrderInfo extends React.Component {
     constructor(props) {
         super(props);
         this.ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
@@ -45,7 +45,7 @@ getOrders(){
         )
     })
     .then((resp) => resp.json())
-    .then(resp =>{ 
+    .then(resp =>{
         console.log('hitting', resp.order)
         this.setState({items:resp.order.item}
         )})
@@ -60,8 +60,8 @@ render(){
 
           {this.state.items.map((item)=>{
             return (<Text>{item}</Text>)
-        })}      
- 
+        })}
+
         </ScrollView>
         </View>
     )
@@ -72,4 +72,4 @@ render(){
 
 
 
-export default UserOrder
+export default OrderInfo;
