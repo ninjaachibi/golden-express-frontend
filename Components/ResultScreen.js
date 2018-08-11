@@ -11,18 +11,133 @@ import {
   RefreshControl,
   Image,
   ScrollView,
-  AsyncStorage
+  ImageBackground,
+  AsyncStorage,
+  Animated,
+  Platform,
+  StatusBar,
+  Dimensions,
+  Flatlist,
 } from 'react-native';
 import {Header, Icon} from 'react-native-elements';
 import styles from './Styles'
-import groceryItems from '../public/New_Inventory/new_meat.json'
-class ResultScreen extends React.Component {
-  //Location  Favorites,foods,home, history, search?
-  static navigationOptions = () => ({
-    header: null //need to fix this + add go back
-  });
-  constructor(props) {
-    super(props);
+const SCREEN_WIDTH = Dimensions.get('window').width
+const SCREEN_HEIGHT = Dimensions.get('window').height
+const HEADER_MAX_HEIGHT = 30;//240;
+const HEADER_MIN_HEIGHT = 0;
+const HEADER_SCROLL_DISTANCE = HEADER_MAX_HEIGHT - HEADER_MIN_HEIGHT;
+const B_IMG = require('../assets/Gradient1.png')
+const G_IMG = require('../assets/goldenImage.jpg')
+const D_IMG = require('../assets/goldenTemple.jpg')
+const L_IMG = require('../assets/Coupon.jpg')
+const A_IMG = require('../assets/GradientLayers.png')
+
+
+
+export default class ResultScreen extends React.Component {
+
+
+  cartNavigate()
+  {
+    this.props.screenProps.cart()
+
+  }
+
+  listFiller(){
+    return <View style={{width: 175, marginBottom: 10, padding: 10,flex:1, alignItems:'center'}}>
+      <Text style={{textAlign: "center"}}></Text>
+      <View
+        style={{
+            width: 150,
+            height: 150,
+          }}/>
+    </View>
+  }
+  listImage(item){
+
+    let split = item.name.split(",")
+    let name = split[0]
+    let count = !!split[1] ? split[1]: ""
+    return (
+      <View style={{ width: 160, flex:1, paddingLeft:10, paddingRight:10, marginBottom:40}}>
+        <View style={{alignItems: 'center'}}>
+          <TouchableOpacity
+            onPress={()=>this.openProduct(item)}
+            >
+        <Image
+          style={{
+            borderRadius:15,
+              width: 130,
+              height: 130,
+            }}
+          source={{
+            uri: item.imgURI
+          }}
+        />
+        </TouchableOpacity>
+      </View>
+        <View style={{alignItems:'flex-start',marginTop:20}}>
+        <Text style={{textAlign: "left", marginLeft: 20, marginRight: -40,fontWeight:'bold',fontSize:17}}>{item.price}</Text>
+
+        <Text style={{textAlign: "left", marginLeft: 20,marginRight: 0, marginTop:5, fontSize: 12}}>{name}</Text>
+        <Text style={{textAlign: "left", marginLeft: 17.5,marginRight: -40, marginTop:5, fontSize: 12}}>{count}</Text>
+
+      </View>
+
+    </View>)
+  }
+  listImageFirst(item){
+    let split = item.name.split(",")
+    let name = split[0]
+    let count = !!split[1] ? split[1]: ""
+    return (
+      <View style={{ width: 160,  flex:1, paddingLeft:10, paddingRight:10, marginBottom:40}}>
+      <View style={{ alignItems:'center'}}>
+        <TouchableOpacity
+          onPress={()=>this.openProduct(item)}
+          >
+        <Image
+          style={{
+            borderRadius:15,
+              width: 130,
+              height: 130,
+            }}
+          source={{
+            uri: item.imgURI
+          }}
+        />
+        </TouchableOpacity>
+      </View>
+
+        <View style={{alignItems:'flex-start', marginTop:20}}>
+        <Text style={{textAlign: "left", marginLeft:20, fontWeight:'bold', fontSize:17}}>{item.price}</Text>
+
+        <Text style={{textAlign: "left", marginLeft: 20, fontSize: 12, marginTop:5}}>{name}</Text>
+        <Text style={{textAlign: "left", marginLeft: 17.5, fontSize: 12, marginTop:5}}>{count}</Text>
+
+      </View>
+
+  </View>)
+  }
+
+  openDrawer()
+  {
+    this.props.screenProps.openDrawer()
+  }
+
+  static navigationOptions =({navigation}) => {
+    const {state} = navigation
+    return {
+    header:null
+
+    }
+
+  };
+
+  constructor(props)
+  {
+
+    super(props)
     this.ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     this.state = {
       items: this.ds.cloneWithRows([]),

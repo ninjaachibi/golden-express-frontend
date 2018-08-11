@@ -120,6 +120,16 @@ const styles = StyleSheet.create({
     height: 90,
     justifyContent: 'flex-start'
   },
+  headerProduct:{
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    backgroundColor: 'white',
+    overflow: 'hidden',
+    height: 90,
+    justifyContent: 'flex-start'
+  },
   header: {
     position: 'absolute',
     top: 0,
@@ -172,6 +182,17 @@ const styles = StyleSheet.create({
 
 
     top: 0,
+    left: 0,
+    right: 0,
+  },
+  bottom: {
+    backgroundColor: 'grey',
+    height: 60,
+    paddingBottom: 115,
+    alignItems: 'flex-start',
+    justifyContent: 'flex-start',
+    position: 'absolute',
+    top: SCREEN_HEIGHT * 9/10,
     left: 0,
     right: 0,
   },

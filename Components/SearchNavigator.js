@@ -57,6 +57,8 @@ export default class SearchNavigator extends React.Component{
 
     }
     this.navigateCart = this.navigateCart.bind(this)
+    this.openProduct = this.openProduct.bind(this)
+
   }
 
   openDrawer(){
@@ -70,7 +72,9 @@ export default class SearchNavigator extends React.Component{
   navigateCart() {
     this.props.screenProps.cart()
   }
-
+  openProduct(item){
+    this.props.screenProps.openProduct(item)
+  }
 
 
 
@@ -96,7 +100,8 @@ export default class SearchNavigator extends React.Component{
           screenProps={{
             cart: this.navigateCart,
             openDrawer: this.openDrawer,
-            closeDrawer: this.closeDrawer
+            closeDrawer: this.closeDrawer,
+            openProduct:this.openProduct
           }}/>
       </View>
 
