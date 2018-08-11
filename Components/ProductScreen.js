@@ -27,16 +27,6 @@ const SCREEN_HEIGHT = Dimensions.get('window').height
 const HEADER_MAX_HEIGHT = 30;//240;
 const HEADER_MIN_HEIGHT = 0;
 const HEADER_SCROLL_DISTANCE = HEADER_MAX_HEIGHT - HEADER_MIN_HEIGHT;
-const MEAT = {cat: 'Meat', src: require('../assets/Meat.png')}
-const PRODUCE = {cat: 'Produce', src: require('../assets/Produce.png')}
-const SEAFOOD = {cat: 'Seafood', src: require('../assets/Seafood.png')}
-const DAIRY = {cat: 'Dairy', src: require('../assets/Dairy.png')}
-const FROZEN = {cat: 'Frozen', src: require('../assets/Frozen.png')}
-const PRESERVED = {cat: 'Preserved', src: require('../assets/Preserved.png')}
-const BEVERAGES = {cat: 'Beverage', src: require('../assets/Beverages.png')}
-const SNACKS = {cat: 'Snacks', src: require('../assets/Snacks.png')}
-const NOODLES = {cat: 'Noodles', src: require('../assets/Noodles.png')}
-const SPICES = {cat: 'Spices', src: require('../assets/Spices.png')}
 
 
 class ProductScreen extends React.Component {
@@ -54,6 +44,7 @@ class ProductScreen extends React.Component {
     this.ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     this.state = {
       item: "",
+      quantity:0,
       scrollY: new Animated.Value(
         // iOS has negative initial scroll value because content inset...
         Platform.OS === 'ios' ? -HEADER_MAX_HEIGHT : 0,
@@ -61,8 +52,18 @@ class ProductScreen extends React.Component {
       refreshing: false,
 
     }
+    this.add = this.add.bind(this)
+    this.subtract = this.subtract.bind(this)
+
   }
 
+  add(){
+    this.setState({quantity:this.state.quantity+1})
+  }
+
+  subtract(){
+    this.state.quantity > 0 ? this.setState({quantity:this.state.quantity-1}):null
+  }
   componentDidMount() {
     console.log("I have reached the Product Screen");
     let item = this.props.navigation.getParam("item", "item")
@@ -149,7 +150,7 @@ const titleScale = scrollY.interpolate({
     const {name,price,image,description, aisle,item} = this.state
 
     return (
-      <View style={[styles.fill]}>
+      <View style={[styles.fill,{backgroundColor:'white'}]}>
         <StatusBar
          translucent
          barStyle="light-content"
@@ -186,7 +187,8 @@ const titleScale = scrollY.interpolate({
           }}
           >
 
-            <View style={[styles.scrollViewContent, {marginTop: 105, width: SCREEN_WIDTH}]}>
+            <View style={[styles.scrollViewContent,  {marginTop: 105, width: SCREEN_WIDTH}]}>
+              <View style={{backgroundColor: 'white'}}>
               <View style={{alignItems:'center'}}>
               <Image source={{uri:image}} style={{borderRadius: 4,height:SCREEN_HEIGHT*1/6, width:SCREEN_WIDTH * 1/2}}/>
             </View>
@@ -194,16 +196,18 @@ const titleScale = scrollY.interpolate({
             <View style={{alignItems:'flex-start', marginLeft: 16, marginTop:47}}>
               <Text style={{fontSize:18, fontWeight:"bold"}}>{name}</Text>
               <Text style={{fontSize:15, fontWeight:"bold", marginTop: 18}}>{price}</Text>
+            </View>
 
 
             </View>
+            <View style={{backgroundColor:'white'}}>
 
-            <Icon
-              name="chevron-left"
-              size={30}
-              color={'green'}
-              onPress={()=>this.addToCart(this.state.item)}
-            />
+            <View style={{alignItems:'flex-start', marginTop: 20, marginLeft:16}}>
+
+              <Text style={{fontSize: 12}}>Description: {this.state.description}</Text>
+            </View>
+          </View>
+
 
 
 
@@ -289,55 +293,26 @@ const titleScale = scrollY.interpolate({
          >
 
            <View style={{flexDirection:'row'}}>
-           <Card borderRadius={8} containerStyle={{alignItems:'flex-start', backgroundColor:'white', borderColor:'grey',marginLeft:5,}}>
-           <View style={{marginTop:-10, marginLeft: -10,width: SCREEN_WIDTH * 0.4}}>
-         <TouchableOpacity style={{marginLeft:-1}} onPress={() => this.props.navigation.goBack()}>
-           <Icon
-                  name='chevron-left'
-                  size={35}
-                  color={'blue'}
-                  underlayColor={'white'}
-
-                />
+           <Card borderRadius={8} containerStyle={{height: 15,position:'absolute', top:-13,left:0, right:0, flexDirection:'row', alignItems:'flex-start', backgroundColor:'white', borderColor:'grey',marginLeft:6,width: SCREEN_WIDTH * 0.48}}>
+         <TouchableOpacity style={{position:'absolute', top:-21,left:-10,right:SCREEN_WIDTH*1/3}} onPress={() => this.subtract()}>
+           <Text style={{fontSize:32}}> - </Text>
               </TouchableOpacity>
-            </View>
-            <View style={{marginTop:-10, width: SCREEN_WIDTH * 0.4}}>
-
-            <Text> Hello </Text>
-          </View>
-
+              <Text style={{position:'absolue', top:-14,left:67,right:0, fontSize: 22, fontWeight:'bold'}}>{this.state.quantity}</Text>
+              <TouchableOpacity style={{position:'absolute', top:-21,left:SCREEN_WIDTH*1/3,right:-10}} onPress={() => this.add()}>
+                <Text style={{fontSize:32}}> + </Text>
+                   </TouchableOpacity>
 
           </Card>
-          <Card borderRadius={8} containerStyle={{backgroundColor:'red', borderColor:'grey', marginRight:5}}>
-            <TouchableOpacity onPress={()=>this.addToCart(item)}>
-            <View style={{marginTop:-10, flexDirection:'row', width: SCREEN_WIDTH * 0.4}}>
-
-
-
-           <Text style={{color: 'white', fontSize: 16}}> Hello </Text>
-         </View>
-
+            <TouchableOpacity style={{alignItems:'center',borderRadius: 8,height:30,position:'absolute', top:2,left:SCREEN_WIDTH*15/29,right:0,zIndex:2,marginLeft:-2.5,
+            flexDirection:'row', width: SCREEN_WIDTH * 0.48, backgroundColor:'red',
+            borderColor:'grey', marginRight:5}} onPress={()=>this.addToCart(item)}>
+           <Text style={{marginLeft: 40,textAlign:'right',color: 'white', fontSize: 18, fontWeight:'bold'}}> Add to Cart </Text>
           </TouchableOpacity>
 
-      </Card>
-        
 
         </View>
 
-              <View style={{marginTop:-25,marginLeft: SCREEN_WIDTH*3/10}}>
-             <Text style={{fontSize:8, fontWeight:'bold', color:'black'}}>{this.state.name}</Text>
-           </View>
-
-           <View style={{marginTop:-25,marginLeft: 30}}>
-
-
-           <TouchableOpacity style={{marginLeft:SCREEN_WIDTH - 64, marginTop:33}}>
-               <Icon
-               name='shopping-cart'
-               color='blue'
-               onPress={()=>{this.props.screenProps.cart()}}/>
-             </TouchableOpacity>
-           </View>
+            
 
          </Animated.View>
 
