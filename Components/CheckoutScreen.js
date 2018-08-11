@@ -164,7 +164,10 @@ class CheckoutScreen extends React.Component {
             //need to include name, identifying information
           })
         })
-        .then(resp => resp.json())
+        .then((resp) => {
+          console.log('yaaayaya') 
+          return resp.json()
+        })
         .then(async function(response) {
           console.log('response', response);
           if(!response.success) {

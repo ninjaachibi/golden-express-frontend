@@ -35,7 +35,7 @@ render () {
          icon={{name: 'user-circle', type: 'font-awesome', size:20}}
          title='Five'
          buttonStyle={styles.button}
-         onPress={this.navigateToScreen('Five')}/>
+         onPress={this.navigateToScreen('Order')}/>
         </ScrollView>
       </View>
     );
