@@ -16,7 +16,11 @@ import {
 import styles from './Styles';
 import {Card} from 'react-native-elements'
 
-class UserOrder extends React.Component {
+class OrderInfo extends React.Component {
+    static navigationOptions = {
+        title:'Order',
+      };
+
     constructor(props) {
         super(props);
         this.ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
@@ -70,10 +74,10 @@ render(){
             {this.state.items.map((item)=>{
                 return (
                 <View style={{flexDirection:'row',flexWrap:'wrap',alignItems:'flex-end'}}>
-                <Text>{item.name}  {item.count}</Text>
+                <Text style={{fontSize:15}}>{item.name}  {item.count}</Text>
                 </View>)
             })}
-            <Text>Total:{this.state.totalPrice}</Text>
+            <Text style ={{textAlign:'left'}}>Total:{this.state.totalPrice}</Text>
             </Card>
           {/* {this.state.items.map((item)=>{
             return (<Text>{item}</Text>)
@@ -87,4 +91,4 @@ render(){
 }
 
 
-export default UserOrder
+export default OrderInfo

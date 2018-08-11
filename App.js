@@ -36,7 +36,7 @@ import SearchNavigator from './Components/SearchNavigator'
 import AddressScreen from './Components/AddressScreen'
 import ContactScreen from './Components/ContactScreen'
 import ProductScreen from './Components/ProductScreen'
-import UserOrder from './Components/UserOrder'
+import UserOrder from './Components/OrderInfo'
 
 
 
@@ -96,7 +96,7 @@ const MainNavigator = StackNavigator({
   headerMode: 'screen',
   navigationOptions: {
   },
-  initialRouteName: 'Drawer' //for debugging
+  initialRouteName: 'Login' //for debugging
 })
 export default class App extends React.Component {
   render() {
