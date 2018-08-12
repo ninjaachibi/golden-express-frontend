@@ -278,6 +278,11 @@ const styles = StyleSheet.create({
     fontWeight:'bold',
     marginTop:15
   },
+  checkOutTitle1:{
+    fontSize:20,
+    fontFamily:'Avenir',
+    marginTop:15
+  },
   paymentBox:{
     flexDirection:'row',
     alignItems:'flex-end',
