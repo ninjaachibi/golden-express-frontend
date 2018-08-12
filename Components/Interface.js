@@ -95,11 +95,7 @@ export default class Interface extends React.Component {
     this.openDrawer = this.openDrawer.bind(this);
     this.closeDrawer = this.closeDrawer.bind(this);
     this.openProduct = this.openProduct.bind(this);
-
-
-
   }
-
 
   openProduct(item){
     this.props.screenProps.openProduct(item)
@@ -120,13 +116,11 @@ export default class Interface extends React.Component {
   render() {
     return (
       <View style={{flex:1}}>
-
         <Tabs screenProps={{
           cart: this.navigateCart,
           openDrawer: this.openDrawer,
           closeDrawer: this.closeDrawer,
           openProduct:this.openProduct
-
         }}/>
       </View>
 

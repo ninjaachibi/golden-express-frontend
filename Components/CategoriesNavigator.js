@@ -32,12 +32,12 @@ export default class Categories extends React.Component{
   constructor(props)
   {
     super(props);
-    this.state = {
 
+    this.state = {
     }
+
     this.navigateCart = this.navigateCart.bind(this)
     this.openProduct = this.openProduct.bind(this)
-
   }
 
   navigateCart() {

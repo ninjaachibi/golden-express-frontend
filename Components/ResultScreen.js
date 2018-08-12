@@ -340,6 +340,3 @@ const titleScale = scrollY.interpolate({
   }
 }
 // ['rgb(0, 0, 0)', 'rgb(255, 0, 0)', 'rgb(0, 0, 255)']
-
-
-

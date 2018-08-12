@@ -21,6 +21,7 @@ import {Header, Icon} from 'react-native-elements';
 const D_IMG = require('../assets/goldenTemple.jpg')
 
 class HomeSearch extends React.Component {
+
   static navigationOptions = ({navigation}) => {
     const {state} = navigation
     return {
@@ -32,15 +33,10 @@ class HomeSearch extends React.Component {
         onPress={()=>{state.params.cart()}}/>
       </TouchableOpacity>
     }
-
   };
-
-componentDidMount()
-{
-
+componentDidMount() {
   const {setParams} = this.props.navigation;
   setParams({cart: this.props.screenProps.cart})
-
 }
   constructor(props) {
     super(props);
@@ -50,43 +46,23 @@ componentDidMount()
 
     }
   }
-
   submit() {
     console.log('clicked search');
     this.props.navigation.navigate('MealPlan', {
       query: this.state.search,
     });
   }
-
   render() {
-
     const { navigation } = this.props;
     {
      this.state.default ? this.setState({default: navigation.getParam('default', true)}): null
-  }
-
-    // if (this.state.default)
-    // {
-    //   this.setState({default:false},()=>  this.props.navigation.navigate('HomePage'))
-    //
-    // }
-
-    console.log(this.state)
-    if (this.state.default)
-    {
-      console.log(this.props.screenProps.home)
-      this.props.screenProps.home()
     }
-
-
-
     return (
       <View style={{
         flex: 1,
         backgroundColor: '#F5FCFF',
         alignItems:'stretch'
       }}>
-
         <ImageBackground
             source={D_IMG}
             style={[styles.goldenImage, {
@@ -94,35 +70,21 @@ componentDidMount()
               justifyContent:'flex-start',
               height: null,
               width:null,
-
             }]}>
-    {/* <View style={{
-      flex: 1,
-      alignItems: 'stretch',
-      backgroundColor: '#F5FCFF',
-    }}>
-      <Text>{this.state.message}</Text> */}
-
-      <TextInput
-        autoFocus={true}
-
-        placeholder="Search for an Item"
-        onKeyPress={() =>{this.setState({type: true})}}
-        style={{textAlign: this.state.type ? 'left': 'center',borderColor:'black',height: 40, backgroundColor:'white',padding:3,display:null}}
-
-        onChangeText={(text) => this.setState({search: text})}>
-         </TextInput>
-      <TouchableOpacity style={[styles.button, styles.buttonBlue]}
-        onPress={ () => {this.submit()} }>
-        <Text style={styles.buttonLabel}>Search</Text>
-      </TouchableOpacity>
-      {/* <TouchableOpacity style={[styles.button, styles.buttonBlue]} onPress={ () => {this.submit()} }>
-        <Text style={styles.buttonLabel}>Search</Text>
-      </TouchableOpacity> */}
-    {/* </View> */}
-</ImageBackground>
-
-  </View>
+        <TextInput
+          autoFocus={true}
+          placeholder="Search for an Item"
+          onKeyPress={() =>{this.setState({type: true})}}
+          style={{textAlign: this.state.type ? 'left': 'center',borderColor:'black',height: 40, backgroundColor:'white',padding:3,display:null}}
+          onChangeText={(text) => this.setState({search: text})}>
+        </TextInput>
+        <TouchableOpacity
+          style={[styles.button, styles.buttonBlue]}
+          onPress={ () => {this.submit()} }>
+          <Text style={styles.buttonLabel}>Search</Text>
+        </TouchableOpacity>
+      </ImageBackground>
+    </View>
     )
   }
 }
