@@ -37,49 +37,68 @@ componentDidMount(){
   this.getOrders()
 }
 getOrders(){
-  console.log('hi')
-  AsyncStorage.getItem('token')
-  .then(token =>{
-    return(
-      fetch('https://golden-express.herokuapp.com/userOrder',{
-      headers: { Authorization:'Bearer ' + token }
-     })
-    )
-  })
-  .then((resp) => resp.json())
-  .then(resp =>{
-    console.log('hitting', resp.order.items)
-    console.log('user',resp.username)
-    this.setState({items:resp.order.items})
-    this.setState({username:resp.username})
-    this.setState({totalPrice:resp.order.totalPrice})
-  })
-  .catch(err => console.log('error',err))
-  }
-render(){
-  return(
-    <View>
-    <Text style={styles.checkOutTitle1}>Welcome {this.state.username}</Text>
-    <Text style={styles.checkOutTitle}>Your Order:</Text>
-    <ScrollView>
+    console.log('hi')
+    AsyncStorage.getItem('token')
+    .then(token =>{
+        return(
+            fetch('https://golden-express.herokuapp.com/userOrder',{
+            headers: { Authorization:'Bearer ' + token }
+          })
+        )
+    })
+    .then((resp) => resp.json())
+    .then(resp => {
+      if(!resp.order) {
+        console.log('no order found for user');
+        this.setState({username:resp.username})
+        return;
+      }
+      console.log('hitting', resp.order.items)
+      console.log('user',resp.username)
+      this.setState({
+        items:resp.order.items,
+        username:resp.username,
+        totalPrice:resp.order.totalPrice
+      })
+    })
+    .catch(err => console.log('error',err))
+    }
 
-      <Card>
+    render(){
+      return(
+        <View>
+          <Text style={styles.checkOutTitle1}>Welcome {this.state.username}</Text>
+          <Text style={styles.checkOutTitle}>Your Orders:</Text>
+          <ScrollView>
 
-      {this.state.items.map((item)=>{
-        return (
-        <View style={{flexDirection:'row',flexWrap:'wrap',alignItems:'flex-end'}}>
-        <Text style={{fontSize:15}}>{item.name} {item.count}</Text>
-        </View>)
-      })}
-      <Text style ={{textAlign:'left'}}>Total:{this.state.totalPrice}</Text>
-      </Card>
-     {/* {this.state.items.map((item)=>{
-      return (<Text>{item}</Text>)
-    })}    */}
+            <Card>
+              {this.state.items.length === 0 ?
+                <Text>No past orders. Make your first order now!</Text>
+                :
+                this.state.items.map((item) => {
+                  return (
+                    <View style={{flexDirection:'row',flexWrap:'wrap',alignItems:'flex-end'}}>
+                      <Text style={{fontSize:18}}>{item.name}  {item.count}</Text>
+                    </View>)
+                  })
+              }
 
-    </ScrollView>
-    </View>
-  )
-}
-}
+
+                <Text style ={{textAlign:'right',
+                  fontWeight:'bold',
+                  fontSize:18,
+                  marginTop:15}}>Total:{this.state.totalPrice}
+                </Text>
+
+            </Card>
+                {/* {this.state.items.map((item)=>{
+                  return (<Text>{item}</Text>)
+                })}       */}
+
+            </ScrollView>
+          </View>
+          )
+        }
+      }
+
 export default OrderInfo
