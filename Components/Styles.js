@@ -255,12 +255,12 @@ const styles = StyleSheet.create({
   },
   singleCardBox:{
     flexDirection:"row",
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
   },
   addAndRemoveBox:{
-    flexDirection:'row',
-    alignItems:'flex-end',
-    flexWrap:'wrap'
+    // flexDirection:'row',
+    // alignItems:'flex-end',
+    //flexWrap:'wrap'
   },
   itemQuan:{
     fontSize:20,
@@ -276,6 +276,11 @@ const styles = StyleSheet.create({
   checkOutTitle:{
     fontSize:25,
     fontWeight:'bold',
+    marginTop:15
+  },
+  checkOutTitle1:{
+    fontSize:20,
+    fontFamily:'Avenir',
     marginTop:15
   },
   paymentBox:{

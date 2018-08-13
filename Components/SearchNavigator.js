@@ -33,9 +33,23 @@ import SearchResultsScreen from './SearchResultsScreen'
 
 
 
+const stack = {
+  Search: {
+    screen: SearchScreen,
+  },
+  SearchResults: {
+  screen: SearchResultsScreen
+},
+}
 
+var SearchStack = StackNavigator(stack, {initialRouteName: 'Search',
+  headerMode: 'screen',
+  navigationOptions: {
+    headerVisible: false,
+  }
+})
 
-export default class Categories extends React.Component{
+export default class SearchNavigator extends React.Component{
   constructor(props)
   {
     super(props);

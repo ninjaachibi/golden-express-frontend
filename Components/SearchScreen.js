@@ -30,7 +30,8 @@ class SearchScreen extends React.Component {
         <Icon
         name='shopping-cart'
         color='blue'
-        onPress={()=>{state.params.cart()}}/>
+// Testing       onPress={()=>{state.params.cart()}}
+        />
       </TouchableOpacity>
     }
 
@@ -51,7 +52,7 @@ class SearchScreen extends React.Component {
 componentDidMount()
 {
   const {setParams} = this.props.navigation;
-  setParams({cart: this.props.screenProps.cart})
+//Testing  setParams({cart: this.props.screenProps.cart})
 }
   constructor(props) {
     super(props);
@@ -59,9 +60,22 @@ componentDidMount()
       message: '',
       search: '',
     }
+    this.searchItem = this.searchItem.bind(this)
   }
 
+ 
+  searchItem(searchItem){
+    fetch('https://golden-express.herokuapp.com/searchItem'+`?searchItem=${searchItem.charAt(0).toUpperCase()+searchItem.slice(1)}`)
+    .then((resp)=> resp.json())
+    .then(resp => {
+      console.log(searchItem.charAt(0).toUpperCase()+searchItem.slice(1))
+      console.log(searchItem)
+      console.log('hitting',resp);
+      this.props.navigation.navigate('SearchResults', {groceryItems: resp.items})//?????
+    })
+  }
 
+ 
 
   render() {
     let navigation = this.props.navigation;

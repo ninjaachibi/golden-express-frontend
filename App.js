@@ -36,7 +36,8 @@ import SearchNavigator from './Components/SearchNavigator'
 import AddressScreen from './Components/AddressScreen'
 import ContactScreen from './Components/ContactScreen'
 import ProductScreen from './Components/ProductScreen'
-import UserOrder from './Components/UserOrder'
+import UserOrder from './Components/OrderInfo'
+
 
 
 // import Interface from './Components/Interface' why does import not work
@@ -74,10 +75,15 @@ const MainNavigator = StackNavigator({
   Product: {
     screen: ProductScreen
   },
-
+  // Search:{
+  //   screen:SearchScreen
+  // },//For testing
+  // SearchResults: {
+  //   screen: SearchResultScreen
+  // },// For testing
   AccountDetail: {
     screen: UserOrder
-  },
+  },//For testing
   Drawer: {
     screen: DrawerNavigator,
       navigationOptions: {
@@ -90,7 +96,7 @@ const MainNavigator = StackNavigator({
   headerMode: 'screen',
   navigationOptions: {
   },
-  initialRouteName: 'Drawer' //for debugging
+  initialRouteName: 'Login' //for debugging
 })
 export default class App extends React.Component {
   render() {

@@ -8,6 +8,8 @@ import SearchNavigator from './SearchNavigator';
 import Test from './Test'
 import Interface from './Interface'
 import AccountNavigator from './AccountNavigator'
+import OrderInfo from './OrderInfo'
+import OrderNavigator from './OrderNavigator'
 
 import {
   StyleSheet,
@@ -35,8 +37,11 @@ const DrawerStack = DrawerNavigator({
     screen: Interface,
   },
   Five: {
-    screen: HomeNavigator,
+    screen: OrderNavigator, //For testing
   },
+  Order:{
+    screen: OrderNavigator,
+  }
   
 }, {
   initialRouteName: 'Three',

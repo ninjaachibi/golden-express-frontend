@@ -36,18 +36,18 @@ export default class CartItem extends React.Component {
           size="medium"
           rounded
           source={{uri:item.item.imgURI}}/>
-          <View style={styles.singleCardBox}>
-            <Text style={styles.shoppingCartItem}>{item.item.name}</Text>
-              <View style={styles.addAndRemoveBox}>
+         <View style={{}}>
+            <Text style={{fontSize:18,fontWeight:'400'}}>{item.item.name}</Text>
+            <View style={{alignItems:'space-between'}}> 
+              <View style={{flexDirection:'row',flexWrap:'wrap'}}>
                 <Icon name="remove" onPress={()=>{this.props.subtractFromCart(item.item)}} />
-                <Text style={styles.itemQuan}>{item.count} </Text>
+                <Text style={{fontSize:16, marginTop:3,marginLeft:2}}>{item.count} </Text>
                 <Icon name="add"  onPress={()=>{this.props.addToCart(item.item)}} />
+                </View>
+                <Text style={{fontSize:16}}>Total: ${getTotal(item)}</Text>
               </View>
           </View>
         </View>
-          <View >
-        <Text style={{textAlign:'right'}}>Total: ${getTotal(item)}</Text>
-          </View>
 
       </Card>
 

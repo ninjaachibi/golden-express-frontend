@@ -13,10 +13,8 @@ import {
   ScrollView
 } from 'react-native';
  // Version can be specified in package.json
-
 import { StackNavigator, TabNavigator, TabBarBottom} from 'react-navigation';
 import { createStackNavigator } from 'react-navigation';
-
 import styles from './Styles'
 import RegisterScreen from './RegisterScreen'
 import LoginScreen from './LoginScreen'
@@ -30,43 +28,29 @@ import FeedbackScreen from './FeedbackScreen'
 import CategoriesScreen from './CategoriesScreen'
 import SearchNavigator from './SearchNavigator'
 import HomeSearch from './HomeSearch'
-
-
-
-
-
-
 export default class HomeNavigator extends React.Component{
   constructor(props)
   {
     super(props);
     this.state = {
-
     }
     this.navigateCart = this.navigateCart.bind(this)
     this.navigateHome = this.navigateHome.bind(this)
     this.closeDrawer = this.closeDrawer.bind(this)
     this.openDrawer = this.openDrawer.bind(this)
-
-
-
   }
-
   openDrawer(){
     this.props.screenProps.openDrawer()
   }
-
   closeDrawer(){
     this.props.screenProps.closeDrawer()
   }
-
   navigateCart() {
     this.props.screenProps.cart()
   }
   navigateHome() {
     this.props.navigation.navigate('Home')
   }
-
   render(){
     const stack = {
       HomePage: {
@@ -76,7 +60,6 @@ export default class HomeNavigator extends React.Component{
       screen: HomeSearch,
     },
     }
-
     const HomeStack = StackNavigator(stack, {initialRouteName:'HomePage',
       headerMode: 'screen',
       navigationOptions: {
@@ -93,9 +76,6 @@ export default class HomeNavigator extends React.Component{
             closeDrawer: this.closeDrawer
           }}/>
       </View>
-
     )
-
   }
-
 };
