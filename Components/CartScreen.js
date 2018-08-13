@@ -29,6 +29,7 @@ class CartScreen extends React.Component {
     this.addToCart = this.addToCart.bind(this);
     this.getItemTotal = this.getItemTotal.bind(this);
     this.subtractFromCart = this.subtractFromCart.bind(this);
+    this.deleteFromCart = this.deleteFromCart.bind(this)
   }
 
   async componentDidMount () {
@@ -82,6 +83,21 @@ class CartScreen extends React.Component {
     }
   }
 
+  async deleteFromCart (item) {
+    try {
+      let cart = await AsyncStorage.getItem('cart', (err,res)=> {if(err)console.log('err',err);});
+      cart = JSON.parse(cart);
+      console.log('cart is',cart);
+      delete cart[item._id];
+      await AsyncStorage.setItem('cart', JSON.stringify(cart));
+      console.log("deleted from cart", cart);
+      this.setState({ cart })
+    }
+    catch (err) {
+      console.log('error', err);
+    }
+  }
+
   checkout() {
     console.log('checking out');
     this.props.navigation.navigate('Checkout', {total: this.calculateTotal(), cart: this.state.cart})
@@ -123,6 +139,7 @@ class CartScreen extends React.Component {
                   item={item}
                   addToCart={this.addToCart}
                   subtractFromCart={this.subtractFromCart}
+                  deleteFromCart={this.deleteFromCart}
                   getTotal={this.getItemTotal}
                 />
                 </View>
