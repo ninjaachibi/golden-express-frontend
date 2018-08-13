@@ -119,7 +119,7 @@ class CartScreen extends React.Component {
               return (
                 <View>
                 <CartItem
-                  key = {item.item._id}//need key indicator?
+                  key = {item.item._id}
                   item={item}
                   addToCart={this.addToCart}
                   subtractFromCart={this.subtractFromCart}

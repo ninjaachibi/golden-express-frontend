@@ -42,7 +42,7 @@ const DrawerStack = DrawerNavigator({
   Order:{
     screen: OrderNavigator,
   }
-  
+
 }, {
   initialRouteName: 'Three',
   contentComponent: DrawerContent,
@@ -68,7 +68,7 @@ export default class Drawer extends React.Component{
   }
 
   openProduct(item){
-    this.props.navigation.navigate('Product', {item: item})
+    this.props.navigation.navigate({key:'Product',routeName:'Product', params:{item: item}})
   }
 
   openCart(){

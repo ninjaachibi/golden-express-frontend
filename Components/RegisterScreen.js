@@ -30,7 +30,6 @@ class RegisterScreen extends React.Component {
   static navigationOptions = {
     title: 'Register'
   };
-
   register() {
     fetch('https://golden-express.herokuapp.com/register', {
       method: 'POST',
