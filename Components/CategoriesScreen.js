@@ -18,6 +18,7 @@ import styles from './Styles';
 import {Header, Icon} from 'react-native-elements';
 import groceryItems from '../public/Inventory/Fresh_Meat'
 import { Ionicons } from '@expo/vector-icons';
+import _ from 'underscore'
 const MEAT = {cat: 'Meat', src: require('../assets/Meat.png')}
 const PRODUCE = {cat: 'Produce', src: require('../assets/Produce.png')}
 const SEAFOOD = {cat: 'Seafood', src: require('../assets/Seafood.png')}
@@ -60,21 +61,23 @@ class CategoriesScreen extends React.Component {
   }
 
   browseAisle (aisle) {
+    console.log('clicked');
     fetch('https://golden-express.herokuapp.com/browse' + `?aisle=${aisle.toLowerCase()}`)
     .then((resp) => resp.json())
     .then(resp => {
       console.log('hitting',resp);
-      this.props.navigation.navigate('Result', {groceryItems: resp.items, aisle: aisle})
+      this.props.navigation.navigate('Result', { groceryItems: resp.items, aisle: aisle })
     })
   }
 
   createCategory (cat1,cat2) {
+    let browseAisle = _.throttle(this.browseAisle, 1000, {trailing: false}).bind(this);
     return  (
       <View style={{flex:1, justifyContent:'flex-start', alignItems:'center',flexDirection:'row',justifyContent:'center'}}>
-        <TouchableOpacity activeOpacity={0.75} onPress={()=>{this.browseAisle(cat1.cat)}}>
+        <TouchableOpacity activeOpacity={0.75} onPress={()=>{browseAisle(cat1.cat)}}>
           <Image source={cat1.src} style={{height: 170,width: 170, marginLeft: 12, marginRight: 5, marginTop: 10,flex: 1}}/>
         </TouchableOpacity>
-        <TouchableOpacity activeOpacity={0.75} onPress={()=>{this.browseAisle(cat2.cat)}}>
+        <TouchableOpacity activeOpacity={0.75} onPress={()=>{browseAisle(cat2.cat)}}>
           <Image source={cat2.src} style={{height: 170,width: 170, marginRight: 12, marginLeft:5, marginTop: 10,flex: 1}}/>
         </TouchableOpacity>
       </View>
