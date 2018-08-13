@@ -305,7 +305,6 @@ class ProductScreen extends React.Component {
         </View>
 
 
-
       </Animated.View>
 
 

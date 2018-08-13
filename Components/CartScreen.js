@@ -119,7 +119,7 @@ class CartScreen extends React.Component {
               return (
                 <View>
                 <CartItem
-                  key = {item.item._id}//need key indicator?
+                  key = {item.item._id}
                   item={item}
                   addToCart={this.addToCart}
                   subtractFromCart={this.subtractFromCart}
@@ -135,7 +135,7 @@ class CartScreen extends React.Component {
             Total: ${this.calculateTotal().toFixed(2)}
           </Text>
 
-          <TouchableOpacity style={[styles.button, styles.buttonBlue]} onPress={()=>{this.checkout();this.calculateTotal()}}>
+          <TouchableOpacity style={[styles.button, styles.buttonBlue]} onPress={()=>{this.checkout()}}>
           <Text style={styles.buttonLabel} borderColor='white'
           borderStyle='solid'>Checkout</Text>
           </TouchableOpacity>
