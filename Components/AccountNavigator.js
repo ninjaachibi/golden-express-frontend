@@ -18,7 +18,7 @@ import { createStackNavigator } from 'react-navigation';
 import styles from './Styles'
 
 export default class AccountNavigator extends React.Component{
-
+  
   constructor(props)
   {
     super(props);
@@ -43,6 +43,7 @@ export default class AccountNavigator extends React.Component{
   }
 
   render(){
+
     return (
       <View style={{flex: 1}}>
         <TouchableOpacity title="Contact" style={{backgroundColor:'red', flex:1}} onPress={()=> this.openContact()}/>

@@ -1,4 +1,6 @@
 import React from 'react';
+
+
 import {
   StyleSheet,
   View,
@@ -35,11 +37,18 @@ const G_IMG = require('../assets/goldenImage.jpg')
 const D_IMG = require('../assets/goldenTemple.jpg')
 const L_IMG = require('../assets/Coupon.jpg')
 const A_IMG = require('../assets/GradientLayers.png')
+
+
+
 export default class ResultScreen extends React.Component {
+
+
   cartNavigate()
   {
     this.props.screenProps.cart()
+
   }
+
   listFiller(){
     return <View style={{width: 175, marginBottom: 10, padding: 10,flex:1, alignItems:'center'}}>
       <Text style={{textAlign: "center"}}></Text>
@@ -51,6 +60,7 @@ export default class ResultScreen extends React.Component {
     </View>
   }
   listImage(item){
+
     let split = item.name.split(",")
     let name = split[0]
     let count = !!split[1] ? split[1]: ""
@@ -74,9 +84,12 @@ export default class ResultScreen extends React.Component {
       </View>
         <View style={{alignItems:'flex-start',marginTop:20}}>
         <Text style={{textAlign: "left", marginLeft: 20, marginRight: -40,fontWeight:'bold',fontSize:17}}>{item.price}</Text>
+
         <Text style={{textAlign: "left", marginLeft: 20,marginRight: 0, marginTop:5, fontSize: 12}}>{name}</Text>
         <Text style={{textAlign: "left", marginLeft: 17.5,marginRight: -40, marginTop:5, fontSize: 12}}>{count}</Text>
+
       </View>
+
     </View>)
   }
   listImageFirst(item){
@@ -101,27 +114,38 @@ export default class ResultScreen extends React.Component {
         />
         </TouchableOpacity>
       </View>
+
         <View style={{alignItems:'flex-start', marginTop:20}}>
         <Text style={{textAlign: "left", marginLeft:20, fontWeight:'bold', fontSize:17}}>{item.price}</Text>
+
         <Text style={{textAlign: "left", marginLeft: 20, fontSize: 12, marginTop:5}}>{name}</Text>
         <Text style={{textAlign: "left", marginLeft: 17.5, fontSize: 12, marginTop:5}}>{count}</Text>
+
       </View>
+
   </View>)
   }
+
   openDrawer()
   {
     this.props.screenProps.openDrawer()
   }
+
   static navigationOptions =({navigation}) => {
     const {state} = navigation
     return {
     header:null
+
     }
+
   };
+
   constructor(props)
   {
+
     super(props)
     this.ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+
     this.state = {
       groceries: [],
       items: this.ds.cloneWithRows([]),
@@ -137,11 +161,18 @@ export default class ResultScreen extends React.Component {
         Platform.OS === 'ios' ? -HEADER_MAX_HEIGHT : 0,
       ),
       refreshing: false,
+
     }
+
     this.listImage = this.listImage.bind(this)
     this.listFiller = this.listFiller.bind(this)
     this.openProduct = this.openProduct.bind(this)
+
+
+
   }
+
+
   //run the coponoennt and have it fetch the data
   //each ingredient has i\ts own page that displays what it looks like
   //how to make an image, where do i source
@@ -154,14 +185,21 @@ export default class ResultScreen extends React.Component {
       query: this.state.search,
     });
   }
+
+
+
+
   componentDidMount() {
     //fetch meallist
     //display top Meals
     //fetch recommended meals
     //create alogirthm that displays certain meals
+
+
     let groceryItems = this.props.navigation.getParam('groceryItems', [])
     let aisle = this.props.navigation.getParam('aisle', "Results")
     this.setState({aisle:aisle})
+
     console.log('ghjfhjfhgj',groceryItems)
     let double = []
     for (let i =0; i < groceryItems.length; i+=2)
@@ -174,6 +212,8 @@ export default class ResultScreen extends React.Component {
     console.log('passed in items', double);
     this.setState({groceries: double})
     this.setState({items: this.ds.cloneWithRows(double)})
+
+
   }
   displayItem (item) {
     console.log('item is', item); //may need to change this to a fetch request?
@@ -182,13 +222,20 @@ export default class ResultScreen extends React.Component {
       currentItem: item
     })
   }
+
+
   press() {
     this.props.navigation.navigate('Search')
   }
+
   openProduct(item)
   {
     this.props.screenProps.openProduct(item)
+
   }
+
+
+
   render() {
     const scrollY = Animated.add(
       this.state.scrollY,
@@ -204,11 +251,13 @@ export default class ResultScreen extends React.Component {
   outputRange: [1, 1],
   extrapolate: 'clamp',
 });
+
 const imageTranslate = this.state.scrollY.interpolate({
   inputRange: [0, HEADER_SCROLL_DISTANCE/15,HEADER_SCROLL_DISTANCE/3,HEADER_SCROLL_DISTANCE],
   outputRange: [0, 50, 60, 100],
   extrapolate: 'clamp',
 });
+
 const titleScale = scrollY.interpolate({
       inputRange: [0, HEADER_SCROLL_DISTANCE / 2, HEADER_SCROLL_DISTANCE],
       outputRange: [1, 1, 1],
@@ -224,16 +273,23 @@ const titleScale = scrollY.interpolate({
       outputRange: ['rgb(0, 0, 0)', 'rgb(255, 0, 0)', 'rgb(0, 0, 255)'],
       extrapolate: 'clamp',
     });
+
+
     // console.log(this.state.scrollY)
     console.log(this.state.items)
     console.log("my groceries", this.state.groceries)
+
     return (
+
+
+
       <View style={[styles.fill, {backgroundColor:'white'}]}>
         <StatusBar
          translucent
          barStyle="light-content"
          backgroundColor="rgba(0, 0, 0, 0.251)"
        />
+
           <Animated.ScrollView
              scrollEventThrottle={1}
             contentContainerStyle={{alignItems:'center'}} style={{
@@ -264,9 +320,14 @@ const titleScale = scrollY.interpolate({
           }}
           >
             <View style={[styles.scrollViewContent]}>
+
+
+
           <View style={{flex:1,
             backgroundColor:'white',
 }}>
+
+
             <ListView
               enableEmptySections={true}
               dataSource={this.state.items}
@@ -281,13 +342,16 @@ const titleScale = scrollY.interpolate({
                 {!!item[1] ?
                 this.listImage(item[1]) :
                 this.listFiller()
+
               }
               </View>
               }
             />
           </View>
         </View>
+
         </Animated.ScrollView>
+
         {/* <Animated.View style={styles.header}>
   <View style={styles.bar}>
     <Text style={styles.title}>Title</Text>
@@ -300,12 +364,19 @@ const titleScale = scrollY.interpolate({
             { opacity:imageOpacity,transform: [{ translateY: headerTranslate }] },
           ]}
         >
+
+
+
+
        </Animated.View>
+
+
        <Animated.View
           style={[
             styles.behind,
             {
               opacity: imageOpacity,
+
               transform: [
                 { translateY: titleTranslate },
                   {scale: titleScale }
@@ -314,19 +385,25 @@ const titleScale = scrollY.interpolate({
           ]}
         >
           <View style={{marginTop:-25,marginLeft: 15}}>
+
         <TouchableOpacity style={{marginTop:-31.5,marginLeft:-1}} onPress={() => this.props.navigation.goBack()}>
           <Icon
                  name='chevron-left'
                  size={35}
                  color={'blue'}
                  underlayColor={'white'}
+
                />
              </TouchableOpacity>
            </View>
+
              <View style={{marginTop:-25,marginLeft: SCREEN_WIDTH/2-25}}>
             <Text style={{fontSize:18, fontWeight:'bold', color:'black'}}>{this.state.aisle}</Text>
           </View>
+
           <View style={{marginTop:-25,marginLeft: 30}}>
+
+
           <TouchableOpacity style={{marginLeft:SCREEN_WIDTH - 64, marginTop:33}}>
               <Icon
               name='shopping-cart'
@@ -334,8 +411,13 @@ const titleScale = scrollY.interpolate({
               onPress={()=>{this.props.screenProps.cart()}}/>
             </TouchableOpacity>
           </View>
+
         </Animated.View>
+
+
+
 </View>
+
     )
   }
 }
