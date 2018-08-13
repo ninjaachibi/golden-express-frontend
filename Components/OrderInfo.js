@@ -52,46 +52,58 @@ getOrders(){
         )
     })
     .then((resp) => resp.json())
-    .then(resp =>{ 
-        console.log('hitting', resp.order.items)
-        console.log('user',resp.username)
-        this.setState({items:resp.order.items})
+    .then(resp => {
+      if(!resp.order) {
+        console.log('no order found for user');
         this.setState({username:resp.username})
-        this.setState({totalPrice:resp.order.totalPrice})
+        return;
+      }
+      console.log('hitting', resp.order.items)
+      console.log('user',resp.username)
+      this.setState({
+        items:resp.order.items,
+        username:resp.username,
+        totalPrice:resp.order.totalPrice
+      })
     })
     .catch(err => console.log('error',err))
     }
 
-render(){
-    return(
+    render(){
+      return(
         <View>
-        <Text style={styles.checkOutTitle1}>Welcome {this.state.username}</Text>
-        <Text style={styles.checkOutTitle}>Your Order:</Text>
-        <ScrollView>
-        
-            <Card>
-            
-            {this.state.items.map((item)=>{
-                return (
-                <View style={{flexDirection:'row',flexWrap:'wrap',alignItems:'flex-end'}}>
-                <Text style={{fontSize:18}}>{item.name}  {item.count}</Text>
-                </View>)
-            })}
+          <Text style={styles.checkOutTitle1}>Welcome {this.state.username}</Text>
+          <Text style={styles.checkOutTitle}>Your Orders:</Text>
+          <ScrollView>
 
-            <Text style ={{textAlign:'right',
-            fontWeight:'bold',
-            fontSize:18,
-            marginTop:15}}>Total:{this.state.totalPrice}</Text>
-        
+            <Card>
+              {this.state.items.length === 0 ?
+                <Text>No past orders. Make your first order now!</Text>
+                :
+                this.state.items.map((item) => {
+                  return (
+                    <View style={{flexDirection:'row',flexWrap:'wrap',alignItems:'flex-end'}}>
+                      <Text style={{fontSize:18}}>{item.name}  {item.count}</Text>
+                    </View>)
+                  })
+              }
+
+
+                <Text style ={{textAlign:'right',
+                  fontWeight:'bold',
+                  fontSize:18,
+                  marginTop:15}}>Total:{this.state.totalPrice}
+                </Text>
+
             </Card>
-          {/* {this.state.items.map((item)=>{
-            return (<Text>{item}</Text>)
-        })}       */}
- 
-        </ScrollView>
-        </View>
-    )
-}
+                {/* {this.state.items.map((item)=>{
+                  return (<Text>{item}</Text>)
+                })}       */}
+
+            </ScrollView>
+          </View>
+          )
+        }
 
 }
 

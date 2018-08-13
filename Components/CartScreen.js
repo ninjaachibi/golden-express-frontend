@@ -135,7 +135,7 @@ class CartScreen extends React.Component {
             Total: ${this.calculateTotal().toFixed(2)}
           </Text>
 
-          <TouchableOpacity style={[styles.button, styles.buttonBlue]} onPress={()=>{this.checkout();this.calculateTotal()}}>
+          <TouchableOpacity style={[styles.button, styles.buttonBlue]} onPress={()=>{this.checkout()}}>
           <Text style={styles.buttonLabel} borderColor='white'
           borderStyle='solid'>Checkout</Text>
           </TouchableOpacity>
