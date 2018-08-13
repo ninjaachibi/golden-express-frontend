@@ -1,46 +1,41 @@
+
 import React from 'react';
 import {
-  StyleSheet,
-  View,
-  Text,
-  TouchableOpacity,
-  TextInput,
-  ListView,
-  Alert,
-  Button,
-  RefreshControl,
-  Image,
-  ScrollView,
-  AsyncStorage
+ StyleSheet,
+ View,
+ Text,
+ TouchableOpacity,
+ TextInput,
+ ListView,
+ Alert,
+ Button,
+ RefreshControl,
+ Image,
+ ScrollView,
+ AsyncStorage
 } from 'react-native';
 import styles from './Styles';
 import {Card} from 'react-native-elements'
-
 class OrderInfo extends React.Component {
-    static navigationOptions = {
-        title:'Order',
-      };
-
-    constructor(props) {
-        super(props);
-        this.ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
-        this.state = {
-            orderDate:null,
-            items:[],
-            username:'',
-            totalPrice:0
-        }
+  static navigationOptions = {
+    title:'Order',
+   };
+  constructor(props) {
+    super(props);
+    this.ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+    this.state = {
+      orderDate:null,
+      items:[],
+      username:'',
+      totalPrice:0
     }
-
+  }
 static navigationOptions = {
-    title:"Your Order"
+  title:"Your Order"
 }
 componentDidMount(){
-
-    this.getOrders()
-
+  this.getOrders()
 }
-
 getOrders(){
     console.log('hi')
     AsyncStorage.getItem('token')
@@ -104,8 +99,6 @@ getOrders(){
           </View>
           )
         }
-
-}
-
+      }
 
 export default OrderInfo

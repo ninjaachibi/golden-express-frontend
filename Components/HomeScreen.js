@@ -396,7 +396,6 @@ const titleScale = scrollY.interpolate({
            style={[
              styles.center,
              {
-
                transform: [
                  { translateY: titleTranslate },
                    {scale: titleScale }
@@ -404,7 +403,6 @@ const titleScale = scrollY.interpolate({
              },
            ]}
          >
-
          </Animated.View> */}
 
 
@@ -424,9 +422,6 @@ const titleScale = scrollY.interpolate({
             },
           ]}
         >
-
-
-
       </Animated.View>*/}
 </View>
 
