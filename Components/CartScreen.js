@@ -66,16 +66,19 @@ class CartScreen extends React.Component {
       let cart = await AsyncStorage.getItem('cart', (err,res)=> {if(err)console.log('err',err);});
       cart = JSON.parse(cart);
       console.log('cart is',cart);
-      if(!cart) {
-        cart = {}
-      }
-        cart[item._id] = !!cart[item._id] ? {count: --cart[item._id].count, item} : {count: 1, item};
+      if (!!cart[item._id] && cart[item._id].count > 0) {
+        cart[item._id] = !!cart[item._id] ? { count: --cart[item._id].count, item } : { count: 1, item };
         await AsyncStorage.setItem('cart', JSON.stringify(cart));
-        console.log("added to cart", cart);
-        this.setState({cart:cart})
+        console.log("subtracted from cart", cart);
+        this.setState({ cart:cart })
+      }
+      else {
+        console.log('not subtracting from cart');
+      }
+
     }
     catch(err) {
-      console.log(err);
+      console.log('error', err);
     }
   }
 
