@@ -255,12 +255,12 @@ const styles = StyleSheet.create({
   },
   singleCardBox:{
     flexDirection:"row",
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
   },
   addAndRemoveBox:{
-    flexDirection:'row',
-    alignItems:'flex-end',
-    flexWrap:'wrap'
+    // flexDirection:'row',
+    // alignItems:'flex-end',
+    //flexWrap:'wrap'
   },
   itemQuan:{
     fontSize:20,
