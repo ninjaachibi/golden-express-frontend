@@ -108,6 +108,28 @@ const styles = StyleSheet.create({
   content: {
     flex: 1,
   },
+  headerResult:{
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    backgroundColor: 'white',
+    borderBottomWidth:0.25,
+    borderBottomColor:'grey',
+    overflow: 'hidden',
+    height: 90,
+    justifyContent: 'flex-start'
+  },
+  headerProduct:{
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    backgroundColor: 'white',
+    overflow: 'hidden',
+    height: 90,
+    justifyContent: 'flex-start'
+  },
   header: {
     position: 'absolute',
     top: 0,
@@ -160,6 +182,18 @@ const styles = StyleSheet.create({
 
 
     top: 0,
+    left: 0,
+    right: 0,
+  },
+  bottom: {
+    backgroundColor: '#edf0f4',
+    height: 60,
+    paddingBottom: 115,
+    alignItems: 'flex-start',
+    justifyContent: 'flex-start',
+    position: 'absolute',
+    zIndex: 1,
+    top: SCREEN_HEIGHT * 9/10,
     left: 0,
     right: 0,
   },
@@ -237,19 +271,35 @@ const styles = StyleSheet.create({
   totalPrice:{
     fontSize:28,
     textAlign:"right",
-    marginRight:20  
+    marginRight:20
   },
   checkOutTitle:{
     fontSize:25,
     fontWeight:'bold',
     marginTop:15
   },
-  paymentBox:{
-    flexDirection:'row', 
-    alignItems:'flex-end', 
-    flexWrap:'wrap',
-    marginTop:10
+  checkOutTitle1:{
+    fontSize:20,
+    fontFamily:'Avenir',
+    marginTop:15
   },
+  paymentBox:{
+    flexDirection:'row',
+    alignItems:'flex-end',
+    flexWrap:'wrap',
+    marginTop:10,
+    marginBottom: 5,
+  },
+  inputLabels:{
+    flexDirection:'row',
+    alignItems:'flex-start',
+    justifyContent:'flex-start',
+    flexWrap:'wrap',
+    position:'absolute',
+    top:13,
+    left:6,
+    right:0,
+  }
 });
 
 

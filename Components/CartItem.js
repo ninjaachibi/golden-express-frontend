@@ -32,23 +32,23 @@ export default class CartItem extends React.Component {
       <View >
         <Card>
         <View>
-        <Avatar 
+        <Avatar
           size="medium"
           rounded
           source={{uri:item.item.imgURI}}/>
-          <View style={styles.singleCardBox}>          
+          <View style={styles.singleCardBox}>
             <Text style={styles.shoppingCartItem}>{item.item.name}</Text>
               <View style={styles.addAndRemoveBox}>
-                <Icon name="remove" onPress={()=>{this.props.subtractFromCart(item.item)}} />       
+                <Icon name="remove" onPress={()=>{this.props.subtractFromCart(item.item)}} />
                 <Text style={styles.itemQuan}>{item.count} </Text>
                 <Icon name="add"  onPress={()=>{this.props.addToCart(item.item)}} />
               </View>
           </View>
         </View>
           <View >
-        <Text style={{textAlign:'right'}}>Total: ${getTotal(item)}</Text> 
-          </View> 
-        
+        <Text style={{textAlign:'right'}}>Total: ${getTotal(item)}</Text>
+          </View>
+
       </Card>
 
 

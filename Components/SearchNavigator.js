@@ -29,11 +29,27 @@ import CheckoutScreen from './CheckoutScreen'
 import FeedbackScreen from './FeedbackScreen'
 import CategoriesScreen from './CategoriesScreen'
 import HomeNavigator from './HomeNavigator'
+import SearchResultsScreen from './SearchResultsScreen'
 
 
 
+const stack = {
+  Search: {
+    screen: SearchScreen,
+  },
+  SearchResults: {
+  screen: SearchResultsScreen
+},
+}
 
-export default class Categories extends React.Component{
+var SearchStack = StackNavigator(stack, {initialRouteName: 'Search',
+  headerMode: 'screen',
+  navigationOptions: {
+    headerVisible: false,
+  }
+})
+
+export default class SearchNavigator extends React.Component{
   constructor(props)
   {
     super(props);
@@ -41,20 +57,34 @@ export default class Categories extends React.Component{
 
     }
     this.navigateCart = this.navigateCart.bind(this)
+    this.openProduct = this.openProduct.bind(this)
+
+  }
+
+  openDrawer(){
+    this.props.screenProps.openDrawer()
+  }
+
+  closeDrawer(){
+    this.props.screenProps.closeDrawer()
   }
 
   navigateCart() {
     this.props.screenProps.cart()
-
   }
+  openProduct(item){
+    this.props.screenProps.openProduct(item)
+  }
+
+
 
   render(){
     const stack = {
       Search: {
         screen: SearchScreen,
       },
-      Grocery: {
-      screen: GroceryListScreen
+      SearchResults: {
+      screen: SearchResultsScreen
     },
     }
 
@@ -68,7 +98,10 @@ export default class Categories extends React.Component{
       <View style={{flex: 1}}>
         <SearchStack
           screenProps={{
-            cart: this.navigateCart
+            cart: this.navigateCart,
+            openDrawer: this.openDrawer,
+            closeDrawer: this.closeDrawer,
+            openProduct:this.openProduct
           }}/>
       </View>
 

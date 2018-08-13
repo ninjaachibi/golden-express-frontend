@@ -51,7 +51,6 @@ const Tabs = TabNavigator({
     navigationOptions: {
       tabBarIcon:({ tintColor }) => <Ionicons name='ios-bookmarks' size={30} color={tintColor} />,
       tabBarLabel:'Category',
-      header:null,
       headerStyle: {
         backgroundColor: "white",
       }
@@ -81,19 +80,8 @@ const Tabs = TabNavigator({
 
 
 },
-{initialRouteName:'Categories',
-  navigationOptions: {
-    headerRight:  <Header
-      backgroundColor='transparent'
-      rightComponent={
-      <TouchableOpacity>
-        <Icon
-        name='shopping-cart'
-        color='blue'
-        onPress={()=>{}}/>
-        </TouchableOpacity>}
-    />
-  }
+{initialRouteName:'Home',
+
 }
 )
 
@@ -106,10 +94,16 @@ export default class Interface extends React.Component {
     this.navigateCart = this.navigateCart.bind(this);
     this.openDrawer = this.openDrawer.bind(this);
     this.closeDrawer = this.closeDrawer.bind(this);
+    this.openProduct = this.openProduct.bind(this);
+
 
 
   }
 
+
+  openProduct(item){
+    this.props.screenProps.openProduct(item)
+  }
 
   openDrawer(){
     this.props.navigation.navigate('DrawerOpen')
@@ -130,7 +124,8 @@ export default class Interface extends React.Component {
         <Tabs screenProps={{
           cart: this.navigateCart,
           openDrawer: this.openDrawer,
-          closeDrawer: this.closeDrawer
+          closeDrawer: this.closeDrawer,
+          openProduct:this.openProduct
 
         }}/>
       </View>

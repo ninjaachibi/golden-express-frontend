@@ -7,6 +7,9 @@ import CategoriesNavigator from './CategoriesNavigator';
 import SearchNavigator from './SearchNavigator';
 import Test from './Test'
 import Interface from './Interface'
+import AccountNavigator from './AccountNavigator'
+import OrderInfo from './OrderInfo'
+import OrderNavigator from './OrderNavigator'
 
 import {
   StyleSheet,
@@ -28,14 +31,17 @@ const deviceWidth  =  Dimensions.get('window').width
 
 const DrawerStack = DrawerNavigator({
   One: {
-    screen: CategoriesNavigator,
+    screen: AccountNavigator,
   },
   Three: {
     screen: Interface,
   },
   Five: {
-    screen: HomeNavigator,
+    screen: OrderNavigator, //For testing
   },
+  Order:{
+    screen: OrderNavigator,
+  }
   
 }, {
   initialRouteName: 'Three',
@@ -55,10 +61,27 @@ export default class Drawer extends React.Component{
     super(props)
     this.state = {}
     this.openCart= this.openCart.bind(this)
+    this.openContact= this.openContact.bind(this)
+    this.openProduct = this.openProduct.bind(this)
+    this.openAddress= this.openAddress.bind(this)
+
+  }
+
+  openProduct(item){
+    this.props.navigation.navigate('Product', {item: item})
   }
 
   openCart(){
     this.props.navigation.navigate('Cart')
+  }
+
+  openContact(){
+    this.props.navigation.navigate('Contact')
+  }
+
+  openAddress(){
+    this.props.navigation.navigate('Address')
+
   }
 
   render()
@@ -67,7 +90,11 @@ export default class Drawer extends React.Component{
     return (
       <View style={{flex:1}}>
         <DrawerStack screenProps={{
-          openCart: this.openCart}}/>
+          openCart: this.openCart,
+          openAddress: this.openAddress,
+          openContact:this.openContact,
+          openProduct: this.openProduct
+        }}/>
       </View>
     )
   }

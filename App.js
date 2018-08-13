@@ -33,7 +33,13 @@ import CartScreen from './Components/CartScreen'
 import HomeNavigator from './Components/HomeNavigator'
 import CategoriesNavigator from './Components/CategoriesNavigator'
 import SearchNavigator from './Components/SearchNavigator'
-import UserOrder from './Components/UserOrder'
+import AddressScreen from './Components/AddressScreen'
+import ContactScreen from './Components/ContactScreen'
+import ProductScreen from './Components/ProductScreen'
+import UserOrder from './Components/OrderInfo'
+
+
+
 // import Interface from './Components/Interface' why does import not work
 import DrawerNavigator from './Components/DrawerNavigator'
 const MainNavigator = StackNavigator({
@@ -56,12 +62,28 @@ const MainNavigator = StackNavigator({
       headerVisible:true
     }
   },
+  Address: {
+    screen: AddressScreen
+
+  },
+  Contact: {
+    screen: ContactScreen
+  },
   Feedback: {
     screen: FeedbackScreen
   },
+  Product: {
+    screen: ProductScreen
+  },
+  // Search:{
+  //   screen:SearchScreen
+  // },//For testing
+  // SearchResults: {
+  //   screen: SearchResultScreen
+  // },// For testing
   AccountDetail: {
     screen: UserOrder
-  },
+  },//For testing
   Drawer: {
     screen: DrawerNavigator,
       navigationOptions: {

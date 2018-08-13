@@ -5,6 +5,9 @@ import { Button } from 'react-native-elements';
 import styles from './Sidebar.style';
 import PropTypes from 'prop-types';
 class DrawerContent extends Component {
+
+
+
 navigateToScreen = (route) => () => {
     const navigate = NavigationActions.navigate({
       routeName: route
@@ -26,13 +29,13 @@ render () {
          icon={{name: 'umbrella', type: 'font-awesome', size: 20}}
          title='Four'
          buttonStyle={styles.button}
-         onPress={this.navigateToScreen('Four')}/>
+         onPress={this.navigateToScreen('One')}/>
         <Button
          raised
          icon={{name: 'user-circle', type: 'font-awesome', size:20}}
          title='Five'
          buttonStyle={styles.button}
-         onPress={this.navigateToScreen('Five')}/>
+         onPress={this.navigateToScreen('Order')}/>
         </ScrollView>
       </View>
     );
