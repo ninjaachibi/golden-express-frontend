@@ -87,7 +87,7 @@ class ProductScreen extends React.Component {
     )
   }
 
-  async addToCart (item) {
+  async addToCart (item, quantity) {
     // console.log('adding to cart', item);
     try {
       let cart = await AsyncStorage.getItem('cart', (err,res)=> {if(err)console.log('err',err);});
@@ -96,7 +96,7 @@ class ProductScreen extends React.Component {
       if(!cart) {
         cart = {}
       }
-      cart[item._id] = !!cart[item._id] ? {count: ++cart[item._id].count, item} : {count: 1, item};
+      cart[item._id] = !!cart[item._id] ? {count: quantity + cart[item._id].count, item} : {count: quantity, item};
       await AsyncStorage.setItem('cart', JSON.stringify(cart));
       console.log("added to cart", cart);
       _.debounce(this.props.navigation.goBack, 300)();
@@ -297,7 +297,7 @@ class ProductScreen extends React.Component {
             </Card>
             <TouchableOpacity style={{alignItems:'center',borderRadius: 8,height:30,position:'absolute', top:2,left:SCREEN_WIDTH*15/29,right:0,zIndex:2,marginLeft:-2.5,
             flexDirection:'row', width: SCREEN_WIDTH * 0.48, backgroundColor:'red',
-            borderColor:'grey', marginRight:5}} onPress={()=>this.addToCart(item)}>
+            borderColor:'grey', marginRight:5}} onPress={()=>this.addToCart(item, this.state.quantity)}>
             <Text style={{marginLeft: 40,textAlign:'right',color: 'white', fontSize: 18, fontWeight:'bold'}}> Add to Cart </Text>
           </TouchableOpacity>
 
