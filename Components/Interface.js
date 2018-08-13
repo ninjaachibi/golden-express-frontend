@@ -80,7 +80,7 @@ const Tabs = TabNavigator({
 
 
 },
-{initialRouteName:'Home',
+{initialRouteName:'Search',
 
 }
 )

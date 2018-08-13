@@ -236,6 +236,7 @@ export default class SearchResultsScreen extends React.Component {
 
 
   render() {
+    console.log('Search Result Screen')
     const scrollY = Animated.add(
       this.state.scrollY,
       Platform.OS === 'ios' ? HEADER_MAX_HEIGHT : 0,
@@ -275,7 +276,7 @@ const titleScale = scrollY.interpolate({
 
 
     // console.log(this.state.scrollY)
-    console.log(this.state.items)
+    console.log('my items', this.state.items)
     console.log("my groceries", this.state.groceries)
 
     return (

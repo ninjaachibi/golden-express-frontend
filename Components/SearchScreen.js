@@ -18,8 +18,8 @@ import styles from './Styles'
 import HorizontalMealScroll from './HorizontalMealScroll'
 import { Ionicons } from '@expo/vector-icons';
 import {Header, Icon} from 'react-native-elements';
+import Autocomplete from 'react-native-autocomplete-input';
 const D_IMG = require('../assets/goldenTemple.jpg')
-
 class SearchScreen extends React.Component {
   static navigationOptions =({navigation}) => {
     const {state} = navigation
@@ -37,16 +37,6 @@ class SearchScreen extends React.Component {
 
   };
 
-  searchItem(searchItem){
-     fetch('https://golden-express.herokuapp.com/searchItem'+`?searchItem=${searchItem.charAt(0).toUpperCase()+searchItem.slice(1)}`)
-     .then((resp)=> resp.json())
-     .then(resp => {
-       console.log(searchItem.charAt(0).toUpperCase()+searchItem.slice(1))
-       console.log(searchItem)
-       console.log('hitting',resp);
-       this.props.navigation.navigate('SearchResults', {groceryItems: resp.items})//?????
-     })
-   }
 
 
 componentDidMount()
@@ -59,11 +49,12 @@ componentDidMount()
     this.state = {
       message: '',
       search: '',
+      query:'',
     }
     this.searchItem = this.searchItem.bind(this)
   }
 
- 
+
   searchItem(searchItem){
     fetch('https://golden-express.herokuapp.com/searchItem'+`?searchItem=${searchItem.charAt(0).toUpperCase()+searchItem.slice(1)}`)
     .then((resp)=> resp.json())
@@ -75,11 +66,13 @@ componentDidMount()
     })
   }
 
- 
+
 
   render() {
     let navigation = this.props.navigation;
-
+    var suggestions = ['pork', "fish", "milk", 'eggs', 'bread', 'banana', 'butter', 'onion', 'pickled', 'chicken', 'beef']
+    const data = suggestions.filter((item)=>item.indexOf(this.state.query) > -1)
+    console.log(data)
     return (
       <View style={{
         flex: 1,
@@ -87,35 +80,25 @@ componentDidMount()
         alignItems:'stretch'
       }}>
 
-        <ImageBackground
-            source={D_IMG}
-            style={[styles.goldenImage, {
-              opacity: 0.69,
-              justifyContent:'flex-start',
-              height: null,
-              width:null,
-              flex: 5
-            }]}>
+
 
 
       <View style={{justifyContent:'flex-start'}}>
-        <TextInput
+        <Autocomplete
+          autoCapitalize={'none'}
+          data= {data}
+          placeholder={<Text>Search Golden Express </Text>}
+          defaultValue={this.state.query}
+          onChangeText={text => this.setState({ query: text })}
+          renderItem={item => (
+      <TouchableOpacity onPress={() => this.searchItem(item)}>
+        <Text>{item}</Text>
+      </TouchableOpacity>
+    )}
+/>
+      </View>
 
-          style={{height: 40, width: 375, backgroundColor:'white',display:null, padding:3}}
-          placeholder="Search for an Item"
-          onChangeText={(text) => this.setState({search: text})}
-        />
-        <TouchableOpacity style={[styles.button, styles.buttonBlue]}
-          onPress={ () => {this.searchItem(this.state.search)} }>
-          <Text style={styles.buttonLabel}>Search</Text>
-        </TouchableOpacity></View>
-<Text>  </Text>
 
-      {/* <TouchableOpacity style={[styles.button, styles.buttonBlue]} onPress={ () => {this.submit()} }>
-        <Text style={styles.buttonLabel}>Search</Text>
-      </TouchableOpacity> */}
-    {/* </View> */}
-</ImageBackground>
 
   </View>
     )
