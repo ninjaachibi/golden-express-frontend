@@ -45,7 +45,7 @@ class ProductScreen extends React.Component {
     this.ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     this.state = {
       item: "",
-      quantity:0,
+      quantity: 1,
       scrollY: new Animated.Value(
         // iOS has negative initial scroll value because content inset...
         Platform.OS === 'ios' ? -HEADER_MAX_HEIGHT : 0,
@@ -261,7 +261,7 @@ class ProductScreen extends React.Component {
           <View style={{marginTop:-25,marginLeft: 30}}>
 
 
-            <TouchableOpacity style={{marginLeft:SCREEN_WIDTH - 64, marginTop:33}}>
+            <TouchableOpacity style={{ marginLeft:SCREEN_WIDTH - 64, marginTop:33 }}>
               <Icon
                 name='shopping-cart'
                 color='blue'
