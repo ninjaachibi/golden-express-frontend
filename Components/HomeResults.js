@@ -20,7 +20,7 @@ import {
   Platform,
   StatusBar,
   Dimensions,
-  Flatlist
+  Flatlist,
 } from 'react-native';
  // Version can be specified in package.json
 import HorizontalMealScroll from './HorizontalMealScroll'
@@ -40,7 +40,7 @@ const A_IMG = require('../assets/GradientLayers.png')
 
 
 
-export default class SearchResultsScreen extends React.Component {
+export default class HomeResults extends React.Component {
 
 
   cartNavigate()
@@ -83,10 +83,10 @@ export default class SearchResultsScreen extends React.Component {
         </TouchableOpacity>
       </View>
         <View style={{alignItems:'flex-start',marginTop:20}}>
-        <Text style={{textAlign: "center", marginLeft: 20, marginRight: -40,fontWeight:'bold',fontSize:17}}>{item.price}</Text>
+        <Text style={{textAlign: "left", marginLeft: 20, marginRight: -40,fontWeight:'bold',fontSize:17}}>{item.price}</Text>
 
-        <Text style={{textAlign: "center", marginLeft: 20,marginRight: 0, marginTop:5, fontSize: 12}}>{name}</Text>
-        <Text style={{textAlign: "center", marginLeft: 17.5,marginRight: -40, marginTop:5, fontSize: 12}}>{count}</Text>
+        <Text style={{textAlign: "left", marginLeft: 20,marginRight: 0, marginTop:5, fontSize: 12}}>{name}</Text>
+        <Text style={{textAlign: "left", marginLeft: 17.5,marginRight: -40, marginTop:5, fontSize: 12}}>{count}</Text>
 
       </View>
 
@@ -197,10 +197,8 @@ export default class SearchResultsScreen extends React.Component {
 
 
     let groceryItems = this.props.navigation.getParam('groceryItems', [])
-    let query = this.props.navigation.getParam('query', 'Results')
-    this.setState({query: query})
-
-
+    let search = this.props.navigation.getParam('query', "Results")
+    this.setState({aisle:search})
 
     console.log('ghjfhjfhgj',groceryItems)
     let double = []
@@ -239,7 +237,6 @@ export default class SearchResultsScreen extends React.Component {
 
 
   render() {
-    console.log('Search Result Screen')
     const scrollY = Animated.add(
       this.state.scrollY,
       Platform.OS === 'ios' ? HEADER_MAX_HEIGHT : 0,
@@ -279,7 +276,7 @@ const titleScale = scrollY.interpolate({
 
 
     // console.log(this.state.scrollY)
-    console.log('my items', this.state.items)
+    console.log(this.state.items)
     console.log("my groceries", this.state.groceries)
 
     return (
@@ -401,7 +398,7 @@ const titleScale = scrollY.interpolate({
            </View>
 
              <View style={{marginTop:-25,marginLeft: SCREEN_WIDTH/2-25}}>
-            <Text style={{fontSize:18, fontWeight:'bold', color:'black'}}>{this.state.query}</Text>
+            <Text style={{fontSize:18, fontWeight:'bold', color:'black'}}>{this.state.aisle}</Text>
           </View>
 
           <View style={{marginTop:-25,marginLeft: 30}}>
