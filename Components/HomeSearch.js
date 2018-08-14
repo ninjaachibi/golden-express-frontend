@@ -66,7 +66,7 @@ componentDidMount()
       console.log(searchItem.charAt(0).toUpperCase()+searchItem.slice(1))
       console.log(searchItem)
       console.log('hitting',resp);
-      this.props.navigation.navigate({key:'SearchResults', routeName:'HomeResults', params:{groceryItems: resp.items, query:item}})//?????
+      this.props.navigation.navigate({key:'HomeResults', routeName:'HomeResults', params:{groceryItems: resp.items, aisle:item}})//?????
     })
   }
 

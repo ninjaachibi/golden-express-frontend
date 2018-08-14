@@ -254,10 +254,11 @@ const styles = StyleSheet.create({
     paddingTop: Platform.OS !== 'ios' ? HEADER_MAX_HEIGHT : 0,
   },
   row: {
-    height: 240,
+    height: 180,
     margin: 16,
     alignItems: 'center',
     justifyContent: 'center',
+
   },
   shoppingCartItem:{
     textAlign:'left',

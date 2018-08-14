@@ -31,11 +31,11 @@ const SCREEN_HEIGHT = Dimensions.get('window').height
 const HEADER_MAX_HEIGHT = 100//240;
 const HEADER_MIN_HEIGHT = 0;
 const HEADER_SCROLL_DISTANCE = HEADER_MAX_HEIGHT - HEADER_MIN_HEIGHT;
-const B_IMG = require('../assets/redGradient1.jpg')
+const B_IMG = require('../assets/redGradient.png')
 const G_IMG = require('../assets/redGradient.png')
 const D_IMG = require('../assets/goldenTemple.jpg')
 const L_IMG = require('../assets/Coupon.jpg')
-const A_IMG = require('../assets/orangeGradient.jpeg')
+const A_IMG = require('../assets/redGradient.png')
 
 
 
@@ -83,6 +83,7 @@ export default class HomeScreen extends React.Component {
 
     }
     this.searchBar = this.searchBar.bind(this)
+    this.browseAisle = this.browseAisle.bind(this)
 
 
   }
@@ -99,6 +100,31 @@ export default class HomeScreen extends React.Component {
     this.props.navigation.navigate('BrowseGrocery', {
       query: this.state.search,
     });
+  }
+
+  browseAisle (aisle) {
+    console.log('clicked');
+    fetch('https://golden-express.herokuapp.com/browse' + `?aisle=${aisle.toLowerCase()}`)
+    .then((resp) => resp.json())
+    .then(resp => {
+      console.log('hitting',resp);
+      this.props.navigation.navigate({key:'HomeResults', routeName:'HomeResults', params: {groceryItems: resp.items, aisle: aisle}})
+    })
+    .then(res => this.setState({disabled:false}))
+  }
+
+  createAisle(aisle){
+
+
+
+    return (<View style={[styles.row]}>
+      <ImageBackground style={{width:SCREEN_WIDTH* 1.25, height: 275, justifyContent:'flex-start',position:'absolute', top: 25, left:-20, right:50 }} source={A_IMG}>
+          <TouchableOpacity onPress={()=> this.browseAisle(aisle)} style={{position:'absolute', top: 12, left: SCREEN_WIDTH*3/4, zIndex:3}}>
+          <Text style={{color:'white',marginTop:2,marginRight:10, fontWeight:'bold',fontSize:16}}>View more...></Text>
+          </TouchableOpacity>
+    <HorizontalMealScroll  aisle={aisle} style={{flex:1}}/>
+  </ImageBackground>
+</View>)
   }
 
 
@@ -226,10 +252,10 @@ const titleScale = scrollY.interpolate({
           }>
 
       </TouchableOpacity>
-          <ImageBackground style={{width:SCREEN_WIDTH* 1.25, height: 275, justifyContent:'center',position:'absolute', top: 25, left:-20, right:50 }} source={B_IMG}>
+          <ImageBackground style={{width:SCREEN_WIDTH* 1.25, height: 275, justifyContent:'center',position:'absolute', top: 25, left:-SCREEN_WIDTH*1/10, right:0}} source={B_IMG}>
           <Image
             source={L_IMG}
-            style={{height:160, width: 230, borderRadius: 14, position:'absolute', top:65,left:0, right:0, marginBottom: 14, marginLeft: 75}}/>
+            style={{height:140, width: 180, borderRadius: 14, position:'absolute', top:65,left:SCREEN_WIDTH*1/10, right:0, marginBottom: 14, marginLeft: 75}}/>
           </ImageBackground>
           {/* </TouchableHighlight> */}
           </View>
@@ -237,27 +263,18 @@ const titleScale = scrollY.interpolate({
             backgroundColor:'transparent',
 
             alignItems:'flex-start'}}>
-            <View style={[styles.row]}>
-              <ImageBackground style={{width:SCREEN_WIDTH* 1.25, height: 275, justifyContent:'center',position:'absolute', top: 25, left:-20, right:50 }} source={A_IMG}>
-
-            <HorizontalMealScroll style={{flex:1}}/>
-          </ImageBackground>
-          </View>
-            <View style={[styles.row]}>
-              <ImageBackground style={{width:SCREEN_WIDTH* 1.25, height: 275, justifyContent:'center',position:'absolute', top: 25, left:-20, right:50 }} source={A_IMG}>
-
-            <HorizontalMealScroll style={{flex:1}}/>
-          </ImageBackground>
-          </View>
-
-            <View style={[styles.row]}>
-
-            <HorizontalMealScroll style={{flex:1}}/>
-          </View>
-            <View style={[styles.row]}>
-
-            <HorizontalMealScroll style={{flex:1}}/>
-          </View>
+            {
+              this.createAisle('meat')
+            }
+            {
+              this.createAisle('seafood')
+            }
+            {
+              this.createAisle('spices')
+            }
+            {
+              this.createAisle('produce')
+            }
 
           </View>
         </View>
