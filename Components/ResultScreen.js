@@ -46,7 +46,6 @@ export default class ResultScreen extends React.Component {
   cartNavigate()
   {
     this.props.screenProps.cart()
-
   }
 
   listFiller(){
@@ -228,10 +227,8 @@ export default class ResultScreen extends React.Component {
     this.props.navigation.navigate('Search')
   }
 
-  openProduct(item)
-  {
+  openProduct(item) {
     this.props.screenProps.openProduct(item)
-
   }
 
 
