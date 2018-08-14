@@ -258,16 +258,17 @@ class ProductScreen extends React.Component {
             <Text style={{fontSize:12, textAlign:'center', fontWeight:'bold', color:'black'}}>{this.state.name}</Text>
           </View>
 
-          <View style={{marginTop:-25,marginLeft: 30}}>
+          {/* <View style={{marginTop:-25,marginLeft: 30}}>
 
 
             <TouchableOpacity style={{ marginLeft:SCREEN_WIDTH - 64, marginTop:33 }}>
               <Icon
                 name='shopping-cart'
                 color='blue'
-                onPress={()=>{this.props.screenProps.cart()}}/>
-              </TouchableOpacity>
-            </View>
+                onPress={()=>{this.props.screenProps.cart()}}
+              />
+            </TouchableOpacity>
+            </View> */}
 
           </Animated.View>
           <Animated.View

@@ -24,34 +24,6 @@ class HorizontalMealScroll extends Component {
     };
   }
 componentDidMount() {
-  fetch('https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/search' + `?number=100`, {
-    headers: {
-      "X-Mashape-Key": "iTqnNBvWSamshrNnx4RCtgFVlPuYp1srw8fjsnZerAuAVNTnjb",
-      "Accept": "application/json",
-    },
-  })
-  .then(res => res.json())
-  .then(res => {console.log(res);
-    this.setState({data:res.results.map((item)=>{
-    return {title:item.title, imageUrl: 'https://spoonacular.com/recipeImages/' + item.imageUrls[0], id: item.id}
-  })
-})
-
-})
-.then(()=>{
-  var meal = this.state.data[0].id
-  fetch('https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/food/ingredients/' + 1002030 + '/information', {
-    headers: {
-      "X-Mashape-Key": "iTqnNBvWSamshrNnx4RCtgFVlPuYp1srw8fjsnZerAuAVNTnjb",
-      "Accept": "application/json",
-    },
-  })
-  .then(res => res.json())
-  .then(res => {console.log(res);
-    // this.setState({data:res.results.map((item)=>{
-    // return {title:item.title, imageUrl: 'https://spoonacular.com/recipeImages/' + item.imageUrls[0], id: item.id}
-  })
-})
 
 }
 
