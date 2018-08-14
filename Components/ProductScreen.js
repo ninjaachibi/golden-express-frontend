@@ -30,6 +30,8 @@ const HEADER_MIN_HEIGHT = 0;
 const HEADER_SCROLL_DISTANCE = HEADER_MAX_HEIGHT - HEADER_MIN_HEIGHT;
 
 let addToCart;
+let cartAdd;
+
 
 class ProductScreen extends React.Component {
   //Location  Favorites,foods,home, history, search?
@@ -70,7 +72,13 @@ class ProductScreen extends React.Component {
   componentDidMount() {
     console.log("I have reached the Product Screen");
     let item = this.props.navigation.getParam("item", {name: "no item passed"})
+
     addToCart = this.props.navigation.getParam("addToCart", null)
+    // cartAdd = (item, quantity) => {
+    //   addToCart(item, quantity)
+    //   _.debounce(this.props.navigation.goBack, 300)();
+    // }
+
     console.log('item',item)
     console.log('add to cart', addToCart);
     this.setState({item:item, image: item.imgURI, price: item.price, description: item.description, aisle:item.aisle, name:item.name})
@@ -321,8 +329,11 @@ class ProductScreen extends React.Component {
                     marginRight:5
                   }}
                 onPress={()=> { addToCart ?
-                  addToCart(item, this.state.quantity)
-                  // _.debounce(this.props.navigation.goBack, 300)();
+                  // cartAdd(item, this.state.quantity)
+                  (function (item,quantity) {
+                    addToCart(item,quantity)
+                    _.debounce(this.props.navigation.goBack, 300)()
+                  }.bind(this))(item,this.state.quantity)
                   :
                   this.addToCart(item, this.state.quantity);
                 }}>
@@ -342,5 +353,7 @@ class ProductScreen extends React.Component {
   )
 }
 }
+
+
 
 export default ProductScreen;
