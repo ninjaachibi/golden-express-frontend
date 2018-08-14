@@ -55,7 +55,6 @@ class CartScreen extends React.Component {
       await AsyncStorage.setItem('cart', JSON.stringify(cart));
       console.log("added to cart", cart);
       this.setState({cart:cart}); //this is the only line that's different between ProductScreen's addToCart
-      _.debounce(this.props.navigation.goBack, 300)();
     }
     catch(err) {
       console.log(err);
