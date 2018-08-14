@@ -156,6 +156,7 @@ const styles = StyleSheet.create({
     width: null,
     height: HEADER_MAX_HEIGHT,
     resizeMode: 'cover',
+    zIndex:1
   },
   backgroundView: {
     position: 'absolute',
@@ -307,6 +308,24 @@ const styles = StyleSheet.create({
     top:13,
     left:6,
     right:0,
+  },
+  searchInput:{
+    backgroundColor:'#e6e9ef',
+    color:'black',
+    borderRadius:5,
+    marginLeft: SCREEN_WIDTH * 1/10,
+    width:SCREEN_WIDTH * 3/4,
+    height: 30,
+    paddingLeft:30,
+    padding:5,
+  },
+  searchItem: {
+    flexDirection:'row',
+    alignItems:'center',
+    height: 45,
+    fontSize: 22.5,
+
+
   }
 });
 
