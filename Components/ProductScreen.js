@@ -29,6 +29,7 @@ const HEADER_MAX_HEIGHT = 30;//240;
 const HEADER_MIN_HEIGHT = 0;
 const HEADER_SCROLL_DISTANCE = HEADER_MAX_HEIGHT - HEADER_MIN_HEIGHT;
 
+let addToCart;
 
 class ProductScreen extends React.Component {
   //Location  Favorites,foods,home, history, search?
@@ -54,8 +55,8 @@ class ProductScreen extends React.Component {
 
     }
     this.add = this.add.bind(this)
-    this.subtract = this.subtract.bind(this)
-
+    this.subtract = this.subtract.bind(this);
+    this.addToCart = this.addToCart.bind(this)
   }
 
   add(){
@@ -69,7 +70,9 @@ class ProductScreen extends React.Component {
   componentDidMount() {
     console.log("I have reached the Product Screen");
     let item = this.props.navigation.getParam("item", {name: "no item passed"})
-    console.log(item)
+    addToCart = this.props.navigation.getParam("addToCart", null)
+    console.log('item',item)
+    console.log('add to cart', addToCart);
     this.setState({item:item, image: item.imgURI, price: item.price, description: item.description, aisle:item.aisle, name:item.name})
 
   }
@@ -287,23 +290,47 @@ class ProductScreen extends React.Component {
 
               <View style={{flexDirection:'row'}}>
                 <Card borderRadius={8} containerStyle={{height: 15,position:'absolute', top:-13,left:0, right:0, flexDirection:'row', alignItems:'flex-start', backgroundColor:'white', borderColor:'grey',marginLeft:6,width: SCREEN_WIDTH * 0.48}}>
-                  <TouchableOpacity style={{position:'absolute', top:-21,left:-10,right:SCREEN_WIDTH*1/3}} onPress={() => this.subtract()}>
-                  <Text style={{fontSize:32}}> - </Text>
+                  <TouchableOpacity
+                    style={{position:'absolute', top:-21,left:-10,right:SCREEN_WIDTH*1/3}}
+                    onPress={() => this.subtract()}>
+                    <Text style={{fontSize:32}}> - </Text>
+                  </TouchableOpacity>
+                  <Text style={{position:'absolue', top:-14,left:67,right:0, fontSize: 22, fontWeight:'bold'}}>{this.state.quantity}</Text>
+                  <TouchableOpacity
+                    style={{position:'absolute', top:-21,left:SCREEN_WIDTH*1/3,right:-10}}
+                    onPress={() => this.add()}>
+                    <Text style={{fontSize:32}}> + </Text>
+                  </TouchableOpacity>
+
+                </Card>
+                <TouchableOpacity
+                  style={{
+                    alignItems:'center',
+                    borderRadius: 8,
+                    height:30,
+                    position:'absolute',
+                    top:2,
+                    left:SCREEN_WIDTH*15/29,
+                    right:0,
+                    zIndex:2,
+                    marginLeft:-2.5,
+                    flexDirection:'row',
+                    width: SCREEN_WIDTH * 0.48,
+                    backgroundColor:'red',
+                    borderColor:'grey',
+                    marginRight:5
+                  }}
+                onPress={()=> { addToCart ?
+                  addToCart(item, this.state.quantity)
+                  // _.debounce(this.props.navigation.goBack, 300)();
+                  :
+                  this.addToCart(item, this.state.quantity);
+                }}>
+                  <Text style={{marginLeft: 40,textAlign:'right',color: 'white', fontSize: 18, fontWeight:'bold'}}> Add to Cart </Text>
                 </TouchableOpacity>
-                <Text style={{position:'absolue', top:-14,left:67,right:0, fontSize: 22, fontWeight:'bold'}}>{this.state.quantity}</Text>
-                <TouchableOpacity style={{position:'absolute', top:-21,left:SCREEN_WIDTH*1/3,right:-10}} onPress={() => this.add()}>
-                <Text style={{fontSize:32}}> + </Text>
-              </TouchableOpacity>
-
-            </Card>
-            <TouchableOpacity style={{alignItems:'center',borderRadius: 8,height:30,position:'absolute', top:2,left:SCREEN_WIDTH*15/29,right:0,zIndex:2,marginLeft:-2.5,
-            flexDirection:'row', width: SCREEN_WIDTH * 0.48, backgroundColor:'red',
-            borderColor:'grey', marginRight:5}} onPress={()=>this.addToCart(item, this.state.quantity)}>
-            <Text style={{marginLeft: 40,textAlign:'right',color: 'white', fontSize: 18, fontWeight:'bold'}}> Add to Cart </Text>
-          </TouchableOpacity>
 
 
-        </View>
+              </View>
 
 
       </Animated.View>

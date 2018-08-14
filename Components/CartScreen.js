@@ -43,8 +43,7 @@ class CartScreen extends React.Component {
     this.setState({cart:JSON.parse(cart)});
   }
 
-  async addToCart (item) {
-    // console.log('adding to cart', item);
+  async addToCart (item, quantity) {
     try {
       let cart = await AsyncStorage.getItem('cart', (err,res)=> {if(err)console.log('err',err);});
       cart = JSON.parse(cart);
@@ -52,10 +51,11 @@ class CartScreen extends React.Component {
       if(!cart) {
         cart = {}
       }
-        cart[item._id] = !!cart[item._id] ? {count: ++cart[item._id].count, item} : {count: 1, item};
-        await AsyncStorage.setItem('cart', JSON.stringify(cart));
-        console.log("added to cart", cart);
-        this.setState({cart:cart})
+      cart[item._id] = !!cart[item._id] ? {count: quantity + cart[item._id].count, item} : {count: quantity, item};
+      await AsyncStorage.setItem('cart', JSON.stringify(cart));
+      console.log("added to cart", cart);
+      this.setState({cart:cart}); //this is the only line that's different between ProductScreen's addToCart
+      _.debounce(this.props.navigation.goBack, 300)();
     }
     catch(err) {
       console.log(err);
@@ -105,7 +105,8 @@ class CartScreen extends React.Component {
   }
 
   openProduct(item){
-    this.props.navigation.navigate({key:'Product',routeName:'Product', params:{item: item}})
+
+    this.props.navigation.navigate({key:'Product',routeName:'Product', params:{item: item, addToCart: this.addToCart}})
   }
 
   calculateTotal () {
