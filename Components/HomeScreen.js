@@ -219,16 +219,18 @@ const titleScale = scrollY.interpolate({
         <View style={[styles.row,{backgroundColor:'transparent', alignItems:'center', justifyContent:'center'}]}>
           {/* <TouchableHighlight onPress={()=>this.props.navigation.navigate('HomeSearch')}> */}
           <TouchableOpacity
-            style={{height: 100, width: SCREEN_WIDTH, alignItems:'center', backgroundColor:'transparent', position:'absolute', top: 32.5,left:0,right:0,padding:3,display:null, justifyContent:'center', }}
+            style={{height: 40, width: SCREEN_WIDTH, alignItems:'center', backgroundColor:'white',
+            borderRadius: 8, padding:3, justifyContent:'center', position:'absolute', top: 35, zIndex:3 }}
             placeholder="Search for a Recipe"
             onPress={()=>{console.log("Pressed");this.props.navigation.navigate('HomeSearch')}
           }>
+          <Text style={{color:'grey'}}> Search Golden Express </Text>
 
           {/* <TouchableOpacity style={[styles.button, styles.buttonBlue]} onPress={ () => {this.submit()} }>
           <Text style={styles.buttonLabel}>Search</Text>
-          </TouchableOpacity> */}
-          {/* </View> */}
-          </TouchableOpacity>
+        </TouchableOpacity> */}
+        {/* </View> */}
+      </TouchableOpacity>
           <ImageBackground style={{width:SCREEN_WIDTH* 1.25, height: 250, justifyContent:'center',position:'absolute', top: 25, left:-20, right:50 }} source={B_IMG}>
           <Image
             source={L_IMG}
@@ -288,20 +290,22 @@ const titleScale = scrollY.interpolate({
 
 
              }]}/>
+             <TouchableOpacity
+               style={{height: 40, width: SCREEN_WIDTH, alignItems:'center', backgroundColor:'white',
+               borderRadius: 8, padding:3, justifyContent:'center', position:'absolute', top: 150, zIndex:3 }}
+               placeholder="Search for a Recipe"
+               onPress={()=>{console.log("Pressed");this.props.navigation.navigate('HomeSearch')}
+             }>
+             <Text style={{color:'grey'}}> Search Golden Express </Text>
+
+             {/* <TouchableOpacity style={[styles.button, styles.buttonBlue]} onPress={ () => {this.submit()} }>
+             <Text style={styles.buttonLabel}>Search</Text>
+           </TouchableOpacity> */}
+           {/* </View> */}
+         </TouchableOpacity>
 
 
-           <TouchableOpacity
-             style={{height: 40, width: SCREEN_WIDTH, alignItems:'center', backgroundColor:'white', borderRadius: 8, marginTop: 152, padding:3,display:null, justifyContent:'center', }}
-             placeholder="Search for a Recipe"
-             onPress={()=>{console.log("Pressed");this.props.navigation.navigate('HomeSearch')}
-           }>
-           <Text style={{color:'grey'}}> Search Golden Express </Text>
 
-           {/* <TouchableOpacity style={[styles.button, styles.buttonBlue]} onPress={ () => {this.submit()} }>
-           <Text style={styles.buttonLabel}>Search</Text>
-         </TouchableOpacity> */}
-         {/* </View> */}
-       </TouchableOpacity>
 
 
 
@@ -396,6 +400,7 @@ const titleScale = scrollY.interpolate({
            style={[
              styles.center,
              {
+
                transform: [
                  { translateY: titleTranslate },
                    {scale: titleScale }
@@ -403,6 +408,7 @@ const titleScale = scrollY.interpolate({
              },
            ]}
          >
+
          </Animated.View> */}
 
 
@@ -422,6 +428,9 @@ const titleScale = scrollY.interpolate({
             },
           ]}
         >
+
+
+
       </Animated.View>*/}
 </View>
 
