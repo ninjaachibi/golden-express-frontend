@@ -30,6 +30,7 @@ class CartScreen extends React.Component {
     this.getItemTotal = this.getItemTotal.bind(this);
     this.subtractFromCart = this.subtractFromCart.bind(this);
     this.deleteFromCart = this.deleteFromCart.bind(this)
+    this.openProduct = this.openProduct.bind(this)
   }
 
   async componentDidMount () {
@@ -103,6 +104,10 @@ class CartScreen extends React.Component {
     this.props.navigation.navigate('Checkout', {total: this.calculateTotal(), cart: this.state.cart})
   }
 
+  openProduct(item){
+    this.props.navigation.navigate({key:'Product',routeName:'Product', params:{item: item}})
+  }
+
   calculateTotal () {
     let ret = _.values(this.state.cart).reduce((total, item) => total + this.getItemTotal(item), 0)
     return ret;
@@ -142,14 +147,17 @@ class CartScreen extends React.Component {
                 {
                   _.values(this.state.cart).map((item) => {
                     return (
-                      <CartItem
-                        key = {item.item._id}
-                        item={item}
-                        addToCart={this.addToCart}
-                        subtractFromCart={this.subtractFromCart}
-                        deleteFromCart={this.deleteFromCart}
-                        getTotal={this.getItemTotal}
-                      />
+                      <TouchableOpacity onPress={()=>{this.openProduct(item.item)}}>
+                        <CartItem
+                          key = {item.item._id}
+                          item={item}
+                          addToCart={this.addToCart}
+                          subtractFromCart={this.subtractFromCart}
+                          deleteFromCart={this.deleteFromCart}
+                          getTotal={this.getItemTotal}
+                        />
+                      </TouchableOpacity>
+
                     )
                   })
                 }
