@@ -16,6 +16,8 @@ const data = [
     title: "Low Carb Frosty"
   }
 ];
+const headerHeight = 50;
+
 class HorizontalMealScroll extends Component {
   constructor(props) {
     super(props);
@@ -24,63 +26,72 @@ class HorizontalMealScroll extends Component {
     };
   }
 componentDidMount() {
-  fetch('https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/search' + `?number=100`, {
-    headers: {
-      "X-Mashape-Key": "iTqnNBvWSamshrNnx4RCtgFVlPuYp1srw8fjsnZerAuAVNTnjb",
-      "Accept": "application/json",
-    },
-  })
-  .then(res => res.json())
-  .then(res => {console.log(res);
-    this.setState({data:res.results.map((item)=>{
-    return {title:item.title, imageUrl: 'https://spoonacular.com/recipeImages/' + item.imageUrls[0], id: item.id}
-  })
-})
+  // this.list.scrollToIndex({ index: 3 || 0 });
+    let aisle = this.props.aisle ? this.props.aisle : 'produce'
 
-})
-.then(()=>{
-  var meal = this.state.data[0].id
-  fetch('https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/food/ingredients/' + 1002030 + '/information', {
-    headers: {
-      "X-Mashape-Key": "iTqnNBvWSamshrNnx4RCtgFVlPuYp1srw8fjsnZerAuAVNTnjb",
-      "Accept": "application/json",
-    },
-  })
-  .then(res => res.json())
-  .then(res => {console.log(res);
-    // this.setState({data:res.results.map((item)=>{
-    // return {title:item.title, imageUrl: 'https://spoonacular.com/recipeImages/' + item.imageUrls[0], id: item.id}
-  })
-})
+    let category = aisle.charAt(0).toUpperCase()+aisle.slice(1)
+    console.log('clicked');
+    fetch('https://golden-express.herokuapp.com/browse' + `?aisle=${aisle.toLowerCase()}`)
+    .then((resp) => resp.json())
+    .then(resp => {
+      console.log('hitting',resp);
+      this.setState({data:resp.items, category: category})
+
+      console.log(resp.items)
+    })
+    // this.refs.listRef.scrollToIndex({index:-1, animated: false})
+
 
 }
+onScrollEnd = (e) => {
+   const scrollTop = e.nativeEvent.contentOffset.x;
+
+   if (scrollTop < 5) {
+     // Scrolls to top instead to y = 100
+     this.flatList.scrollToOffset({
+       x: 300,
+       animated: true
+     })
+   }
+ }
+
 
 //"#b3d9ff"
   render() {
     return (
       <View style={{flex:1}}>
-        <View style={{alignItems:'flex-end'}}>
-          <TouchableOpacity>
-          <Text style={{color:'red',marginTop:2,marginRight:10, fontWeight:'bold',fontSize:15}}>View more ></Text>
-          </TouchableOpacity>
-        </View>
-<Text> Coupons</Text>
-      <FlatList
-        getItemLayout={(data, index) => (
-           {length: 280, offset: 280 * index, index}
-         )}
 
+<Text style={{position:'absolute', top:12, marginLeft: 5, color:'white', fontSize: 16, fontWeight:'bold'}}> {this.state.category}</Text>
+  <View style={{marginTop:10}}>
+      <FlatList
+        showsHorizontalScrollIndicator={false}
+
+        getItemLayout={(data, index) => (
+           {length: 125, offset: 125 * index, index}
+         )}
+         // ref={'listRef'}
         horizontal
         data={this.state.data}
+        ref={
+          (c) => {
+            this.flatList = c;
+          }
+        }
+        onScrollEndDrag={this.onScrollEnd}
+        contentOffset={
+         {x: 500, y: 0}
+       }
         renderItem={({ item: rowData }) => {
           return (
             <Card
               title={null}
-              style={{color:"white"}}
+              intialRows={1}
+              style={{color:"transparent", backgroundColor:'transparent'}}
+              wrapperStyle={{borderColor:'transparent', backgroundColor:'transparent'}}
+              image={{ uri: rowData.imgURI }}
 
-              image={{ uri: rowData.imageUrl }}
-              imageStyle={{width:115, height:115,borderRadius:32,marginLeft:9,marginTop:22}}
-              containerStyle={{ borderColor: "white",marginLeft:-5, width: 125, height:190, borderColor:'white',borderRadius:30,backgroundColor:"white",alignItems:"center", justifyContent:'flex-start',}}
+              imageStyle={{width:115, height:115, borderRadius: 10, marginLeft:9,marginTop:22, overflow:'hidden'}}
+              containerStyle={{marginLeft:-5, width: 125, height:190, borderRadius: 10, borderColor:'transparent',backgroundColor:"transparent",alignItems:"center", justifyContent:'flex-start',}}
             >
               <View style={{marginTop:-5,width:110,alignItems:"flex-start"}}>
               <Text style={{ fontWeight:'bold',fontSize:9,marginBottom: 10, color:'black' }}>
@@ -93,6 +104,7 @@ componentDidMount() {
         }}
         keyExtractor={(item, index) => index}
       />
+    </View>
     </View>
     );
   }

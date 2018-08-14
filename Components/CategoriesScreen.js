@@ -71,8 +71,6 @@ class CategoriesScreen extends React.Component {
       this.props.navigation.navigate({key:'Result', routeName:'Result', params: {groceryItems: resp.items, aisle: aisle}})
     })
     .then(res => this.setState({disabled:false}))
-
-
   }
 
   createCategory (cat1,cat2) {
