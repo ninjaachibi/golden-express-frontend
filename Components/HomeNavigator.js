@@ -28,6 +28,7 @@ import FeedbackScreen from './FeedbackScreen'
 import CategoriesScreen from './CategoriesScreen'
 import SearchNavigator from './SearchNavigator'
 import HomeSearch from './HomeSearch'
+import HomeResults from './HomeResults'
 export default class HomeNavigator extends React.Component{
   constructor(props)
   {
@@ -59,6 +60,9 @@ export default class HomeNavigator extends React.Component{
       HomeSearch: {
       screen: HomeSearch,
     },
+    HomeResults: {
+      screen: HomeResults
+    }
     }
     const HomeStack = StackNavigator(stack, {initialRouteName:'HomePage',
       headerMode: 'screen',

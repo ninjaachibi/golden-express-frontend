@@ -31,11 +31,11 @@ const SCREEN_HEIGHT = Dimensions.get('window').height
 const HEADER_MAX_HEIGHT = 100//240;
 const HEADER_MIN_HEIGHT = 0;
 const HEADER_SCROLL_DISTANCE = HEADER_MAX_HEIGHT - HEADER_MIN_HEIGHT;
-const B_IMG = require('../assets/Gradient1.png')
-const G_IMG = require('../assets/goldenImage.jpg')
+const B_IMG = require('../assets/redGradient1.jpg')
+const G_IMG = require('../assets/redGradient.png')
 const D_IMG = require('../assets/goldenTemple.jpg')
 const L_IMG = require('../assets/Coupon.jpg')
-const A_IMG = require('../assets/GradientLayers.png')
+const A_IMG = require('../assets/orangeGradient.jpeg')
 
 
 
@@ -177,7 +177,7 @@ const titleScale = scrollY.interpolate({
 
 
 
-      <View style={[styles.fill, {backgroundColor:'#07182f'}]}>
+      <View style={[styles.fill, {backgroundColor:'#EA9380'}]}>
         <StatusBar
          translucent
          barStyle="light-content"
@@ -219,19 +219,14 @@ const titleScale = scrollY.interpolate({
         <View style={[styles.row,{backgroundColor:'transparent', alignItems:'center', justifyContent:'center'}]}>
           {/* <TouchableHighlight onPress={()=>this.props.navigation.navigate('HomeSearch')}> */}
           <TouchableOpacity
-            style={{height: 40, width: SCREEN_WIDTH, alignItems:'center', backgroundColor:'white',
+            style={{height: 40, width: SCREEN_WIDTH, alignItems:'center', backgroundColor:'transparent',
             borderRadius: 8, padding:3, justifyContent:'center', position:'absolute', top: 35, zIndex:3 }}
             placeholder="Search for a Recipe"
             onPress={()=>{console.log("Pressed");this.props.navigation.navigate('HomeSearch')}
           }>
-          <Text style={{color:'grey'}}> Search Golden Express </Text>
 
-          {/* <TouchableOpacity style={[styles.button, styles.buttonBlue]} onPress={ () => {this.submit()} }>
-          <Text style={styles.buttonLabel}>Search</Text>
-        </TouchableOpacity> */}
-        {/* </View> */}
       </TouchableOpacity>
-          <ImageBackground style={{width:SCREEN_WIDTH* 1.25, height: 250, justifyContent:'center',position:'absolute', top: 25, left:-20, right:50 }} source={B_IMG}>
+          <ImageBackground style={{width:SCREEN_WIDTH* 1.25, height: 275, justifyContent:'center',position:'absolute', top: 25, left:-20, right:50 }} source={B_IMG}>
           <Image
             source={L_IMG}
             style={{height:160, width: 230, borderRadius: 14, position:'absolute', top:65,left:0, right:0, marginBottom: 14, marginLeft: 75}}/>
@@ -239,17 +234,17 @@ const titleScale = scrollY.interpolate({
           {/* </TouchableHighlight> */}
           </View>
           <View style={{flex:1,
-            backgroundColor:'#f1e87c',
+            backgroundColor:'transparent',
 
             alignItems:'flex-start'}}>
             <View style={[styles.row]}>
-              <ImageBackground style={{width:SCREEN_WIDTH* 1.25, height: 250, justifyContent:'center',position:'absolute', top: 25, left:-20, right:50 }} source={A_IMG}>
+              <ImageBackground style={{width:SCREEN_WIDTH* 1.25, height: 275, justifyContent:'center',position:'absolute', top: 25, left:-20, right:50 }} source={A_IMG}>
 
             <HorizontalMealScroll style={{flex:1}}/>
           </ImageBackground>
           </View>
             <View style={[styles.row]}>
-              <ImageBackground style={{width:SCREEN_WIDTH* 1.25, height: 250, justifyContent:'center',position:'absolute', top: 25, left:-20, right:50 }} source={A_IMG}>
+              <ImageBackground style={{width:SCREEN_WIDTH* 1.25, height: 275, justifyContent:'center',position:'absolute', top: 25, left:-20, right:50 }} source={A_IMG}>
 
             <HorizontalMealScroll style={{flex:1}}/>
           </ImageBackground>
@@ -291,8 +286,8 @@ const titleScale = scrollY.interpolate({
 
              }]}/>
              <TouchableOpacity
-               style={{height: 40, width: SCREEN_WIDTH, alignItems:'center', backgroundColor:'white',
-               borderRadius: 8, padding:3, justifyContent:'center', position:'absolute', top: 150, zIndex:3 }}
+               style={{height: 40, width: SCREEN_WIDTH * 9/10, alignItems:'center', backgroundColor:'white',
+               borderRadius: 5, padding:3, justifyContent:'center', position:'absolute', top: 150, zIndex:3 }}
                placeholder="Search for a Recipe"
                onPress={()=>{console.log("Pressed");this.props.navigation.navigate('HomeSearch')}
              }>
@@ -396,42 +391,7 @@ const titleScale = scrollY.interpolate({
            </View>
 
          </Animated.View>
-        {/* <Animated.View
-           style={[
-             styles.center,
-             {
 
-               transform: [
-                 { translateY: titleTranslate },
-                   {scale: titleScale }
-               ],
-             },
-           ]}
-         >
-
-         </Animated.View> */}
-
-
-
-
-
-
-
-       {/* <Animated.View
-          style={[
-            styles.right,
-            {
-              transform: [
-                { translateY: titleTranslate},
-                {scale: titleScale },
-              ],
-            },
-          ]}
-        >
-
-
-
-      </Animated.View>*/}
 </View>
 
     )

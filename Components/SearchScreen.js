@@ -59,13 +59,14 @@ componentDidMount()
 
 
   searchItem(searchItem){
-    fetch('https://golden-express.herokuapp.com/searchItem'+`?searchItem=${searchItem.charAt(0).toUpperCase()+searchItem.slice(1)}`)
+    let query = searchItem.charAt(0).toUpperCase()+searchItem.slice(1)
+    fetch('https://golden-express.herokuapp.com/searchItem'+`?searchItem=${query}`)
     .then((resp)=> resp.json())
     .then(resp => {
       console.log(searchItem.charAt(0).toUpperCase()+searchItem.slice(1))
       console.log(searchItem)
       console.log('hitting',resp);
-      this.props.navigation.navigate({key:'SearchResults', routeName:'SearchResults', params:{groceryItems: resp.items}})//?????
+      this.props.navigation.navigate({key:'SearchResults', routeName:'SearchResults', params:{groceryItems: resp.items, query: query}})//?????
     })
   }
 

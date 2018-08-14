@@ -9,120 +9,162 @@ import {
   Alert,
   Button,
   RefreshControl,
+  TouchableHighlight,
   Image,
   ScrollView,
   AsyncStorage,
-  ImageBackground
+  ImageBackground,
+  Dimensions
 } from 'react-native';
+
 import styles from './Styles'
 import HorizontalMealScroll from './HorizontalMealScroll'
-import { Ionicons } from '@expo/vector-icons';
+import { Ionicons, Entypo } from '@expo/vector-icons';
 import {Header, Icon} from 'react-native-elements';
+import Autocomplete from 'react-native-autocomplete-input';
 const D_IMG = require('../assets/goldenTemple.jpg')
-
+const SCREEN_WIDTH = Dimensions.get('window').width
 class HomeSearch extends React.Component {
-  static navigationOptions = ({navigation}) => {
+  static navigationOptions =({navigation}) => {
     const {state} = navigation
     return {
-    title: 'Home Search',
-    headerRight: <TouchableOpacity style={{marginRight:10}}>
-        <Icon
-        name='shopping-cart'
-        color='blue'
-        onPress={()=>{state.params.cart()}}/>
-      </TouchableOpacity>
+      header:null
+
+
     }
 
   };
+updateText(text){
+  this.setState({query:text})
+}
+
 
 componentDidMount()
 {
-
   const {setParams} = this.props.navigation;
-  setParams({cart: this.props.screenProps.cart})
-
+//Testing  setParams({cart: this.props.screenProps.cart})
 }
   constructor(props) {
     super(props);
     this.state = {
       message: '',
       search: '',
-
+      query:'',
     }
+    this.searchItem = this.searchItem.bind(this)
+    this.updateText = this.updateText.bind(this)
+
+
   }
 
-  submit() {
-    console.log('clicked search');
-    this.props.navigation.navigate('MealPlan', {
-      query: this.state.search,
-    });
+
+  searchItem(searchItem){
+    let item = searchItem.charAt(0).toUpperCase()+searchItem.slice(1)
+    fetch('https://golden-express.herokuapp.com/searchItem'+`?searchItem=${item}`)
+    .then((resp)=> resp.json())
+    .then(resp => {
+      console.log(searchItem.charAt(0).toUpperCase()+searchItem.slice(1))
+      console.log(searchItem)
+      console.log('hitting',resp);
+      this.props.navigation.navigate({key:'SearchResults', routeName:'HomeResults', params:{groceryItems: resp.items, query:item}})//?????
+    })
+  }
+
+  cartNavigate()
+  {
+    this.props.screenProps.cart()
+
   }
 
   render() {
 
-    const { navigation } = this.props;
-    {
-     this.state.default ? this.setState({default: navigation.getParam('default', true)}): null
-  }
-
-    // if (this.state.default)
-    // {
-    //   this.setState({default:false},()=>  this.props.navigation.navigate('HomePage'))
-    //
-    // }
-
-    console.log(this.state)
-    if (this.state.default)
-    {
-      console.log(this.props.screenProps.home)
-      this.props.screenProps.home()
-    }
-
-
-
+    console.log('query', this.state.query)
+    let navigation = this.props.navigation;
+    var suggestions = ['pork', "fish", "milk", 'eggs', 'bread', 'banana', 'butter', 'onion', 'pickled', 'chicken', 'beef']
+    const data = suggestions.filter((item)=>item.indexOf(this.state.query) > -1)
+    console.log(data)
     return (
+      <View style={{backgroundColor:'white',  flex: 1,
+        alignItems:'stretch',justifyContent:'flex-start'}}>
       <View style={{
-        flex: 1,
-        backgroundColor: '#F5FCFF',
-        alignItems:'stretch'
+
+        marginTop:46,
+
       }}>
 
-        <ImageBackground
-            source={D_IMG}
-            style={[styles.goldenImage, {
-              opacity: 0.69,
-              justifyContent:'flex-start',
-              height: null,
-              width:null,
 
-            }]}>
-    {/* <View style={{
-      flex: 1,
-      alignItems: 'stretch',
-      backgroundColor: '#F5FCFF',
-    }}>
-      <Text>{this.state.message}</Text> */}
 
-      <TextInput
-        autoFocus={true}
 
-        placeholder="Search for an Item"
-        onKeyPress={() =>{this.setState({type: true})}}
-        style={{textAlign: this.state.type ? 'left': 'center',borderColor:'black',height: 40, backgroundColor:'white',padding:3,display:null}}
+        <TouchableOpacity style={{position:'absolute', top: 4, zIndex: 5}} onPress={() => this.props.navigation.goBack()}>
+          <Icon
+            name='chevron-left'
+            size={35}
+            color={'grey'}
+            underlayColor={'white'}
 
-        onChangeText={(text) => this.setState({search: text})}>
-         </TextInput>
-      <TouchableOpacity style={[styles.button, styles.buttonBlue]}
-        onPress={ () => {this.submit()} }>
-        <Text style={styles.buttonLabel}>Search</Text>
+          />
+        </TouchableOpacity>
+        <Autocomplete
+          containerStyle={{marginTop:3}}
+          listContainerStyle={{borderColor:'white'}}
+          listStyle={{borderColor:'white'}}
+          inputContainerStyle={{borderColor:'white'}}
+          renderTextInput={()=><View style={{flexDirection:'row',marginTop:5, marginBottom:5}}>
+            <Ionicons style={{position:'absolute', left:SCREEN_WIDTH*1/8, marginTop:5, zIndex: 3}}
+              name='ios-search'
+              size={20}
+              color={'grey'}/>
+              <TextInput
+                autoFocus={true}
+                placeholderTextColor={'black'}
+                autoCapitalize={'none'}
+                onChangeText={(text)=> this.updateText(text)}
+                placeholder={'Search Golden Express...'}
+                style={styles.searchInput}
+                value={this.state.query}
+              onSubmitEditing={()=>this.searchItem(this.state.query)}/>
+              {this.state.query.length > 0 ?
+              <Entypo style={{position:'absolute', top:3, left:SCREEN_WIDTH*3/4, marginTop:5, zIndex: 3}}
+                name='circle-with-cross'
+                size={15}
+                color={'grey'}
+              onPress={()=>{this.setState({query:""})}}/> : null
+            }
+
+              </View>}
+          data= {data}
+
+          renderItem={item => (
+
+      <TouchableOpacity onPress={() => this.searchItem(item)}>
+        <View style={styles.searchItem}>
+        <Ionicons style={{marginTop: 4,marginLeft: 7.5, marginRight:7.5}}
+          name='ios-search'
+          size={15}
+          color={'grey'}/>
+        <Text>{item}</Text>
+        <View style={{position:'absolute', left: SCREEN_WIDTH * 9/10 }}>
+        <Icon
+          name='chevron-right'
+          size={15}
+          underlayColor={'white'}
+          color={'grey'}/>
+        </View>
+      </View>
       </TouchableOpacity>
-      {/* <TouchableOpacity style={[styles.button, styles.buttonBlue]} onPress={ () => {this.submit()} }>
-        <Text style={styles.buttonLabel}>Search</Text>
-      </TouchableOpacity> */}
-    {/* </View> */}
-</ImageBackground>
+    )}
+/>
+<TouchableOpacity onPress={()=>{console.log('pressed'); this.cartNavigate()}} style={{position:'absolute', top: 10, left: SCREEN_WIDTH * 9/10, zIndex:3}}>
+    <Icon
+    name='shopping-cart'
+    color='grey'
+    />
+  </TouchableOpacity>
+      </View>
+    </View>
 
-  </View>
+
+
     )
   }
 }
