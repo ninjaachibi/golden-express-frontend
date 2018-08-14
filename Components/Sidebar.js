@@ -21,19 +21,19 @@ render () {
           <Button
            raised
            icon={{name: 'close', type: 'font-awesome', size: 20}}
-           title='X'
+           title='Home'
            buttonStyle={styles.button}
-           onPress={this.navigateToScreen('Three')}/>
+           onPress={this.navigateToScreen('Interface')}/>
         <Button
          raised
          icon={{name: 'umbrella', type: 'font-awesome', size: 20}}
-         title='Four'
+         title='My Account'
          buttonStyle={styles.button}
-         onPress={this.navigateToScreen('One')}/>
+         onPress={this.navigateToScreen('Account')}/>
         <Button
          raised
          icon={{name: 'user-circle', type: 'font-awesome', size:20}}
-         title='Five'
+         title='My Orders'
          buttonStyle={styles.button}
          onPress={this.navigateToScreen('Order')}/>
         </ScrollView>
