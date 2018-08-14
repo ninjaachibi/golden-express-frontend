@@ -41,8 +41,9 @@ const DrawerStack = DrawerNavigator({
   },
   Order:{
     screen: OrderNavigator,
-  }
+  },
 
+  
 }, {
   initialRouteName: 'Three',
   contentComponent: DrawerContent,
@@ -64,7 +65,7 @@ export default class Drawer extends React.Component{
     this.openContact= this.openContact.bind(this)
     this.openProduct = this.openProduct.bind(this)
     this.openAddress= this.openAddress.bind(this)
-
+    this.logout = this.logout.bind(this)
   }
 
   openProduct(item){
@@ -81,8 +82,13 @@ export default class Drawer extends React.Component{
 
   openAddress(){
     this.props.navigation.navigate('Address')
-
   }
+
+  logout () {
+    console.log('logging out')
+    this.props.navigation.navigate('Login')
+  }
+
 
   render()
   {
@@ -93,7 +99,8 @@ export default class Drawer extends React.Component{
           openCart: this.openCart,
           openAddress: this.openAddress,
           openContact:this.openContact,
-          openProduct: this.openProduct
+          openProduct: this.openProduct,
+          logout: this.logout
         }}/>
       </View>
     )
