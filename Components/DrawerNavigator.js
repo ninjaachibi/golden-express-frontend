@@ -30,10 +30,10 @@ import {
 const deviceWidth  =  Dimensions.get('window').width
 
 const DrawerStack = DrawerNavigator({
-  One: {
+  Account: {
     screen: AccountNavigator,
   },
-  Three: {
+  Interface: {
     screen: Interface,
   },
   Five: {
@@ -45,7 +45,7 @@ const DrawerStack = DrawerNavigator({
 
   
 }, {
-  initialRouteName: 'Three',
+  initialRouteName: 'Interface',
   contentComponent: DrawerContent,
   drawerWidth: deviceWidth*3/4,
   drawerPosition: 'up',

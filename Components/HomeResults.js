@@ -197,8 +197,10 @@ export default class HomeResults extends React.Component {
 
 
     let groceryItems = this.props.navigation.getParam('groceryItems', [])
-    let search = this.props.navigation.getParam('query', "Results")
-    this.setState({aisle:search})
+    let aisle = this.props.navigation.getParam('aisle', "Results")
+    let category = aisle.charAt(0).toUpperCase()+aisle.slice(1)
+
+    this.setState({aisle:category})
 
     console.log('ghjfhjfhgj',groceryItems)
     let double = []

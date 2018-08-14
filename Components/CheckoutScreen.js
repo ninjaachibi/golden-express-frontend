@@ -16,7 +16,9 @@ import {
 } from 'react-native';
 import _ from 'underscore';
 import styles from './Styles';
-import {Header, Icon, Card, Avatar,FormLabel, FormInput, FormValidationMessage } from 'react-native-elements';
+import {Header, Icon, Card, Avatar,FormLabel, FormInput, FormValidationMessage, } from 'react-native-elements';
+import { CreditCardInput, LiteCreditCardInput } from "react-native-credit-card-input";
+
 // import PaymentInfoScreen from './PaymentInfoScreen'
 
 let stripeAPI = `
@@ -131,10 +133,10 @@ class CheckoutScreen extends React.Component {
 
   order() {
     let { cardNumber, expMonth, expYear, cvc, total, address } = this.state;
-    cardNumber = "5555555555554444";
-    expMonth = '1';
-    expYear = '2020'
-    cvc = '123';
+    // cardNumber = "5555555555554444";
+    // expMonth = '1';
+    // expYear = '2020'
+    // cvc = '123';
     address = '851 California'
 
     console.log('order', cardNumber, expMonth, expYear, cvc, total, address);
@@ -177,7 +179,7 @@ class CheckoutScreen extends React.Component {
           })
         })
         .then((resp) => {
-          console.log('yaaayaya') 
+          console.log('yaaayaya')
           return resp.json()
         })
         .then(async function(response) {
@@ -228,6 +230,17 @@ class CheckoutScreen extends React.Component {
     })
   }
 
+  _onChange = form => {
+    console.log(form);
+    let {values} = form;
+    this.setState({
+      cardNumber: values.number,
+      expMonth: values.expiry.split('/')[0],
+      expYear: values.expiry.split('/')[1],
+      cvc: values.cvc,
+    })
+  }
+
   render() {
     // console.log(_.values(this.state.cart).map((item) => {
     //   return {
@@ -237,6 +250,7 @@ class CheckoutScreen extends React.Component {
     //   }
     // }));
     let { total, cart, paid, confirmed, message } = this.state;
+    console.log('state', this.state);
     return (
 
       <View style={{flex: 1, alignItems: 'stretch', position:'absolute', top:0,bottom:0,left:0,right:0 }}>
@@ -292,7 +306,9 @@ class CheckoutScreen extends React.Component {
 
           <View className="payment-container">
             <Text style={styles.checkOutTitle}>Payment Information</Text>
-            <Card >
+            {/* <CreditCardInput onChange={this._onChange} /> */}
+            <LiteCreditCardInput onChange={this._onChange} />
+            <Card>
               <TextInput
                 placeholder='Card Number'
                 style={{height: 40, borderColor: 'gray', borderWidth: 1, padding: 10}}
@@ -313,24 +329,23 @@ class CheckoutScreen extends React.Component {
                   value={this.state.expYear}
                 />
                 <TextInput
-                  placeholder='cvv'
+                  placeholder='cvc'
                   style={{height: 40,width:80, borderColor: 'gray', borderWidth: 1, padding: 5, marginLeft:72}}
                   onChangeText={(cvc) => this.setState({cvc})}
                   value={this.state.cvc}
                 />
               </View>
-
             </Card>
-
           </View>
 
           <View className="confirmation-container">
-            <Text style ={{fontSize:20,marginTop:10}}>Please confirm your order: {total.toFixed(2)}</Text>
-            <TouchableOpacity style={[styles.button, styles.buttonBlue]} onPress={()=>{console.log('confirmed');this.order()}}>
-              <Text style={styles.buttonLabel} borderColor='white'
-                borderStyle='solid'>Place Order</Text>
-              </TouchableOpacity>
-            </View>
+            <Text style ={{fontSize:20,marginTop:10}}>Please confirm your order: ${total.toFixed(2)}</Text>
+            <TouchableOpacity
+              style={[styles.button, styles.buttonBlue]}
+              onPress={()=>{console.log('confirmed');this.order()}}>
+              <Text style={styles.buttonLabel} borderColor='white' borderStyle='solid'>Place Order</Text>
+            </TouchableOpacity>
+          </View>
           </ScrollView>
         </View>
 
