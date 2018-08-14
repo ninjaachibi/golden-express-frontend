@@ -30,6 +30,7 @@ class CartScreen extends React.Component {
     this.getItemTotal = this.getItemTotal.bind(this);
     this.subtractFromCart = this.subtractFromCart.bind(this);
     this.deleteFromCart = this.deleteFromCart.bind(this)
+    this.openProduct = this.openProduct.bind(this)
   }
 
   async componentDidMount () {
@@ -42,8 +43,7 @@ class CartScreen extends React.Component {
     this.setState({cart:JSON.parse(cart)});
   }
 
-  async addToCart (item) {
-    // console.log('adding to cart', item);
+  async addToCart (item, quantity) {
     try {
       let cart = await AsyncStorage.getItem('cart', (err,res)=> {if(err)console.log('err',err);});
       cart = JSON.parse(cart);
@@ -51,10 +51,10 @@ class CartScreen extends React.Component {
       if(!cart) {
         cart = {}
       }
-        cart[item._id] = !!cart[item._id] ? {count: ++cart[item._id].count, item} : {count: 1, item};
-        await AsyncStorage.setItem('cart', JSON.stringify(cart));
-        console.log("added to cart", cart);
-        this.setState({cart:cart})
+      cart[item._id] = !!cart[item._id] ? {count: quantity + cart[item._id].count, item} : {count: quantity, item};
+      await AsyncStorage.setItem('cart', JSON.stringify(cart));
+      console.log("added to cart", cart);
+      this.setState({cart:cart}); //this is the only line that's different between ProductScreen's addToCart
     }
     catch(err) {
       console.log(err);
@@ -103,6 +103,11 @@ class CartScreen extends React.Component {
     this.props.navigation.navigate('Checkout', {total: this.calculateTotal(), cart: this.state.cart})
   }
 
+  openProduct(item){
+
+    this.props.navigation.navigate({key:'Product',routeName:'Product', params:{item: item, addToCart: this.addToCart}})
+  }
+
   calculateTotal () {
     let ret = _.values(this.state.cart).reduce((total, item) => total + this.getItemTotal(item), 0)
     return ret;
@@ -142,14 +147,17 @@ class CartScreen extends React.Component {
                 {
                   _.values(this.state.cart).map((item) => {
                     return (
-                      <CartItem
-                        key = {item.item._id}
-                        item={item}
-                        addToCart={this.addToCart}
-                        subtractFromCart={this.subtractFromCart}
-                        deleteFromCart={this.deleteFromCart}
-                        getTotal={this.getItemTotal}
-                      />
+                      <TouchableOpacity onPress={()=>{this.openProduct(item.item)}}>
+                        <CartItem
+                          key = {item.item._id}
+                          item={item}
+                          addToCart={this.addToCart}
+                          subtractFromCart={this.subtractFromCart}
+                          deleteFromCart={this.deleteFromCart}
+                          getTotal={this.getItemTotal}
+                        />
+                      </TouchableOpacity>
+
                     )
                   })
                 }

@@ -54,7 +54,7 @@ export default class CartItem extends React.Component {
                       <Icon name="remove" onPress={()=>{this.props.subtractFromCart(item.item)}} />
                     }
                     <Text style={{fontSize:16, marginTop:3,marginLeft:2}}>{item.count} </Text>
-                    <Icon name="add"  onPress={()=>{this.props.addToCart(item.item)}} />
+                    <Icon name="add" onPress={()=>{this.props.addToCart(item.item,1)}} />
                   </View>
 
                   <View className="footer" style={{flexDirection:'row', flexWrap:'wrap'}}>
