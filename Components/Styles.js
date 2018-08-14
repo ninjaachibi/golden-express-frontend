@@ -91,7 +91,15 @@ const styles = StyleSheet.create({
     borderTopWidth:0.7,
     borderLeftWidth:0.7,
     borderRightWidth:0.7,
-
+  },
+  buttonDisabled: {
+    backgroundColor: 'grey',
+    opacity:0.77,
+    borderColor:'white',
+    borderBottomWidth:0.7,
+    borderTopWidth:0.7,
+    borderLeftWidth:0.7,
+    borderRightWidth:0.7,
   },
   buttonGreen: {
     backgroundColor: '#3aa575',
