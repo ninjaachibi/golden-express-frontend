@@ -89,7 +89,7 @@ onScrollEnd = (e) => {
             <View>
             <Card
               title={null}
-              intialRows={1}
+              initialNumToRender={10}
               style={{color:"transparent", backgroundColor:'transparent'}}
               wrapperStyle={{borderColor:'transparent', backgroundColor:'transparent'}}
               image={{ uri: rowData.imgURI }}

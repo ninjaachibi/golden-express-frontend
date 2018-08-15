@@ -250,8 +250,8 @@ const titleScale = scrollY.interpolate({
         <View style={[styles.row,{backgroundColor:'transparent', alignItems:'center', justifyContent:'center'}]}>
           {/* <TouchableHighlight onPress={()=>this.props.navigation.navigate('HomeSearch')}> */}
           <TouchableOpacity
-            style={{height: 40, width: SCREEN_WIDTH, alignItems:'center', backgroundColor:'transparent',
-            borderRadius: 8, padding:3, justifyContent:'center', position:'absolute', top: 35, zIndex:3 }}
+            style={{height: 40, width: SCREEN_WIDTH , alignItems:'center', backgroundColor:'transparent',
+            borderRadius: 8, padding:3, justifyContent:'center', position:'absolute', top: 35,  left:0, right: 0,zIndex:3 }}
             placeholder="Search for a Recipe"
             onPress={()=>{console.log("Pressed");this.props.navigation.navigate('HomeSearch')}
           }>
