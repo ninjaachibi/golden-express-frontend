@@ -16,7 +16,7 @@ import {
 } from 'react-native';
 import _ from 'underscore';
 import styles from './Styles';
-import {Header, Icon, Card, Avatar} from 'react-native-elements';
+import {Header, Icon, Card, Avatar,FormLabel, FormInput, FormValidationMessage, } from 'react-native-elements';
 import { CreditCardInput, LiteCreditCardInput } from "react-native-credit-card-input";
 
 // import PaymentInfoScreen from './PaymentInfoScreen'
@@ -92,6 +92,7 @@ class CheckoutScreen extends React.Component {
   };
   constructor(props) {
     super(props);
+    this.validation=this.validation.bind(this)
     this.state = {
       total:0,
       cart: {},
@@ -106,8 +107,12 @@ class CheckoutScreen extends React.Component {
       instructions: '',
       name: '',
       phone: '',
-      address: '',
-      message: '',
+      address1: '',
+      address2: '',
+      city:'',
+      state:'',
+      errorMessage: null,
+      zip:''
     };
   }
 
@@ -118,6 +123,13 @@ class CheckoutScreen extends React.Component {
     console.log('got total', total, 'cart', cart);
     this.setState({total, cart})
   }
+
+  validation(input){
+    if(input.length===0){
+      this.setState({errorMessage:'This field is required'})
+    }
+  }
+
 
   order() {
     let { cardNumber, expMonth, expYear, cvc, total, address } = this.state;
@@ -261,37 +273,35 @@ class CheckoutScreen extends React.Component {
             <Card>
               {_.values(cart).map((item)=><Text key={item.item._id} style={{fontSize:17}}>{item.count} {item.item.name}</Text>)}
             </Card>
-            <Text>Any special instructions?</Text>
-            <TextInput
-              placeholder='Any Instructions about your order?'
-              style={{height: 40,width:80, borderColor: 'gray', borderWidth: 1, padding: 5}}
-              onChangeText={(instructions) => this.setState({instructions})}
-              value={this.state.instructions}
-            />
+            </View>
 
 
-          </View>
-
-          <View className="personal-info-container">
-            <TextInput
-              placeholder='Name'
-              style={{height: 40,width:80, borderColor: 'gray', borderWidth: 1, padding: 5}}
-              onChangeText={(name) => this.setState({name})}
-              value={this.state.name}
-            />
-            <TextInput
-              placeholder='Phone Number'
-              style={{height: 40,width:80, borderColor: 'gray', borderWidth: 1, padding: 5}}
-              onChangeText={(phone) => this.setState({phone})}
-              value={this.state.phone}
-            />
-            <Text>Address here</Text>
-            <TextInput
-              placeholder='Address'
-              style={{height: 40,width:80, borderColor: 'gray', borderWidth: 1, padding: 5}}
-              onChangeText={(address) => this.setState({address})}
-              value={this.state.address}
-            />
+            <View className="personal-info-container">
+            <Text style={styles.checkOutTitle}>Personal Information</Text>
+            <Card>
+            {/* <FormLabel>Any special instructions about your order?</FormLabel>
+            <FormInput onChangeText={(instructions)=>this.setState({instructions})}/> */}
+            <FormLabel>Name</FormLabel>
+            <FormInput  onChangeText={(name) => this.setState({name})}
+                        value={this.state.name}
+                        onChange={(name)=>{this.validation(name)}}/>
+            <FormValidationMessage>{this.validation}</FormValidationMessage>
+            <FormLabel>Phone Number</FormLabel>
+            <FormInput onChangeText={(phone) => this.setState({phone})}
+                        value={this.state.phone}/>
+            <FormLabel>Address Line 1</FormLabel>
+            <FormInput onChangeText={(address1) => this.setState({address1})}/>
+            <FormLabel>Address Line 2</FormLabel>
+            <FormInput onChangeText={(address2) => this.setState({address2})}/>
+            <FormLabel>City</FormLabel>
+            <FormInput onChangeText={(city) => this.setState({city})}/>
+            <FormLabel>State</FormLabel>
+            <FormInput onChangeText={(state) => this.setState({state})}/>
+            <FormLabel>ZIP</FormLabel>
+            <FormInput onChangeText={(zip) => this.setState({zip})}/>
+            
+            </Card>
+            
           </View>
 
           <View className="payment-container">
