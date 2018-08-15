@@ -67,7 +67,7 @@ class CategoriesScreen extends React.Component {
     fetch('https://golden-express.herokuapp.com/browse' + `?aisle=${aisle.toLowerCase()}`)
     .then((resp) => resp.json())
     .then(resp => {
-      console.log('hitting',resp);
+      // console.log('hitting',resp);
       this.props.navigation.navigate({key:'Result', routeName:'Result', params: {groceryItems: resp.items, aisle: aisle}})
     })
     .then(res => this.setState({disabled:false}))
