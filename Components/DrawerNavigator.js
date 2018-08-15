@@ -43,11 +43,11 @@ const DrawerStack = DrawerNavigator({
     screen: OrderNavigator,
   },
 
-  
+
 }, {
   initialRouteName: 'Interface',
   contentComponent: DrawerContent,
-  drawerWidth: deviceWidth*3/4,
+  drawerWidth: deviceWidth,
   drawerPosition: 'up',
   drawerOpenRoute: 'DrawerOpen',
   drawerCloseRoute: 'DrawerClose',

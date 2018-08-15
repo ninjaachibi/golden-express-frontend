@@ -68,6 +68,23 @@ const styles = StyleSheet.create({
     marginRight: 55,
     borderRadius: 10
   },
+  button1: {
+    alignSelf: 'stretch',
+    position:'absolute',
+    top:200,
+    right:0,
+    left:0,
+    zIndex:7,
+    width: SCREEN_WIDTH,
+
+    color:'red',
+    paddingTop: 10,
+    paddingBottom: 10,
+    marginTop: 20,
+    marginLeft: 55,
+    marginRight: 55,
+    borderRadius: 10
+  },
   inputContainer:{
     borderBottomWidth:0.4,
     borderColor:'white',
@@ -126,7 +143,8 @@ const styles = StyleSheet.create({
     borderBottomColor:'grey',
     overflow: 'hidden',
     height: 90,
-    justifyContent: 'flex-start'
+    justifyContent: 'flex-start',
+    alignItems:'flex-start'
   },
   headerProduct:{
     position: 'absolute',
@@ -139,6 +157,17 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start'
   },
   header: {
+    position: 'absolute',
+    alignItems:'center',
+    top: 0,
+    left: 0,
+    right: 0,
+    backgroundColor: 'white',
+    overflow: 'hidden',
+    height: HEADER_MAX_HEIGHT,
+    justifyContent: 'flex-start'
+  },
+  header1: {
     position: 'absolute',
     alignItems:'center',
     top: 0,
@@ -252,6 +281,10 @@ const styles = StyleSheet.create({
   scrollViewContent: {
     // iOS uses content inset, which acts like padding.
     paddingTop: Platform.OS !== 'ios' ? HEADER_MAX_HEIGHT : 0,
+  },
+  scrollViewContent1: {
+    // iOS uses content inset, which acts like padding.
+    paddingTop: Platform.OS !== 'ios' ? HEADER_MAX_HEIGHT + 20 : 0,
   },
   row: {
     height: 180,

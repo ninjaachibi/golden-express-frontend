@@ -56,7 +56,7 @@ getOrders(){
       console.log('hitting', resp.order.items)
       console.log('user',resp.username)
       this.setState({
-        items:resp.order.items,
+        items: resp.order.items ? resp.order.items: [],
         username:resp.username,
         totalPrice:resp.order.totalPrice
       })

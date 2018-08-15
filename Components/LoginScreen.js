@@ -13,7 +13,7 @@ import {
 } from 'react-native';
 import styles from './Styles';
 import {Input,Icon} from 'react-native-elements';
-const BG_IMG = require('../assets/Fruity.jpg')
+const BG_IMG = require('../assets/Login.jpg')
 
 
 class LoginScreen extends React.Component {
