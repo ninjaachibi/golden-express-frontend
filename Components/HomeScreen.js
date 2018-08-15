@@ -84,6 +84,7 @@ export default class HomeScreen extends React.Component {
     }
     this.searchBar = this.searchBar.bind(this)
     this.browseAisle = this.browseAisle.bind(this)
+    this.openProduct = this.openProduct.bind(this)
 
 
   }
@@ -122,7 +123,7 @@ export default class HomeScreen extends React.Component {
           <TouchableOpacity onPress={()=> this.browseAisle(aisle)} style={{position:'absolute', top: 12, left: SCREEN_WIDTH*3/4, zIndex:3}}>
           <Text style={{color:'white',marginTop:2,marginRight:10, fontWeight:'bold',fontSize:16}}>View more...></Text>
           </TouchableOpacity>
-    <HorizontalMealScroll  aisle={aisle} style={{flex:1}}/>
+    <HorizontalMealScroll openProduct={this.openProduct} aisle={aisle} style={{flex:1}}/>
   </ImageBackground>
 </View>)
   }
@@ -145,6 +146,10 @@ export default class HomeScreen extends React.Component {
     //   })
     //   .catch(err => console.log('err',err))
 
+  }
+
+  openProduct(item){
+    this.props.screenProps.openProduct(item)
   }
   press() {
     this.props.navigation.navigate('Search')
@@ -275,6 +280,15 @@ const titleScale = scrollY.interpolate({
             {
               this.createAisle('produce')
             }
+            {
+              this.createAisle('snacks')
+            }
+            {
+              this.createAisle('noodles')
+            }
+            {
+              this.createAisle('beverage')
+            }
 
           </View>
         </View>
@@ -343,7 +357,7 @@ const titleScale = scrollY.interpolate({
           <Icon
                  name='account-circle'
                  size={35}
-                 color={'black'}
+                 color={'white'}
                  underlayColor={'white'}
 
                />
@@ -385,7 +399,7 @@ const titleScale = scrollY.interpolate({
            <Icon
                   name='account-circle'
                   size={35}
-                  color={'black'}
+                  color={'white'}
                   underlayColor={'white'}
 
                 />
@@ -402,7 +416,7 @@ const titleScale = scrollY.interpolate({
            <TouchableOpacity style={{marginLeft:SCREEN_WIDTH - 64, marginTop:32.1}}>
                <Icon
                name='shopping-cart'
-               color='blue'
+               color='white'
                onPress={()=>{this.props.screenProps.cart()}}/>
              </TouchableOpacity>
            </View>
