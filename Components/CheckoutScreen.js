@@ -106,13 +106,13 @@ class CheckoutScreen extends React.Component {
 
       instructions: '',
       name: '',
+      userName:'',
       phone: '',
       address: '',
-      address1: '',
       city:'',
       state:'',
       errorMessage: null,
-      zip:''
+      ZIP:''
     };
   }
 
@@ -137,7 +137,7 @@ class CheckoutScreen extends React.Component {
     // expMonth = '1';
     // expYear = '2020'
     // cvc = '123';
-    address = '851 California'
+    // address = '851 California'
 
     console.log('order', cardNumber, expMonth, expYear, cvc, total, address);
 
@@ -203,7 +203,10 @@ class CheckoutScreen extends React.Component {
               },
               body: JSON.stringify({
                 totalPrice: this.state.total,
-                address: address,
+                userName:this.state.userName,
+                ZIP:this.state.ZIP,
+                address: this.state.address,
+                phone:this.state.phone,
                 items: _.values(this.state.cart).map((item) => {
                   return {
                     count: item.count,
@@ -282,21 +285,21 @@ class CheckoutScreen extends React.Component {
             {/* <FormLabel>Any special instructions about your order?</FormLabel>
             <FormInput onChangeText={(instructions)=>this.setState({instructions})}/> */}
             <FormLabel>Name</FormLabel>
-            <FormInput  onChangeText={(name) => this.setState({name})}
-                        value={this.state.name}
-                        onChange={(name)=>{this.validation(name)}}/>
+            <FormInput  onChangeText={(userName) => this.setState({userName})}
+                        value={this.state.userName}
+                        onChange={(userName)=>{this.validation(userName)}}/>
             <FormValidationMessage>{this.validation}</FormValidationMessage>
             <FormLabel>Phone Number</FormLabel>
             <FormInput onChangeText={(phone) => this.setState({phone})}
                         value={this.state.phone}/>
-            <FormLabel>Address Line 1</FormLabel>
-            <FormInput onChangeText={(address1) => this.setState({address1})}/>
+            <FormLabel>Address Line</FormLabel>
+            <FormInput onChangeText={(address) => this.setState({address})}/>
             <FormLabel>City</FormLabel>
             <FormInput onChangeText={(city) => this.setState({city})}/>
             <FormLabel>State</FormLabel>
             <FormInput onChangeText={(state) => this.setState({state})}/>
             <FormLabel>ZIP</FormLabel>
-            <FormInput onChangeText={(zip) => this.setState({zip})}/>
+            <FormInput onChangeText={(ZIP) => this.setState({ZIP})}/>
 
             </Card>
 
