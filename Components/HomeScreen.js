@@ -255,19 +255,16 @@ const titleScale = scrollY.interpolate({
             placeholder="Search for a Recipe"
             onPress={()=>{console.log("Pressed");this.props.navigation.navigate({key:'HomeSearch', routeName: 'HomeSearch'})}
           }>
-
-      </TouchableOpacity>
+          </TouchableOpacity>
           <ImageBackground style={{width:SCREEN_WIDTH* 1.25, height: 275, justifyContent:'center',position:'absolute', top: 25, left:-SCREEN_WIDTH*1/10, right:0}} source={B_IMG}>
           <Image
             source={L_IMG}
             style={{height:140, width: 180, borderRadius: 14, position:'absolute', top:65,left:SCREEN_WIDTH*1/10, right:0, marginBottom: 14, marginLeft: 75}}/>
           </ImageBackground>
-          {/* </TouchableHighlight> */}
-          </View>
-          <View style={{flex:1,
-            backgroundColor:'transparent',
-
-            alignItems:'flex-start'}}>
+        </View>
+          <View
+            style={{flex:1, backgroundColor:'transparent', alignItems:'flex-start'}}
+          >
             {
               this.createAisle('meat')
             }
@@ -300,13 +297,13 @@ const titleScale = scrollY.interpolate({
     <Text style={styles.title}>Title</Text>
   </View>
 </Animated.View> */}
-<Animated.View
+        <Animated.View
           pointerEvents="none"
           style={[
             styles.header,
             { opacity:imageOpacity,transform: [{ translateY: headerTranslate }] },
           ]}
-        >
+          >
 
            <Animated.Image
              source={G_IMG}
