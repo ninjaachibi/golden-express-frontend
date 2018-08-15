@@ -148,7 +148,7 @@ class CheckoutScreen extends React.Component {
 
 
   order() {
-    let { cardNumber, expMonth, expYear, cvc, total, address } = this.state;
+    let { cardNumber, expMonth, expYear, cvc, total, address, ZIP } = this.state;
     // cardNumber = "5555555555554444";
     // expMonth = '1';
     // expYear = '2020'
@@ -234,9 +234,19 @@ class CheckoutScreen extends React.Component {
               })
             })
             .then((resp) => resp.json())
-            .then(resp => {
+            .then(async (resp) => {
               console.log('order fulfilled',resp);
               if(resp.success) {
+                Alert.alert(
+                  'Success',
+                  'Your order is in and will arrive soon',
+                  [
+                    {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
+                    {text: 'OK', onPress: () => {console.log('OK pressed');}},
+                  ],
+                  { cancelable: false }
+                )
+                await AsyncStorage.removeItem('cart', ()=>{console.log('cleared cart');})
                 this.props.navigation.navigate('Drawer')
               }
               else {
@@ -248,6 +258,7 @@ class CheckoutScreen extends React.Component {
             })
           }
           else {
+            alertError('Problem with payment, please call (214)-475-9824')
             this.setState({paid: false, confirmed: true, message: 'problem with payment'})
           }
         }.bind(this)).catch(err => console.error(err));
@@ -276,7 +287,7 @@ class CheckoutScreen extends React.Component {
     //     itemId: item.item._id
     //   }
     // }));
-    let { total, cart, paid, confirmed, message, cardValid, address } = this.state;
+    let { total, cart, paid, confirmed, message, cardValid, address, userName, phone, ZIP } = this.state;
     console.log('state', this.state);
     return (
 
@@ -334,7 +345,7 @@ class CheckoutScreen extends React.Component {
             <Text style={styles.checkOutTitle}>Payment Information</Text>
             {/* <CreditCardInput onChange={this._onChange} /> */}
             <LiteCreditCardInput onChange={this._onChange} />
-            <Card>
+            {/* <Card>
               <TextInput
                 placeholder='Card Number'
                 style={{height: 40, borderColor: 'gray', borderWidth: 1, padding: 10}}
@@ -361,13 +372,13 @@ class CheckoutScreen extends React.Component {
                   value={this.state.cvc}
                 />
               </View>
-            </Card>
+            </Card> */}
           </View>
 
           <View className="confirmation-container">
             <Text style ={{fontSize:20,marginTop:10}}>Please confirm your order: ${total.toFixed(2)}</Text>
 
-            {cardValid && address ? //cardValid && address
+            {cardValid && address && userName && phone && ZIP ? //cardValid && address
               <TouchableOpacity
                 style={[styles.button, styles.buttonBlue]}
                 // onPress={()=>{_.throttle(this.order, 3000, {trailing: false})()}}
