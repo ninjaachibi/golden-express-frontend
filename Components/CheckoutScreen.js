@@ -309,6 +309,9 @@ class CheckoutScreen extends React.Component {
               null
             }
           </View>
+
+          <Text style={[styles.welcome, {color:'red'}]}>Beta Test: If have any questions/problems, call (214)475-9824</Text>
+
           <View className="items-container">
             <Text style={styles.checkOutTitle}>Order Summary</Text>
             <Card>
