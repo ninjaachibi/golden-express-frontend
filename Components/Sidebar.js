@@ -283,7 +283,7 @@ const titleScale = scrollY.interpolate({
             },
           ]}
         >
-          <View style={{marginTop:-25,marginLeft: 15}}>
+         <View style={{position:'absolute', top:90, left:0,right: SCREEN_WIDTH*5/6}}>
 
         <TouchableOpacity onPress={this.navigateToScreen('Interface')} style={{marginTop:-31.5,marginLeft:-1}} >
           <Icon
@@ -296,7 +296,7 @@ const titleScale = scrollY.interpolate({
              </TouchableOpacity>
            </View>
 
-           <View style={{position:'absolute', top:46,left:SCREEN_WIDTH*3/10,right:0}}>
+           <View style={{position:'absolute', top:60,left:SCREEN_WIDTH*3/10,right:0}}>
           <Text style={{fontSize:21, fontWeight:'bold', color:'white',marginTop:-5}}>Golden Express</Text>
         </View>
 
@@ -320,7 +320,7 @@ const titleScale = scrollY.interpolate({
              },
            ]}
          >
-           <View style={{marginTop:-25,marginLeft: 15}}>
+           <View style={{position:'absolute', top:86, left:0,right: SCREEN_WIDTH*5/6}}>
 
          <TouchableOpacity style={{marginTop:-31.5,marginLeft:-1}} onPress={this.navigateToScreen('Interface')}>
            <Icon
@@ -333,7 +333,7 @@ const titleScale = scrollY.interpolate({
               </TouchableOpacity>
             </View>
 
-              <View style={{position:'absolute', top:46,left:SCREEN_WIDTH*3/10,right:0}}>
+              <View style={{position:'absolute', top:60,left:SCREEN_WIDTH*3/10,right:0}}>
              <Text style={{fontSize:21, fontWeight:'bold', color:'white',marginTop:-5}}>Golden Express</Text>
            </View>
 
