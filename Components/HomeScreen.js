@@ -357,7 +357,7 @@ const titleScale = scrollY.interpolate({
           <Icon
                  name='account-circle'
                  size={35}
-                 color={'white'}
+                 color={'black'}
                  underlayColor={'white'}
 
                />

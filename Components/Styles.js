@@ -178,6 +178,17 @@ const styles = StyleSheet.create({
     height: HEADER_MAX_HEIGHT,
     justifyContent: 'flex-start'
   },
+  header2: {
+    position: 'absolute',
+    alignItems:'center',
+    top: 0,
+    left: 0,
+    right: 0,
+    backgroundColor: 'white',
+    overflow: 'hidden',
+    height: HEADER_MAX_HEIGHT*11/25,
+    justifyContent: 'flex-start'
+  },
   backgroundImage: {
     position: 'absolute',
     top: 0,
