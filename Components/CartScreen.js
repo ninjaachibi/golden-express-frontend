@@ -17,6 +17,7 @@ import styles from './Styles'
 import _ from 'underscore'
 import CartItem from './CartItem'
 
+
 class CartScreen extends React.Component {
   static navigationOptions = {
     title: 'My Cart'

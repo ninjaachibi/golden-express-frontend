@@ -12,7 +12,7 @@ import {
   AsyncStorage,
   FlatList,
   Image,
-  WebView
+  WebView,
 } from 'react-native';
 import _ from 'underscore';
 import styles from './Styles';
@@ -20,6 +20,20 @@ import {Header, Icon, Card, Avatar,FormLabel, FormInput, FormValidationMessage, 
 import { CreditCardInput, LiteCreditCardInput } from "react-native-credit-card-input";
 
 // import PaymentInfoScreen from './PaymentInfoScreen'
+function alertError(message) {
+  Alert.alert(
+    'Error',
+    message,
+    [
+      {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
+      {text: 'OK', onPress: () => {
+        console.log('OK pressed');
+      }},
+
+    ],
+    { cancelable: false }
+  )
+}
 
 let stripeAPI = `
 <script src="https://checkout.stripe.com/checkout.js"></script>
@@ -103,6 +117,7 @@ class CheckoutScreen extends React.Component {
       expMonth: '',
       expYear:'',
       cvc:'',
+      cardValid: false,
 
       instructions: '',
       name: '',
@@ -114,6 +129,7 @@ class CheckoutScreen extends React.Component {
       errorMessage: null,
       ZIP:''
     };
+    this.order = this.order.bind(this)
   }
 
   async componentDidMount () {
@@ -164,6 +180,7 @@ class CheckoutScreen extends React.Component {
           paid: false,
           confirmed: true,
         })
+        alertError(data.error.message);
       }
       else {
         fetch('https://golden-express.herokuapp.com/payments', {
@@ -219,6 +236,12 @@ class CheckoutScreen extends React.Component {
             .then((resp) => resp.json())
             .then(resp => {
               console.log('order fulfilled',resp);
+              if(resp.success) {
+                this.props.navigation.navigate('Drawer')
+              }
+              else {
+                alertError(resp.message)
+              }
             })
             .catch(err => {
               console.log('ERROR',err);
@@ -235,12 +258,13 @@ class CheckoutScreen extends React.Component {
 
   _onChange = form => {
     console.log(form);
-    let {values} = form;
+    let {values,valid} = form;
     this.setState({
       cardNumber: values.number,
       expMonth: values.expiry.split('/')[0],
       expYear: values.expiry.split('/')[1],
       cvc: values.cvc,
+      cardValid: valid,
     })
   }
 
@@ -252,7 +276,7 @@ class CheckoutScreen extends React.Component {
     //     itemId: item.item._id
     //   }
     // }));
-    let { total, cart, paid, confirmed, message } = this.state;
+    let { total, cart, paid, confirmed, message, cardValid, address } = this.state;
     console.log('state', this.state);
     return (
 
@@ -266,7 +290,8 @@ class CheckoutScreen extends React.Component {
         <ScrollView>
           <View>
             { confirmed ?
-              paid ? <Text>{message}</Text>: <Text>problem with payment: {message}</Text>
+              paid ?
+              <Text>{message}</Text> : <Text>problem with payment: {message}</Text>
               :
               null
             }
@@ -341,11 +366,42 @@ class CheckoutScreen extends React.Component {
 
           <View className="confirmation-container">
             <Text style ={{fontSize:20,marginTop:10}}>Please confirm your order: ${total.toFixed(2)}</Text>
-            <TouchableOpacity
-              style={[styles.button, styles.buttonBlue]}
-              onPress={()=>{console.log('confirmed');this.order()}}>
-              <Text style={styles.buttonLabel} borderColor='white' borderStyle='solid'>Place Order</Text>
-            </TouchableOpacity>
+
+            {cardValid && address ? //cardValid && address
+              <TouchableOpacity
+                style={[styles.button, styles.buttonBlue]}
+                // onPress={()=>{_.throttle(this.order, 3000, {trailing: false})()}}
+                onPress={()=> {
+                  console.log('pressed');
+                  Alert.alert(
+                    'Order Confirmation',
+                    'Is this everything you want?',
+                    [
+                      {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
+                      {text: 'Confirm Order', onPress: () => {
+                        console.log('confirmed');
+                        this.order();
+                      }},
+
+                    ],
+                    { cancelable: false }
+                  )
+                }}
+              >
+                <Text style={styles.buttonLabel} borderColor='white' borderStyle='solid'>Place Order</Text>
+              </TouchableOpacity>
+              :
+              <View>
+                <Text>Fill the form out fully in order to place order</Text>
+                <TouchableOpacity style={[styles.button, styles.buttonDisabled]} disabled={true}>
+                  <Text style={styles.buttonLabel} borderColor='white' borderStyle='solid'>Place Order</Text>
+                </TouchableOpacity>
+              </View>
+            }
+
+
+
+
           </View>
           </ScrollView>
         </View>
