@@ -24,7 +24,7 @@ import {
  // Version can be specified in package.json
 import HorizontalMealScroll from './HorizontalMealScroll'
 import { Ionicons } from '@expo/vector-icons';
-import {Header, Icon} from 'react-native-elements';
+import {Header, Icon, List, ListItem} from 'react-native-elements';
 import styles from './Styles'
 const SCREEN_WIDTH = Dimensions.get('window').width
 const SCREEN_HEIGHT = Dimensions.get('window').height
@@ -253,7 +253,7 @@ const titleScale = scrollY.interpolate({
             style={{height: 40, width: SCREEN_WIDTH , alignItems:'center', backgroundColor:'transparent',
             borderRadius: 8, padding:3, justifyContent:'center', position:'absolute', top: 35,  left:0, right: 0,zIndex:3 }}
             placeholder="Search for a Recipe"
-            onPress={()=>{console.log("Pressed");this.props.navigation.navigate('HomeSearch')}
+            onPress={()=>{console.log("Pressed");this.props.navigation.navigate({key:'HomeSearch', routeName: 'HomeSearch'})}
           }>
 
       </TouchableOpacity>

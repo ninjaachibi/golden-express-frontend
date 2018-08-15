@@ -13,7 +13,7 @@ import {
 } from 'react-native';
 import styles from './Styles';
 import {Input,Icon} from 'react-native-elements';
-const BG_IMG = require('../assets/Fruity.jpg')
+const BG_IMG = require('../assets/Login.jpg')
 
 
 class LoginScreen extends React.Component {
@@ -88,13 +88,13 @@ class LoginScreen extends React.Component {
             >
         <Text>{this.state.message}</Text>
 
-        <Text style={[styles.textBig,{color:'rgba(225, 225, 225, .89)'}]}>WELCOME</Text>
+        <Text style={[styles.textBig,{color:'white'}]}>WELCOME</Text>
         <View style={styles.inputContainer}>
          <TextInput
 
           style={styles.Logininput}
           placeholder="Username"
-          placeholderTextColor='rgba(225, 225, 225, .89)'
+          placeholderTextColor='white'
           onChangeText={(text) => this.setState({username: text})}
         />
        </View>
@@ -103,7 +103,7 @@ class LoginScreen extends React.Component {
           style={styles.Logininput}
           secureTextEntry={true}
           placeholder="Password"
-          placeholderTextColor='rgba(225, 225, 225, .89)'
+          placeholderTextColor='white'
           borderColor='white'
           borderStyle='solid'
           onChangeText={(text) => this.setState({password: text})}

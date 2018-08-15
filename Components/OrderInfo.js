@@ -74,7 +74,7 @@ getOrders(){
             {this.state.orders.map((order)=>{
               return (
                 <View>
-                
+
                 <Card>
                 <Text style={{fontSize:18,fontWeight:"bold",marginBottom:20}}>OrderId: {order._id}</Text>
                   {order.items.map((item)=>{
@@ -82,7 +82,7 @@ getOrders(){
                       <View style={{flexDirection:'row',flexWrap:'wrap',alignItems:'flex-end'}}>
                       <Text style={{fontSize:18}}>{item.name}  {item.count}</Text>
                      </View>
-                    
+
                     )
                   })
                   }
@@ -117,7 +117,7 @@ getOrders(){
               }
 
 
-               
+
 
             </Card>
                */}
