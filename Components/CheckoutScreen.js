@@ -12,7 +12,8 @@ import {
   AsyncStorage,
   FlatList,
   Image,
-  WebView
+  WebView,
+  KeyboardAvoidingView
 } from 'react-native';
 import _ from 'underscore';
 import styles from './Styles';
@@ -255,8 +256,9 @@ class CheckoutScreen extends React.Component {
     let { total, cart, paid, confirmed, message } = this.state;
     console.log('state', this.state);
     return (
+      <KeyboardAvoidingView style={[styles.container,{flex: 1, alignItems: 'stretch', position:'absolute', top:0,bottom:0,left:0,right:0}]} behavior="padding" enabled>
 
-      <View style={{flex: 1, alignItems: 'stretch', position:'absolute', top:0,bottom:0,left:0,right:0 }}>
+
         {/* <WebView
           scalesPageToFit={false}
           scrollEnabled={false}
@@ -343,12 +345,14 @@ class CheckoutScreen extends React.Component {
             <Text style ={{fontSize:20,marginTop:10}}>Please confirm your order: ${total.toFixed(2)}</Text>
             <TouchableOpacity
               style={[styles.button, styles.buttonBlue]}
-              onPress={()=>{console.log('confirmed');this.order()}}>
+              onPress={()=>{ console.log('confirmed'); this.order()}}>
               <Text style={styles.buttonLabel} borderColor='white' borderStyle='solid'>Place Order</Text>
             </TouchableOpacity>
           </View>
           </ScrollView>
-        </View>
+          <View style={{ height: 60 }} />
+
+        </KeyboardAvoidingView>
 
       )
     }

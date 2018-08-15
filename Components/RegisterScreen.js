@@ -17,7 +17,7 @@ import Icon from 'react-native-vector-icons/SimpleLineIcons'
 
 UIManager.setLayoutAnimationEnabledExperimental &&
   UIManager.setLayoutAnimationEnabledExperimental(true)
-const BG_IMG = require('../assets/Vegetables.jpg')
+const BG_IMG = require('../assets/Register.png')
 
 
 class RegisterScreen extends React.Component {
@@ -71,10 +71,10 @@ class RegisterScreen extends React.Component {
 
         <Text style={styles.textBig}>Register</Text>
         <TextInput
-          style={{height: 50, color: 'rgba(255,255,255,0.89)', fontSize:15}}
+          style={{height: 50, color: 'white', fontSize:15}}
 
           placeholder="Enter your username"
-          placeholderTextColor='rgba(255,255,255,0.8)'
+          placeholderTextColor='white'
           onChangeText={(text) => this.setState({username: text})}
         />
         <TextInput

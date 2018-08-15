@@ -96,7 +96,7 @@ const MainNavigator = StackNavigator({
   headerMode: 'screen',
   navigationOptions: {
   },
-  initialRouteName: 'Login' //for debugging
+  initialRouteName: 'Drawer' //for debugging
 })
 export default class App extends React.Component {
   render() {
