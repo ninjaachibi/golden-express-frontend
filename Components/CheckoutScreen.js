@@ -107,6 +107,7 @@ class CheckoutScreen extends React.Component {
       instructions: '',
       name: '',
       phone: '',
+      address: '',
       address1: '',
       address2: '',
       city:'',
@@ -299,9 +300,9 @@ class CheckoutScreen extends React.Component {
             <FormInput onChangeText={(state) => this.setState({state})}/>
             <FormLabel>ZIP</FormLabel>
             <FormInput onChangeText={(zip) => this.setState({zip})}/>
-            
+
             </Card>
-            
+
           </View>
 
           <View className="payment-container">
