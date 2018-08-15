@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { FlatList, Text, View, TouchableOpacity } from "react-native";
+import { FlatList, Text, View, TouchableOpacity, TouchableHighlight } from "react-native";
 import { Card } from "react-native-elements";
 
 const data = [
@@ -83,6 +83,10 @@ onScrollEnd = (e) => {
        }
         renderItem={({ item: rowData }) => {
           return (
+            <TouchableHighlight
+              underlayColor={'transparent'}
+              onPress={()=>{console.log('Pressed'); this.props.openProduct(rowData)}}>
+            <View>
             <Card
               title={null}
               intialRows={1}
@@ -94,12 +98,14 @@ onScrollEnd = (e) => {
               containerStyle={{marginLeft:-5, width: 125, height:190, borderRadius: 10, borderColor:'transparent',backgroundColor:"transparent",alignItems:"center", justifyContent:'flex-start',}}
             >
               <View style={{marginTop:-5,width:110,alignItems:"flex-start"}}>
-              <Text style={{ fontWeight:'bold',fontSize:9,marginBottom: 10, color:'black' }}>
-                {rowData.title}
+              <Text style={{ fontWeight:'bold',fontSize:12,marginBottom: 10, color:'white' }}>
+                {rowData.name}
               </Text>
               </View>
 
             </Card>
+          </View>
+        </TouchableHighlight>
           );
         }}
         keyExtractor={(item, index) => index}
