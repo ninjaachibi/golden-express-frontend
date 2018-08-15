@@ -7,20 +7,20 @@ import PropTypes from 'prop-types';
 class DrawerContent extends Component {
 constructor(props){
   super(props)
-  this.logout=this.logout.bind(this)
+  // this.logout=this.logout.bind(this)
 }
 
-async logout(){
-  try {
-    await AsyncStorage.removeItem('token',(err, token)=> {
-    console.log('token',token)});
-    AlertIOS.alert("Logout Success!",()=>{
-      this.props.screenProps.logout
-    })
-  } catch (error) {
-    console.log('AsyncStorage error: ' + error.message);
-  }
-}
+// async logout(){
+//   try {
+//     await AsyncStorage.removeItem('token',(err, token)=> {
+//     console.log('token',token)});
+//     AlertIOS.alert("Logout Success!",()=>{
+//       this.props.screenProps.logout
+//     })
+//   } catch (error) {
+//     console.log('AsyncStorage error: ' + error.message);
+//   }
+// }
 
 
 navigateToScreen = (route) => () => {
@@ -51,11 +51,12 @@ render () {
          title='My Orders'
          buttonStyle={styles.button}
          onPress={this.navigateToScreen('Order')}/>
-        <Button
+        {/* <Button
          raised
          title='Log Out'
          buttonStyle={styles.button}
-         onPress={this.logout}/>
+         onPress={this.logout}
+         /> */}
         </ScrollView>
       </View>
     );

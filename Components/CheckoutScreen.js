@@ -108,7 +108,6 @@ class CheckoutScreen extends React.Component {
       name: '',
       phone: '',
       address1: '',
-      address2: '',
       city:'',
       state:'',
       errorMessage: null,
@@ -291,8 +290,6 @@ class CheckoutScreen extends React.Component {
                         value={this.state.phone}/>
             <FormLabel>Address Line 1</FormLabel>
             <FormInput onChangeText={(address1) => this.setState({address1})}/>
-            <FormLabel>Address Line 2</FormLabel>
-            <FormInput onChangeText={(address2) => this.setState({address2})}/>
             <FormLabel>City</FormLabel>
             <FormInput onChangeText={(city) => this.setState({city})}/>
             <FormLabel>State</FormLabel>
