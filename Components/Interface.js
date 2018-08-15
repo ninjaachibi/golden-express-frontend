@@ -46,16 +46,7 @@ const Tabs = TabNavigator({
         backgroundColor: "white",
       }    }
   },
-  Categories: {
-    screen: CategoriesNavigator,
-    navigationOptions: {
-      tabBarIcon:({ tintColor }) => <Ionicons name='ios-bookmarks' size={30} color={tintColor} />,
-      tabBarLabel:'Category',
-      headerStyle: {
-        backgroundColor: "white",
-      }
-    }
-  },
+
 
   Search: {
     screen: SearchNavigator,
@@ -70,13 +61,23 @@ const Tabs = TabNavigator({
     }
   },
 
-  GroceryList: {
-    screen: GroceryListScreen,
+  Categories: {
+    screen: CategoriesNavigator,
     navigationOptions: {
-      tabBarIcon:({ tintColor }) => <Ionicons name='ios-basket' size={30} color={tintColor} />,
-      tabBarLabel:'Grocery'
+      tabBarIcon:({ tintColor }) => <Ionicons name='ios-bookmarks' size={30} color={tintColor} />,
+      tabBarLabel:'Category',
+      headerStyle: {
+        backgroundColor: "white",
+      }
     }
   },
+  // GroceryList: {
+  //   screen: GroceryListScreen,
+  //   navigationOptions: {
+  //     tabBarIcon:({ tintColor }) => <Ionicons name='ios-basket' size={30} color={tintColor} />,
+  //     tabBarLabel:'Grocery'
+  //   }
+  // },
 
 
 },

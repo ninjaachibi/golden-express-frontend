@@ -13,6 +13,7 @@ import {
   FlatList,
   Image,
   WebView,
+  KeyboardAvoidingView
 } from 'react-native';
 import _ from 'underscore';
 import styles from './Styles';
@@ -290,8 +291,9 @@ class CheckoutScreen extends React.Component {
     let { total, cart, paid, confirmed, message, cardValid, address, userName, phone, ZIP } = this.state;
     console.log('state', this.state);
     return (
+      <KeyboardAvoidingView style={[styles.container,{flex: 1, alignItems: 'stretch', position:'absolute', top:0,bottom:0,left:0,right:0}]} behavior="padding" enabled>
 
-      <View style={{flex: 1, alignItems: 'stretch', position:'absolute', top:0,bottom:0,left:0,right:0 }}>
+
         {/* <WebView
           scalesPageToFit={false}
           scrollEnabled={false}
@@ -415,7 +417,9 @@ class CheckoutScreen extends React.Component {
 
           </View>
           </ScrollView>
-        </View>
+          <View style={{ height: 60 }} />
+
+        </KeyboardAvoidingView>
 
       )
     }

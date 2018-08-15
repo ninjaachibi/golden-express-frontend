@@ -124,7 +124,7 @@ componentDidMount()
                 value={this.state.query}
               onSubmitEditing={()=>this.searchItem(this.state.query)}/>
               {this.state.query.length > 0 ?
-              <Entypo style={{position:'absolute', top:3, left:SCREEN_WIDTH*3/4, marginTop:5, zIndex: 3}}
+              <Entypo style={{position:'absolute', top:3, left:SCREEN_WIDTH*4/5, marginTop:5, zIndex: 3}}
                 name='circle-with-cross'
                 size={15}
                 color={'grey'}
