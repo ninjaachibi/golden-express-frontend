@@ -30,14 +30,13 @@ componentDidMount() {
     let aisle = this.props.aisle ? this.props.aisle : 'produce'
 
     let category = aisle.charAt(0).toUpperCase()+aisle.slice(1)
-    console.log('clicked');
     fetch('https://golden-express.herokuapp.com/browse' + `?aisle=${aisle.toLowerCase()}`)
     .then((resp) => resp.json())
     .then(resp => {
-      console.log('hitting',resp);
+      // console.log('hitting',resp);
       this.setState({data:resp.items, category: category})
 
-      console.log(resp.items)
+      // console.log(resp.items)
     })
     // this.refs.listRef.scrollToIndex({index:-1, animated: false})
 

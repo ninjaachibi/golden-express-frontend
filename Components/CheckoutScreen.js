@@ -163,7 +163,7 @@ class CheckoutScreen extends React.Component {
       method: 'POST',
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",
-        "Authorization": 'Bearer ' + 'pk_test_m8dakWs3AKLUeqE9lOucuaFX', //live key for GE
+        "Authorization": 'Bearer ' + 'pk_live_apspd6PtgprdnbOOtJj5QVqG', //live key for GE
       }
     })
     .then(resp => {

@@ -34,7 +34,7 @@ const HEADER_SCROLL_DISTANCE = HEADER_MAX_HEIGHT - HEADER_MIN_HEIGHT;
 const B_IMG = require('../assets/redGradient.png')
 const G_IMG = require('../assets/redGradient.png')
 const D_IMG = require('../assets/goldenTemple.jpg')
-const L_IMG = require('../assets/Coupon.jpg')
+const L_IMG = require('../assets/Vegetables.jpg')
 const A_IMG = require('../assets/redGradient.png')
 
 
@@ -202,7 +202,7 @@ const titleScale = scrollY.interpolate({
     });
 
 
-    console.log(this.state.scrollY)
+    // console.log(this.state.scrollY)
 
     return (
 

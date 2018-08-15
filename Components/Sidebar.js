@@ -150,7 +150,7 @@ const titleScale = scrollY.interpolate({
     });
 
 
-    console.log(this.state.scrollY)
+    // console.log(this.state.scrollY)
 
     return (
 
