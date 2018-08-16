@@ -35,7 +35,7 @@ const HEADER_SCROLL_DISTANCE = HEADER_MAX_HEIGHT - HEADER_MIN_HEIGHT;
 const B_IMG = require('../assets/Gradient1.png')
 const G_IMG = require('../assets/goldenImage.jpg')
 const D_IMG = require('../assets/goldenTemple.jpg')
-const L_IMG = require('../assets/Coupon.jpg')
+const L_IMG = require('../assets/Vegetables.jpg')
 const A_IMG = require('../assets/GradientLayers.png')
 
 

@@ -189,7 +189,7 @@ class CheckoutScreen extends React.Component {
       method: 'POST',
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",
-        "Authorization": 'Bearer ' + 'pk_test_m8dakWs3AKLUeqE9lOucuaFX', //live key for GE
+        "Authorization": 'Bearer ' + 'pk_live_apspd6PtgprdnbOOtJj5QVqG', //live key for GE
       }
     })
     .then(resp => {
@@ -359,6 +359,7 @@ renderViewPagerPage = (data) => {
             }
           </View>
           <Text style={[styles.welcome, {color:'red'}]}>Beta Test: If have any questions/problems, call (214)475-9824</Text>
+          
           <View className="items-container">
             <Text style={styles.checkOutTitle}>Order Summary</Text>
             <TouchableOpacity onPress={()=>{this.onPageChange(0)}}>
@@ -410,7 +411,7 @@ renderViewPagerPage = (data) => {
             <Text style={styles.checkOutTitle}>Payment Information</Text>
             {/* <CreditCardInput onChange={this._onChange} /> */}
             <Card>
-            <LiteCreditCardInput onChange={this._onChange}/>
+              <LiteCreditCardInput onChange={this._onChange}/>
             </Card>
             {/* <Card>
               <TextInput
@@ -449,7 +450,6 @@ renderViewPagerPage = (data) => {
                 // onPress={()=>{_.throttle(this.order, 3000, {trailing: false})()}}
                 onPress={()=> {
                   console.log('pressed');
-
                   Alert.alert(
                     'Order Confirmation',
                     'Is this everything you want?',
@@ -478,7 +478,7 @@ renderViewPagerPage = (data) => {
             }
           </View>
           </ScrollView>
-          <View style={{ height: 60 }} />
+          <View style={{ height: 100 }} />
         </View>
         </KeyboardAvoidingView>
       )

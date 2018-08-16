@@ -17,7 +17,7 @@ import Icon from 'react-native-vector-icons/SimpleLineIcons'
 
 UIManager.setLayoutAnimationEnabledExperimental &&
   UIManager.setLayoutAnimationEnabledExperimental(true)
-const BG_IMG = require('../assets/Vegetables.jpg')
+const BG_IMG = require('../assets/Register.png')
 
 
 class RegisterScreen extends React.Component {
@@ -39,6 +39,8 @@ class RegisterScreen extends React.Component {
       body: JSON.stringify({
         username: this.state.username,
         password: this.state.password,
+        phone: this.state.phone,
+        email: this.state.email,
       })
     })
     .then((response) => response.json())
@@ -60,6 +62,7 @@ class RegisterScreen extends React.Component {
   }
 
   render() {
+    let {username, password, phone, email} = this.state;
     return (
       <View style={styles.container}>
         <ImageBackground
@@ -71,10 +74,10 @@ class RegisterScreen extends React.Component {
 
         <Text style={styles.textBig}>Register</Text>
         <TextInput
-          style={{height: 50, color: 'rgba(255,255,255,0.89)', fontSize:15}}
+          style={{height: 50, color: 'white', fontSize:15}}
 
           placeholder="Enter your username"
-          placeholderTextColor='rgba(255,255,255,0.8)'
+          placeholderTextColor='white'
           onChangeText={(text) => this.setState({username: text})}
         />
         <TextInput
@@ -83,9 +86,34 @@ class RegisterScreen extends React.Component {
           placeholder="Enter your password"
           onChangeText={(text) => this.setState({password: text})}
         />
-        <TouchableOpacity style={[styles.button, styles.buttonBlue]} onPress={ () => {this.register()} }>
-          <Text style={styles.buttonLabel}>Register</Text>
-        </TouchableOpacity>
+        <TextInput
+          style={{height: 50, color: 'rgba(255,255,255,0.89)', fontSize: 15}}
+          placeholderTextColor='rgba(255,255,255,0.8)'
+          placeholder="Phone Number"
+          onChangeText={(text) => this.setState({phone: text})}
+        />
+        <TextInput
+          style={{height: 50, color: 'rgba(255,255,255,0.89)', fontSize: 15}}
+          placeholderTextColor='rgba(255,255,255,0.8)'
+          placeholder="Enter your email"
+          onChangeText={(text) => this.setState({email: text})}
+        />
+        {username && password && email && phone ?
+          <TouchableOpacity style={[styles.button, styles.buttonBlue]} onPress={ () => {this.register()} }>
+            <Text style={styles.buttonLabel}>Register</Text>
+          </TouchableOpacity>
+          :
+          <View>
+            <TouchableOpacity style={[styles.button, styles.buttonDisabled]} disabled={true}>
+              <Text style={styles.buttonLabel} borderColor='white' borderStyle='solid'>Register</Text>
+            </TouchableOpacity>
+            <Text>Fill the form out fully in order to register</Text>
+
+          </View>
+        }
+
+
+
       </ImageBackground>
       </View>
     )
