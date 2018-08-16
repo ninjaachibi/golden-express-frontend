@@ -137,7 +137,6 @@ class CategoriesScreen extends React.Component {
             onFinish={() => this.setState({ isReady: true })}
             onError={console.warn}
           />
-          <Text>Hello world</Text>
           <ActivityIndicator size="large" color="#0000ff" />
         </View>
       );
@@ -146,7 +145,6 @@ class CategoriesScreen extends React.Component {
 
       <ScrollView style={{flex:1}}>
         <View style={{height:12}}/>
-        <Text>Ready</Text>
         {this.createCategory(MEAT,PRODUCE)}
         {this.createCategory(SEAFOOD,DAIRY)}
         {this.createCategory(FROZEN,PRESERVED)}
