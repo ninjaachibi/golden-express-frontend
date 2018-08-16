@@ -137,6 +137,7 @@ class CheckoutScreen extends React.Component {
     this.state = {
       currentPosition: 0,
       tax:0,
+      markup:0,
       total:0,
       cart: {},
       confirmed: false,
@@ -170,9 +171,10 @@ class CheckoutScreen extends React.Component {
   async componentDidMount () {
     let total = this.props.navigation.getParam('total', 0)*1.28;
     let tax = total *0.08
+    let markup = total*0.2
     let cart = this.props.navigation.getParam('cart', {});
     console.log('got total', total, 'cart', cart);
-    this.setState({total, cart,tax})
+    this.setState({total, cart,tax,markup})
   }
   validation(input){
     if(input.length===0){
@@ -180,7 +182,7 @@ class CheckoutScreen extends React.Component {
     }
   }
   order() {
-    let { cardNumber, expMonth, expYear, cvc, total, address, ZIP } = this.state;
+    let { cardNumber, expMonth, expYear, cvc, total, address, ZIP,markup } = this.state;
     // cardNumber = "5555555555554444";
     // expMonth = '1';
     // expYear = '2020'
@@ -329,7 +331,7 @@ renderViewPagerPage = (data) => {
     //     itemId: item.item._id
     //   }
     // }));
-    let { total, cart, paid, confirmed, message, cardValid, address, userName, phone, ZIP,tax } = this.state;
+    let { total, cart, paid, confirmed, message, cardValid, address, userName, phone, ZIP,tax,markup } = this.state;
     console.log('state', this.state);
     return (
       <KeyboardAvoidingView style={[styles.container,{flex: 1, alignItems: 'stretch', position:'absolute', top:0,bottom:0,left:0,right:0}]} behavior="padding" enabled>
@@ -373,7 +375,8 @@ renderViewPagerPage = (data) => {
               </View>
               {_.values(cart).map((item)=><View style={{flexDirection:'row',flexWrap:'wrap',justifyContent:'space-evenly'}}><Text key={item.item._id} style={{fontSize:13}}>    {item.count}  </Text>
                         <Text style={{fontSize:11}}>  {item.item.name}</Text></View>)}
-              <Text style={{fontWeight:'bold', marginLeft:210}}>Tax: ${tax.toFixed(2)}</Text>
+              <Text style={{ marginLeft:180}}>Service Fee: ${markup.toFixed(2)}</Text>
+              <Text style={{ marginLeft:235}}>Tax: ${tax.toFixed(2)}</Text>
               <Text style={{fontWeight:'bold', marginLeft:210}}>Total: ${total.toFixed(2)}</Text>       
               
             </Card>
