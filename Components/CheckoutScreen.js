@@ -362,22 +362,27 @@ renderViewPagerPage = (data) => {
             }
           </View>
           <Text style={[styles.welcome, {color:'red'}]}>Beta Test: If have any questions/problems, call (214)475-9824</Text>
-          
+
           <View className="items-container">
             <Text style={styles.checkOutTitle}>Order Summary</Text>
             <TouchableOpacity onPress={()=>{this.onPageChange(0)}}>
             <Card>
               <View style={{flexDirection:'row',flexWrap:'wrap',justifyContent:'space-between'}}>
-              <Text style={{fontWeight:'bold'}}> Quantity</Text>  
+              <Text style={{fontWeight:'bold'}}> Quantity</Text>
               <Text style={{fontWeight:'bold', marginRight:140}}>Item Name</Text>
 
               </View>
-              {_.values(cart).map((item)=><View style={{flexDirection:'row',flexWrap:'wrap',justifyContent:'space-evenly'}}><Text key={item.item._id} style={{fontSize:13}}>    {item.count}  </Text>
-                        <Text style={{fontSize:11}}>  {item.item.name}</Text></View>)}
+              {_.values(cart).map((item)=>
+                <View style={{flexDirection:'row',flexWrap:'wrap',justifyContent:'space-evenly'}}>
+                  <Text key={item.item._id} style={{marginLeft:25, fontSize:13}}>{item.count}</Text>
+                  <Text style={{fontSize:11, marginLeft: 54}}>  {item.item.name}</Text>
+                </View>)}
+                <View style={{alignItems:'flex-end'}}>
               <Text style={{ marginLeft:180}}>Service Fee: ${markup.toFixed(2)}</Text>
               <Text style={{ marginLeft:235}}>Tax: ${tax.toFixed(2)}</Text>
-              <Text style={{fontWeight:'bold', marginLeft:210}}>Total: ${total.toFixed(2)}</Text>       
-              
+              <Text style={{fontWeight:'bold', marginLeft:210}}>Total: ${total.toFixed(2)}</Text>
+            </View>
+
             </Card>
             </TouchableOpacity>
             </View>
