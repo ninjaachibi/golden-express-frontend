@@ -11,25 +11,33 @@ import {
   Dimensions,
   ImageBackground,
   KeyboardAvoidingView,
+  Linking,
 } from 'react-native';
 import styles from './Styles'
-import { Input, Button, Icon } from 'react-native-elements'
+import { Input, Button, Icon, CheckBox, Card } from 'react-native-elements'
 const SCREEN_WIDTH = Dimensions.get('window').width
 UIManager.setLayoutAnimationEnabledExperimental &&
   UIManager.setLayoutAnimationEnabledExperimental(true)
 const BG_IMG = require('../assets/Register.jpg')
-
+const TOSurl = 'https://drive.google.com/file/d/1NuDxs8N-XNTcz8oqEq5H7-ZFdBymkRXo/view'
 
 class RegisterScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      message:''
+      message:'',
+      checked:false
     }
+
+  this.openTOSURL=this.openTOSURL.bind(this)
   }
   static navigationOptions = {
     header: null
   };
+
+  openTOSURL(){
+    Linking.openURL(TOSurl).catch(err => console.error('An error occurred', err));
+  }
   register() {
     fetch('https://golden-express.herokuapp.com/register', {
       method: 'POST',
@@ -132,7 +140,29 @@ class RegisterScreen extends React.Component {
           <Text style={styles.buttonLabel} borderColor='white' borderStyle='solid'>Go to Login Screen</Text>
         </TouchableOpacity>
       </View>
+      <View style={{alignSelf: 'stretch',
+                    paddingTop: 10,
+                    paddingBottom: 10,
+                    marginTop: 20,
+                    marginLeft: 55,
+                    marginRight: 55,
+                    borderRadius: 10}}>
+      {/* <CheckBox
+        center
+        title='TOS'
+        checked={this.state.checked}
+        onPress={() => this.setState({checked: !this.state.checked})}
+        /> */}
+          <View style={{flexWrap: 'wrap', flexDirection: 'row'}}>
+            <Text style={{color: 'white'}}>By registering, I agree to the </Text>
 
+            <TouchableOpacity onPress={this.openTOSURL}>
+              <Text style={{color: 'blue'}}>TOS</Text>
+            </TouchableOpacity>
+
+            <Text style={{color: 'white'}}>of the Golden Express Beta</Text>
+          </View>
+      </View>
 
         <View style={{height:25}}/>
 
