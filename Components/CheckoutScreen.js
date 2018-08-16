@@ -17,7 +17,6 @@ import {
 } from 'react-native';
 import _ from 'underscore';
 import styles from './Styles';
-import { ViewPager } from 'rn-viewpager';
 import {Header, Icon, Card, Avatar,FormLabel, FormInput, FormValidationMessage, } from 'react-native-elements';
 import { CreditCardInput, LiteCreditCardInput } from "react-native-credit-card-input";
 import StepIndicator from 'react-native-step-indicator';
