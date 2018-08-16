@@ -24,7 +24,6 @@ import {
 } from 'react-native';
  // Version can be specified in package.json
 import HorizontalMealScroll from './HorizontalMealScroll';
-//import Spinner from 'react-native-loading-spinner-overlay';
 import { Ionicons } from '@expo/vector-icons';
 import {Header, Icon, List, ListItem} from 'react-native-elements';
 import styles from './Styles'
@@ -72,7 +71,6 @@ export default class HomeScreen extends React.Component {
   {
     super(props)
     this.state = {
-      visible: false,
       search:"",
       meals: [],
       searchBar: false,
@@ -134,11 +132,7 @@ export default class HomeScreen extends React.Component {
 
 
   componentDidMount() {
-    setInterval(() => {
-      this.setState({
-        visible: !this.state.visible
-      });
-    }, 3000);
+
   }
  
 
