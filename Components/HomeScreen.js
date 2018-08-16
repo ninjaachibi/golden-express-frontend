@@ -81,7 +81,7 @@ export default class HomeScreen extends React.Component {
         Platform.OS === 'ios' ? -HEADER_MAX_HEIGHT : 0,
       ),
       refreshing: false,
-
+      isReady: false,
     }
     this.searchBar = this.searchBar.bind(this)
     this.browseAisle = this.browseAisle.bind(this)
@@ -116,46 +116,29 @@ export default class HomeScreen extends React.Component {
   }
 
   createAisle(aisle){
-
-
-
-    return (<View style={[styles.row]}>
-      <ImageBackground style={{width:SCREEN_WIDTH* 1.25, height: 275, justifyContent:'flex-start',position:'absolute', top: 25, left:-20, right:50 }} source={A_IMG}>
+    return (
+      <View style={[styles.row]}>
+        <ImageBackground style={{width:SCREEN_WIDTH* 1.25, height: 275, justifyContent:'flex-start',position:'absolute', top: 25, left:-20, right:50 }} source={A_IMG}>
           <TouchableOpacity onPress={()=> this.browseAisle(aisle)} style={{position:'absolute', top: 12, left: SCREEN_WIDTH*3/4, zIndex:3}}>
           <Text style={{color:'white',marginTop:2,marginRight:10, fontWeight:'bold',fontSize:16}}>View more...></Text>
-          </TouchableOpacity>
-    <HorizontalMealScroll openProduct={this.openProduct} aisle={aisle} style={{flex:1}}/>
-  </ImageBackground>
-</View>)
-  }
+        </TouchableOpacity>
+        <HorizontalMealScroll openProduct={this.openProduct} aisle={aisle} style={{flex:1}}/>
+      </ImageBackground>
+    </View>
+  )}
 
 
 
   componentDidMount() {
-
+    setTimeout(()=>{
+      this.setState({isReady: true})
+    }, 3000)
   }
- 
 
-
-
-    //fetch meallist
-    //display top Meals
-    //fetch recommended meals
-    //create alogirthm that displays certain meals
-
-    // AsyncStorage.getItem('meals')
-    //   .then((data) => {
-    //     console.log('meals from AsyncStorage', JSON.parse(data));
-    //     this.setState({
-    //       meals: JSON.parse(data)
-    //     })
-    //   })
-    //   .catch(err => console.log('err',err))
-
-  
   openProduct(item){
     this.props.screenProps.openProduct(item)
   }
+
   press() {
     this.props.navigation.navigate('Search')
   }
@@ -175,22 +158,21 @@ export default class HomeScreen extends React.Component {
       extrapolate: 'clamp',
     });
     const imageOpacity = this.state.scrollY.interpolate({
-  inputRange: [0,  HEADER_SCROLL_DISTANCE / 6, HEADER_SCROLL_DISTANCE / 4,HEADER_SCROLL_DISTANCE / 2,HEADER_SCROLL_DISTANCE * 3 / 4,HEADER_SCROLL_DISTANCE * 7 / 8, HEADER_SCROLL_DISTANCE],
-  outputRange: [1, 0.8, 0.7,0.5,0.4,0.25,0],
-  extrapolate: 'clamp',
-});
-const imageOpacity1 = this.state.scrollY.interpolate({
-inputRange: [0,  HEADER_SCROLL_DISTANCE / 6, HEADER_SCROLL_DISTANCE / 4,HEADER_SCROLL_DISTANCE / 2,HEADER_SCROLL_DISTANCE * 3 / 4,HEADER_SCROLL_DISTANCE * 7 / 8, HEADER_SCROLL_DISTANCE],
-outputRange: [0, 0.25, 0.40,0.6,0.75,0.9,1],
-extrapolate: 'clamp',
-});
-const imageTranslate = this.state.scrollY.interpolate({
-  inputRange: [0, HEADER_SCROLL_DISTANCE/15,HEADER_SCROLL_DISTANCE/3,HEADER_SCROLL_DISTANCE],
-  outputRange: [0, 50, 60, 100],
-  extrapolate: 'clamp',
-});
-
-const titleScale = scrollY.interpolate({
+      inputRange: [0,  HEADER_SCROLL_DISTANCE / 6, HEADER_SCROLL_DISTANCE / 4,HEADER_SCROLL_DISTANCE / 2,HEADER_SCROLL_DISTANCE * 3 / 4,HEADER_SCROLL_DISTANCE * 7 / 8, HEADER_SCROLL_DISTANCE],
+      outputRange: [1, 0.8, 0.7,0.5,0.4,0.25,0],
+      extrapolate: 'clamp',
+    });
+    const imageOpacity1 = this.state.scrollY.interpolate({
+      inputRange: [0,  HEADER_SCROLL_DISTANCE / 6, HEADER_SCROLL_DISTANCE / 4,HEADER_SCROLL_DISTANCE / 2,HEADER_SCROLL_DISTANCE * 3 / 4,HEADER_SCROLL_DISTANCE * 7 / 8, HEADER_SCROLL_DISTANCE],
+      outputRange: [0, 0.25, 0.40,0.6,0.75,0.9,1],
+      extrapolate: 'clamp',
+    });
+    const imageTranslate = this.state.scrollY.interpolate({
+      inputRange: [0, HEADER_SCROLL_DISTANCE/15,HEADER_SCROLL_DISTANCE/3,HEADER_SCROLL_DISTANCE],
+      outputRange: [0, 50, 60, 100],
+      extrapolate: 'clamp',
+    });
+    const titleScale = scrollY.interpolate({
       inputRange: [0, HEADER_SCROLL_DISTANCE / 2, HEADER_SCROLL_DISTANCE],
       outputRange: [1, 1, 1],
       extrapolate: 'clamp',
@@ -206,15 +188,20 @@ const titleScale = scrollY.interpolate({
       extrapolate: 'clamp',
     });
 
-
-    // console.log(this.state.scrollY)
-
+    if(!this.state.isReady) {
+      return (
+        <View style={{
+          flex: 1,
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}>
+          <ActivityIndicator size="large" color="#0000ff" />
+        </View>
+      )
+    }
     return (
-
-
-
       <View style={[styles.fill, {backgroundColor:'#EA9380'}]}>
- 
+
         <StatusBar
          translucent
          barStyle="light-content"
