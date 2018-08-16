@@ -18,10 +18,13 @@
     "react-native-autocomplete-input": "^3.5.0",
     "react-native-credit-card-input": "^0.4.1",
     "react-native-elements": "^0.19.1",
+    "react-native-loading-spinner-overlay": "^0.1.1",
+    "react-native-step-indicator": "0.0.9",
     "react-native-vector-icons": "^5.0.0",
     "react-navigation": "^1.5.12",
     "react-redux": "^5.0.7",
     "redux": "^4.0.0",
+    "rn-viewpager": "^1.2.9",
     "tipsi-stripe": "^5.4.0",
     "underscore": "^1.9.1"
   },

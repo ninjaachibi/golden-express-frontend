@@ -19,10 +19,12 @@ import {
   Animated,
   Platform,
   StatusBar,
-  Dimensions
+  Dimensions,
+  ActivityIndicator
 } from 'react-native';
  // Version can be specified in package.json
-import HorizontalMealScroll from './HorizontalMealScroll'
+import HorizontalMealScroll from './HorizontalMealScroll';
+//import Spinner from 'react-native-loading-spinner-overlay';
 import { Ionicons } from '@expo/vector-icons';
 import {Header, Icon, List, ListItem} from 'react-native-elements';
 import styles from './Styles'
@@ -70,6 +72,7 @@ export default class HomeScreen extends React.Component {
   {
     super(props)
     this.state = {
+      visible: false,
       search:"",
       meals: [],
       searchBar: false,
@@ -130,8 +133,17 @@ export default class HomeScreen extends React.Component {
 
 
 
-
   componentDidMount() {
+    setInterval(() => {
+      this.setState({
+        visible: !this.state.visible
+      });
+    }, 3000);
+  }
+ 
+
+
+
     //fetch meallist
     //display top Meals
     //fetch recommended meals
@@ -146,8 +158,7 @@ export default class HomeScreen extends React.Component {
     //   })
     //   .catch(err => console.log('err',err))
 
-  }
-
+  
   openProduct(item){
     this.props.screenProps.openProduct(item)
   }
@@ -209,6 +220,7 @@ const titleScale = scrollY.interpolate({
 
 
       <View style={[styles.fill, {backgroundColor:'#EA9380'}]}>
+ 
         <StatusBar
          translucent
          barStyle="light-content"

@@ -12,15 +12,30 @@ import {
   AsyncStorage,
   FlatList,
   Image,
-  WebView
+  WebView,
+  KeyboardAvoidingView
 } from 'react-native';
 import _ from 'underscore';
 import styles from './Styles';
+import { ViewPager } from 'rn-viewpager';
 import {Header, Icon, Card, Avatar,FormLabel, FormInput, FormValidationMessage, } from 'react-native-elements';
 import { CreditCardInput, LiteCreditCardInput } from "react-native-credit-card-input";
-
+import StepIndicator from 'react-native-step-indicator';
+import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
 // import PaymentInfoScreen from './PaymentInfoScreen'
-
+function alertError(message) {
+  Alert.alert(
+    'Error',
+    message,
+    [
+      {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
+      {text: 'OK', onPress: () => {
+        console.log('OK pressed');
+      }},
+    ],
+    { cancelable: false }
+  )
+}
 let stripeAPI = `
 <script src="https://checkout.stripe.com/checkout.js"></script>
 <style>
@@ -52,10 +67,7 @@ html, body {
 }
 </style>
 <button style="height: '360px'; width:'1080px'" id="customButton">Purchase</button>
-
 <script>
-
-
 var handler = StripeCheckout.configure({
   key: 'pk_test_em9P947GbzZeOut44HUiFFP2',
   image: 'https://www.jinx.com/content/pages/gold_exp/goldcoin_final.gif',
@@ -68,7 +80,6 @@ var handler = StripeCheckout.configure({
     // Get the token ID to your server-side code for use.
   }
 });
-
 document.getElementById('customButton').addEventListener('click', function(e) {
   // Open Checkout with further options:
   handler.open({
@@ -79,13 +90,43 @@ document.getElementById('customButton').addEventListener('click', function(e) {
   });
   e.preventDefault();
 });
-
 // Close Checkout on page navigation:
 window.addEventListener('popstate', function() {
   handler.close();
 });
 </script>
 `
+const labels = ["Order Summary","Delivery Address","Payment Method","Submit"];
+const Pages = ['Page1','Page2','Page3','Page4'];
+const getStepIndicatorConfig =({position, stepStatus}) =>{
+  const iconConfig = {
+    name:'feed',
+    color: stepStatus === 'finished' ? '#ffffff' : '#fe7013',
+    size: 15,
+  }
+  switch(position){
+    case 0: {
+      iconConfig.name = 'shopping-cart';
+      break;
+    }
+    case 1: {
+      iconConfig.name = 'location-on';
+      break;
+    }
+    case 2: {
+      iconConfig.name = 'payment';
+      break;
+    }
+    case 3: {
+      iconConfig.name = 'track-changes';
+      break;
+    }
+    default: {
+      break;
+    }
+  }
+    return iconConfig;
+}
 class CheckoutScreen extends React.Component {
   static navigationOptions = {
     title:'Checkout',
@@ -94,16 +135,16 @@ class CheckoutScreen extends React.Component {
     super(props);
     this.validation=this.validation.bind(this)
     this.state = {
+      currentPosition: 0,
       total:0,
       cart: {},
       confirmed: false,
       paid: false,
-
       cardNumber: '',
       expMonth: '',
       expYear:'',
       cvc:'',
-
+      cardValid: false,
       instructions: '',
       name: '',
       userName:'',
@@ -114,34 +155,36 @@ class CheckoutScreen extends React.Component {
       errorMessage: null,
       ZIP:''
     };
+    this.order = this.order.bind(this)
+    this.onPageChange=this.onPageChange.bind(this)
+    this.viewabilityConfig = {itemVisiblePercentThreshold: 40}
   }
-
+  componentWillReceiveProps(nextProps,nextState){
+    if(nextState.currentPage != this.state.currentPage){
+      if(this.viewPager){
+        this.viewPager.setPage(nextState.currentPage)
+      }
+    }
+  }
   async componentDidMount () {
     let total = this.props.navigation.getParam('total', 0);
     let cart = this.props.navigation.getParam('cart', {});
-
     console.log('got total', total, 'cart', cart);
     this.setState({total, cart})
   }
-
   validation(input){
     if(input.length===0){
       this.setState({errorMessage:'This field is required'})
     }
   }
-
-
   order() {
-    let { cardNumber, expMonth, expYear, cvc, total, address } = this.state;
+    let { cardNumber, expMonth, expYear, cvc, total, address, ZIP } = this.state;
     // cardNumber = "5555555555554444";
     // expMonth = '1';
     // expYear = '2020'
     // cvc = '123';
     // address = '851 California'
-
     console.log('order', cardNumber, expMonth, expYear, cvc, total, address);
-
-
     fetch(`https://api.stripe.com/v1/tokens?card[number]=${cardNumber}&card[exp_month]=${expMonth}&card[exp_year]=${expYear}&card[cvc]=${cvc}&amount=${Math.round(total*100)}&currency=usd`, {
       method: 'POST',
       headers: {
@@ -164,6 +207,7 @@ class CheckoutScreen extends React.Component {
           paid: false,
           confirmed: true,
         })
+        alertError(data.error.message);
       }
       else {
         fetch('https://golden-express.herokuapp.com/payments', {
@@ -192,7 +236,6 @@ class CheckoutScreen extends React.Component {
             this.setState({paid: true, confirmed: true, message: 'payment went through'});
             let token = await AsyncStorage.getItem('token');
             console.log('got token from AsyncStorage', token);
-
             //send an order request to the database
             fetch(`https://golden-express.herokuapp.com/Order`, {
               method: 'POST',
@@ -217,32 +260,64 @@ class CheckoutScreen extends React.Component {
               })
             })
             .then((resp) => resp.json())
-            .then(resp => {
+            .then(async (resp) => {
               console.log('order fulfilled',resp);
+              if(resp.success) {
+                Alert.alert(
+                  'Success',
+                  'Your order is in and will arrive soon',
+                  [
+                    {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
+                    {text: 'OK', onPress: () => {console.log('OK pressed');}},
+                  ],
+                  { cancelable: false }
+                )
+                await AsyncStorage.removeItem('cart', ()=>{console.log('cleared cart');})
+                this.props.navigation.navigate('Drawer')
+              }
+              else {
+                alertError(resp.message)
+              }
             })
             .catch(err => {
               console.log('ERROR',err);
             })
           }
           else {
+            alertError('Problem with payment, please call (214)-475-9824')
             this.setState({paid: false, confirmed: true, message: 'problem with payment'})
           }
         }.bind(this)).catch(err => console.error(err));
       }
-
     })
   }
-
   _onChange = form => {
     console.log(form);
-    let {values} = form;
+    let {values,valid} = form;
     this.setState({
       cardNumber: values.number,
       expMonth: values.expiry.split('/')[0],
       expYear: values.expiry.split('/')[1],
       cvc: values.cvc,
+      cardValid: valid,
+      currentPosition:2
     })
   }
+  onPageChange(position){
+      this.setState({currentPosition: position});
+  }
+
+  onViewableItemsChanged = ({ viewableItems, changed }) => {
+    const visibleItemsCount = viewableItems.length;
+    if(visibleItemsCount != 0) {
+    this.setState({currentPage:viewableItems[visibleItemsCount-1].index})
+  };
+}
+renderViewPagerPage = (data) => {
+  return(<View style={styles.page}>
+    <Text>{data}</Text>
+  </View>)
+}
 
   render() {
     // console.log(_.values(this.state.cart).map((item) => {
@@ -252,64 +327,92 @@ class CheckoutScreen extends React.Component {
     //     itemId: item.item._id
     //   }
     // }));
-    let { total, cart, paid, confirmed, message } = this.state;
+    let { total, cart, paid, confirmed, message, cardValid, address, userName, phone, ZIP } = this.state;
     console.log('state', this.state);
     return (
-
-      <View style={{flex: 1, alignItems: 'stretch', position:'absolute', top:0,bottom:0,left:0,right:0 }}>
+      <KeyboardAvoidingView style={[styles.container,{flex: 1, alignItems: 'stretch', position:'absolute', top:0,bottom:0,left:0,right:0}]} behavior="padding" enabled>
         {/* <WebView
           scalesPageToFit={false}
           scrollEnabled={false}
           source={{html:stripeAPI}}
           style={{backgroundColor: 'gold',position:'absolute', top:0,bottom:0,left:0,right:0}}
         /> */}
-        <ScrollView>
+        <View style={{marginTop:95}}>
+          <StepIndicator
+          stepCount={4}
+          currentPosition={this.state.currentPosition}
+          labels={labels}/>
+         <ScrollView>
+          {/* <ViewPager
+          style={{flexGrow:1}}
+          ref={(viewPager) => {this.viewPager = viewPager}}
+          onPageSelected={(page) => {this.setState({currentPage:page.position})}}
+          >
+            {Pages.map((page) => this.renderViewPagerPage(page))}
+          </ViewPager> */}
           <View>
             { confirmed ?
-              paid ? <Text>{message}</Text>: <Text>problem with payment: {message}</Text>
+              paid ?
+              <Text>{message}</Text> : <Text>problem with payment: {message}</Text>
               :
               null
             }
           </View>
+          <Text style={[styles.welcome, {color:'red'}]}>Beta Test: If have any questions/problems, call (214)475-9824</Text>
           <View className="items-container">
             <Text style={styles.checkOutTitle}>Order Summary</Text>
+            <TouchableOpacity onPress={()=>{this.onPageChange(0)}}>
             <Card>
-              {_.values(cart).map((item)=><Text key={item.item._id} style={{fontSize:17}}>{item.count} {item.item.name}</Text>)}
+              <View style={{flexDirection:'row',flexWrap:'wrap',justifyContent:'space-between'}}>
+              <Text style={{fontWeight:'bold'}}> Quantity</Text>  
+              <Text style={{fontWeight:'bold', marginRight:140}}>Item Name</Text>
+
+              </View>
+              {_.values(cart).map((item)=><View style={{flexDirection:'row',flexWrap:'wrap',justifyContent:'space-evenly'}}><Text key={item.item._id} style={{fontSize:13}}>    {item.count}  </Text>
+                        <Text style={{fontSize:11}}>  {item.item.name}</Text></View>)}
+             
+              <Text style={{fontWeight:'bold', marginLeft:220}}>Total: ${total.toFixed(2)}</Text>       
+              
             </Card>
+            </TouchableOpacity>
             </View>
-
-
             <View className="personal-info-container">
-            <Text style={styles.checkOutTitle}>Personal Information</Text>
+            <Text style={styles.checkOutTitle}>Delivery Address</Text>
             <Card>
             {/* <FormLabel>Any special instructions about your order?</FormLabel>
             <FormInput onChangeText={(instructions)=>this.setState({instructions})}/> */}
             <FormLabel>Name</FormLabel>
             <FormInput  onChangeText={(userName) => this.setState({userName})}
                         value={this.state.userName}
-                        onChange={(userName)=>{this.validation(userName)}}/>
+                        onChange={()=>{this.onPageChange(1)}}
+                        />
             <FormValidationMessage>{this.validation}</FormValidationMessage>
             <FormLabel>Phone Number</FormLabel>
             <FormInput onChangeText={(phone) => this.setState({phone})}
-                        value={this.state.phone}/>
+                        value={this.state.phone}
+                        onChange={()=>{this.onPageChange(1)}}
+                        />
             <FormLabel>Address Line</FormLabel>
-            <FormInput onChangeText={(address) => this.setState({address})}/>
+            <FormInput onChangeText={(address) => this.setState({address})}
+                        onChange={()=>{this.onPageChange(1)}}/>
             <FormLabel>City</FormLabel>
-            <FormInput onChangeText={(city) => this.setState({city})}/>
+            <FormInput onChangeText={(city) => this.setState({city})}
+                        onChange={()=>{this.onPageChange(1)}}/>
             <FormLabel>State</FormLabel>
-            <FormInput onChangeText={(state) => this.setState({state})}/>
+            <FormInput onChangeText={(state) => this.setState({state})}
+                      onChange={()=>{this.onPageChange(1)}}/>
             <FormLabel>ZIP</FormLabel>
-            <FormInput onChangeText={(ZIP) => this.setState({ZIP})}/>
-
+            <FormInput onChangeText={(ZIP) => this.setState({ZIP})}
+                      onChange={()=>{this.onPageChange(1)}}/>
             </Card>
-
           </View>
-
           <View className="payment-container">
             <Text style={styles.checkOutTitle}>Payment Information</Text>
             {/* <CreditCardInput onChange={this._onChange} /> */}
-            <LiteCreditCardInput onChange={this._onChange} />
             <Card>
+            <LiteCreditCardInput onChange={this._onChange}/>
+            </Card>
+            {/* <Card>
               <TextInput
                 placeholder='Card Number'
                 style={{height: 40, borderColor: 'gray', borderWidth: 1, padding: 10}}
@@ -336,22 +439,49 @@ class CheckoutScreen extends React.Component {
                   value={this.state.cvc}
                 />
               </View>
-            </Card>
+            </Card> */}
           </View>
-
           <View className="confirmation-container">
-            <Text style ={{fontSize:20,marginTop:10}}>Please confirm your order: ${total.toFixed(2)}</Text>
-            <TouchableOpacity
-              style={[styles.button, styles.buttonBlue]}
-              onPress={()=>{console.log('confirmed');this.order()}}>
-              <Text style={styles.buttonLabel} borderColor='white' borderStyle='solid'>Place Order</Text>
-            </TouchableOpacity>
+            <Text style ={{fontSize:20,marginTop:10,marginLeft:16.5,fontWeight:'bold'}}>Please confirm your order: ${total.toFixed(2)}</Text>
+            {cardValid && address && userName && phone && ZIP ? //cardValid && address
+              <TouchableOpacity
+                style={[styles.button, styles.buttonBlue]}
+                // onPress={()=>{_.throttle(this.order, 3000, {trailing: false})()}}
+                onPress={()=> {
+                  console.log('pressed');
+
+                  Alert.alert(
+                    'Order Confirmation',
+                    'Is this everything you want?',
+                    [
+                      {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
+                      {text: 'Confirm Order', onPress: () => {
+                        console.log('confirmed');
+                        this.order();
+                      }},
+                    ],
+                    { cancelable: false }
+                  )
+                }}
+              >
+                <Text style={styles.buttonLabel} borderColor='white' borderStyle='solid'>Place Order</Text>
+              </TouchableOpacity>
+              :
+              <View>
+                <Text style={{marginLeft:15, fontSize:20}}>Fill the form out fully in order to place order</Text>
+               <View style={{marginBottom:85}}>
+                <TouchableOpacity style={[styles.button, styles.buttonDisabled]} disabled={true}>
+                  <Text style={styles.buttonLabel} borderColor='white' borderStyle='solid'>Place Order</Text>
+                </TouchableOpacity>
+                </View>
+              </View>
+            }
           </View>
           </ScrollView>
+          <View style={{ height: 60 }} />
         </View>
-
+        </KeyboardAvoidingView>
       )
     }
 }
-
 export default CheckoutScreen;
