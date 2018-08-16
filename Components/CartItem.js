@@ -62,24 +62,28 @@ export default class CartItem extends React.Component {
             <Text style={{fontSize:20}}>{item.count} </Text>
           </View>
             <View style={{position:'absolute', top:0,left:42,right:0}}>
-            <Icon name="add" size={22} onPress={()=>{this.props.addToCart(item.item,1)}} />
+              <TouchableOpacity onPress={()=>{this.props.addToCart(item.item,1)}} >
+            <Icon name="add" size={22}/>
+          </TouchableOpacity>
           </View>
           </View>
 
 
           </View>
           <View style={{flexDirection:'row'}}>
+            <TouchableHighlight underlayColor={'transparent'} onPress={()=>{this.props.deleteFromCart(item.item)}}>
+              <View>
             <FontAwesome
               style={{position:'absolute', top: 5}}
               name={'trash-o'}
               size={16}
               color={'red'}
-
-              onPress={()=>{this.props.deleteFromCart(item.item)}}
             />
-                <Text style={{position:'absolute', top:5,left:16,right:0, fontSize:14}}> Remove </Text>
+            <Text style={{fontSize: 12,position:'relative', left:20,right: 0, top:6}}> Remove </Text>
+</View>
+          </TouchableHighlight>
               <View style={{position:'absolute', top:5,right:0,left:SCREEN_WIDTH*27/50, alignItems:'flex-end'}}>
-            <Text style={{fontSize:14, marginLeft:12}}>Total: ${getTotal(item)}</Text>
+            <Text style={{fontSize:14}}>Subtotal: ${getTotal(item)}</Text>
           </View>
         </View>
               <View style={{marginTop:10}}>
