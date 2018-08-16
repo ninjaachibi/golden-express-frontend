@@ -394,8 +394,8 @@ const titleScale = scrollY.interpolate({
              </TouchableOpacity>
            </View>
 
-             <View style={{marginTop:-25,marginLeft: SCREEN_WIDTH/2-25}}>
-            <Text style={{fontSize:18, fontWeight:'bold', color:'black'}}>{this.state.aisle}</Text>
+             <View style={{marginTop:-25,marginLeft: SCREEN_WIDTH*2/5}}>
+            <Text style={{textAlign:'center',fontSize:16, fontWeight:'bold', color:'black'}}>{this.state.aisle}</Text>
           </View>
 
           <View style={{marginTop:-25,marginLeft: 30}}>

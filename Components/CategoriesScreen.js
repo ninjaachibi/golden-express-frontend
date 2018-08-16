@@ -25,12 +25,17 @@ const MEAT = {cat: 'Meat', src: require('../assets/Meat.png')}
 const PRODUCE = {cat: 'Produce', src: require('../assets/Produce.png')}
 const SEAFOOD = {cat: 'Seafood', src: require('../assets/Seafood.png')}
 const DAIRY = {cat: 'Dairy', src: require('../assets/Dairy.png')}
-const FROZEN = {cat: 'Frozen', src: require('../assets/Frozen.png')}
+const FROZEN = {cat: 'FrozenGoods', src: require('../assets/Frozen.png')}
 const PRESERVED = {cat: 'Preserved', src: require('../assets/Preserved.png')}
 const BEVERAGES = {cat: 'Beverage', src: require('../assets/Beverages.png')}
 const SNACKS = {cat: 'Snacks', src: require('../assets/Snacks.png')}
 const NOODLES = {cat: 'Noodles', src: require('../assets/Noodles.png')}
+const CANNED = {cat: 'Canned', src: require('../assets/Canned.png')}
+const DRIED = {cat: 'Dried', src: require('../assets/Dried.png')}
+const INSTANT = {cat: 'Instant', src: require('../assets/Instant.png')}
+const POWDERMIX = {cat: 'PowderMix', src: require('../assets/PowderMix.png')}
 const SPICES = {cat: 'Spices', src: require('../assets/Spices.png')}
+
 
 
 class CategoriesScreen extends React.Component {
@@ -103,7 +108,12 @@ class CategoriesScreen extends React.Component {
       require('../assets/Beverages.png'),
       require('../assets/Snacks.png'),
       require('../assets/Noodles.png'),
-      require('../assets/Spices.png')
+      require('../assets/Canned.png'),
+      require('../assets/Dried.png'),
+      require('../assets/Instant.png'),
+      require('../assets/PowderMix.png'),
+      require('../assets/Spices.png'),
+
     ];
 
     const cacheImages = images.map((image) => {
@@ -141,7 +151,10 @@ class CategoriesScreen extends React.Component {
         {this.createCategory(SEAFOOD,DAIRY)}
         {this.createCategory(FROZEN,PRESERVED)}
         {this.createCategory(BEVERAGES,SNACKS)}
-        {this.createCategory(NOODLES,SPICES)}
+        {this.createCategory(NOODLES,CANNED)}
+        {this.createCategory(DRIED,INSTANT)}
+        {this.createCategory(POWDERMIX,SPICES)}
+
         {/* <View style={{flex:1, justifyContent:'flex-start', alignItems:'center',flexDirection:'row',justifyContent:'center'}}>
           <TouchableOpacity activeOpacity={0.75} onPress={()=>{browseAisle('Meat')}}>
             <Image source={require('../assets/Meat.png')} style={{height: 170,width: 170, marginLeft: 12, marginRight: 5, marginTop: 10,flex: 1}}/>

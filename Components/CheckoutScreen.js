@@ -67,10 +67,7 @@ html, body {
 }
 </style>
 <button style="height: '360px'; width:'1080px'" id="customButton">Purchase</button>
-
 <script>
-
-
 var handler = StripeCheckout.configure({
   key: 'pk_test_em9P947GbzZeOut44HUiFFP2',
   image: 'https://www.jinx.com/content/pages/gold_exp/goldcoin_final.gif',
@@ -83,7 +80,6 @@ var handler = StripeCheckout.configure({
     // Get the token ID to your server-side code for use.
   }
 });
-
 document.getElementById('customButton').addEventListener('click', function(e) {
   // Open Checkout with further options:
   handler.open({
@@ -94,7 +90,6 @@ document.getElementById('customButton').addEventListener('click', function(e) {
   });
   e.preventDefault();
 });
-
 // Close Checkout on page navigation:
 window.addEventListener('popstate', function() {
   handler.close();
