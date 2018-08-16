@@ -10,12 +10,11 @@ import {
   UIManager,
   Dimensions,
   ImageBackground,
-  KeyboardAvoidingView
+  KeyboardAvoidingView,
 } from 'react-native';
 import styles from './Styles'
-import { Input, Button } from 'react-native-elements'
-import Icon from 'react-native-vector-icons/SimpleLineIcons'
-
+import { Input, Button, Icon } from 'react-native-elements'
+const SCREEN_WIDTH = Dimensions.get('window').width
 UIManager.setLayoutAnimationEnabledExperimental &&
   UIManager.setLayoutAnimationEnabledExperimental(true)
 const BG_IMG = require('../assets/Register.jpg')
@@ -29,7 +28,7 @@ class RegisterScreen extends React.Component {
     }
   }
   static navigationOptions = {
-    title: 'Register'
+    header: null
   };
   register() {
     fetch('https://golden-express.herokuapp.com/register', {
@@ -70,10 +69,21 @@ class RegisterScreen extends React.Component {
             source={BG_IMG}
             style={[styles.bgImage,{opacity:0.75}]}
             >
+              <View style={{position:'absolute',top: 48, left:0,right:SCREEN_WIDTH * 9/10}}>
+          <Icon
+            name={'chevron-left'}
+            size={45}
+            color={'white'}
+            onPress={()=>this.props.navigation.goBack()}
+            underlayColor={'transparent'}
+          />
+        </View>
 
         <Text>{this.state.message}</Text>
 
         <Text style={styles.textBig}>Register</Text>
+        <Text style={{fontSize:18, marginTop:10,fontWeight:'bold', color:'white'}}>Fill the form out fully in order to register</Text>
+
         <TextInput
           style={{height: 50, color: 'white', fontSize:15}}
 
@@ -100,20 +110,31 @@ class RegisterScreen extends React.Component {
           onChangeText={(text) => this.setState({email: text})}
         />
         {username && password && email && phone ?
-          <TouchableOpacity style={[styles.button, styles.buttonBlue]} onPress={ () => {this.register()} }>
+          <View>
+          <TouchableOpacity style={[styles.button2, styles.buttonBlue]} onPress={ () => {this.register()} }>
             <Text style={styles.buttonLabel}>Register</Text>
           </TouchableOpacity>
+          </View>
           :
           <View>
-            <TouchableOpacity style={[styles.button, styles.buttonDisabled]} disabled={true}>
+
+            <TouchableOpacity style={[styles.button2, styles.buttonDisabled]} disabled={true}>
               <Text style={styles.buttonLabel} borderColor='white' borderStyle='solid'>Register</Text>
             </TouchableOpacity>
-            <Text style={{marginTop:10,fontWeight:'bold', color:'white'}}>Fill the form out fully in order to register</Text>
-
           </View>
-        }
 
-        <View style={{height:40}}/>
+
+
+
+        }
+        <View>
+        <TouchableOpacity onPress={()=>this.props.navigation.navigate('Login')} style={[styles.button3,styles.buttonOrange]}>
+          <Text style={styles.buttonLabel} borderColor='white' borderStyle='solid'>Go to Login Screen</Text>
+        </TouchableOpacity>
+      </View>
+
+
+        <View style={{height:25}}/>
 
 
       </ImageBackground>

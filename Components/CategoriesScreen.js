@@ -30,7 +30,12 @@ const PRESERVED = {cat: 'Preserved', src: require('../assets/Preserved.png')}
 const BEVERAGES = {cat: 'Beverage', src: require('../assets/Beverages.png')}
 const SNACKS = {cat: 'Snacks', src: require('../assets/Snacks.png')}
 const NOODLES = {cat: 'Noodles', src: require('../assets/Noodles.png')}
+const CANNED = {cat: 'Spices', src: require('../assets/Canned.png')}
+const DRIED = {cat: 'Spices', src: require('../assets/Dried.png')}
+const INSTANT = {cat: 'Spices', src: require('../assets/Instant.png')}
+const POWDERMIX = {cat: 'Spices', src: require('../assets/PowderMix.png')}
 const SPICES = {cat: 'Spices', src: require('../assets/Spices.png')}
+
 
 
 class CategoriesScreen extends React.Component {
@@ -103,7 +108,12 @@ class CategoriesScreen extends React.Component {
       require('../assets/Beverages.png'),
       require('../assets/Snacks.png'),
       require('../assets/Noodles.png'),
-      require('../assets/Spices.png')
+      require('../assets/Canned.png'),
+      require('../assets/Dried.png'),
+      require('../assets/Instant.png'),
+      require('../assets/PowderMix.png'),
+      require('../assets/Spices.png'),
+
     ];
 
     const cacheImages = images.map((image) => {
@@ -141,7 +151,10 @@ class CategoriesScreen extends React.Component {
         {this.createCategory(SEAFOOD,DAIRY)}
         {this.createCategory(FROZEN,PRESERVED)}
         {this.createCategory(BEVERAGES,SNACKS)}
-        {this.createCategory(NOODLES,SPICES)}
+        {this.createCategory(NOODLES,CANNED)}
+        {this.createCategory(DRIED,INSTANT)}
+        {this.createCategory(POWDERMIX,SPICES)}
+
         {/* <View style={{flex:1, justifyContent:'flex-start', alignItems:'center',flexDirection:'row',justifyContent:'center'}}>
           <TouchableOpacity activeOpacity={0.75} onPress={()=>{browseAisle('Meat')}}>
             <Image source={require('../assets/Meat.png')} style={{height: 170,width: 170, marginLeft: 12, marginRight: 5, marginTop: 10,flex: 1}}/>

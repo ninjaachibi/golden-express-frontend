@@ -90,7 +90,7 @@ class LoginScreen extends React.Component {
         <Text>{this.state.message}</Text>
 
         <Text style={[styles.textBig,{color:'white'}]}>WELCOME TO BETA</Text>
-        <Text style={[styles.welcome, {color:'red'}]}>If have any questions/problems, call (214)475-9824</Text>
+        <Text style={[styles.welcome, {color:'#ea4a41', fontWeight:'bold'}]}>If you have any questions/problems, call (214)475-9824</Text>
         <View style={styles.inputContainer}>
          <TextInput
 
