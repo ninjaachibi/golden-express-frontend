@@ -118,22 +118,22 @@ export default class DrawerContent extends React.Component {
       extrapolate: 'clamp',
     });
     const imageOpacity = this.state.scrollY.interpolate({
-  inputRange: [0,  HEADER_SCROLL_DISTANCE / 6, HEADER_SCROLL_DISTANCE / 4,HEADER_SCROLL_DISTANCE / 2,HEADER_SCROLL_DISTANCE * 3 / 4,HEADER_SCROLL_DISTANCE * 7 / 8, HEADER_SCROLL_DISTANCE],
-  outputRange: [1, 0.8, 0.7,0.5,0.4,0.25,0],
-  extrapolate: 'clamp',
-});
-const imageOpacity1 = this.state.scrollY.interpolate({
-inputRange: [0,  HEADER_SCROLL_DISTANCE / 6, HEADER_SCROLL_DISTANCE / 4,HEADER_SCROLL_DISTANCE / 2,HEADER_SCROLL_DISTANCE * 3 / 4,HEADER_SCROLL_DISTANCE * 7 / 8, HEADER_SCROLL_DISTANCE],
-outputRange: [0, 0.25, 0.40,0.6,0.75,0.9,1],
-extrapolate: 'clamp',
-});
-const imageTranslate = this.state.scrollY.interpolate({
-  inputRange: [0, HEADER_SCROLL_DISTANCE/15,HEADER_SCROLL_DISTANCE/3,HEADER_SCROLL_DISTANCE],
-  outputRange: [0, 50, 60, 100],
-  extrapolate: 'clamp',
-});
+      inputRange: [0,  HEADER_SCROLL_DISTANCE / 6, HEADER_SCROLL_DISTANCE / 4,HEADER_SCROLL_DISTANCE / 2,HEADER_SCROLL_DISTANCE * 3 / 4,HEADER_SCROLL_DISTANCE * 7 / 8, HEADER_SCROLL_DISTANCE],
+      outputRange: [1, 0.8, 0.7,0.5,0.4,0.25,0],
+      extrapolate: 'clamp',
+    });
+    const imageOpacity1 = this.state.scrollY.interpolate({
+      inputRange: [0,  HEADER_SCROLL_DISTANCE / 6, HEADER_SCROLL_DISTANCE / 4,HEADER_SCROLL_DISTANCE / 2,HEADER_SCROLL_DISTANCE * 3 / 4,HEADER_SCROLL_DISTANCE * 7 / 8, HEADER_SCROLL_DISTANCE],
+      outputRange: [0, 0.25, 0.40,0.6,0.75,0.9,1],
+      extrapolate: 'clamp',
+    });
+    const imageTranslate = this.state.scrollY.interpolate({
+      inputRange: [0, HEADER_SCROLL_DISTANCE/15,HEADER_SCROLL_DISTANCE/3,HEADER_SCROLL_DISTANCE],
+      outputRange: [0, 50, 60, 100],
+      extrapolate: 'clamp',
+    });
 
-const titleScale = scrollY.interpolate({
+    const titleScale = scrollY.interpolate({
       inputRange: [0, HEADER_SCROLL_DISTANCE / 2, HEADER_SCROLL_DISTANCE],
       outputRange: [1, 1, 1],
       extrapolate: 'clamp',
@@ -208,25 +208,36 @@ const titleScale = scrollY.interpolate({
           <View style={{position:'absolute', width: SCREEN_WIDTH,top:SCREEN_HEIGHT*1/3, left:0,right:0, zIndex:5}}>
           <ImageBackground style={{width:SCREEN_WIDTH* 1.25, height: SCREEN_HEIGHT*6/10, top:-10, justifyContent:'center',position:'absolute',left:-SCREEN_WIDTH*1/10, right:0}} source={B_IMG}>
 
-              <List containerStyle={{marginBottom: 20, position:'absolute', top:-20, left:SCREEN_WIDTH*1/10,right:0}}>
-      {
-        list.map((l) => (
+          <List containerStyle={{marginBottom: 20, position:'absolute', top:-20, left:SCREEN_WIDTH*1/10,right:0}}>
+          {/* {
+            list.map((l) => (
 
+              <ListItem
+                roundAvatar
+                containerStyle={{width: SCREEN_WIDTH}}
+                titleContainerStyle={{marginLeft:5}}
+                onPress={l.route === 'Account' ? ()=> this.openContact() : this.navigateToScreen('Order')}
+                key={l.route}
+                title={l.route}
+                leftIcon={l.icon}
+              />
+            ))
+          } */}
           <ListItem
             roundAvatar
             containerStyle={{width: SCREEN_WIDTH}}
             titleContainerStyle={{marginLeft:5}}
-            onPress={l.route === 'Account' ? ()=> this.openContact() : this.navigateToScreen('Order')}
-            key={l.route}
-            title={l.route}
-            leftIcon={l.icon}
+            onPress={this.navigateToScreen('Order')}
+            key={'order'}
+            title={'Order History'}
+            leftIcon={{name: 'file-text-o', type: 'font-awesome', size: 20}}
           />
-        ))
-      }
-    </List>
-            <TouchableOpacity
-             style={{height:50, alignItems:'center', justifyContent:'center',width: SCREEN_WIDTH*3/4,position:'absolute', top:SCREEN_HEIGHT*1/5,left:SCREEN_WIDTH*1/5,right:0, zIndex:7, backgroundColor:'#fcb6b3', borderRadius:12}}
-             onPress={this.logout}><Text style={{color:'white', fontSize:24, fontWeight:'bold'}}>Logout</Text></TouchableOpacity>
+        </List>
+        {/* <TouchableOpacity
+          style={{height:50, alignItems:'center', justifyContent:'center',width: SCREEN_WIDTH*3/4,position:'absolute', top:SCREEN_HEIGHT*1/5,left:SCREEN_WIDTH*1/5,right:0, zIndex:7, backgroundColor:'#fcb6b3', borderRadius:12}}
+          onPress={this.logout}>
+          <Text style={{color:'white', fontSize:24, fontWeight:'bold'}}>Logout</Text>
+        </TouchableOpacity> */}
            </ImageBackground>
           </View>
 
