@@ -16,8 +16,11 @@ import {
   Dimensions,
   Animated,
   StatusBar,
-  Platform
+  Platform,
+  ActivityIndicator
 } from 'react-native';
+import { AppLoading, Asset, Font } from 'expo';
+
 import styles from './Styles';
 import {Header, Icon, Card} from 'react-native-elements';
 import groceryItems from '../public/Inventory/Fresh_Meat'
@@ -32,6 +35,21 @@ const HEADER_SCROLL_DISTANCE = HEADER_MAX_HEIGHT - HEADER_MIN_HEIGHT;
 let addToCart;
 let cartAdd;
 
+// function cacheImage(image) {
+//   return Image.prefetch(image);
+// }
+
+function cacheImages(images) {
+  console.log('images',images);
+  return images.map(image => {
+    if (typeof image === 'string') {
+      console.log('image is a string');
+      return Image.prefetch(image);
+    } else {
+      return Asset.fromModule(image).downloadAsync();
+    }
+  });
+}
 
 class ProductScreen extends React.Component {
   //Location  Favorites,foods,home, history, search?
@@ -40,7 +58,6 @@ class ProductScreen extends React.Component {
     return {
       header:null
     }
-
   };
 
   constructor(props) {
@@ -54,11 +71,12 @@ class ProductScreen extends React.Component {
         Platform.OS === 'ios' ? -HEADER_MAX_HEIGHT : 0,
       ),
       refreshing: false,
-
+      isReady: false,
     }
     this.add = this.add.bind(this)
     this.subtract = this.subtract.bind(this);
-    this.addToCart = this.addToCart.bind(this)
+    this.addToCart = this.addToCart.bind(this);
+    this._loadAssetsAsync = this._loadAssetsAsync.bind(this);
   }
 
   add(){
@@ -69,10 +87,10 @@ class ProductScreen extends React.Component {
     this.state.quantity > 0 ? this.setState({quantity:this.state.quantity-1}):null
   }
 
-  componentDidMount() {
+  componentWillMount() {
     console.log("I have reached the Product Screen");
     let item = this.props.navigation.getParam("item", {name: "no item passed"})
-
+    console.log(item)
     addToCart = this.props.navigation.getParam("addToCart", null)
     // cartAdd = (item, quantity) => {
     //   addToCart(item, quantity)
@@ -82,20 +100,6 @@ class ProductScreen extends React.Component {
     console.log('item',item)
     console.log('add to cart', addToCart);
     this.setState({item:item, image: item.imgURI, price: item.price, description: item.description, aisle:item.aisle, name:item.name})
-
-  }
-
-  createCategory (cat1,cat2) {
-    return  (
-      <View style={{flex:1, justifyContent:'flex-start', alignItems:'center',flexDirection:'row',justifyContent:'center'}}>
-        <TouchableOpacity activeOpacity={0.75} >
-          <Image source={cat1.src} style={{height: 170,width: 170, marginLeft: 12, marginRight: 5, marginTop: 10,flex: 1}}/>
-        </TouchableOpacity>
-        <TouchableOpacity activeOpacity={0.75} >
-          <Image source={cat2.src} style={{height: 170,width: 170, marginRight: 12, marginLeft:5, marginTop: 10,flex: 1}}/>
-        </TouchableOpacity>
-      </View>
-    )
   }
 
   async addToCart (item, quantity) {
@@ -116,6 +120,14 @@ class ProductScreen extends React.Component {
     catch(err) {
       console.log(err);
     }
+  }
+
+  async _loadAssetsAsync() {
+    const imageAssets = cacheImages([
+      this.state.image
+    ]);
+
+    await Promise.all([...imageAssets]);
   }
 
   render() {
@@ -157,6 +169,8 @@ class ProductScreen extends React.Component {
     });
 
     console.log(this.state)
+    console.log('isReady',this.state.isReady);
+    console.log('image is', this.state.image);
 
     const {name,price,image,description, aisle,item} = this.state
 
@@ -201,7 +215,20 @@ class ProductScreen extends React.Component {
             <View style={[styles.scrollViewContent,  {marginTop: 105, width: SCREEN_WIDTH}]}>
               <View style={{backgroundColor: 'white'}}>
                 <View style={{alignItems:'center'}}>
-                  <Image source={{uri:image}} style={{borderRadius: 4,height:SCREEN_HEIGHT*1/6, width:SCREEN_WIDTH * 1/2}}/>
+                  {this.state.isReady ?
+                    <Image source={{uri:image}} style={{borderRadius: 4,height:SCREEN_HEIGHT*1/6, width:SCREEN_WIDTH * 1/2}}/>
+                    :
+                    <View>
+                      <Text>Loading</Text>
+                      <AppLoading
+                        startAsync={this._loadAssetsAsync}
+                        onFinish={() => this.setState({ isReady: true })}
+                        onError={console.warn}
+                      />
+                      <ActivityIndicator size="large" color="#0000ff" />
+
+                    </View>
+                  }
                 </View>
 
                 <View style={{alignItems:'flex-start', marginLeft: 16, marginTop:47}}>
