@@ -12,7 +12,8 @@ import {
  RefreshControl,
  Image,
  ScrollView,
- AsyncStorage
+ AsyncStorage,
+ ActivityIndicator
 } from 'react-native';
 import styles from './Styles';
 import {Card} from 'react-native-elements'
@@ -34,6 +35,7 @@ class OrderInfo extends React.Component {
 static navigationOptions = {
   title:"Your Order"
 }
+
 componentDidMount(){
   this.getOrders()
 }
@@ -67,7 +69,9 @@ getOrders(){
 
     render(){
       return(
+       
         <ScrollView style={{marginBottom:20}}>
+         
           <Text style={styles.checkOutTitle1}>Welcome {this.state.username}</Text>
           <Text style={styles.checkOutTitle}>Your Orders:</Text>
           <ScrollView >

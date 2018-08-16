@@ -362,9 +362,11 @@ const styles = StyleSheet.create({
     marginRight:20
   },
   checkOutTitle:{
-    fontSize:25,
+    marginLeft:15,
+    fontSize:23,
     fontWeight:'bold',
-    marginTop:15
+    marginTop:15,
+    color:'#2aaf4d'
   },
   checkOutTitle1:{
     fontSize:20,
