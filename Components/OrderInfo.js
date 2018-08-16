@@ -35,9 +35,7 @@ class OrderInfo extends React.Component {
 static navigationOptions = {
   title:"Your Order"
 }
-componentWillMount(){
-  <ActivityIndicator size="large" color="#0000ff" />
-}
+
 componentDidMount(){
   this.getOrders()
 }
