@@ -17,11 +17,8 @@ import {
 } from 'react-native';
 import _ from 'underscore';
 import styles from './Styles';
-import { ViewPager } from 'rn-viewpager';
 import {Header, Icon, Card, Avatar,FormLabel, FormInput, FormValidationMessage, } from 'react-native-elements';
 import { CreditCardInput, LiteCreditCardInput } from "react-native-credit-card-input";
-import StepIndicator from 'react-native-step-indicator';
-import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
 
 // import PaymentInfoScreen from './PaymentInfoScreen'
 function alertError(message) {
@@ -70,10 +67,7 @@ html, body {
 }
 </style>
 <button style="height: '360px'; width:'1080px'" id="customButton">Purchase</button>
-
 <script>
-
-
 var handler = StripeCheckout.configure({
   key: 'pk_test_em9P947GbzZeOut44HUiFFP2',
   image: 'https://www.jinx.com/content/pages/gold_exp/goldcoin_final.gif',
@@ -86,7 +80,6 @@ var handler = StripeCheckout.configure({
     // Get the token ID to your server-side code for use.
   }
 });
-
 document.getElementById('customButton').addEventListener('click', function(e) {
   // Open Checkout with further options:
   handler.open({
@@ -97,46 +90,12 @@ document.getElementById('customButton').addEventListener('click', function(e) {
   });
   e.preventDefault();
 });
-
 // Close Checkout on page navigation:
 window.addEventListener('popstate', function() {
   handler.close();
 });
 </script>
 `
-
-const labels = ["Order Summary","Delivery Address","Payment Method","Track"];
-const Pages = ['Page1','Page2','Page3','Page4'];
-const getStepIndicatorConfig =({position, stepStatus}) =>{
-  const iconConfig = {
-    name:'feed',
-    color: stepStatus === 'finished' ? '#ffffff' : '#fe7013',
-    size: 15,
-  }
-  switch(position){
-    case 0: {
-      iconConfig.name = 'shopping-cart';
-      break;
-    }
-    case 1: {
-      iconConfig.name = 'location-on';
-      break;
-    }
-    case 2: {
-      iconConfig.name = 'payment';
-      break;
-    }
-    case 3: {
-      iconConfig.name = 'track-changes';
-      break;
-    }
-    default: {
-      break;
-    }
-  }
-    return iconConfig;
-}
-
 class CheckoutScreen extends React.Component {
   static navigationOptions = {
     title:'Checkout',
@@ -145,8 +104,6 @@ class CheckoutScreen extends React.Component {
     super(props);
     this.validation=this.validation.bind(this)
     this.state = {
-      currentPosition: 0,
-
       total:0,
       cart: {},
       confirmed: false,
@@ -169,15 +126,6 @@ class CheckoutScreen extends React.Component {
       ZIP:''
     };
     this.order = this.order.bind(this)
-  }
-
-
-  componentWillReceiveProps(nextProps,nextState){
-    if(nextState.currentPage != this.state.currentPage){
-      if(this.viewPager){
-        this.viewPager.setPage(nextState.currentPage)
-      }
-    }
   }
 
   async componentDidMount () {
@@ -210,7 +158,7 @@ class CheckoutScreen extends React.Component {
       method: 'POST',
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",
-        "Authorization": 'Bearer ' + 'pk_test_m8dakWs3AKLUeqE9lOucuaFX', //live key for GE
+        "Authorization": 'Bearer ' + 'pk_live_apspd6PtgprdnbOOtJj5QVqG', //live key for GE
       }
     })
     .then(resp => {
@@ -327,10 +275,6 @@ class CheckoutScreen extends React.Component {
     })
   }
 
-  onPageChange(position){
-      this.setState({currentPosition: position});
-  }
-
   render() {
     // console.log(_.values(this.state.cart).map((item) => {
     //   return {
@@ -342,7 +286,6 @@ class CheckoutScreen extends React.Component {
     let { total, cart, paid, confirmed, message, cardValid, address, userName, phone, ZIP } = this.state;
     console.log('state', this.state);
     return (
-
       <KeyboardAvoidingView style={[styles.container,{flex: 1, alignItems: 'stretch', position:'absolute', top:0,bottom:0,left:0,right:0}]} behavior="padding" enabled>
 
 
@@ -352,13 +295,7 @@ class CheckoutScreen extends React.Component {
           source={{html:stripeAPI}}
           style={{backgroundColor: 'gold',position:'absolute', top:0,bottom:0,left:0,right:0}}
         /> */}
-        <View style={{marginTop:95}}>
-          <StepIndicator
-          stepCount={4}
-          currentPosition={this.state.currentPosition}
-          labels={labels}/>
-         <ScrollView>
-
+        <ScrollView>
           <View>
             { confirmed ?
               paid ?
@@ -369,7 +306,6 @@ class CheckoutScreen extends React.Component {
           </View>
 
           <Text style={[styles.welcome, {color:'red'}]}>Beta Test: If have any questions/problems, call (214)475-9824</Text>
-
 
           <View className="items-container">
             <Text style={styles.checkOutTitle}>Order Summary</Text>
@@ -404,7 +340,6 @@ class CheckoutScreen extends React.Component {
             </Card>
 
           </View>
-
 
           <View className="payment-container">
             <Text style={styles.checkOutTitle}>Payment Information</Text>
@@ -480,8 +415,7 @@ class CheckoutScreen extends React.Component {
 
           </View>
           </ScrollView>
-          <View style={{ height: 60 }} />
-        </View>
+          <View style={{ height: 100 }} />
 
         </KeyboardAvoidingView>
 
