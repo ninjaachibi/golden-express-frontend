@@ -34,7 +34,7 @@ componentDidMount() {
     .then((resp) => resp.json())
     .then(resp => {
       // console.log('hitting',resp);
-      this.setState({data:resp.items, category: category})
+      this.setState({data:resp.items.slice(0,8), category: category})
 
       // console.log(resp.items)
     })
