@@ -239,7 +239,7 @@ const titleScale = scrollY.interpolate({
 
 
 
-      <View style={[styles.fill, {backgroundColor:'#EA9380'}]}>
+      <View style={[styles.fill, {backgroundColor:'white'}]}>
         <StatusBar
          translucent
          barStyle="light-content"
@@ -292,7 +292,6 @@ const titleScale = scrollY.interpolate({
                       {
                         _.values(this.state.cart).map((item) => {
                           return (
-                            <TouchableOpacity onPress={()=>{this.openProduct(item.item)}}>
                               <CartItem
                                 key = {item.item._id}
                                 item={item}
@@ -300,8 +299,8 @@ const titleScale = scrollY.interpolate({
                                 subtractFromCart={this.subtractFromCart}
                                 deleteFromCart={this.deleteFromCart}
                                 getTotal={this.getItemTotal}
+                                openProduct={this.openProduct}
                               />
-                            </TouchableOpacity>
 
                           )
                         })

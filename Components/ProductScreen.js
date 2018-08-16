@@ -240,7 +240,7 @@ class ProductScreen extends React.Component {
               </View>
               <View style={{backgroundColor:'white'}}>
 
-                <View style={{alignItems:'flex-start', marginTop: 20, marginLeft:16}}>
+                <View style={{alignItems:'flex-start', marginTop: 20, marginLeft:16, marginRight:8,}}>
 
                   <Text style={{fontSize: 12}}>Description: {this.state.description}</Text>
                 </View>
