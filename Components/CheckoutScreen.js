@@ -136,6 +136,7 @@ class CheckoutScreen extends React.Component {
     this.validation=this.validation.bind(this)
     this.state = {
       currentPosition: 0,
+      tax:0,
       total:0,
       cart: {},
       confirmed: false,
@@ -167,10 +168,11 @@ class CheckoutScreen extends React.Component {
     }
   }
   async componentDidMount () {
-    let total = this.props.navigation.getParam('total', 0);
+    let total = this.props.navigation.getParam('total', 0)*1.28;
+    let tax = total *0.08
     let cart = this.props.navigation.getParam('cart', {});
     console.log('got total', total, 'cart', cart);
-    this.setState({total, cart})
+    this.setState({total, cart,tax})
   }
   validation(input){
     if(input.length===0){
@@ -327,7 +329,7 @@ renderViewPagerPage = (data) => {
     //     itemId: item.item._id
     //   }
     // }));
-    let { total, cart, paid, confirmed, message, cardValid, address, userName, phone, ZIP } = this.state;
+    let { total, cart, paid, confirmed, message, cardValid, address, userName, phone, ZIP,tax } = this.state;
     console.log('state', this.state);
     return (
       <KeyboardAvoidingView style={[styles.container,{flex: 1, alignItems: 'stretch', position:'absolute', top:0,bottom:0,left:0,right:0}]} behavior="padding" enabled>
@@ -371,8 +373,8 @@ renderViewPagerPage = (data) => {
               </View>
               {_.values(cart).map((item)=><View style={{flexDirection:'row',flexWrap:'wrap',justifyContent:'space-evenly'}}><Text key={item.item._id} style={{fontSize:13}}>    {item.count}  </Text>
                         <Text style={{fontSize:11}}>  {item.item.name}</Text></View>)}
-             
-              <Text style={{fontWeight:'bold', marginLeft:220}}>Total: ${total.toFixed(2)}</Text>       
+              <Text style={{fontWeight:'bold', marginLeft:210}}>Tax: ${tax.toFixed(2)}</Text>
+              <Text style={{fontWeight:'bold', marginLeft:210}}>Total: ${total.toFixed(2)}</Text>       
               
             </Card>
             </TouchableOpacity>
@@ -448,6 +450,12 @@ renderViewPagerPage = (data) => {
               <TouchableOpacity
                 style={[styles.button, styles.buttonBlue]}
                 // onPress={()=>{_.throttle(this.order, 3000, {trailing: false})()}}
+
+
+
+
+
+
                 onPress={()=> {
                   console.log('pressed');
                   Alert.alert(
