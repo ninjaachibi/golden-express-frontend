@@ -25,15 +25,15 @@ const MEAT = {cat: 'Meat', src: require('../assets/Meat.png')}
 const PRODUCE = {cat: 'Produce', src: require('../assets/Produce.png')}
 const SEAFOOD = {cat: 'Seafood', src: require('../assets/Seafood.png')}
 const DAIRY = {cat: 'Dairy', src: require('../assets/Dairy.png')}
-const FROZEN = {cat: 'Frozen', src: require('../assets/Frozen.png')}
+const FROZEN = {cat: 'FrozenGoods', src: require('../assets/Frozen.png')}
 const PRESERVED = {cat: 'Preserved', src: require('../assets/Preserved.png')}
 const BEVERAGES = {cat: 'Beverage', src: require('../assets/Beverages.png')}
 const SNACKS = {cat: 'Snacks', src: require('../assets/Snacks.png')}
 const NOODLES = {cat: 'Noodles', src: require('../assets/Noodles.png')}
-const CANNED = {cat: 'Spices', src: require('../assets/Canned.png')}
-const DRIED = {cat: 'Spices', src: require('../assets/Dried.png')}
-const INSTANT = {cat: 'Spices', src: require('../assets/Instant.png')}
-const POWDERMIX = {cat: 'Spices', src: require('../assets/PowderMix.png')}
+const CANNED = {cat: 'Canned', src: require('../assets/Canned.png')}
+const DRIED = {cat: 'Dried', src: require('../assets/Dried.png')}
+const INSTANT = {cat: 'Instant', src: require('../assets/Instant.png')}
+const POWDERMIX = {cat: 'PowderMix', src: require('../assets/PowderMix.png')}
 const SPICES = {cat: 'Spices', src: require('../assets/Spices.png')}
 
 

@@ -81,7 +81,7 @@ const Tabs = TabNavigator({
 
 
 },
-{initialRouteName:'Home',
+{initialRouteName:'Categories',
 
 }
 )
