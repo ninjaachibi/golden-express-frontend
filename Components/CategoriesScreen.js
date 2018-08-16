@@ -33,7 +33,7 @@ const NOODLES = {cat: 'Noodles', src: require('../assets/Noodles.png')}
 const CANNED = {cat: 'Canned', src: require('../assets/Canned.png')}
 const DRIED = {cat: 'Dried', src: require('../assets/Dried.png')}
 const INSTANT = {cat: 'Instant', src: require('../assets/Instant.png')}
-const POWDERMIX = {cat: 'PowderMix', src: require('../assets/PowderMix.png')}
+const POWDERMIX = {cat: 'Powder-Mix', src: require('../assets/PowderMix.png')}
 const SPICES = {cat: 'Spices', src: require('../assets/Spices.png')}
 
 
