@@ -12,8 +12,10 @@ import {
   Image,
   ScrollView,
   AsyncStorage,
-  TouchableHighlight
+  TouchableHighlight,
+  ActivityIndicator,
 } from 'react-native';
+import { AppLoading, Asset, Font } from 'expo';
 import styles from './Styles';
 import {Header, Icon} from 'react-native-elements';
 import groceryItems from '../public/Inventory/Fresh_Meat'
@@ -51,7 +53,8 @@ class CategoriesScreen extends React.Component {
     super(props);
     this.ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     this.state = {
-      disabled:false
+      disabled:false,
+      isReady: false,
     }
     this.browseAisle = this.browseAisle.bind(this)
   }
@@ -88,17 +91,103 @@ class CategoriesScreen extends React.Component {
   }
 
 
+  async _cacheResourcesAsync() {
+
+    const images = [
+      require('../assets/Meat.png'),
+      require('../assets/Seafood.png'),
+      require('../assets/Produce.png'),
+      require('../assets/Dairy.png'),
+      require('../assets/Frozen.png'),
+      require('../assets/Preserved.png'),
+      require('../assets/Beverages.png'),
+      require('../assets/Snacks.png'),
+      require('../assets/Noodles.png'),
+      require('../assets/Spices.png')
+    ];
+
+    const cacheImages = images.map((image) => {
+      return Asset.fromModule(image).downloadAsync();
+    });
+    return Promise.all(cacheImages)
+
+  }
+
+
 
   render() {
+    console.log('is Ready',this.state.isReady);
+    let browseAisle = _.throttle(this.browseAisle, 1000, {trailing: false}).bind(this);
+
+    if (!this.state.isReady) {
+      return (
+        <View>
+          <AppLoading
+            startAsync={this._cacheResourcesAsync}
+            onFinish={() => this.setState({ isReady: true })}
+            onError={console.warn}
+          />
+          <Text>Hello world</Text>
+          <ActivityIndicator size="large" color="#0000ff" />
+        </View>
+      );
+    }
     return (
 
       <ScrollView style={{flex:1}}>
         <View style={{height:12}}/>
+        <Text>Ready</Text>
         {this.createCategory(MEAT,PRODUCE)}
         {this.createCategory(SEAFOOD,DAIRY)}
         {this.createCategory(FROZEN,PRESERVED)}
         {this.createCategory(BEVERAGES,SNACKS)}
         {this.createCategory(NOODLES,SPICES)}
+        {/* <View style={{flex:1, justifyContent:'flex-start', alignItems:'center',flexDirection:'row',justifyContent:'center'}}>
+          <TouchableOpacity activeOpacity={0.75} onPress={()=>{browseAisle('Meat')}}>
+            <Image source={require('../assets/Meat.png')} style={{height: 170,width: 170, marginLeft: 12, marginRight: 5, marginTop: 10,flex: 1}}/>
+          </TouchableOpacity>
+          <TouchableOpacity activeOpacity={0.75} onPress={()=>{browseAisle('Produce')}}>
+            <Image source={require('../assets/Produce.png')} style={{height: 170,width: 170, marginRight: 12, marginLeft:5, marginTop: 10,flex: 1}}/>
+          </TouchableOpacity>
+        </View>
+
+        <View style={{flex:1, justifyContent:'flex-start', alignItems:'center',flexDirection:'row',justifyContent:'center'}}>
+          <TouchableOpacity activeOpacity={0.75} onPress={()=>{browseAisle('Seafood')}}>
+            <Image source={require('../assets/Seafood.png')} style={{height: 170,width: 170, marginLeft: 12, marginRight: 5, marginTop: 10,flex: 1}}/>
+          </TouchableOpacity>
+          <TouchableOpacity activeOpacity={0.75} onPress={()=>{browseAisle('Dairy')}}>
+            <Image source={require('../assets/Dairy.png')} style={{height: 170,width: 170, marginRight: 12, marginLeft:5, marginTop: 10,flex: 1}}/>
+          </TouchableOpacity>
+        </View>
+
+        <View style={{flex:1, justifyContent:'flex-start', alignItems:'center',flexDirection:'row',justifyContent:'center'}}>
+          <TouchableOpacity activeOpacity={0.75} onPress={()=>{browseAisle('Frozen')}}>
+            <Image source={require('../assets/Frozen.png')} style={{height: 170,width: 170, marginLeft: 12, marginRight: 5, marginTop: 10,flex: 1}}/>
+          </TouchableOpacity>
+          <TouchableOpacity activeOpacity={0.75} onPress={()=>{browseAisle('Preserved')}}>
+            <Image source={require('../assets/Preserved.png')} style={{height: 170,width: 170, marginRight: 12, marginLeft:5, marginTop: 10,flex: 1}}/>
+          </TouchableOpacity>
+        </View>
+
+        <View style={{flex:1, justifyContent:'flex-start', alignItems:'center',flexDirection:'row',justifyContent:'center'}}>
+          <TouchableOpacity activeOpacity={0.75} onPress={()=>{browseAisle('Beverage')}}>
+            <Image source={require('../assets/Beverages.png')} style={{height: 170,width: 170, marginLeft: 12, marginRight: 5, marginTop: 10,flex: 1}}/>
+          </TouchableOpacity>
+          <TouchableOpacity activeOpacity={0.75} onPress={()=>{browseAisle('Snacks')}}>
+            <Image source={require('../assets/Snacks.png')} style={{height: 170,width: 170, marginRight: 12, marginLeft:5, marginTop: 10,flex: 1}}/>
+          </TouchableOpacity>
+        </View>
+
+        <View style={{flex:1, justifyContent:'flex-start', alignItems:'center',flexDirection:'row',justifyContent:'center'}}>
+          <TouchableOpacity activeOpacity={0.75} onPress={()=>{browseAisle('Noodles')}}>
+            <Image source={require('../assets/Noodles.png')} style={{height: 170,width: 170, marginLeft: 12, marginRight: 5, marginTop: 10,flex: 1}}/>
+          </TouchableOpacity>
+          <TouchableOpacity activeOpacity={0.75} onPress={()=>{browseAisle('Spices')}}>
+            <Image source={require('../assets/Spices.png')} style={{height: 170,width: 170, marginRight: 12, marginLeft:5, marginTop: 10,flex: 1}}/>
+          </TouchableOpacity>
+        </View> */}
+
+
       <View style={{height:12}}/>
 </ScrollView>
 

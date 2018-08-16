@@ -35,7 +35,7 @@ const SCREEN_HEIGHT = Dimensions.get('window').height
 const B_IMG = require('../assets/redGradient.png')
 const G_IMG = require('../assets/redGradient.png')
 const D_IMG = require('../assets/goldenTemple.jpg')
-const L_IMG = require('../assets/Coupon.jpg')
+const L_IMG = require('../assets/Vegetables.jpg')
 const A_IMG = require('../assets/redGradient.png')
 const list = [
   {route:'Account', icon:{name: 'user-circle', type: 'font-awesome', size:20}},
