@@ -93,11 +93,12 @@ class LoginScreen extends React.Component {
         <Text style={[styles.welcome, {color:'#ea4a41', fontWeight:'bold'}]}>If you have any questions/problems, call (214)475-9824</Text>
         <View style={styles.inputContainer}>
          <TextInput
-
           style={styles.Logininput}
           placeholder="Username"
           placeholderTextColor='white'
           onChangeText={(text) => this.setState({username: text})}
+          autoCorrect={false}
+          autoCapitalize='none'
         />
        </View>
        <View style={styles.inputContainer}>
@@ -109,8 +110,10 @@ class LoginScreen extends React.Component {
           borderColor='white'
           borderStyle='solid'
           onChangeText={(text) => this.setState({password: text})}
+          autoCorrect={false}
+          autoCapitalize='none'
         />
-        </View>
+      </View>
         <TouchableOpacity onPress={ () => {this.press()} } style={[styles.button, styles.buttonGreen]}>
           <Text style={styles.buttonLabel}>Login</Text>
         </TouchableOpacity>

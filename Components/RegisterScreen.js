@@ -94,28 +94,35 @@ class RegisterScreen extends React.Component {
 
         <TextInput
           style={{height: 50, color: 'white', fontSize:15}}
-
           placeholder="Enter your username..."
           placeholderTextColor='white'
           onChangeText={(text) => this.setState({username: text})}
+          autoCorrect={false}
+          autoCapitalize='none'
         />
         <TextInput
           style={{height: 50, color: 'rgba(255,255,255,1)', fontSize: 15}}
           placeholderTextColor='rgba(255,255,255,1)'
           placeholder="Enter your password..."
           onChangeText={(text) => this.setState({password: text})}
+          autoCorrect={false}
+          autoCapitalize='none'
         />
         <TextInput
           style={{height: 50, color: 'rgba(255,255,255,1)', fontSize: 15}}
           placeholderTextColor='rgba(255,255,255,1)'
           placeholder="Phone Number..."
           onChangeText={(text) => this.setState({phone: text})}
+          autoCorrect={false}
+          autoCapitalize='none'
         />
         <TextInput
           style={{textAlign:'left',height: 50, color: 'rgba(255,255,255,1)', fontSize: 15}}
           placeholderTextColor='rgba(255,255,255,1)'
           placeholder="Enter your email..."
           onChangeText={(text) => this.setState({email: text})}
+          autoCorrect={false}
+          autoCapitalize='none'
         />
         {username && password && email && phone ?
           <View>
