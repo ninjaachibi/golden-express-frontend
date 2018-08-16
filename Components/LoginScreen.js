@@ -9,7 +9,8 @@ import {
   Alert,
   Button,
   AsyncStorage,
-  ImageBackground
+  ImageBackground,
+  KeyboardAvoidingView
 } from 'react-native';
 import styles from './Styles';
 import {Input,Icon} from 'react-native-elements';
@@ -81,7 +82,7 @@ class LoginScreen extends React.Component {
 
   render() {
     return (
-      <View style={styles.container}>
+      <KeyboardAvoidingView style={[styles.container,{flex: 1, alignItems: 'stretch', position:'absolute', top:0,bottom:0,left:0,right:0}]} behavior="padding" enabled>
         <ImageBackground
             source={BG_IMG}
             style={[styles.bgImage, {opacity:0.75}]}
@@ -89,7 +90,7 @@ class LoginScreen extends React.Component {
         <Text>{this.state.message}</Text>
 
         <Text style={[styles.textBig,{color:'white'}]}>WELCOME TO BETA</Text>
-        <Text style={[styles.welcome, {color:'red'}]}>If have any questions/problems, call (214)475-9824</Text>
+        <Text style={[styles.welcome, {color:'#ea4a41', fontWeight:'bold'}]}>If you have any questions/problems, call (214)475-9824</Text>
         <View style={styles.inputContainer}>
          <TextInput
 
@@ -118,8 +119,7 @@ class LoginScreen extends React.Component {
           borderStyle='solid'>Register</Text>
         </TouchableOpacity>
       </ImageBackground>
-      </View>
-    )
+</KeyboardAvoidingView>    )
   }
 }
 

@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#F5FCFF',
   },
   welcome: {
-    fontSize: 20,
+    fontSize: 24,
     textAlign: 'center',
     margin: 10,
   },
@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
     marginBottom: 5,
   },
   textBig: {
-    fontSize: 44,
+    fontSize: 58,
     textAlign: 'center',
     fontFamily: 'Didot',
     color:'rgba(255,255,255,0.89)',
@@ -61,6 +61,28 @@ const styles = StyleSheet.create({
   },
   button: {
     alignSelf: 'stretch',
+    paddingTop: 10,
+    paddingBottom: 10,
+    marginTop: 20,
+    marginLeft: 55,
+    marginRight: 55,
+    borderRadius: 10
+  },
+  button2: {
+    alignSelf: 'stretch',
+    marginLeft: 55,
+    width: SCREEN_WIDTH*1/2,
+    paddingTop: 10,
+    paddingBottom: 10,
+    marginTop: 20,
+    marginLeft: 55,
+    marginRight: 55,
+    borderRadius: 10
+  },
+  button3: {
+    alignSelf: 'stretch',
+    width: SCREEN_WIDTH*1/2,
+    marginLeft: 55,
     paddingTop: 10,
     paddingBottom: 10,
     marginTop: 20,
@@ -95,6 +117,8 @@ const styles = StyleSheet.create({
   },
   Logininput:{
     height: 40,
+    marginLeft: -40,
+
     color:'white'
   },
   buttonRed: {
@@ -102,6 +126,15 @@ const styles = StyleSheet.create({
   },
   buttonBlue: {
     backgroundColor: 'orange',
+    opacity:0.77,
+    borderColor:'#f9ce84',
+    borderBottomWidth:0.7,
+    borderTopWidth:0.7,
+    borderLeftWidth:0.7,
+    borderRightWidth:0.7,
+  },
+  buttonOrange: {
+    backgroundColor: '#19efff',
     opacity:0.77,
     borderColor:'#f9ce84',
     borderBottomWidth:0.7,
