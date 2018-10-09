@@ -104,9 +104,6 @@ export default class SearchNavigator extends React.Component{
             openProduct:this.openProduct
           }}/>
       </View>
-
     )
-
   }
-
 };

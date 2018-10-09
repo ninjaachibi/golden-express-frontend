@@ -69,10 +69,10 @@ getOrders(){
 
     render(){
       return(
-       
+
         <ScrollView style={{marginBottom:20}}>
-         
-          <Text style={styles.checkOutTitle1}>Welcome {this.state.username}</Text>
+
+          <Text style={[styles.checkOutTitle1, {marginLeft:10}]}>Welcome {this.state.username}</Text>
           <Text style={styles.checkOutTitle}>Your Orders:</Text>
           <ScrollView >
             {this.state.orders.map((order)=>{

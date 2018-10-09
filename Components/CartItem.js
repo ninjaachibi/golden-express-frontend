@@ -58,8 +58,12 @@ export default class CartItem extends React.Component {
               <Ionicons name="md-remove" size={18} onPress={()=>{this.props.subtractFromCart(item.item)}} />
             </View>
             }
-            <View style={{position:'absolute', top:0,left:24,right:0}}>
-            <Text style={{fontSize:20}}>{item.count} </Text>
+            <View style={{position:'absolute', top:7,left:16,right:0, width:30, height:10, alignItems:'center', justifyContent:'center'}}>
+            <Text
+
+          numberOfLines={1}
+          
+          style={{fontSize:14}}>{item.count} </Text>
           </View>
             <View style={{position:'absolute', top:0,left:42,right:0}}>
               <TouchableOpacity onPress={()=>{this.props.addToCart(item.item,1)}} >

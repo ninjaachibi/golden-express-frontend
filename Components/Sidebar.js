@@ -38,43 +38,20 @@ const D_IMG = require('../assets/goldenTemple.jpg')
 const L_IMG = require('../assets/Vegetables.jpg')
 const A_IMG = require('../assets/redGradient.png')
 const list = [
-  {route:'Account', icon:{name: 'user-circle', type: 'font-awesome', size:20}},
-  {route: 'Order',icon:{name: 'file-text-o', type: 'font-awesome', size: 20}  }]
-
-
-
-
-
+  {route:'Order', name: 'Order Information',icon:{name: 'user-circle', type: 'font-awesome', size:20}},
+{route:'Score', name: 'Scoreboard',icon:{name: 'user-circle', type: 'font-awesome', size:20,}}
+  // {route: 'Help',icon:{name: 'file-text-o', type: 'font-awesome', size: 20}  }
+]
 
 export default class DrawerContent extends React.Component {
-
-  cartNavigate()
-  {
-    this.props.screenProps.cart()
-
-  }
-
-  openDrawer()
-  {
-    this.props.screenProps.openDrawer()
-  }
-
   static navigationOptions =({navigation}) => {
     const {state} = navigation
     return {
     header:null
-    // headerRight: <TouchableOpacity style={{marginRight:10}}>
-    //     <Icon
-    //     name='shopping-cart'
-    //     color='blue'
-    //     onPress={()=>{state.params.cart()}}/>
-    //   </TouchableOpacity>
     }
-
   };
 
-  constructor(props)
-  {
+  constructor(props){
     super(props)
     this.state = {
       searchBar: false,
@@ -85,11 +62,13 @@ export default class DrawerContent extends React.Component {
       refreshing: false,
 
     }
-
-
   }
-  openContact(){
-    this.props.screenProps.openContact()
+
+  cartNavigate(){
+    this.props.screenProps.cart()
+  }
+  openDrawer(){
+    this.props.screenProps.openDrawer()
   }
 
 
@@ -98,8 +77,6 @@ export default class DrawerContent extends React.Component {
   //how to make an image, where do i source
   //user gives quantities
   //algo updates quantiies with respect to recipe and user's desires
-
-
   navigateToScreen = (route) => () => {
       const navigate = NavigationActions.navigate({
         routeName: route
@@ -148,14 +125,8 @@ export default class DrawerContent extends React.Component {
       outputRange: ['rgb(0, 0, 0)', 'rgb(255, 0, 0)', 'rgb(0, 0, 255)'],
       extrapolate: 'clamp',
     });
-
-
     // console.log(this.state.scrollY)
-
     return (
-
-
-
       <View style={[styles.fill, {backgroundColor:'#EA9380'}]}>
         <StatusBar
          translucent
@@ -199,9 +170,7 @@ export default class DrawerContent extends React.Component {
           {/* <TouchableHighlight onPress={()=>this.props.navigation.navigate('HomeSearch')}> */}
 
           <ImageBackground style={{width:SCREEN_WIDTH* 1.25, height: 220, justifyContent:'center',position:'absolute', top: 25, left:-SCREEN_WIDTH*1/10, right:0}} source={B_IMG}>
-          <Image
-            source={L_IMG}
-            style={{height:140, width: 180, borderRadius: 14, position:'absolute', top:65,left:SCREEN_WIDTH*1/9, right:0, marginBottom: 14, marginLeft: 75}}/>
+
           </ImageBackground>
           {/* </TouchableHighlight> */}
           </View>
@@ -209,78 +178,53 @@ export default class DrawerContent extends React.Component {
           <ImageBackground style={{width:SCREEN_WIDTH* 1.25, height: SCREEN_HEIGHT*6/10, top:-10, justifyContent:'center',position:'absolute',left:-SCREEN_WIDTH*1/10, right:0}} source={B_IMG}>
 
           <List containerStyle={{marginBottom: 20, position:'absolute', top:-20, left:SCREEN_WIDTH*1/10,right:0}}>
-          {/* {
+          {
             list.map((l) => (
 
               <ListItem
                 roundAvatar
                 containerStyle={{width: SCREEN_WIDTH}}
                 titleContainerStyle={{marginLeft:5}}
-                onPress={l.route === 'Account' ? ()=> this.openContact() : this.navigateToScreen('Order')}
+                onPress={this.navigateToScreen(l.route)}
                 key={l.route}
-                title={l.route}
+                title={l.name}
                 leftIcon={l.icon}
               />
             ))
-          } */}
-          <ListItem
-            roundAvatar
-            containerStyle={{width: SCREEN_WIDTH}}
-            titleContainerStyle={{marginLeft:5}}
-            onPress={this.navigateToScreen('Order')}
-            key={'order'}
-            title={'Order History'}
-            leftIcon={{name: 'file-text-o', type: 'font-awesome', size: 20}}
-          />
+          }
+
         </List>
-        {/* <TouchableOpacity
+        <TouchableOpacity
           style={{height:50, alignItems:'center', justifyContent:'center',width: SCREEN_WIDTH*3/4,position:'absolute', top:SCREEN_HEIGHT*1/5,left:SCREEN_WIDTH*1/5,right:0, zIndex:7, backgroundColor:'#fcb6b3', borderRadius:12}}
           onPress={this.logout}>
           <Text style={{color:'white', fontSize:24, fontWeight:'bold'}}>Logout</Text>
-        </TouchableOpacity> */}
+        </TouchableOpacity>
            </ImageBackground>
           </View>
 
         </View>
 
         </Animated.ScrollView>
-
-        {/* <Animated.View style={styles.header}>
-  <View style={styles.bar}>
-    <Text style={styles.title}>Title</Text>
-  </View>
-</Animated.View> */}
-<Animated.View
+        <Animated.View
           pointerEvents="none"
           style={[
             styles.header1,
             { opacity:imageOpacity,transform: [{ translateY: headerTranslate }] },
           ]}
         >
-
            <Animated.Image
              source={G_IMG}
              style={[styles.backgroundImage, {
                opacity: imageOpacity,
                transform: [{ translateY: imageTranslate }]
-
-
              }]}/>
              <View style={{position:'absolute', zIndex:6, top: SCREEN_HEIGHT*1/8, left:0, marginLeft: 10, alignItems:'flex-start'}}>
              <Text style={{ fontSize:36, color:'white'}}> Hi, Tester</Text>
              <Text style={{ fontSize: 14, color:'white'}}> Thanks for taking the time to
            try out our application. </Text>
          <Text style={{ fontSize: 14, color:'white'}}> We greatly appreciate it and would love your feedback!</Text>
-
 </View>
-
-
-
-
-
        </Animated.View>
-
-
        <Animated.View
           style={[
             styles.behind,
@@ -312,11 +256,7 @@ export default class DrawerContent extends React.Component {
         </View>
 
           <View style={{marginTop:-25,marginLeft: 30}}>
-
-
-
           </View>
-
         </Animated.View>
         <Animated.View
            style={[
@@ -332,32 +272,22 @@ export default class DrawerContent extends React.Component {
            ]}
          >
            <View style={{position:'absolute', top:86, left:0,right: SCREEN_WIDTH*5/6}}>
-
          <TouchableOpacity style={{marginTop:-31.5,marginLeft:-1}} onPress={this.navigateToScreen('Interface')}>
            <Icon
-                  name='close'
-                  size={25}
-                  color={'white'}
-                  underlayColor={'white'}
-
-                />
+              name='close'
+              size={25}
+              color={'white'}
+              underlayColor={'white'}
+          />
               </TouchableOpacity>
             </View>
-
               <View style={{position:'absolute', top:60,left:SCREEN_WIDTH*3/10,right:0}}>
              <Text style={{fontSize:21, fontWeight:'bold', color:'white',marginTop:-5}}>Golden Express</Text>
            </View>
-
            <View style={{marginTop:-25,marginLeft: 30}}>
-
-
-
            </View>
-
          </Animated.View>
-
-</View>
-
+       </View>
     )
   }
 }

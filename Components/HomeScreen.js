@@ -32,11 +32,11 @@ const SCREEN_HEIGHT = Dimensions.get('window').height
 const HEADER_MAX_HEIGHT = 100//240;
 const HEADER_MIN_HEIGHT = 0;
 const HEADER_SCROLL_DISTANCE = HEADER_MAX_HEIGHT - HEADER_MIN_HEIGHT;
-const B_IMG = require('../assets/redGradient.png')
-const G_IMG = require('../assets/redGradient.png')
+const B_IMG = require('../assets/White.png')
+const G_IMG = require('../assets/Nature.jpg')
 const D_IMG = require('../assets/goldenTemple.jpg')
-const L_IMG = require('../assets/Vegetables.jpg')
-const A_IMG = require('../assets/redGradient.png')
+const L_IMG = require('../assets/White.png')
+const A_IMG = require('../assets/White.png')
 
 
 
@@ -57,12 +57,6 @@ export default class HomeScreen extends React.Component {
     const {state} = navigation
     return {
     header:null
-    // headerRight: <TouchableOpacity style={{marginRight:10}}>
-    //     <Icon
-    //     name='shopping-cart'
-    //     color='blue'
-    //     onPress={()=>{state.params.cart()}}/>
-    //   </TouchableOpacity>
     }
 
   };
@@ -120,7 +114,7 @@ export default class HomeScreen extends React.Component {
       <View style={[styles.row]}>
         <ImageBackground style={{width:SCREEN_WIDTH* 1.25, height: 275, justifyContent:'flex-start',position:'absolute', top: 25, left:-20, right:50 }} source={A_IMG}>
           <TouchableOpacity onPress={()=> this.browseAisle(aisle)} style={{position:'absolute', top: 12, left: SCREEN_WIDTH*3/4, zIndex:3}}>
-          <Text style={{color:'white',marginTop:2,marginRight:10, fontWeight:'bold',fontSize:16}}>View more...></Text>
+          <Text style={{color:'#E15252',marginTop:2,marginRight:10, fontWeight:'bold',fontSize:16}}>View more...></Text>
         </TouchableOpacity>
         <HorizontalMealScroll openProduct={this.openProduct} aisle={aisle} style={{flex:1}}/>
       </ImageBackground>
@@ -200,7 +194,7 @@ export default class HomeScreen extends React.Component {
       )
     }
     return (
-      <View style={[styles.fill, {backgroundColor:'#EA9380'}]}>
+      <View style={[styles.fill, {backgroundColor:'white'}]}>
 
         <StatusBar
          translucent
@@ -244,41 +238,54 @@ export default class HomeScreen extends React.Component {
           {/* <TouchableHighlight onPress={()=>this.props.navigation.navigate('HomeSearch')}> */}
           <TouchableOpacity
             style={{height: 40, width: SCREEN_WIDTH , alignItems:'center', backgroundColor:'transparent',
-            borderRadius: 8, padding:3, justifyContent:'center', position:'absolute', top: 35,  left:0, right: 0,zIndex:3 }}
+            borderRadius: 8, padding:3, justifyContent:'center', position:'absolute', top: 130,  left:0, right: 0,zIndex:3 }}
             placeholder="Search for a Recipe"
             onPress={()=>{console.log("Pressed");this.props.navigation.navigate({key:'HomeSearch', routeName: 'HomeSearch'})}
           }>
           </TouchableOpacity>
-          <ImageBackground style={{width:SCREEN_WIDTH* 1.25, height: 275, justifyContent:'center',position:'absolute', top: 25, left:-SCREEN_WIDTH*1/10, right:0}} source={B_IMG}>
+          {/* <ImageBackground style={{width:SCREEN_WIDTH* 1.25, height: 275, justifyContent:'center',position:'absolute', top: 25, left:-SCREEN_WIDTH*1/10, right:0}} source={B_IMG}>
           <Image
             source={L_IMG}
             style={{height:140, width: 180, borderRadius: 14, position:'absolute', top:65,left:SCREEN_WIDTH*1/10, right:0, marginBottom: 14, marginLeft: 75}}/>
-          </ImageBackground>
+          </ImageBackground> */}
         </View>
           <View
-            style={{flex:1, backgroundColor:'transparent', alignItems:'flex-start'}}
+            style={{flex:1, backgroundColor:'white', alignItems:'flex-start'}}
           >
             {
               this.createAisle('meat')
             }
+            <View style={{height:SCREEN_HEIGHT*1/11, backgroundColor:'transparent'}}/>
             {
               this.createAisle('seafood')
             }
+            <View style={{height:SCREEN_HEIGHT*1/11, backgroundColor:'transparent'}}/>
+
             {
               this.createAisle('spices')
             }
+            <View style={{height:SCREEN_HEIGHT*1/11, backgroundColor:'transparent'}}/>
+
             {
               this.createAisle('produce')
             }
+            <View style={{height:SCREEN_HEIGHT*1/11, backgroundColor:'transparent'}}/>
+
             {
               this.createAisle('snacks')
             }
+            <View style={{height:SCREEN_HEIGHT*1/11, backgroundColor:'transparent'}}/>
+
             {
               this.createAisle('noodles')
             }
+            <View style={{height:SCREEN_HEIGHT*1/11, backgroundColor:'transparent'}}/>
+
             {
               this.createAisle('beverage')
             }
+            <View style={{height:SCREEN_HEIGHT*1/9, backgroundColor:'transparent'}}/>
+
 
           </View>
         </View>
@@ -308,11 +315,11 @@ export default class HomeScreen extends React.Component {
              }]}/>
              <TouchableOpacity
                style={{height: 40, width: SCREEN_WIDTH * 9/10, alignItems:'center', backgroundColor:'white',
-               borderRadius: 5, padding:3, justifyContent:'center', position:'absolute', top: 150, zIndex:3 }}
+               borderRadius: 5, padding:3, justifyContent:'center', position:'absolute', top: 245, zIndex:3 }}
                placeholder="Search for a Recipe"
                onPress={()=>{console.log("Pressed");this.props.navigation.navigate('HomeSearch')}
              }>
-             <Text style={{color:'grey'}}> Search Golden Express </Text>
+             <Text style={{color:'#D1CFCF'}}> Search Golden Express </Text>
 
              {/* <TouchableOpacity style={[styles.button, styles.buttonBlue]} onPress={ () => {this.submit()} }>
              <Text style={styles.buttonLabel}>Search</Text>
@@ -347,7 +354,7 @@ export default class HomeScreen extends React.Component {
           <Icon
                  name='account-circle'
                  size={35}
-                 color={'black'}
+                 color={'yellow'}
                  underlayColor={'white'}
 
                />
@@ -355,13 +362,13 @@ export default class HomeScreen extends React.Component {
            </View>
 
              <View style={{marginTop:-25,marginLeft: SCREEN_WIDTH/2-25}}>
-            <Text style={{fontSize:21, fontWeight:'bold', color:'red',marginTop:-5}}>Home</Text>
+            <Text style={{fontSize:21, fontWeight:'bold', color:'blue',marginTop:-5}}>Home</Text>
           </View>
 
           <View style={{marginTop:-25,marginLeft: 30}}>
 
 
-          <TouchableOpacity style={{marginLeft:SCREEN_WIDTH - 64, marginTop:32.1}}>
+          <TouchableOpacity style={{marginLeft:SCREEN_WIDTH - 68, marginTop:34}}>
               <Icon
               name='shopping-cart'
               color='blue'
@@ -389,24 +396,24 @@ export default class HomeScreen extends React.Component {
            <Icon
                   name='account-circle'
                   size={35}
-                  color={'white'}
-                  underlayColor={'white'}
+                  color={'red'}
+                  underlayColor={'transparent'}
 
                 />
               </TouchableOpacity>
             </View>
 
               <View style={{marginTop:-25,marginLeft: SCREEN_WIDTH/2-25}}>
-             <Text style={{fontSize:21, fontWeight:'bold', color:'white',marginTop:-5}}>Home</Text>
+             <Text style={{fontSize:21, fontWeight:'bold', color:'red',marginTop:-5}}>Home</Text>
            </View>
 
            <View style={{marginTop:-25,marginLeft: 30}}>
 
 
-           <TouchableOpacity style={{marginLeft:SCREEN_WIDTH - 64, marginTop:32.1}}>
+           <TouchableOpacity style={{marginLeft:SCREEN_WIDTH - 68, marginTop:34}}>
                <Icon
                name='shopping-cart'
-               color='white'
+               color='red'
                onPress={()=>{this.props.screenProps.cart()}}/>
              </TouchableOpacity>
            </View>

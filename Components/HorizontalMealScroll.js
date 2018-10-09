@@ -39,8 +39,6 @@ componentDidMount() {
       // console.log(resp.items)
     })
     // this.refs.listRef.scrollToIndex({index:-1, animated: false})
-
-
 }
 onScrollEnd = (e) => {
    const scrollTop = e.nativeEvent.contentOffset.x;
@@ -59,8 +57,7 @@ onScrollEnd = (e) => {
   render() {
     return (
       <View style={{flex:1}}>
-
-<Text style={{position:'absolute', top:12, marginLeft: 5, color:'white', fontSize: 16, fontWeight:'bold'}}> {this.state.category}</Text>
+<Text style={{position:'absolute', top:12, marginLeft: 5, color:'#848587', fontSize: 16, fontWeight:'bold'}}> {this.state.category}</Text>
   <View style={{marginTop:10}}>
       <FlatList
         showsHorizontalScrollIndicator={false}
@@ -97,7 +94,7 @@ onScrollEnd = (e) => {
               containerStyle={{marginLeft:-5, width: 125, height:190, borderRadius: 10, borderColor:'transparent',backgroundColor:"transparent",alignItems:"center", justifyContent:'flex-start',}}
             >
               <View style={{marginTop:-5,width:110,alignItems:"flex-start"}}>
-              <Text style={{ fontWeight:'bold',fontSize:12,marginBottom: 10, color:'white' }}>
+              <Text style={{ fontWeight:'bold',fontSize:12,marginBottom: 10, color:'#A2A0A0' }}>
                 {rowData.name}
               </Text>
               </View>
@@ -114,5 +111,4 @@ onScrollEnd = (e) => {
     );
   }
 }
-
 export default HorizontalMealScroll;

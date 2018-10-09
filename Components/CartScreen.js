@@ -428,9 +428,12 @@ const titleScale = scrollY.interpolate({
            >
 
              <View style={{flexDirection:'row'}}>
-               <Card borderRadius={8} containerStyle={{height: 15,position:'absolute', top:-13,left:0, right:0, flexDirection:'row', alignItems:'flex-start', backgroundColor:'white', borderColor:'grey',marginLeft:6,width: SCREEN_WIDTH * 0.48}}>
+               <Card borderRadius={8} containerStyle={{height: 24,position:'absolute', top:-13,left:0, right:0, flexDirection:'row', alignItems:'flex-start', backgroundColor:'white', borderColor:'grey',marginLeft:6,width: SCREEN_WIDTH * 0.48}}>
 
-                 <Text style={{position:'absolue', top:-14,left:0,right:0, fontSize: 22, fontWeight:'bold'}}> Total: ${this.calculateTotal().toFixed(2)}</Text>
+                 <Text  adjustsFontSizeToFit
+              numberOfLines={1}
+              allowFontScaling
+              style={{height:26,position:'absolue', top:-14,left:15,right:0,fontWeight:'bold'}}> Total: ${this.calculateTotal().toFixed(2)}</Text>
 
 
                </Card>

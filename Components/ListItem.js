@@ -28,17 +28,12 @@ import { Ionicons } from '@expo/vector-icons';
 import {Header, Icon} from 'react-native-elements';
 import styles from './Styles'
 
-
-
 export default class ListItem extends React.Component {
 
   constructor(props) {
     super(props)
   }
-
-
   render(){
-
     return (
       <View style={{flexDirection:'row',alignItems:'center'}}>
         <View style={{ borderBottomWidth: 1, width: 150, marginBottom: 10, flexDirection: 'row', flex:1, backgroundColor: "lightblue"}}>
@@ -76,12 +71,5 @@ export default class ListItem extends React.Component {
       }
       </View>
     )
-
-
-
-
   }
-
-
-
 }

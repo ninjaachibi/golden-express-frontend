@@ -10,6 +10,9 @@ import Interface from './Interface'
 import AccountNavigator from './AccountNavigator'
 import OrderInfo from './OrderInfo'
 import OrderNavigator from './OrderNavigator'
+import ScoreNavigator from './ScoreNavigator';
+import DrawerContentNavigator from './DrawerContentNavigator';
+
 
 import {
   StyleSheet,
@@ -42,11 +45,14 @@ const DrawerStack = DrawerNavigator({
   Order:{
     screen: OrderNavigator,
   },
+  Score: {
+    screen: ScoreNavigator,
+  }
 
 
 }, {
   initialRouteName: 'Interface',
-  contentComponent: DrawerContent,
+  contentComponent: DrawerContentNavigator,
   drawerWidth: deviceWidth,
   drawerPosition: 'up',
   drawerOpenRoute: 'DrawerOpen',

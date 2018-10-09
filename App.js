@@ -75,6 +75,7 @@ const MainNavigator = StackNavigator({
   Product: {
     screen: ProductScreen
   },
+
   // Search:{
   //   screen:SearchScreen
   // },//For testing
@@ -96,7 +97,7 @@ const MainNavigator = StackNavigator({
   headerMode: 'screen',
   navigationOptions: {
   },
-  initialRouteName: 'Login' //for debugging
+  initialRouteName: 'Drawer' //for debugging
 })
 export default class App extends React.Component {
   render() {

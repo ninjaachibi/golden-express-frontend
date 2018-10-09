@@ -5,8 +5,8 @@ import {
   Text,
   Platform
 } from 'react-native';
-const HEADER_MAX_HEIGHT = 200;
-const HEADER_MIN_HEIGHT = 120;
+const HEADER_MAX_HEIGHT = 290;
+const HEADER_MIN_HEIGHT = 100;
 const HEADER_SCROLL_DISTANCE = HEADER_MAX_HEIGHT - HEADER_MIN_HEIGHT;
 const SCREEN_WIDTH = Dimensions.get('window').width
 const SCREEN_HEIGHT = Dimensions.get('window').height
@@ -331,7 +331,7 @@ const styles = StyleSheet.create({
     paddingTop: Platform.OS !== 'ios' ? HEADER_MAX_HEIGHT + 20 : 0,
   },
   row: {
-    height: 180,
+    height: 115,
     margin: 16,
     alignItems: 'center',
     justifyContent: 'center',

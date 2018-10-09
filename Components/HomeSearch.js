@@ -80,7 +80,7 @@ componentDidMount()
 
     console.log('query', this.state.query)
     let navigation = this.props.navigation;
-    var suggestions = ['pork', "fish", "milk", 'eggs', 'bread', 'banana', 'butter', 'onion', 'pickled', 'chicken', 'beef']
+    var suggestions = ['pork', "fish", "milk", 'eggs', 'bread', 'banana', 'butter', 'onion', 'pickled', 'chicken', 'beef','juice', 'mussel', 'seaweed', 'papaya']
     const data = suggestions.filter((item)=>item.indexOf(this.state.query) > -1)
     console.log(data)
     return (

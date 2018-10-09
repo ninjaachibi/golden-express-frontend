@@ -383,7 +383,7 @@ const titleScale = scrollY.interpolate({
         >
           <View style={{marginTop:-25,marginLeft: 15}}>
 
-        <TouchableOpacity style={{marginTop:-31.5,marginLeft:-1}} onPress={() => this.props.navigation.goBack()}>
+        <TouchableOpacity style={{marginTop:-31.5,marginLeft:-5}} onPress={() => this.props.navigation.goBack()}>
           <Icon
                  name='chevron-left'
                  size={35}

@@ -168,7 +168,7 @@ class CheckoutScreen extends React.Component {
     }
   }
   async componentDidMount () {
-    let total = this.props.navigation.getParam('total', 0)*1.28;
+    let total = this.props.navigation.getParam('total', 0);
     let tax = total *0.08
     let markup = total*0.2
     let cart = this.props.navigation.getParam('cart', {});
@@ -492,6 +492,8 @@ renderViewPagerPage = (data) => {
               </View>
             }
           </View>
+          <View style={{ height: 50 }} />
+
           </ScrollView>
           <View style={{ height: 100 }} />
         </View>
