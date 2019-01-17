@@ -193,7 +193,7 @@ export default class HomeScreen extends React.Component {
         <View style={{
           flex: 1,
           justifyContent: 'center',
-          alignItems: 'center',
+          alignItems: 'center'
         }}>
           <ActivityIndicator size="large" color="#0000ff" />
         </View>

@@ -493,7 +493,7 @@ renderViewPagerPage = (data) => {
             }
           </View>
           </ScrollView>
-          <View style={{ height: 100 }} />
+          <View style={{ height: 175 }} />
         </View>
         </KeyboardAvoidingView>
       )
