@@ -25,7 +25,7 @@ import { NavigationActions } from 'react-navigation';
 
  // Version can be specified in package.json
 import HorizontalMealScroll from './HorizontalMealScroll'
-import { Ionicons, MaterialCommunityIcons, Entypo } from '@expo/vector-icons';
+// import { Ionicons, MaterialCommunityIcons, Entypo } from '@expo/vector-icons';
 import {Header, Icon, List, ListItem, Card} from 'react-native-elements';
 import styles from './Styles'
 const HEADER_MAX_HEIGHT = 100//240;
@@ -281,7 +281,7 @@ const titleScale = scrollY.interpolate({
               <View>
                 { _.isEmpty(this.state.cart) ?
                   <View style={{position:'relative', zIndex:4,top:46, right:0,left:SCREEN_WIDTH*1/4, alignItems:'center'}}>
-                  <MaterialCommunityIcons style={{marginBottom:30}} name={'cart-outline'} size={64} color={'grey'}/>
+                  {/* <MaterialCommunityIcons style={{marginBottom:30}} name={'cart-outline'} size={64} color={'grey'}/> */}
                     <Text style={{fontSize: 24, fontWeight:'bold'}}>Your cart is empty</Text>
                     <TouchableOpacity
                       onPress={()=>this.props.navigation.goBack(0)}
@@ -357,13 +357,13 @@ const titleScale = scrollY.interpolate({
          <View style={{position:'absolute', top:86, left:0,right: SCREEN_WIDTH*7/8}}>
 
         <TouchableOpacity onPress={()=>this.props.navigation.goBack()} style={{marginTop:-31.5,marginLeft:8}} >
-          <Entypo
+          {/* <Entypo
                  name='cross'
                  size={28}
                  color={'red'}
                  underlayColor={'white'}
 
-               />
+               /> */}
              </TouchableOpacity>
            </View>
 
@@ -393,13 +393,13 @@ const titleScale = scrollY.interpolate({
            <View style={{position:'absolute', top:86, left:0,right: SCREEN_WIDTH*7/8}}>
 
          <TouchableOpacity onPress={()=>this.props.navigation.goBack()} style={{marginTop:-31.5,marginLeft:8}}>
-           <Entypo
+           {/* <Entypo
                   name='cross'
                   size={28}
                   color={'red'}
                   underlayColor={'white'}
 
-                />
+                /> */}
               </TouchableOpacity>
             </View>
 
