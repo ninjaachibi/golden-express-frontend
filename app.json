@@ -2,14 +2,14 @@
   "expo": {
     "name": "GoldenExpress",
     "description": "Null",
-    "slug": "hohoho",
+    "slug": "goldenexpress",
     "privacy": "public",
-    "sdkVersion": "25.0.0",
+    "sdkVersion": "26.0.0",
     "platforms": ["ios", "android"],
     "version": "1.0.0",
     "orientation": "portrait",
     "primaryColor": "#F5FCFF",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/square.png",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",

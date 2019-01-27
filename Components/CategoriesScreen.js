@@ -19,7 +19,7 @@ import { AppLoading, Asset, Font } from 'expo';
 import styles from './Styles';
 import {Header, Icon} from 'react-native-elements';
 import groceryItems from '../public/Inventory/Fresh_Meat'
-import { Ionicons } from '@expo/vector-icons';
+// import { Ionicons } from '@expo/vector-icons';
 import _ from 'underscore'
 const MEAT = {cat: 'Meat', src: require('../assets/Meat.png')}
 const PRODUCE = {cat: 'Produce', src: require('../assets/Produce.png')}

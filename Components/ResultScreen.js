@@ -24,7 +24,7 @@ import {
 } from 'react-native';
  // Version can be specified in package.json
 import HorizontalMealScroll from './HorizontalMealScroll'
-import { Ionicons } from '@expo/vector-icons';
+// import { Ionicons } from '@expo/vector-icons';
 import {Header, Icon} from 'react-native-elements';
 import styles from './Styles'
 const SCREEN_WIDTH = Dimensions.get('window').width
