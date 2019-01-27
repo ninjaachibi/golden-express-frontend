@@ -20,7 +20,7 @@ import styles from './Styles';
 import {Header, Icon, Card, Avatar,FormLabel, FormInput, FormValidationMessage, } from 'react-native-elements';
 import { CreditCardInput, LiteCreditCardInput } from "react-native-credit-card-input";
 import StepIndicator from 'react-native-step-indicator';
-// import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
+import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
 // import PaymentInfoScreen from './PaymentInfoScreen'
 function alertError(message) {
   Alert.alert(

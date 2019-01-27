@@ -24,6 +24,7 @@ import { AppLoading, Asset, Font } from 'expo';
 import styles from './Styles';
 import {Header, Icon, Card} from 'react-native-elements';
 import groceryItems from '../public/Inventory/Fresh_Meat'
+import { Ionicons } from '@expo/vector-icons';
 import _ from 'underscore';
 const SCREEN_WIDTH = Dimensions.get('window').width
 const SCREEN_HEIGHT = Dimensions.get('window').height

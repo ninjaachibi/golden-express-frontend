@@ -19,7 +19,7 @@ import {
 
 import styles from './Styles'
 import HorizontalMealScroll from './HorizontalMealScroll'
-// import { Ionicons, Entypo } from '@expo/vector-icons';
+import { Ionicons, Entypo } from '@expo/vector-icons';
 import {Header, Icon} from 'react-native-elements';
 import Autocomplete from 'react-native-autocomplete-input';
 const D_IMG = require('../assets/goldenTemple.jpg')
@@ -104,7 +104,7 @@ componentDidMount()
 
           />
         </TouchableOpacity> */}
-        {/* <Autocomplete
+        <Autocomplete
           containerStyle={{marginTop:3}}
           listContainerStyle={{borderColor:'white'}}
           listStyle={{borderColor:'white'}}
@@ -135,24 +135,24 @@ componentDidMount()
 
           renderItem={item => (
 
-            <TouchableOpacity onPress={() => this.searchItem(item)}>
-              <View style={styles.searchItem}>
-              <Ionicons style={{marginTop: 4,marginLeft: 7.5, marginRight:7.5}}
-                name='ios-search'
-                size={15}
-                color={'grey'}/>
-              <Text>{item}</Text>
-              <View style={{position:'absolute', left: SCREEN_WIDTH * 9/10 }}>
-              <Icon
-                name='chevron-right'
-                size={15}
-                underlayColor={'white'}
-                color={'grey'}/>
-              </View>
-            </View>
-            </TouchableOpacity>
-          )}
-          /> */}
+      <TouchableOpacity onPress={() => this.searchItem(item)}>
+        <View style={styles.searchItem}>
+        <Ionicons style={{marginTop: 4,marginLeft: 7.5, marginRight:7.5}}
+          name='ios-search'
+          size={15}
+          color={'grey'}/>
+        <Text>{item}</Text>
+        <View style={{position:'absolute', left: SCREEN_WIDTH * 9/10 }}>
+        <Icon
+          name='chevron-right'
+          size={15}
+          underlayColor={'white'}
+          color={'grey'}/>
+        </View>
+      </View>
+      </TouchableOpacity>
+    )}
+/>
 <TouchableOpacity onPress={()=>{console.log('pressed'); this.cartNavigate()}} style={{position:'absolute', top: 10, left: SCREEN_WIDTH * 9/10, zIndex:3}}>
     <Icon
     name='shopping-cart'
